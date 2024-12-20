@@ -1,0 +1,1 @@
+from recognizer.plate_recognizer import PlateRecognizer
