@@ -1,43 +1,77 @@
 from pydantic_ai import Agent,RunContext
 from pydantic_ai.models.gemini import GeminiModel
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from dataclasses import dataclass
 import os
 import cv2
 import tempfile
 import google.generativeai as genai
+# from openai import AsyncOpenAI
+# import ollama
 import json
+import base64
 
 load_dotenv()
 model = GeminiModel('gemini-1.5-flash', api_key=os.environ['GEMINI_API_KEY'])
 genai.configure(api_key=os.environ['GEMINI_API_KEY'])
+# client = AsyncOpenAI(api_key=os.environ['OPENAI_API_KEY'])
+# client = ollama.AsyncClient(host='http://localhost:11434')
 
 @dataclass
 class Deps:
     image_path: str
 
 @dataclass
-class LicensePlate:
+class LicensePlate(BaseModel):
     plate_number: str
 
+class BoundingBox(BaseModel):
+    coordinates: list[int]
+    
 plateExtractor = Agent(model, system_prompt='Extract the exact image of plate from given image', result_type=Deps, retries=0)
 plateRecognizer = Agent(model, system_prompt='Recognize the plate number from given image', result_type=LicensePlate, retries=0)
+
+# Function to encode the image
+def encode_image(image_path):
+  with open(image_path, "rb") as image_file:
+    return base64.b64encode(image_file.read()).decode('utf-8')
 
 @plateExtractor.tool
 async def extract_plate_loc(ctx: RunContext[Deps]) -> list[int]:
     """Tool to get bounding boxes of license plate."""
     
-    # Assuming the image is in bytes and needs to be processed using OpenCV
-    file = genai.upload_file(ctx.deps.image_path)
+    # Interact with AsyncOpenAI client
+    # response = await client.beta.chat.completions.parse(
+    #     model="gpt-4o",
+    #     messages=[
+    #         {
+    #             "role": "user",
+    #             "content": [
+    #                 {"type": "text", "text": "Return bounding boxes (bottom-left and upper-right corners) for the license plate in JSON format, for example: [ymin, xmin, ymax, xmax]"},
+    #                 {
+    #                     "type": "image_url",
+    #                     "image_url": {
+    #                         "url": f"data:image/jpeg;base64,{encode_image(ctx.deps.image_path)}"
+    #                     }
+    #                 },
+    #             ],
+    #         }
+    #     ],
+    #     response_format=BoundingBox,
+    # )
+
     model = genai.GenerativeModel("gemini-1.5-flash",
                                     generation_config=genai.GenerationConfig(
                                         response_mime_type="application/json",
                                         response_schema=list[int]
                                     )
                                 )
-    response = model.generate_content([file, 'Return bounding boxes for the license plate in JSON format, for example: [ymin, xmin, ymax, xmax]'])
-    print(response.text)
+    response = model.generate_content([{'mime_type':'image/jpeg', 'data': encode_image(ctx.deps.image_path)}, 'Return bounding boxes for the license plate in JSON format, for example: [ymin, xmin, ymax, xmax]'])
+
+    # print(response)
     return json.loads(response.text)
+    # return BoundingBox.model_validate_json(response.choices[0].message.content).coordinates
  
 @plateExtractor.tool
 async def crop_image(ctx: RunContext[Deps], plate_coordinates: list[int]) -> str:
@@ -61,22 +95,22 @@ async def crop_image(ctx: RunContext[Deps], plate_coordinates: list[int]) -> str
         temp_file.write(cv2.imencode('.jpg', cropped_img)[1].tobytes())
         temp_file_path = temp_file.name
 
-        return temp_file_path
     return temp_file_path
 
 @plateRecognizer.tool
 async def recognize(ctx: RunContext[Deps]) -> LicensePlate:
     """Tool to recognize the plate number from the cropped image."""
-    file = genai.upload_file(ctx.deps.image_path, mime_type="image/jpeg")
+    
     model = genai.GenerativeModel("gemini-1.5-flash",
-                               system_instruction='Detect the plate number from the given image',
-                               generation_config={"response_mime_type": "application/json",
-                                     "response_schema": LicensePlate
+                               system_instruction='Identify the plate number from the given image',
+                               generation_config={
+                                    "response_mime_type": "application/json",
+                                    "response_schema": LicensePlate
                                }
                             )
-    response = model.generate_content(['Identify the plate number from the given image',file])
-    print(response.text)
-    return json.loads(response.text)
+    
+    response = model.generate_content(['Identify the plate number from the given image', {'mime_type':'image/jpeg', 'data': encode_image(ctx.deps.image_path)}])
+    return LicensePlate.model_validate_json(response.text)
 
 class PlateRecognizer(object):
     

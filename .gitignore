@@ -63,6 +63,7 @@ docker/nginx/ssl
 
 venv/
 .env
+ollama_volume/
 
 # data end
 Taipei-City-Dashboard-DE/local_env/volume_data
