@@ -53,8 +53,10 @@ async def crop_image(ctx: RunContext[Deps], plate_coordinates: list[int]) -> str
     abs_y2 = int(plate_coordinates[2]/1000 * height)
 
     cropped_img = img[abs_y1:abs_y2, abs_x1:abs_x2]
-    temp_file_path = None
+    cropped_img = cv2.cvtColor(cropped_img, cv2.COLOR_BGR2GRAY)
     
+    temp_file_path = None
+
     # save to tempfile
     with tempfile.NamedTemporaryFile(delete=False, suffix='.jpg') as temp_file:
         temp_file.write(cv2.imencode('.jpg', cropped_img)[1].tobytes())
