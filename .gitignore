@@ -61,6 +61,8 @@ docker/db-data
 docker/nginx/ssl
 
 
+venv/
+
 # data end
 Taipei-City-Dashboard-DE/local_env/volume_data
 Taipei-City-Dashboard-DE/logs
