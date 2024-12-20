@@ -20,22 +20,21 @@ class Deps:
 class LicensePlate:
     plate_number: str
 
-plateExtractor = Agent(model,system_prompt='Extract the exact image of plate from given image',result_type=Deps)
-plateRecognizer = Agent(model,system_prompt='Recognize the plate number from given image',result_type=LicensePlate)
+plateExtractor = Agent(model, system_prompt='Extract the exact image of plate from given image', result_type=Deps, retries=0)
+plateRecognizer = Agent(model, system_prompt='Recognize the plate number from given image', result_type=LicensePlate, retries=0)
 
 @plateExtractor.tool
 async def extract_plate_loc(ctx: RunContext[Deps]) -> list[int]:
-    """Tool to get two coordinates (bottom left and top right) of plate."""
+    """Tool to get bounding boxes of license plate."""
     
     # Assuming the image is in bytes and needs to be processed using OpenCV
     file = genai.upload_file(ctx.deps.image_path)
     model = genai.GenerativeModel("gemini-1.5-flash",
-                               system_instruction='Get the bounding boxes of license plate from given image',
-                               generation_config=genai.GenerationConfig(
-                                   response_mime_type="application/json",
-                                   response_schema=list[int]
+                                    generation_config=genai.GenerationConfig(
+                                        response_mime_type="application/json",
+                                        response_schema=list[int]
+                                    )
                                 )
-                            )
     response = model.generate_content([file, 'Return bounding boxes for the license plate in JSON format, for example: [ymin, xmin, ymax, xmax]'])
     print(response.text)
     return json.loads(response.text)
