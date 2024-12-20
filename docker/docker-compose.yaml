@@ -9,7 +9,7 @@ services:
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/ssl:/etc/nginx/ssl
     ports:
-      - 80:80
+      - 81:81
       - 443:443
 
   dashboard-fe:

@@ -41,7 +41,7 @@ services:
       DB_DASHBOARD_PORT: ${DB_DASHBOARD_PORT:-5432}
       DASHBOARD_SAMPLE_FILE: ${DASHBOARD_SAMPLE_FILE:-dashboard-demo.sql}
     volumes:
-      - ../Dashboard-BE:/opt/City-Dashboard-BE
+      - ../Dashboard-BE:/opt/Dashboard-BE
       - ../db-sample-data:/opt/db-sample-data
     working_dir: /opt/Dashboard-BE
     command: ["go", "run", "main.go", "initDashboard"]
