@@ -295,12 +295,12 @@ CREATE TABLE public.violation (
     violation_date date NOT NULL,
     violation_time time without time zone NOT NULL,
     location character varying(255) NOT NULL,
-    photo_id character varying(20),
+    photo_id character varying(20) NOT NULL,
     speed_limit integer NOT NULL,
     vehicle_speed integer NOT NULL,
-    device_id character varying(20),
+    device_id character varying(20) NOT NULL,
     license_plate character varying(20),
-    recognize character varying NOT NULL
+    recognize integer
 );
 ALTER TABLE ONLY public.violation ALTER COLUMN license_plate SET STORAGE EXTERNAL;
 
@@ -401,11 +401,11 @@ MNO-7890	黑色	小客車	高雄市苓雅區中正路100號	張秀珍
 --
 
 COPY public.violation (violation_id, violation_date, violation_time, location, photo_id, speed_limit, vehicle_speed, device_id, license_plate, recognize) FROM stdin;
-1	2024-12-23	14:30:00	臨江街觀光夜市	photo1.jpg	50	80	D001	ABC-1234	小客車
-2	2024-12-23	09:15:00	樹林秀泰影城	photo2.jpg	40	70	D002	DEF-5678	機車
-3	2024-12-22	20:45:00	桃園市中壢圖書館	photo3.jpg	30	55	D003	GHI-9012	小貨車
-4	2024-12-21	14:20:00	秋紅谷景觀生態公園	photo4.jpg	60	95	D004	JKL-3456	大客車
-5	2024-12-20	16:10:00	高雄市政府衛生局	photo5.jpg	70	120	D005	MNO-7890	小客車
+1	2024-12-23	14:30:00	臨江街觀光夜市	photo1.jpg	50	80	D001	ABC-1234	1
+2	2024-12-23	09:15:00	樹林秀泰影城	photo2.jpg	40	70	D002	DEF-5678	1
+3	2024-12-22	20:45:00	桃園市中壢圖書館	photo3.jpg	30	55	D003	GHI-9012	2
+4	2024-12-21	14:20:00	秋紅谷景觀生態公園	photo4.jpg	60	95	D004	JKL-3456	2
+5	2024-12-20	16:10:00	高雄市政府衛生局	photo5.jpg	70	120	D005	MNO-7890	3
 \.
 
 
