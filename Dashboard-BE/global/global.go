@@ -71,7 +71,7 @@ var (
 	// only used in the init function.
 	PostgresManagerSampleDataFile = getEnv("MANAGER_SAMPLE_FILE", "dashboardmanager-demo.sql")
     PostgresDashboardSampleDataFile = getEnv("DASHBOARD_SAMPLE_FILE", "dashboard-demo.sql")
-	PostgresCarSampleDataFile = getEnv("CARD_SAMPLE_FILE", "dashboardcard-demo.sql")
+	PostgresCarSampleDataFile = getEnv("CARD_SAMPLE_FILE", "dashboardcar-demo.sql")
 
 	Isso = IssoConfig{
 		IssoURL:          getEnv("ISSO_URL", "https://id.taipei/isso"),
