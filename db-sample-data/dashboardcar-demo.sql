@@ -16,6 +16,96 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: tiger; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA tiger;
+
+
+ALTER SCHEMA tiger OWNER TO postgres;
+
+--
+-- Name: tiger_data; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA tiger_data;
+
+
+ALTER SCHEMA tiger_data OWNER TO postgres;
+
+--
+-- Name: topology; Type: SCHEMA; Schema: -; Owner: postgres
+--
+
+CREATE SCHEMA topology;
+
+
+ALTER SCHEMA topology OWNER TO postgres;
+
+--
+-- Name: SCHEMA topology; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA topology IS 'PostGIS Topology schema';
+
+
+--
+-- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
+
+
+--
+-- Name: postgis_tiger_geocoder; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder WITH SCHEMA tiger;
+
+
+--
+-- Name: EXTENSION postgis_tiger_geocoder; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis_tiger_geocoder IS 'PostGIS tiger geocoder and reverse geocoder';
+
+
+--
+-- Name: postgis_topology; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis_topology WITH SCHEMA topology;
+
+
+--
+-- Name: EXTENSION postgis_topology; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis_topology IS 'PostGIS topology spatial types and functions';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -32,7 +122,7 @@ CREATE TABLE public.artificialrecognition_log (
     licenseplate character varying(20) NOT NULL,
     processing_date date DEFAULT CURRENT_DATE NOT NULL,
     processing_time time without time zone DEFAULT CURRENT_TIME NOT NULL,
-    CONSTRAINT artificialrecognitionlog_eventtype_check CHECK (((eventtype)::text = ANY ((ARRAY['讀取紀錄'::character varying, '修正紀錄'::character varying])::text[])))
+    CONSTRAINT artificialrecognitionlog_eventtype_check CHECK (((eventtype)::text = ANY (ARRAY[('讀取紀錄'::character varying)::text, ('修正紀錄'::character varying)::text])))
 );
 
 
@@ -138,7 +228,7 @@ ALTER SEQUENCE public.license_plate_id_seq OWNED BY public.unrecognized.violatio
 
 CREATE TABLE public.trafficviolation (
     violation_id integer NOT NULL,
-    photo_id integer,
+    photo_id character varying(20),
     location character varying(255),
     latitudelongitude character varying(50),
     violation_date date,
@@ -147,13 +237,13 @@ CREATE TABLE public.trafficviolation (
     speed_limit integer,
     vehicle_speed integer,
     license_plate character varying(20),
-    licenseplateerrorcode character varying(50),
     licenseplatereplydate date,
     licenseplatereplytime time without time zone,
     owner_name character varying(50),
     vehicletype character varying(50),
     owner_address character varying(255),
-    vehiclestatuscode character varying(50)
+    vehiclestatuscode integer NOT NULL,
+    recognize integer
 );
 
 
@@ -201,43 +291,21 @@ ALTER TABLE public.vehicle_registration OWNER TO postgres;
 --
 
 CREATE TABLE public.violation (
-    violation_id integer NOT NULL,
+    violation_id integer DEFAULT nextval('public.trafficviolation_violation_id_seq'::regclass) NOT NULL,
     violation_date date NOT NULL,
     violation_time time without time zone NOT NULL,
     location character varying(255) NOT NULL,
-    photo_id integer NOT NULL,
+    photo_id character varying(20),
     speed_limit integer NOT NULL,
     vehicle_speed integer NOT NULL,
-    device_id integer NOT NULL,
+    device_id character varying(20),
     license_plate character varying(20),
-    recognize boolean NOT NULL
+    recognize character varying NOT NULL
 );
 ALTER TABLE ONLY public.violation ALTER COLUMN license_plate SET STORAGE EXTERNAL;
 
 
 ALTER TABLE public.violation OWNER TO postgres;
-
---
--- Name: violation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.violation_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.violation_id_seq OWNER TO postgres;
-
---
--- Name: violation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.violation_id_seq OWNED BY public.violation.violation_id;
-
 
 --
 -- Name: artificialrecognition_log violation_id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -268,13 +336,6 @@ ALTER TABLE ONLY public.unrecognized ALTER COLUMN violation_id SET DEFAULT nextv
 
 
 --
--- Name: violation violation_id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.violation ALTER COLUMN violation_id SET DEFAULT nextval('public.violation_id_seq'::regclass);
-
-
---
 -- Data for Name: artificialrecognition_log; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -291,10 +352,23 @@ COPY public.fineprint_log (violation_id, employee_id, print_date, print_time, pr
 
 
 --
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
+\.
+
+
+--
 -- Data for Name: trafficviolation; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.trafficviolation (violation_id, photo_id, location, latitudelongitude, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licenseplateerrorcode, licenseplatereplydate, licenseplatereplytime, owner_name, vehicletype, owner_address, vehiclestatuscode) FROM stdin;
+COPY public.trafficviolation (violation_id, photo_id, location, latitudelongitude, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licenseplatereplydate, licenseplatereplytime, owner_name, vehicletype, owner_address, vehiclestatuscode, recognize) FROM stdin;
+1	photo1.jpg	臨江街觀光夜市	25.033964, 121.564468	2024-12-23	14:30:00	D001	50	80	ABC-1234	2024-12-24	10:00:00	王小明	小客車	台北市信義區松仁路100號	1	1
+2	photo2.jpg	樹林秀泰影城	25.011004, 121.462788	2024-12-23	09:15:00	D002	40	70	DEF-5678	2024-12-24	12:00:00	陳大華	機車	新北市板橋區文化路50號	1	1
+3	photo3.jpg	桃園市中壢圖書館	24.993628, 121.301506	2024-12-22	20:45:00	D003	30	55	GHI-9012	2024-12-24	14:30:00	林美惠	小貨車	桃園市中壢區中山路20號	1	2
+4	photo4.jpg	秋紅谷景觀生態公園	24.163264, 120.642803	2024-12-21	14:20:00	D004	60	95	JKL-3456	2024-12-24	16:45:00	李志強	大客車	台中市西屯區台灣大道50號	1	2
+5	photo5.jpg	高雄市政府衛生局	22.627278, 120.301435	2024-12-20	16:10:00	D005	70	120	MNO-7890	2024-12-24	18:15:00	張秀珍	小客車	高雄市苓雅區中正路100號	1	3
 \.
 
 
@@ -303,6 +377,9 @@ COPY public.trafficviolation (violation_id, photo_id, location, latitudelongitud
 --
 
 COPY public.unrecognized (violation_id) FROM stdin;
+3
+4
+2
 \.
 
 
@@ -311,6 +388,11 @@ COPY public.unrecognized (violation_id) FROM stdin;
 --
 
 COPY public.vehicle_registration (license_plate, registered_color, registered_model, owner_address, owner_name) FROM stdin;
+ABC-1234	紅色	小客車	台北市信義區松仁路100號	王小明
+DEF-5678	藍色	機車	新北市板橋區文化路50號	陳大華
+GHI-9012	白色	小貨車	桃園市中壢區中山路20號	林美惠
+JKL-3456	綠色	大客車	台中市西屯區台灣大道50號	李志強
+MNO-7890	黑色	小客車	高雄市苓雅區中正路100號	張秀珍
 \.
 
 
@@ -319,6 +401,59 @@ COPY public.vehicle_registration (license_plate, registered_color, registered_mo
 --
 
 COPY public.violation (violation_id, violation_date, violation_time, location, photo_id, speed_limit, vehicle_speed, device_id, license_plate, recognize) FROM stdin;
+1	2024-12-23	14:30:00	臨江街觀光夜市	photo1.jpg	50	80	D001	ABC-1234	小客車
+2	2024-12-23	09:15:00	樹林秀泰影城	photo2.jpg	40	70	D002	DEF-5678	機車
+3	2024-12-22	20:45:00	桃園市中壢圖書館	photo3.jpg	30	55	D003	GHI-9012	小貨車
+4	2024-12-21	14:20:00	秋紅谷景觀生態公園	photo4.jpg	60	95	D004	JKL-3456	大客車
+5	2024-12-20	16:10:00	高雄市政府衛生局	photo5.jpg	70	120	D005	MNO-7890	小客車
+\.
+
+
+--
+-- Data for Name: geocode_settings; Type: TABLE DATA; Schema: tiger; Owner: postgres
+--
+
+COPY tiger.geocode_settings (name, setting, unit, category, short_desc) FROM stdin;
+\.
+
+
+--
+-- Data for Name: pagc_gaz; Type: TABLE DATA; Schema: tiger; Owner: postgres
+--
+
+COPY tiger.pagc_gaz (id, seq, word, stdword, token, is_custom) FROM stdin;
+\.
+
+
+--
+-- Data for Name: pagc_lex; Type: TABLE DATA; Schema: tiger; Owner: postgres
+--
+
+COPY tiger.pagc_lex (id, seq, word, stdword, token, is_custom) FROM stdin;
+\.
+
+
+--
+-- Data for Name: pagc_rules; Type: TABLE DATA; Schema: tiger; Owner: postgres
+--
+
+COPY tiger.pagc_rules (id, rule, is_custom) FROM stdin;
+\.
+
+
+--
+-- Data for Name: topology; Type: TABLE DATA; Schema: topology; Owner: postgres
+--
+
+COPY topology.topology (id, name, srid, "precision", hasz) FROM stdin;
+\.
+
+
+--
+-- Data for Name: layer; Type: TABLE DATA; Schema: topology; Owner: postgres
+--
+
+COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_column, feature_type, level, child_id) FROM stdin;
 \.
 
 
@@ -340,7 +475,7 @@ SELECT pg_catalog.setval('public.fineprintlog_reportid_seq', 1, false);
 -- Name: license_plate_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.license_plate_id_seq', 1, false);
+SELECT pg_catalog.setval('public.license_plate_id_seq', 2, true);
 
 
 --
@@ -351,10 +486,10 @@ SELECT pg_catalog.setval('public.trafficviolation_violation_id_seq', 1, false);
 
 
 --
--- Name: violation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+-- Name: topology_id_seq; Type: SEQUENCE SET; Schema: topology; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.violation_id_seq', 1, false);
+SELECT pg_catalog.setval('topology.topology_id_seq', 1, false);
 
 
 --
