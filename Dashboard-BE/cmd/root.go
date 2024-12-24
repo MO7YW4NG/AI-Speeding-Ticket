@@ -54,10 +54,22 @@ var initDashboardDBCmd = &cobra.Command{
 	},
 }
 
+// initCarDBCmd
+var initCarDBCmd = &cobra.Command{
+	Use:   "initCar",
+	Short: "init Car data",
+	Long:  "init Car data.",
+	Run: func(_ *cobra.Command, _ []string) {
+		logs.Info("Start the process of insert car database data.")
+		app.InsertCarSampleData()
+	},
+}
+
 // Execute initializes Cobra and adds the checkExpiredCmd to the root command.
 func Execute() {
 	rootCmd.AddCommand(migrateDBCmd)
 	rootCmd.AddCommand(initDashboardDBCmd)
+	rootCmd.AddCommand(initCarDBCmd)
 	// Execute the root command and handle any errors.
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(err)

@@ -47,6 +47,23 @@ services:
     command: ["go", "run", "main.go", "initDashboard"]
     # command: ["sleep","600000"]
 
+  dashboard-be-init-car:
+    image: golang:${GOLANG_IMAGE_TAG:-latest}
+    container_name: dashboard-be-init-car
+    environment:
+      DB_CAR_HOST: ${DB_CAR_HOST:-postgres-data}
+      DB_CAR_USER: ${DB_CAR_USER}
+      DB_CAR_PASSWORD: ${DB_CAR_PASSWORD}
+      PGPASSWORD: ${DB_CAR_PASSWORD}
+      DB_CAR_DBNAME: ${DB_CAR_DBNAME}
+      DB_CAR_PORT: ${DB_CAR_PORT:-5432}
+      CAR_SAMPLE_FILE: ${CAR_SAMPLE_FILE:-dashboardcar-demo.sql}
+    volumes:
+      - ../Dashboard-BE:/opt/Dashboard-BE
+      - ../db-sample-data:/opt/db-sample-data
+    working_dir: /opt/Dashboard-BE
+    command: ["go", "run", "main.go", "initCar"]
+
 networks:
   default:
     name: br_dashboard

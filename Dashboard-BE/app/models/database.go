@@ -31,6 +31,7 @@ import (
 var (
 	DBDashboard *gorm.DB
 	DBManager   *gorm.DB
+	DBCar 	    *gorm.DB
 )
 
 // ConnectToDatabases connects to the two PostgreSQL databases used by this application.
@@ -48,6 +49,9 @@ func ConnectToDatabases(dbNames ...interface{}) {
 			case "MANAGER":
 				logs.FInfo("MANAGER Hostname: %s", global.PostgresManager.Host)
 				DBManager = ConnectToDatabase(global.PostgresManager)
+			case "CAR":
+				logs.FInfo("CAR Hostname: %s", global.PostgresCar.Host)
+				DBCar = ConnectToDatabase(global.PostgresCar)
 			default:
 				panic("Database not in connection list.")
 			}
@@ -93,6 +97,8 @@ func CloseConnects(dbNames ...interface{}) {
 				CloseConnect(dbString, DBDashboard)
 			case "MANAGER":
 				CloseConnect(dbString, DBManager)
+			case "CAR":
+				CloseConnect(dbString, DBCar)
 			default:
 				panic("DB does not in connection list.")
 			}

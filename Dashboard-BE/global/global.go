@@ -60,9 +60,18 @@ var (
 		DBName:   getEnv("DB_DASHBOARD_DBNAME", "dashboard"),
 	}
 
+	PostgresCar = DatabaseConfig{
+		Host:     getEnv("DB_CAR_HOST", "postgres-car"),
+		Port:     getEnv("DB_CAR_PORT", "5432"),
+		User:     getEnv("DB_CAR_USER", ""),
+		Password: getEnv("DB_CAR_PASSWORD", ""),
+		DBName:   getEnv("DB_CAR_DBNAME", "dashboarcar"),
+	}
+
 	// only used in the init function.
 	PostgresManagerSampleDataFile = getEnv("MANAGER_SAMPLE_FILE", "dashboardmanager-demo.sql")
     PostgresDashboardSampleDataFile = getEnv("DASHBOARD_SAMPLE_FILE", "dashboard-demo.sql")
+	PostgresCarSampleDataFile = getEnv("CARD_SAMPLE_FILE", "dashboardcard-demo.sql")
 
 	Isso = IssoConfig{
 		IssoURL:          getEnv("ISSO_URL", "https://id.taipei/isso"),
