@@ -1,5 +1,3 @@
-version: "3.7"
-
 services:
   nginx:
     restart: always
@@ -31,6 +29,19 @@ services:
     ports:
       - "8080:80"
     working_dir: /opt/Dashboard-FE
+    command: ["npm", "run", "dev"]
+
+  ai-fe:
+    image: node:23-alpine3.20
+    container_name: ai-fe
+    restart: always
+    environment:
+      NODE_ENV: ${NODE_ENV}
+    volumes:
+      - ../AI-FE:/opt/AI-FE
+    ports:
+      - "8081:81"
+    working_dir: /opt/AI-FE
     command: ["npm", "run", "dev"]
 
   dashboard-be:

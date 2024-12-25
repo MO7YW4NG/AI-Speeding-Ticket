@@ -1,4 +1,3 @@
-version: "3.7"
 services:
   dashboard-fe-init:
     image: node:${NODE_IMAGE_TAG:-latest}
@@ -6,6 +5,14 @@ services:
     volumes:
       - ../Dashboard-FE:/opt/Dashboard-FE
     working_dir: /opt/Dashboard-FE
+    command: ["npm", "install"]
+
+  ai-fe-init:
+    image: node:23-alpine3.20
+    container_name: ai-fe-init
+    volumes:
+      - ../AI-FE:/opt/AI-FE
+    working_dir: /opt/AI-FE
     command: ["npm", "install"]
 
   dashboard-be-init-manager:

@@ -6,6 +6,10 @@ import ViolationForm from "../components/ViolationForm.vue";
 
 const routes = [
   {
+    path: "/",
+    redirect: "/test1",
+  },
+  {
     path: "/test1",
     name: "RecognitionSystem",
     component: {
