@@ -35,22 +35,6 @@ CREATE SCHEMA tiger_data;
 ALTER SCHEMA tiger_data OWNER TO postgres;
 
 --
--- Name: topology; Type: SCHEMA; Schema: -; Owner: postgres
---
-
-CREATE SCHEMA topology;
-
-
-ALTER SCHEMA topology OWNER TO postgres;
-
---
--- Name: SCHEMA topology; Type: COMMENT; Schema: -; Owner: postgres
---
-
-COMMENT ON SCHEMA topology IS 'PostGIS Topology schema';
-
-
---
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -62,49 +46,6 @@ CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
 --
 
 COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
-
-
---
--- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
-
-
---
--- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
-
-
---
--- Name: postgis_tiger_geocoder; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder WITH SCHEMA tiger;
-
-
---
--- Name: EXTENSION postgis_tiger_geocoder; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION postgis_tiger_geocoder IS 'PostGIS tiger geocoder and reverse geocoder';
-
-
---
--- Name: postgis_topology; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS postgis_topology WITH SCHEMA topology;
-
-
---
--- Name: EXTENSION postgis_topology; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION postgis_topology IS 'PostGIS topology spatial types and functions';
-
 
 SET default_tablespace = '';
 
@@ -393,14 +334,6 @@ COPY public.fineprint_log (violation_id, employee_id, print_date, print_time, pr
 
 
 --
--- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
-\.
-
-
---
 -- Data for Name: trafficviolation; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -435,55 +368,6 @@ GHI-9012	白色	小貨車	桃園市中壢區中山路20號	林美惠
 JKL-3456	綠色	大客車	台中市西屯區台灣大道50號	李志強
 MNO-7890	黑色	小客車	高雄市苓雅區中正路100號	張秀珍
 \.
-
-
---
--- Data for Name: geocode_settings; Type: TABLE DATA; Schema: tiger; Owner: postgres
---
-
-COPY tiger.geocode_settings (name, setting, unit, category, short_desc) FROM stdin;
-\.
-
-
---
--- Data for Name: pagc_gaz; Type: TABLE DATA; Schema: tiger; Owner: postgres
---
-
-COPY tiger.pagc_gaz (id, seq, word, stdword, token, is_custom) FROM stdin;
-\.
-
-
---
--- Data for Name: pagc_lex; Type: TABLE DATA; Schema: tiger; Owner: postgres
---
-
-COPY tiger.pagc_lex (id, seq, word, stdword, token, is_custom) FROM stdin;
-\.
-
-
---
--- Data for Name: pagc_rules; Type: TABLE DATA; Schema: tiger; Owner: postgres
---
-
-COPY tiger.pagc_rules (id, rule, is_custom) FROM stdin;
-\.
-
-
---
--- Data for Name: topology; Type: TABLE DATA; Schema: topology; Owner: postgres
---
-
-COPY topology.topology (id, name, srid, "precision", hasz) FROM stdin;
-\.
-
-
---
--- Data for Name: layer; Type: TABLE DATA; Schema: topology; Owner: postgres
---
-
-COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_column, feature_type, level, child_id) FROM stdin;
-\.
-
 
 --
 -- Name: abandoned_violation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
