@@ -1,14 +1,14 @@
-require("@rushstack/eslint-patch/modern-module-resolution");
+import jsdoc from "eslint-plugin-jsdoc";
 
-module.exports = {
-  root: true,
-  extends: [
-    "plugin:vue/vue3-essential",
-    "eslint:recommended",
-    "@vue/eslint-config-typescript",
-    "@vue/eslint-config-prettier/skip-formatting",
-  ],
-  parserOptions: {
-    ecmaVersion: "latest",
+export default [
+  {
+    files: ["**/*.js"],
+    plugins: {
+      jsdoc: jsdoc,
+    },
+    rules: {
+      "jsdoc/require-description": "error",
+      "jsdoc/check-values": "error",
+    },
   },
-};
+];
