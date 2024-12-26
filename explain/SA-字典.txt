@@ -1,7 +1,7 @@
- recognize
-1--可辨識
-2--AI無法辨識
-3--人工無法辨識
+recognize
+0--可辨識
+1--AI無法辨識
+2--人工無法辨識
 
 vehiclestatuscode
 1-車牌合格、車主活著
