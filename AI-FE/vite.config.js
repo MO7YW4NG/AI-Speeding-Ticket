@@ -4,13 +4,11 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import vueDevTools from "vite-plugin-vue-devtools";
 import viteCompression from "vite-plugin-compression";
+import eslintPlugin from "vite-plugin-eslint";
 
 // https://vite.dev/config/
 export default defineConfig({
-  // 關鍵：設定 base 為你的 Repo 名稱（前後要加 / ）
-  base: "/",
-
-  plugins: [vue(), vueDevTools(), viteCompression()],
+  plugins: [vue(), vueDevTools(), viteCompression(), eslintPlugin()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -19,7 +17,7 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    port: 81,
+    // port: 81,
     // proxy: {
     //     "/api/dev": {
     //         target: "http://dashboard-be:8080",
