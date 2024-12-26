@@ -111,6 +111,53 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
+-- Name: abandoned; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.abandoned (
+    violation_id integer NOT NULL,
+    photo_id character varying(20) NOT NULL,
+    location character varying(255) NOT NULL,
+    violation_date date NOT NULL,
+    violation_time time without time zone NOT NULL,
+    device_id character varying(50) NOT NULL,
+    speed_limit integer NOT NULL,
+    vehicle_speed integer NOT NULL,
+    license_plate character varying(20),
+    licenseplatereplydate date NOT NULL,
+    licenseplatereplytime time without time zone NOT NULL,
+    vehicletype character varying(50),
+    vehiclestatuscode integer NOT NULL,
+    longitude double precision,
+    latitude double precision
+);
+
+
+ALTER TABLE public.abandoned OWNER TO postgres;
+
+--
+-- Name: abandoned_violation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.abandoned_violation_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.abandoned_violation_id_seq OWNER TO postgres;
+
+--
+-- Name: abandoned_violation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.abandoned_violation_id_seq OWNED BY public.abandoned.violation_id;
+
+
+--
 -- Name: artificialrecognition_log; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -194,7 +241,9 @@ ALTER SEQUENCE public.fineprintlog_reportid_seq OWNED BY public.fineprint_log.vi
 --
 
 CREATE TABLE public.unrecognized (
-    violation_id integer NOT NULL
+    violation_id integer NOT NULL,
+    photo_id character varying NOT NULL,
+    recognize integer
 );
 
 
@@ -228,22 +277,20 @@ ALTER SEQUENCE public.license_plate_id_seq OWNED BY public.unrecognized.violatio
 
 CREATE TABLE public.trafficviolation (
     violation_id integer NOT NULL,
-    photo_id character varying(20),
-    location character varying(255),
-    latitudelongitude character varying(50),
-    violation_date date,
-    violation_time time without time zone,
-    device_id character varying(50),
-    speed_limit integer,
+    photo_id character varying(20) NOT NULL,
+    location character varying(255) NOT NULL,
+    violation_date date NOT NULL,
+    violation_time time without time zone NOT NULL,
+    device_id character varying(50) NOT NULL,
+    speed_limit integer NOT NULL,
     vehicle_speed integer,
-    license_plate character varying(20),
-    licenseplatereplydate date,
-    licenseplatereplytime time without time zone,
-    owner_name character varying(50),
+    license_plate character varying(20) NOT NULL,
+    licenseplatereplydate date NOT NULL,
+    licenseplatereplytime time without time zone NOT NULL,
     vehicletype character varying(50),
-    owner_address character varying(255),
     vehiclestatuscode integer NOT NULL,
-    recognize integer
+    longitude double precision NOT NULL,
+    latitude double precision NOT NULL
 );
 
 
@@ -287,25 +334,11 @@ CREATE TABLE public.vehicle_registration (
 ALTER TABLE public.vehicle_registration OWNER TO postgres;
 
 --
--- Name: violation; Type: TABLE; Schema: public; Owner: postgres
+-- Name: abandoned violation_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
-CREATE TABLE public.violation (
-    violation_id integer DEFAULT nextval('public.trafficviolation_violation_id_seq'::regclass) NOT NULL,
-    violation_date date NOT NULL,
-    violation_time time without time zone NOT NULL,
-    location character varying(255) NOT NULL,
-    photo_id character varying(20) NOT NULL,
-    speed_limit integer NOT NULL,
-    vehicle_speed integer NOT NULL,
-    device_id character varying(20) NOT NULL,
-    license_plate character varying(20),
-    recognize integer
-);
-ALTER TABLE ONLY public.violation ALTER COLUMN license_plate SET STORAGE EXTERNAL;
+ALTER TABLE ONLY public.abandoned ALTER COLUMN violation_id SET DEFAULT nextval('public.abandoned_violation_id_seq'::regclass);
 
-
-ALTER TABLE public.violation OWNER TO postgres;
 
 --
 -- Name: artificialrecognition_log violation_id; Type: DEFAULT; Schema: public; Owner: postgres
@@ -336,6 +369,14 @@ ALTER TABLE ONLY public.unrecognized ALTER COLUMN violation_id SET DEFAULT nextv
 
 
 --
+-- Data for Name: abandoned; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.abandoned (violation_id, photo_id, location, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licenseplatereplydate, licenseplatereplytime, vehicletype, vehiclestatuscode, longitude, latitude) FROM stdin;
+\.
+
+
+--
 -- Data for Name: artificialrecognition_log; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -363,12 +404,12 @@ COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM
 -- Data for Name: trafficviolation; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.trafficviolation (violation_id, photo_id, location, latitudelongitude, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licenseplatereplydate, licenseplatereplytime, owner_name, vehicletype, owner_address, vehiclestatuscode, recognize) FROM stdin;
-1	photo1.jpg	臨江街觀光夜市	25.033964, 121.564468	2024-12-23	14:30:00	D001	50	80	ABC-1234	2024-12-24	10:00:00	王小明	小客車	台北市信義區松仁路100號	1	1
-2	photo2.jpg	樹林秀泰影城	25.011004, 121.462788	2024-12-23	09:15:00	D002	40	70	DEF-5678	2024-12-24	12:00:00	陳大華	機車	新北市板橋區文化路50號	1	1
-3	photo3.jpg	桃園市中壢圖書館	24.993628, 121.301506	2024-12-22	20:45:00	D003	30	55	GHI-9012	2024-12-24	14:30:00	林美惠	小貨車	桃園市中壢區中山路20號	1	2
-4	photo4.jpg	秋紅谷景觀生態公園	24.163264, 120.642803	2024-12-21	14:20:00	D004	60	95	JKL-3456	2024-12-24	16:45:00	李志強	大客車	台中市西屯區台灣大道50號	1	2
-5	photo5.jpg	高雄市政府衛生局	22.627278, 120.301435	2024-12-20	16:10:00	D005	70	120	MNO-7890	2024-12-24	18:15:00	張秀珍	小客車	高雄市苓雅區中正路100號	1	3
+COPY public.trafficviolation (violation_id, photo_id, location, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licenseplatereplydate, licenseplatereplytime, vehicletype, vehiclestatuscode, longitude, latitude) FROM stdin;
+5	photo5.jpg	高雄市政府衛生局	2024-12-20	16:10:00	D005	70	120	MNO-7890	2024-12-24	18:15:00	小客車	1	120.301435	22.627278
+1	photo1.jpg	臨江街觀光夜市	2024-12-23	14:30:00	D001	50	80	ABC-1234	2024-12-24	10:00:00	小客車	1	121.564468	25.033964
+2	photo2.jpg	樹林秀泰影城	2024-12-23	09:15:00	D002	40	70	DEF-5678	2024-12-24	12:00:00	機車	1	121.462788	25.011004
+3	photo3.jpg	桃園市中壢圖書館	2024-12-22	20:45:00	D003	30	55	GHI-9012	2024-12-24	14:30:00	小貨車	1	121.301506	24.993628
+4	photo4.jpg	秋紅谷景觀生態公園	2024-12-21	14:20:00	D004	60	95	JKL-3456	2024-12-24	16:45:00	大客車	1	120.642803	24.163264
 \.
 
 
@@ -376,10 +417,10 @@ COPY public.trafficviolation (violation_id, photo_id, location, latitudelongitud
 -- Data for Name: unrecognized; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.unrecognized (violation_id) FROM stdin;
-3
-4
-2
+COPY public.unrecognized (violation_id, photo_id, recognize) FROM stdin;
+3	photo3.jpg	1
+4	photo4.jpg	1
+5	photo5.jpg	1
 \.
 
 
@@ -393,19 +434,6 @@ DEF-5678	藍色	機車	新北市板橋區文化路50號	陳大華
 GHI-9012	白色	小貨車	桃園市中壢區中山路20號	林美惠
 JKL-3456	綠色	大客車	台中市西屯區台灣大道50號	李志強
 MNO-7890	黑色	小客車	高雄市苓雅區中正路100號	張秀珍
-\.
-
-
---
--- Data for Name: violation; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.violation (violation_id, violation_date, violation_time, location, photo_id, speed_limit, vehicle_speed, device_id, license_plate, recognize) FROM stdin;
-1	2024-12-23	14:30:00	臨江街觀光夜市	photo1.jpg	50	80	D001	ABC-1234	1
-2	2024-12-23	09:15:00	樹林秀泰影城	photo2.jpg	40	70	D002	DEF-5678	1
-3	2024-12-22	20:45:00	桃園市中壢圖書館	photo3.jpg	30	55	D003	GHI-9012	2
-4	2024-12-21	14:20:00	秋紅谷景觀生態公園	photo4.jpg	60	95	D004	JKL-3456	2
-5	2024-12-20	16:10:00	高雄市政府衛生局	photo5.jpg	70	120	D005	MNO-7890	3
 \.
 
 
@@ -458,6 +486,13 @@ COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_col
 
 
 --
+-- Name: abandoned_violation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.abandoned_violation_id_seq', 1, false);
+
+
+--
 -- Name: artificialrecognitionlog_reportid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -490,6 +525,14 @@ SELECT pg_catalog.setval('public.trafficviolation_violation_id_seq', 1, false);
 --
 
 SELECT pg_catalog.setval('topology.topology_id_seq', 1, false);
+
+
+--
+-- Name: abandoned abandoned_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.abandoned
+    ADD CONSTRAINT abandoned_pkey PRIMARY KEY (violation_id);
 
 
 --
@@ -538,14 +581,6 @@ ALTER TABLE ONLY public.vehicle_registration
 
 ALTER TABLE ONLY public.vehicle_registration
     ADD CONSTRAINT vehicle_registration_pkey PRIMARY KEY (license_plate);
-
-
---
--- Name: violation violation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.violation
-    ADD CONSTRAINT violation_pkey PRIMARY KEY (violation_id);
 
 
 --
