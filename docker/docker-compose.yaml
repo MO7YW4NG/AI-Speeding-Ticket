@@ -82,6 +82,18 @@ services:
       - "8088:${PORT:-8080}"
     command: ["go", "run", "main.go"]
 
+  ai-be:
+    container_name: ai-be
+    build: ../AI-BE
+    restart: always
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    working_dir: /opt/AI-BE
+    volumes:
+      - ../AI-BE:/opt/AI-BE
+
 networks:
   default:
     name: br_dashboard

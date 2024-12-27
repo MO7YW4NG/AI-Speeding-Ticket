@@ -58,7 +58,7 @@ services:
     image: golang:${GOLANG_IMAGE_TAG:-latest}
     container_name: dashboard-be-init-car
     environment:
-      DB_CAR_HOST: ${DB_CAR_HOST:-postgres-data}
+      DB_CAR_HOST: ${DB_CAR_HOST:-postgres-car}
       DB_CAR_USER: ${DB_CAR_USER}
       DB_CAR_PASSWORD: ${DB_CAR_PASSWORD}
       PGPASSWORD: ${DB_CAR_PASSWORD}
