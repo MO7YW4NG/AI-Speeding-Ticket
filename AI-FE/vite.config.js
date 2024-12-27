@@ -15,7 +15,7 @@ export default defineConfig({
   },
   server: {
     host: "0.0.0.0",
-    // port: 81,
+    port: 81,
     // proxy: {
     //     "/api/dev": {
     //         target: "http://dashboard-be:8080",
