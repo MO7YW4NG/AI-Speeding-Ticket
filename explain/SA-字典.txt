@@ -1,7 +1,8 @@
 recognize
 0--可辨識
-1--AI無法辨識
+1--進人工辨識
 2--人工無法辨識
+3--已處理案件
 
 vehiclestatuscode
 1-車牌合格、車主活著
