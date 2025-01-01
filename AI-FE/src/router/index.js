@@ -1,7 +1,6 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import ImageViewer from "../components/ImageViewer.vue";
 import Form from "../components/Form.vue";
-import ViolationImageViewer from "../components/ViolationImageViewer.vue";
 import ViolationForm from "../components/ViolationForm.vue";
 
 const routes = [
@@ -15,7 +14,7 @@ const routes = [
     component: {
       template: `
         <div class="flex flex-1">
-          <ImageViewer />
+          <ImageViewer :zoomable="true" title="車牌檢視器" />
           <Form />
         </div>
       `,
@@ -31,12 +30,12 @@ const routes = [
     component: {
       template: `
         <div class="flex flex-1">
-          <ViolationImageViewer />
+          <ImageViewer :zoomable="false" title="違規車輛檢視器" />
           <ViolationForm />
         </div>
       `,
       components: {
-        ViolationImageViewer,
+        ImageViewer,
         ViolationForm,
       },
     },
