@@ -137,7 +137,7 @@ def get_all_issuable_violations():
 
     return result
 
-@app.get("/get_vehicle")
+@app.get("/get_vehicle_details")
 def get_vehicle(plate_number):
     conn = psycopg2.connect(
         database='dashboardcar',
@@ -157,44 +157,16 @@ def get_vehicle(plate_number):
     cursor.execute(sql, (plate_number,))
     
     # Fetch the results
-    vehicle = cursor.fetchall()
+    result = cursor.fetchall()
     
     # Close the cursor and connection
     cursor.close()
     conn.close()
     
-    return vehicle
+    return result
 
-# @app.get("/get_driver")
-# def get_driver(plate_number):
-#     conn = psycopg2.connect(
-#         database='dashboardcar',
-#         user='postgres',
-#         password='1234',
-#         host='localhost',
-#         port='5432'
-#     )
-
-#     conn.autocommit = True
-#     cursor = conn.cursor()
-
-#     # Use parameterized query to safely insert the name
-#     sql = '''SELECT * FROM drivers WHERE plateNumber = %s'''
-
-#     # Execute the query with the 'name' argument passed as a parameter
-#     cursor.execute(sql, (plate_number,))
-
-#     # Fetch the results
-#     driver = cursor.fetchall()
-
-#     # Close the cursor and connection
-#     cursor.close()
-#     conn.close()
-
-#     return driver
-
-@app.get("/get_all_driver")
-def get_all_driver():
+@app.post("/update_traffic_violation")
+def update_traffic_violation(violation_id):
     conn = psycopg2.connect(
         database='dashboardcar',
         user='postgres',
@@ -207,121 +179,12 @@ def get_all_driver():
     cursor = conn.cursor()
 
     # Use parameterized query to safely insert the name
-    sql = '''SELECT * FROM drivers'''
-
+    sql = '''UPDATE trafficviolation SET is_issued = 1 WHERE violation_id = %s'''
+    
     # Execute the query with the 'name' argument passed as a parameter
-    cursor.execute(sql)
-
-    # Fetch the results
-    drivers = cursor.fetchall()
-
-    # Close the cursor and connection
-    cursor.close()
-    conn.close()
-
-    return drivers
-
-@app.post("/new_ticket")
-def new_ticket(image, location, coordinate, datetime, equipment_id, speedlimit, speed, plate_number, vehicle_type, is_recognized):
-    conn = psycopg2.connect(
-        database='dashboardcar',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
-
-    #
-    sql = '''INSERT INTO tickets (image, location, coordinate, datetime, equipment_id, speedlimit, speed, plate_number, vehicle_type, is_recognized) 
-             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)'''
-
-    # Execute the query with the parameters (name, age, license_number, image)
-    cursor.execute(sql, (image, location, coordinate, datetime, equipment_id, speedlimit, speed, plate_number, vehicle_type, is_recognized))
-
-    # Close the cursor and connection
-    cursor.close()
-    conn.close()
-
-    print("Ticket submitted successfully")
-
-@app.get("/get_all_ticket")
-def get_all_ticket(license_number):
-    conn = psycopg2.connect(
-        database='dashboardcar',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
-
-    # Use parameterized query to safely insert the name
-    sql = '''SELECT * FROM tickets WHERE is_recognized = true'''
-
-    # Execute the query with the 'name' argument passed as a parameter
-    cursor.execute(sql)
-
-    # Fetch the results
-    tickets = cursor.fetchall()
-
-    # Close the cursor and connection
-    cursor.close()
-    conn.close()
-
-    return tickets
-
-@app.get("/get_all_unrecognized_ticket")
-def get_all_unrecognized_ticket():
-    conn = psycopg2.connect(
-        database='dashboardcar',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
-
-    # Use parameterized query to safely insert the name
-    sql = '''SELECT * FROM tickets WHERE is_recognized = false'''
-
-    # Execute the query with the 'name' argument passed as a parameter
-    cursor.execute(sql)
-
-    # Fetch the results
-    tickets = cursor.fetchall()
-
-    # Close the cursor and connection
-    cursor.close()
-    conn.close()
-
-    return tickets
-
-@app.post("/update_ticket")
-def update_ticket(license_plate):
-    conn = psycopg2.connect(
-        database='dashboardcar',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
-
-    # Use parameterized query to safely insert the name
-    sql = '''UPDATE * FROM tickets WHERE license_plate = %s'''
-
-    cursor.execute(sql, license_plate)
-
-    print("Update license plate successfully.")
+    cursor.execute(sql, (violation_id,))
+    
+    print("Traffic violation updated successfully.")
 
 @app.post("/delete_ticket")
 def delete_ticket(license_plate):
@@ -345,6 +208,6 @@ def delete_ticket(license_plate):
 
 # get_license_plate()
 # print(get_driver())
-get_all_violation()
+# get_all_violation()
 # print(get_all_driver())
 # print(get_all_ticket())
