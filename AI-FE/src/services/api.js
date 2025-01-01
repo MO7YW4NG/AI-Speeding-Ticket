@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8000", // FastAPI 的基礎 URL
+  baseURL: "http://localhost:8000", // API 位置
   headers: {
     "Content-Type": "application/json",
   },

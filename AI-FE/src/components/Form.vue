@@ -84,7 +84,7 @@
         </div>
   
         <div class="flex mt-4 space-x-4">
-          <!-- 左邊回報區域 -->
+          <!-- 回報區域 -->
           <div class="flex-1 bg-gray-800 rounded-lg p-4 border border-gray-700">
             <h3 class="text-md text-gray-100 font-semibold mb-2">回報原因</h3>
             <div>
@@ -102,7 +102,7 @@
             </button>
           </div>
   
-          <!-- 右邊提交區域 -->
+          <!-- 提交區域 -->
           <div class="flex-1 flex flex-col justify-between bg-gray-800 rounded-lg p-4">
             <div class="mt-8">
               <button @click="resetForm" class="w-full px-3 py-2 mb-2 rounded bg-gray-600 hover:bg-gray-700 text-white">
@@ -122,18 +122,18 @@
   
   <script>
   import { reactive, ref, onMounted } from "vue";
-  import { createRecognitionForm } from "@/services/recognitionService";
+  import { getUnrecognizedPlates, updateRecognizedPlate } from "@/services/recognitionService";
   
   export default {
     setup() {
       const formData = reactive({
-        aiErrorReason: "無法辨識車牌",
-        licensePlate: "",
-        eventType: "超速", // 預設為超速
-        serialNumber: "12345678",
-        ip: "192.168.0.1",
-        employeeId: "EMP001",
-        reportReason: "",
+        aiErrorReason: "無法辨識車牌", // AI 辨識錯誤原因
+        licensePlate: "", // 用戶輸入的車牌號
+        eventType: "超速", // 預設事件類型
+        serialNumber: "12345678", // 舉發 ID
+        ip: "192.168.0.1", // 處理機 IP
+        employeeId: "EMP001", // 員工 ID
+        reportReason: "", // 回報原因
       });
   
       const currentTime = ref("");
@@ -143,48 +143,54 @@
         currentTime.value = now.toLocaleString();
       };
   
-      onMounted(() => {
-        updateTime();
-        setInterval(updateTime, 1000);
-      });
-  
-      const resetForm = () => {
-        formData.licensePlate = "";
-        formData.eventType = "超速"; // 重置時也設為超速
-        formData.reportReason = "";
+      // 獲取需要人工辨識的車牌
+      const fetchUnrecognizedPlates = async () => {
+        try {
+          const response = await getUnrecognizedPlates();
+          // 根據第一條需要辨識的車牌數據初始化表單
+          if (response.data.length > 0) {
+            const firstPlate = response.data[0];
+            formData.aiErrorReason = firstPlate.aiErrorReason || "無";
+            formData.licensePlate = firstPlate.licensePlate || "";
+            formData.serialNumber = firstPlate.violationId;
+          }
+        } catch (error) {
+          console.error("獲取需要辨識的車牌失敗:", error);
+        }
       };
   
+      // 提交表單，更新車牌信息
       const submitForm = async () => {
         try {
-          const payload = {
-            aiErrorReason: formData.aiErrorReason,
-            licensePlate: formData.licensePlate,
-            eventType: formData.eventType,
-            serialNumber: formData.serialNumber,
-            ip: formData.ip,
-            employeeId: formData.employeeId,
-            timestamp: currentTime.value,
-          };
-  
-          if (!payload.licensePlate) {
+          if (!formData.licensePlate) {
             alert("請輸入車牌號碼！");
             return;
           }
-  
-          const response = await createRecognitionForm(payload);
-          console.log("表單提交成功:", response.data);
+          await updateRecognizedPlate(formData.serialNumber, formData.licensePlate);
           alert("表單提交成功！");
-          resetForm();
+          fetchUnrecognizedPlates(); // 提交後重新獲取需要辨識的車牌
         } catch (error) {
           console.error("表單提交失敗:", error);
           alert("表單提交失敗，請稍後再試！");
         }
       };
   
+      const resetForm = () => {
+        formData.licensePlate = "";
+        formData.eventType = "超速";
+        formData.reportReason = "";
+      };
+  
       const submitReport = () => {
         console.log("回報原因:", formData.reportReason);
         alert("回報提交成功！");
       };
+  
+      onMounted(() => {
+        updateTime();
+        setInterval(updateTime, 1000);
+        fetchUnrecognizedPlates(); // 組件掛載時獲取需要辨識的車牌
+      });
   
       return {
         formData,
@@ -196,8 +202,4 @@
     },
   };
   </script>
-  
-  <style>
-  /**** 表單相關樣式 ****/
-  </style>
   

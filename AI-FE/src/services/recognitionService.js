@@ -1,13 +1,13 @@
 import apiClient from "./api";
 
-// 獲取所有未辨識的車牌
+// 獲取所有需要被辨識的車牌
 export const getUnrecognizedPlates = () => {
-  return apiClient.get("/get_unrecognized_license_plates_by_AI");
+  return apiClient.get("/violation/get_all_unrecognized");
 };
 
-// 更新人工辨識後的車牌
+// 更新人工辨識的車牌信息
 export const updateRecognizedPlate = (violationId, newLicensePlate) => {
-  return apiClient.post("/articial_recognize_license_plate", {
+  return apiClient.post("/violation/update", {
     violation_id: violationId,
     new_license_plate: newLicensePlate,
   });
