@@ -30,7 +30,7 @@ def recognize_license_plate():
         license_plate = main.recognize_license_plate(image)
         print(license_plate)
         
-@app.get("/get_unrecognized_license_plates_by_AI")
+@app.get("/violation/get_all_unrecognized")
 def get_unrecognized_license_plates_by_AI():
     conn = psycopg2.connect(
         database='dashboardcar',
@@ -52,7 +52,7 @@ def get_unrecognized_license_plates_by_AI():
     
     return entries
         
-@app.post("/articial_recognize_license_plate")
+@app.post("/violation/update")
 def articial_recognize_license_plate(violation_id, new_license_plate):
     conn = psycopg2.connect(
         database='dashboardcar',
@@ -72,7 +72,7 @@ def articial_recognize_license_plate(violation_id, new_license_plate):
     
     print("License plate updated successfully.")
     
-@app.post("/move_and_delete_unrecognized_license_plate")
+@app.post("/violation/remove")
 def move_and_delete_unrecognized_license_plate(violation_id):
     conn = psycopg2.connect(
         database='dashboardcar',
@@ -107,7 +107,7 @@ def move_and_delete_unrecognized_license_plate(violation_id):
     cursor.close()
     conn.close()
           
-@app.get("/get_all_issuable_violations")
+@app.get("/violation/get_all")
 def get_all_issuable_violations():
     conn = psycopg2.connect(
         database='dashboardcar',
@@ -137,7 +137,7 @@ def get_all_issuable_violations():
 
     return result
 
-@app.get("/get_vehicle_details")
+@app.get("/vehicle/get")
 def get_vehicle(plate_number):
     conn = psycopg2.connect(
         database='dashboardcar',
@@ -165,7 +165,7 @@ def get_vehicle(plate_number):
     
     return result
 
-@app.post("/update_traffic_violation")
+@app.post("/violation/issue")
 def update_traffic_violation(violation_id):
     conn = psycopg2.connect(
         database='dashboardcar',
