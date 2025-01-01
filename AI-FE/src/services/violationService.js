@@ -1,13 +1,11 @@
 import apiClient from "./api";
 
-// 獲取所有表單資料
-export const getViolationForms = () => apiClient.get("/violations/forms");
+// 獲取所有可開單的違規數據
+export const getAllIssuableViolations = () => {
+  return apiClient.get("/get_all_issuable_violations");
+};
 
-// 提交新的表單資料
-export const createViolationForm = (formData) => apiClient.post("/violations/forms", formData);
-
-// 獲取所有圖片資料
-export const getViolationImages = () => apiClient.get("/violations/images");
-
-// 上傳新的圖片資料
-export const uploadViolationImage = (imageData) => apiClient.post("/violations/images", imageData);
+// 創建新的罰單
+export const createNewTicket = (ticketData) => {
+  return apiClient.post("/new_ticket", ticketData);
+};
