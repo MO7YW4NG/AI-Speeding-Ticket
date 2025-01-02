@@ -81,8 +81,15 @@ services:
     container_name: ai-be
     build: ../AI-BE
     restart: always
-    env_file:
-      - .env
+    environment:
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      GEMINI_API_KEY: ${GEMINI_API_KEY}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      DB_DASHBOARD_HOST: ${DB_DASHBOARD_HOST:-postgres-data}
+      DB_DASHBOARD_USER: ${DB_DASHBOARD_USER}
+      DB_DASHBOARD_PASSWORD: ${DB_DASHBOARD_PASSWORD}
+      DB_DASHBOARD_DBNAME: ${DB_DASHBOARD_DBNAME}
+      DB_DASHBOARD_PORT: ${DB_DASHBOARD_PORT:-5432}
     ports:
       - "8000:8000"
     working_dir: /opt/AI-BE

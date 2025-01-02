@@ -1,1 +1,1 @@
-from recognizer.plate_recognizer import PlateRecognizer, LicensePlate
+from recognizer.plate_recognizer import PlateRecognizer, ExtractedPlate

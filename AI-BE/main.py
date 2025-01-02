@@ -1,16 +1,12 @@
 from fastapi import FastAPI, File, UploadFile
-from pydantic import BaseModel
-from recognizer import PlateRecognizer
+from recognizer import PlateRecognizer,ExtractedPlate
 import tempfile
 import time
-
+from be import router as be_router  # Import the router from be.py
 
 app = FastAPI()
 
-class RecognizeResponse(BaseModel):
-    license_plate: str
-
-@app.post("/recognize", response_model=RecognizeResponse)
+@app.post("/recognize", response_model=ExtractedPlate)
 async def recognize_license_plate(file: UploadFile = File(...)):
     start = time.time()
     plate = None
@@ -20,8 +16,11 @@ async def recognize_license_plate(file: UploadFile = File(...)):
         temp_file_path = temp_file.name
         recognizer = PlateRecognizer(temp_file_path)
         plate = await recognizer.recognize()
-        
-    temp_file.close()
+    
+    # os.remove(temp_file_path)
     
     print(f"Time taken: {time.time() - start}")
-    return RecognizeResponse(license_plate=plate)
+    return plate
+
+app.include_router(be_router)
+
