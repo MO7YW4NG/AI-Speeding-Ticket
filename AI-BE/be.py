@@ -7,7 +7,7 @@ app = FastAPI()
 @app.get("/recognize_license_plate")
 def recognize_license_plate():
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
@@ -33,7 +33,7 @@ def recognize_license_plate():
 @app.get("/violation/get_all_unrecognized")
 def get_unrecognized_license_plates_by_AI():
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
@@ -55,7 +55,7 @@ def get_unrecognized_license_plates_by_AI():
 @app.post("/violation/update")
 def articial_recognize_license_plate(violation_id, new_license_plate):
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
@@ -75,7 +75,7 @@ def articial_recognize_license_plate(violation_id, new_license_plate):
 @app.post("/violation/remove")
 def move_and_delete_unrecognized_license_plate(violation_id):
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
@@ -110,7 +110,7 @@ def move_and_delete_unrecognized_license_plate(violation_id):
 @app.get("/violation/get_all")
 def get_all_issuable_violations():
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
@@ -140,7 +140,7 @@ def get_all_issuable_violations():
 @app.get("/vehicle/get")
 def get_vehicle(plate_number):
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
@@ -168,7 +168,7 @@ def get_vehicle(plate_number):
 @app.post("/violation/issue")
 def update_traffic_violation(violation_id):
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
@@ -189,7 +189,7 @@ def update_traffic_violation(violation_id):
 @app.post("/delete_ticket")
 def delete_ticket(license_plate):
     conn = psycopg2.connect(
-        database='dashboardcar',
+        database='dashboard',
         user='postgres',
         password='1234',
         host='localhost',
