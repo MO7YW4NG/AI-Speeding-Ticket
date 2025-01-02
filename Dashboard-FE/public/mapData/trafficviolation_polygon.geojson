@@ -307,7 +307,7 @@
     ] ]
     },
     "properties": {
-    "number":8,
+    "number":27,
     "location":"北投區"
     }
   },
@@ -717,7 +717,7 @@
        ]]
     },
     "properties": {
-    "number":22,
+    "number":10,
     "location":"士林區"
     }
   },
@@ -951,7 +951,7 @@
        ]]
     },
     "properties": {
-    "number":3,
+    "number":6,
     "location":"內湖區"
     }
   },
@@ -1041,7 +1041,7 @@
        ]]
     },
     "properties": {
-    "number":8,
+    "number":10,
     "location":"大同區"
     }
   },
@@ -1187,7 +1187,7 @@
        ]]
     },
     "properties": {
-    "number":3,
+    "number":9,
     "location":"中山區"
     }
   },
@@ -1293,7 +1293,7 @@
        ]]
     },
     "properties": {
-    "number":6,
+    "number":4,
     "location":"松山區"
     }
   },
@@ -1399,7 +1399,7 @@
        ]]
     },
     "properties": {
-    "number":12,
+    "number":5,
     "location":"萬華區"
     }
   },
@@ -1707,7 +1707,7 @@
        ]]
     },
     "properties": {
-    "number":4,
+    "number":7,
     "location":"大安區"
     }
   },
@@ -1865,7 +1865,7 @@
        ]]
     },
     "properties": {
-    "number":29,
+    "number":3,
     "location":"信義區"
     }
   },
@@ -2239,7 +2239,7 @@
        ]]
     },
     "properties": {
-    "number":4,
+    "number":2,
     "location":"南港區"
     }
   },
@@ -2729,7 +2729,7 @@
        ]]
     },
     "properties": {
-    "number":0,
+    "number":13,
     "location":"文山區"
     }
   }

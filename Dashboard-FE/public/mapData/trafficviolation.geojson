@@ -5,2496 +5,2500 @@
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.564468,25.033964 ]
+       "coordinates":  [ 121.6044617,25.05466652 ]
     },
     "properties": {
     "violation_id":1,
-    "location":"北投區",
     "violation_date":"2024-12-23",
     "violation_time":"14:30:00",
     "device_id":"D001",
     "speed_limit":50,
     "vehicle_speed":80,
-    "license_plate":"ABC1234",
+    "license_plate":"K9C123",
     "licenseplatereplydate":"2024-12-24",
     "licenseplatereplytime":"10:00:00",
     "vehicletype":"小客車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ABC-1234"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"K9C123",
+    "location":"南港區",
+    "address":"臺北市南港區東明里南港路二段60巷17號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.462788,25.011004 ]
+       "coordinates":  [ 121.5841904,24.98931503 ]
     },
     "properties": {
     "violation_id":2,
-    "location":"士林區",
     "violation_date":"2024-12-23",
     "violation_time":"09:15:00",
     "device_id":"D002",
     "speed_limit":40,
     "vehicle_speed":70,
-    "license_plate":"DEF5678",
+    "license_plate":"EME7268",
     "licenseplatereplydate":"2024-12-24",
     "licenseplatereplytime":"12:00:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"DEF-5678"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"EME7268",
+    "location":"文山區",
+    "address":"臺北市文山區政大二街129號"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.301506,24.993628 ]
+       "coordinates":  [ 121.5812759,25.0371933 ]
     },
     "properties": {
     "violation_id":3,
-    "location":"大同區",
     "violation_date":"2024-12-22",
     "violation_time":"20:45:00",
     "device_id":"D003",
     "speed_limit":30,
     "vehicle_speed":55,
-    "license_plate":"GHI9012",
+    "license_plate":"NHI891",
     "licenseplatereplydate":"2024-12-24",
     "licenseplatereplytime":"14:30:00",
     "vehicletype":"小貨車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"GHI-9012"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NHI891",
+    "location":"信義區",
+    "address":"臺北市信義區大仁里福德街１"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.642803,24.163264 ]
+       "coordinates":  [ 121.5430145,25.10202217 ]
     },
     "properties": {
     "violation_id":4,
-    "location":"中山區",
     "violation_date":"2024-12-21",
     "violation_time":"14:20:00",
     "device_id":"D004",
     "speed_limit":60,
     "vehicle_speed":95,
-    "license_plate":"JKL3456",
+    "license_plate":"MHC1251",
     "licenseplatereplydate":"2024-12-24",
     "licenseplatereplytime":"16:45:00",
     "vehicletype":"大客車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"JKL-3456"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.311928,22.627334 ]
-    },
-    "properties": {
-    "violation_id":6,
-    "location":"內湖區",
-    "violation_date":"2024-12-19",
-    "violation_time":"08:45:00",
-    "device_id":"D006",
-    "speed_limit":40,
-    "vehicle_speed":65,
-    "license_plate":"PQR2345",
-    "licenseplatereplydate":"2024-12-20",
-    "licenseplatereplytime":"09:00:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"PQR-2345"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.538469,25.047767 ]
-    },
-    "properties": {
-    "violation_id":7,
-    "location":"萬華區",
-    "violation_date":"2024-12-20",
-    "violation_time":"09:15:00",
-    "device_id":"D007",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"STU6789",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"09:30:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"STU-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.457956,25.016984 ]
-    },
-    "properties": {
-    "violation_id":8,
-    "location":"中正區",
-    "violation_date":"2024-12-20",
-    "violation_time":"10:00:00",
-    "device_id":"D008",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"VWX3456",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"10:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"VWX-3456"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.681226,24.146183 ]
-    },
-    "properties": {
-    "violation_id":9,
-    "location":"大安區",
-    "violation_date":"2024-12-20",
-    "violation_time":"11:30:00",
-    "device_id":"D009",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"YZA7890",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"11:45:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"YZA-7890"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.195018,22.970689 ]
-    },
-    "properties": {
-    "violation_id":10,
-    "location":"信義區",
-    "violation_date":"2024-12-20",
-    "violation_time":"12:00:00",
-    "device_id":"D010",
-    "speed_limit":40,
-    "vehicle_speed":60,
-    "license_plate":"BCD1234",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"12:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"BCD-1234"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.297478,22.629298 ]
-    },
-    "properties": {
-    "violation_id":11,
-    "location":"南港區",
-    "violation_date":"2024-12-20",
-    "violation_time":"12:30:00",
-    "device_id":"D011",
-    "speed_limit":60,
-    "vehicle_speed":85,
-    "license_plate":"EFG5678",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"12:45:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"EFG-5678"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.7411,25.126146 ]
-    },
-    "properties": {
-    "violation_id":12,
-    "location":"北投區",
-    "violation_date":"2024-12-20",
-    "violation_time":"13:00:00",
-    "device_id":"D012",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"HIJ1234",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"13:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"HIJ1-234"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.223246,24.957099 ]
-    },
-    "properties": {
-    "violation_id":13,
-    "location":"北投區",
-    "violation_date":"2024-12-20",
-    "violation_time":"14:00:00",
-    "device_id":"D013",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"KLM4567",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"14:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"KLM-4567"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.976106,24.806877 ]
-    },
-    "properties": {
-    "violation_id":14,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MHC1251",
     "location":"士林區",
-    "violation_date":"2024-12-20",
-    "violation_time":"15:00:00",
-    "device_id":"D014",
-    "speed_limit":50,
-    "vehicle_speed":65,
-    "license_plate":"NOP8901",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"15:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"NOP-8901"
+    "address":"臺北市士林區永福里1鄰仰德大道二段2巷50號"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.609403,25.071465 ]
-    },
-    "properties": {
-    "violation_id":15,
-    "location":"士林區",
-    "violation_date":"2024-12-20",
-    "violation_time":"16:00:00",
-    "device_id":"D015",
-    "speed_limit":40,
-    "vehicle_speed":60,
-    "license_plate":"QRS2346",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"16:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"QRS-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.53707,25.037924 ]
-    },
-    "properties": {
-    "violation_id":16,
-    "location":"士林區",
-    "violation_date":"2024-12-20",
-    "violation_time":"16:30:00",
-    "device_id":"D016",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"TUV5670",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"16:45:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"TUV-5670"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.662295,24.140058 ]
-    },
-    "properties": {
-    "violation_id":17,
-    "location":"士林區",
-    "violation_date":"2024-12-20",
-    "violation_time":"17:00:00",
-    "device_id":"D017",
-    "speed_limit":60,
-    "vehicle_speed":85,
-    "license_plate":"WXY1235",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"17:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"WXY-1235"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.565084,25.033956 ]
-    },
-    "properties": {
-    "violation_id":18,
-    "location":"大同區",
-    "violation_date":"2024-12-20",
-    "violation_time":"17:30:00",
-    "device_id":"D018",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"ZAB8902",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"17:45:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ZAB-8902"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.439845,25.043911 ]
-    },
-    "properties": {
-    "violation_id":19,
-    "location":"中山區",
-    "violation_date":"2024-12-20",
-    "violation_time":"18:00:00",
-    "device_id":"D019",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"CDE2346",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"18:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"CDE-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.563755,25.053848 ]
-    },
-    "properties": {
-    "violation_id":20,
-    "location":"士林區",
-    "violation_date":"2024-12-20",
-    "violation_time":"19:00:00",
-    "device_id":"D020",
-    "speed_limit":40,
-    "vehicle_speed":60,
-    "license_plate":"FGH5679",
-    "licenseplatereplydate":"2024-12-21",
-    "licenseplatereplytime":"19:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"FGH-5679"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.301435,22.627278 ]
+       "coordinates":  [ 121.5565491,25.04299355 ]
     },
     "properties": {
     "violation_id":5,
-    "location":"松山區",
     "violation_date":"2024-12-20",
     "violation_time":"16:10:00",
     "device_id":"D005",
     "speed_limit":70,
     "vehicle_speed":120,
-    "license_plate":"MNO7890",
+    "license_plate":"589HPG",
     "licenseplatereplydate":"2024-12-24",
     "licenseplatereplytime":"18:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"MNO-7890"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"589HPG",
+    "location":"大安區",
+    "address":"臺北市大安區光復南路116巷1、3、5號5樓及3號6樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.179702,22.956967 ]
+       "coordinates":  [ 121.5107727,25.02360153 ]
+    },
+    "properties": {
+    "violation_id":6,
+    "violation_date":"2024-12-19",
+    "violation_time":"08:45:00",
+    "device_id":"D006",
+    "speed_limit":40,
+    "vehicle_speed":65,
+    "license_plate":"505NKK",
+    "licenseplatereplydate":"2024-12-20",
+    "licenseplatereplytime":"09:00:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"505NKK",
+    "location":"萬華區",
+    "address":"臺北市萬華區水源路187號"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5219727,25.05989265 ]
+    },
+    "properties": {
+    "violation_id":7,
+    "violation_date":"2024-12-20",
+    "violation_time":"09:15:00",
+    "device_id":"D007",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"NMD3033",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"09:30:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NMD3033",
+    "location":"中山區",
+    "address":"臺北市中山區中山北路二段96巷19號3樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5127487,25.11644936 ]
+    },
+    "properties": {
+    "violation_id":8,
+    "violation_date":"2024-12-20",
+    "violation_time":"10:00:00",
+    "device_id":"D008",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"NBD3997",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"10:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NBD3997",
+    "location":"北投區",
+    "address":"臺北市北投區致遠二路96巷3弄1、3號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5023575,25.04452133 ]
+    },
+    "properties": {
+    "violation_id":9,
+    "violation_date":"2024-12-20",
+    "violation_time":"11:30:00",
+    "device_id":"D009",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"MYB3600",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"11:45:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MYB3600",
+    "location":"萬華區",
+    "address":"臺北市萬華區峨眉街124、124之1號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5419464,25.06735992 ]
+    },
+    "properties": {
+    "violation_id":10,
+    "violation_date":"2024-12-20",
+    "violation_time":"12:00:00",
+    "device_id":"D010",
+    "speed_limit":40,
+    "vehicle_speed":60,
+    "license_plate":"623NGD",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"12:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"623NGD",
+    "location":"中山區",
+    "address":"臺北市中山區民族東路512巷14號3~5樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5327377,25.06795311 ]
+    },
+    "properties": {
+    "violation_id":11,
+    "violation_date":"2024-12-20",
+    "violation_time":"12:30:00",
+    "device_id":"D011",
+    "speed_limit":60,
+    "vehicle_speed":85,
+    "license_plate":"030PFS",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"12:45:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"030PFS",
+    "location":"中山區",
+    "address":"臺北市中山區松江路374、380、382號4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5327377,25.06795311 ]
+    },
+    "properties": {
+    "violation_id":12,
+    "violation_date":"2024-12-20",
+    "violation_time":"13:00:00",
+    "device_id":"D012",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"NFH1708",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"13:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NFH1708",
+    "location":"中山區",
+    "address":"臺北市中山區松江路374、380、382號7樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5272141,25.04865265 ]
+    },
+    "properties": {
+    "violation_id":13,
+    "violation_date":"2024-12-20",
+    "violation_time":"14:00:00",
+    "device_id":"D013",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"379NRC",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"14:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"379NRC",
+    "location":"中山區",
+    "address":"臺北市中山區長安東路一段63號4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.532486,25.03775406 ]
+    },
+    "properties": {
+    "violation_id":14,
+    "violation_date":"2024-12-20",
+    "violation_time":"15:00:00",
+    "device_id":"D014",
+    "speed_limit":50,
+    "vehicle_speed":65,
+    "license_plate":"MVD0077",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"15:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MVD0077",
+    "location":"中正區",
+    "address":"臺北市中正區新生南路一段124之3號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5323029,25.03763771 ]
+    },
+    "properties": {
+    "violation_id":15,
+    "violation_date":"2024-12-20",
+    "violation_time":"16:00:00",
+    "device_id":"D015",
+    "speed_limit":40,
+    "vehicle_speed":60,
+    "license_plate":"NZ8008",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"16:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NZ8008",
+    "location":"中正區",
+    "address":"臺北市中正區連雲街3號1、3樓、3之4號及新生南路1段124之3號5樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5091705,25.02619934 ]
+    },
+    "properties": {
+    "violation_id":16,
+    "violation_date":"2024-12-20",
+    "violation_time":"16:30:00",
+    "device_id":"D016",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"MRF6676",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"16:45:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MRF6676",
+    "location":"中正區",
+    "address":"臺北市中正區詔安街220巷2、4號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5309219,25.01579475 ]
+    },
+    "properties": {
+    "violation_id":17,
+    "violation_date":"2024-12-20",
+    "violation_time":"17:00:00",
+    "device_id":"D017",
+    "speed_limit":60,
+    "vehicle_speed":85,
+    "license_plate":"163JGZ",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"17:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"163JGZ",
+    "location":"中正區",
+    "address":"臺北市中正區汀州路三段56號2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.576355,25.07274628 ]
+    },
+    "properties": {
+    "violation_id":18,
+    "violation_date":"2024-12-20",
+    "violation_time":"17:30:00",
+    "device_id":"D018",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"MXT2372",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"17:45:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MXT2372",
+    "location":"內湖區",
+    "address":"臺北市內湖區陽光街70-2、70-3、72、72-1號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5899811,25.08249664 ]
+    },
+    "properties": {
+    "violation_id":19,
+    "violation_date":"2024-12-20",
+    "violation_time":"18:00:00",
+    "device_id":"D019",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"739TCR",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"18:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"739TCR",
+    "location":"內湖區",
+    "address":"臺北市內湖區內湖路二段253巷1弄1、3號1-2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5866013,25.08285332 ]
+    },
+    "properties": {
+    "violation_id":20,
+    "violation_date":"2024-12-20",
+    "violation_time":"19:00:00",
+    "device_id":"D020",
+    "speed_limit":40,
+    "vehicle_speed":60,
+    "license_plate":"NDP5031",
+    "licenseplatereplydate":"2024-12-21",
+    "licenseplatereplytime":"19:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NDP5031",
+    "location":"內湖區",
+    "address":"臺北市內湖區內湖路二段179巷58、60號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.6049957,25.0715847 ]
     },
     "properties": {
     "violation_id":21,
-    "location":"士林區",
     "violation_date":"2024-12-20",
     "violation_time":"19:30:00",
     "device_id":"D021",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"IJK1239",
+    "license_plate":"NFQ2820",
     "licenseplatereplydate":"2024-12-21",
     "licenseplatereplytime":"19:45:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"IJK-1239"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NFQ2820",
+    "location":"內湖區",
+    "address":"臺北市內湖區民權東路六段280巷19弄1、3、5、7號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.291104,22.607168 ]
+       "coordinates":  [ 121.5907822,25.08038139 ]
     },
     "properties": {
     "violation_id":22,
-    "location":"士林區",
     "violation_date":"2024-12-20",
     "violation_time":"20:00:00",
     "device_id":"D022",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"LMN7891",
+    "license_plate":"859NGF",
     "licenseplatereplydate":"2024-12-21",
     "licenseplatereplytime":"20:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"LMN-7891"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"859NGF",
+    "location":"內湖區",
+    "address":"臺北市內湖區成功路三段88、90、92號2樓、76巷9號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.382514,24.99634 ]
+       "coordinates":  [ 121.5896835,25.07325363 ]
     },
     "properties": {
     "violation_id":23,
-    "location":"士林區",
     "violation_date":"2024-12-20",
     "violation_time":"21:00:00",
     "device_id":"D023",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"OPQ1235",
+    "license_plate":"NDF0113",
     "licenseplatereplydate":"2024-12-21",
     "licenseplatereplytime":"21:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"OPQ-1235"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NDF0113",
+    "location":"內湖區",
+    "address":"臺北市內湖區成功路二段488號2~5樓、490號2~4樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.687423,24.160529 ]
+       "coordinates":  [ 121.5216065,25.1136837 ]
     },
     "properties": {
     "violation_id":24,
-    "location":"士林區",
     "violation_date":"2024-12-20",
     "violation_time":"22:00:00",
     "device_id":"D024",
     "speed_limit":60,
     "vehicle_speed":85,
-    "license_plate":"RST5679",
+    "license_plate":"689LDS",
     "licenseplatereplydate":"2024-12-21",
     "licenseplatereplytime":"22:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"RST-5679"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"689LDS",
+    "location":"北投區",
+    "address":"臺北市北投區建民路22、24、26、26之1號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.531486,25.045174 ]
+       "coordinates":  [ 121.5156097,25.11821747 ]
     },
     "properties": {
     "violation_id":25,
-    "location":"松山區",
     "violation_date":"2024-12-20",
     "violation_time":"23:00:00",
     "device_id":"D025",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"UVW6789",
+    "license_plate":"MXM8258",
     "licenseplatereplydate":"2024-12-21",
     "licenseplatereplytime":"23:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"UVW-6789"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MXM8258",
+    "location":"北投區",
+    "address":"臺北市北投區義理街63巷4弄7、11之1~3號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.516325,25.053652 ]
+       "coordinates":  [ 121.5029831,25.12865257 ]
     },
     "properties": {
     "violation_id":26,
-    "location":"內湖區",
     "violation_date":"2024-12-20",
     "violation_time":"23:30:00",
     "device_id":"D026",
     "speed_limit":40,
     "vehicle_speed":60,
-    "license_plate":"XYZ1235",
+    "license_plate":"MYN0123",
     "licenseplatereplydate":"2024-12-21",
     "licenseplatereplytime":"23:45:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":1,
-    "license_plate2":"XYZ-1235"
+    "photo_id":"binary data",
+    "recognize":"1",
+    "license_plate2":"MYN0123",
+    "location":"北投區",
+    "address":"臺北市北投區磺港路156號1~3樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.456073,24.983983 ]
+       "coordinates":  [ 121.4674225,25.11811638 ]
     },
     "properties": {
     "violation_id":27,
-    "location":"萬華區",
     "violation_date":"2024-12-21",
     "violation_time":"00:00:00",
     "device_id":"D027",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"ABC5679",
+    "license_plate":"MXV6155",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"00:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ABC-5679"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MXV6155",
+    "location":"北投區",
+    "address":"臺北市北投區知行路52巷1號及54號1~2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.521307,25.038523 ]
+       "coordinates":  [ 121.523468,25.12265968 ]
     },
     "properties": {
     "violation_id":28,
-    "location":"中正區",
     "violation_date":"2024-12-21",
     "violation_time":"01:00:00",
     "device_id":"D028",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"DEF1236",
+    "license_plate":"NFV7559",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"01:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"DEF-1236"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NFV7559",
+    "location":"北投區",
+    "address":"臺北市北投區石牌路二段343巷17號1~2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.205637,22.979229 ]
+       "coordinates":  [ 121.5471649,25.15086746 ]
     },
     "properties": {
     "violation_id":29,
-    "location":"大安區",
     "violation_date":"2024-12-21",
     "violation_time":"02:00:00",
     "device_id":"D029",
     "speed_limit":60,
     "vehicle_speed":90,
-    "license_plate":"GHI4568",
+    "license_plate":"MDL0361",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"02:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"GHI-4568"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MDL0361",
+    "location":"北投區",
+    "address":"臺北市北投區紗帽路116號"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.332728,22.585671 ]
+       "coordinates":  [ 121.486557,25.1429348 ]
     },
     "properties": {
     "violation_id":30,
-    "location":"信義區",
     "violation_date":"2024-12-21",
     "violation_time":"03:00:00",
     "device_id":"D030",
     "speed_limit":50,
     "vehicle_speed":80,
-    "license_plate":"JKL7891",
+    "license_plate":"MQU5805",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"03:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"JKL-7891"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MQU5805",
+    "location":"北投區",
+    "address":"臺北市北投區稻香路321號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.684441,24.132669 ]
+       "coordinates":  [ 121.5223846,25.12383652 ]
     },
     "properties": {
     "violation_id":31,
-    "location":"信義區",
     "violation_date":"2024-12-21",
     "violation_time":"04:00:00",
     "device_id":"D031",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"MNO1235",
+    "license_plate":"897PJT",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"04:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"MNO-1235"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"897PJT",
+    "location":"北投區",
+    "address":"臺北市北投區石牌路二段315巷34弄14、16號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.547349,25.030365 ]
+       "coordinates":  [ 121.5008545,25.14749146 ]
     },
     "properties": {
     "violation_id":32,
-    "location":"信義區",
     "violation_date":"2024-12-21",
     "violation_time":"05:00:00",
     "device_id":"D032",
     "speed_limit":60,
     "vehicle_speed":85,
-    "license_plate":"PQR6780",
+    "license_plate":"728DMU",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"05:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"PQR-6780"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"728DMU",
+    "location":"北投區",
+    "address":"臺北市北投區中和街錫安巷112號1-2樓及地下1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.650298,24.944659 ]
+       "coordinates":  [ 121.4971466,25.1315155 ]
     },
     "properties": {
     "violation_id":33,
-    "location":"信義區",
     "violation_date":"2024-12-21",
     "violation_time":"06:00:00",
     "device_id":"D033",
     "speed_limit":40,
     "vehicle_speed":60,
-    "license_plate":"STU2347",
+    "license_plate":"MXD1689",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"06:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"STU-2347"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MXD1689",
+    "location":"北投區",
+    "address":"臺北市北投區大業路452巷2號6~9樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.584503,25.033786 ]
+       "coordinates":  [ 121.4971466,25.1315155 ]
     },
     "properties": {
     "violation_id":34,
-    "location":"信義區",
     "violation_date":"2024-12-21",
     "violation_time":"07:00:00",
     "device_id":"D034",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"VWX3457",
+    "license_plate":"HRB710",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"07:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"VWX-3457"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.608739,24.986313 ]
-    },
-    "properties": {
-    "violation_id":36,
-    "location":"信義區",
-    "violation_date":"2024-12-21",
-    "violation_time":"09:00:00",
-    "device_id":"D036",
-    "speed_limit":40,
-    "vehicle_speed":60,
-    "license_plate":"BCD3459",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"09:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"BCD-3459"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.479526,25.060385 ]
-    },
-    "properties": {
-    "violation_id":37,
-    "location":"信義區",
-    "violation_date":"2024-12-21",
-    "violation_time":"10:00:00",
-    "device_id":"D037",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"EFG6789",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"10:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"EFG-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.577181,24.991684 ]
-    },
-    "properties": {
-    "violation_id":38,
-    "location":"信義區",
-    "violation_date":"2024-12-21",
-    "violation_time":"11:00:00",
-    "device_id":"D038",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"HIJ6789",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"11:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"HIJ-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.255308,23.030631 ]
-    },
-    "properties": {
-    "violation_id":39,
-    "location":"信義區",
-    "violation_date":"2024-12-21",
-    "violation_time":"12:00:00",
-    "device_id":"D039",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"KLM9013",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"12:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":1,
-    "license_plate2":"KLM-9013"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.309548,22.62684 ]
-    },
-    "properties": {
-    "violation_id":40,
-    "location":"信義區",
-    "violation_date":"2024-12-21",
-    "violation_time":"13:00:00",
-    "device_id":"D040",
-    "speed_limit":40,
-    "vehicle_speed":60,
-    "license_plate":"NOP2346",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"13:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"NOP-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.684902,24.14223 ]
-    },
-    "properties": {
-    "violation_id":41,
-    "location":"南港區",
-    "violation_date":"2024-12-21",
-    "violation_time":"14:00:00",
-    "device_id":"D041",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"QRS3457",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"14:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"QRS-3457"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.495842,25.051645 ]
-    },
-    "properties": {
-    "violation_id":42,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"HRB710",
     "location":"北投區",
-    "violation_date":"2024-12-21",
-    "violation_time":"15:00:00",
-    "device_id":"D042",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"TUV5679",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"15:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"TUV-5679"
+    "address":"臺北市北投區大業路452巷2號2~5樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.533665,25.083578 ]
-    },
-    "properties": {
-    "violation_id":43,
-    "location":"士林區",
-    "violation_date":"2024-12-21",
-    "violation_time":"16:00:00",
-    "device_id":"D043",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"WXY6789",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"16:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"WXY-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.970844,24.831122 ]
-    },
-    "properties": {
-    "violation_id":44,
-    "location":"大同區",
-    "violation_date":"2024-12-21",
-    "violation_time":"17:00:00",
-    "device_id":"D044",
-    "speed_limit":60,
-    "vehicle_speed":85,
-    "license_plate":"ZAB2346",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"17:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ZAB-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.650702,24.137972 ]
-    },
-    "properties": {
-    "violation_id":45,
-    "location":"中山區",
-    "violation_date":"2024-12-21",
-    "violation_time":"18:00:00",
-    "device_id":"D045",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"CDE6789",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"18:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"CDE-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.5478,25.062353 ]
-    },
-    "properties": {
-    "violation_id":46,
-    "location":"松山區",
-    "violation_date":"2024-12-21",
-    "violation_time":"19:00:00",
-    "device_id":"D046",
-    "speed_limit":40,
-    "vehicle_speed":60,
-    "license_plate":"FGH9013",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"19:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"FGH-9013"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.692741,24.156542 ]
-    },
-    "properties": {
-    "violation_id":47,
-    "location":"內湖區",
-    "violation_date":"2024-12-21",
-    "violation_time":"20:00:00",
-    "device_id":"D047",
-    "speed_limit":60,
-    "vehicle_speed":85,
-    "license_plate":"IJK1235",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"20:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"IJK-1235"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.453243,25.023874 ]
-    },
-    "properties": {
-    "violation_id":48,
-    "location":"萬華區",
-    "violation_date":"2024-12-21",
-    "violation_time":"21:00:00",
-    "device_id":"D048",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"LMN9013",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"21:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"LMN-9013"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.641763,25.067249 ]
-    },
-    "properties": {
-    "violation_id":49,
-    "location":"中正區",
-    "violation_date":"2024-12-21",
-    "violation_time":"22:00:00",
-    "device_id":"D049",
-    "speed_limit":40,
-    "vehicle_speed":60,
-    "license_plate":"OPQ2346",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"22:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"OPQ-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.295122,22.629018 ]
-    },
-    "properties": {
-    "violation_id":50,
-    "location":"大安區",
-    "violation_date":"2024-12-21",
-    "violation_time":"23:00:00",
-    "device_id":"D050",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"RST6789",
-    "licenseplatereplydate":"2024-12-22",
-    "licenseplatereplytime":"23:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"RST-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.693218,24.147632 ]
-    },
-    "properties": {
-    "violation_id":51,
-    "location":"信義區",
-    "violation_date":"2024-12-22",
-    "violation_time":"00:00:00",
-    "device_id":"D051",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"UVW1234",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"00:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"UVW-1234"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.43567,25.003541 ]
-    },
-    "properties": {
-    "violation_id":52,
-    "location":"南港區",
-    "violation_date":"2024-12-22",
-    "violation_time":"01:00:00",
-    "device_id":"D052",
-    "speed_limit":60,
-    "vehicle_speed":90,
-    "license_plate":"XYZ2346",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"01:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"XYZ-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.55342,25.043548 ]
-    },
-    "properties": {
-    "violation_id":53,
-    "location":"北投區",
-    "violation_date":"2024-12-22",
-    "violation_time":"02:00:00",
-    "device_id":"D053",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"ABC6780",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"02:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ABC-6780\n"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.728309,24.173639 ]
-    },
-    "properties": {
-    "violation_id":54,
-    "location":"北投區",
-    "violation_date":"2024-12-22",
-    "violation_time":"03:00:00",
-    "device_id":"D054",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"DEF1237",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"03:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"DEF-1237"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.450371,24.872501 ]
-    },
-    "properties": {
-    "violation_id":55,
-    "location":"北投區",
-    "violation_date":"2024-12-22",
-    "violation_time":"04:00:00",
-    "device_id":"D055",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"GHI5679",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"04:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"GHI-5679"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.526456,25.037861 ]
-    },
-    "properties": {
-    "violation_id":56,
-    "location":"北投區",
-    "violation_date":"2024-12-22",
-    "violation_time":"05:00:00",
-    "device_id":"D056",
-    "speed_limit":60,
-    "vehicle_speed":90,
-    "license_plate":"JKL2349",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"05:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"JKL-2349"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.698411,24.130524 ]
-    },
-    "properties": {
-    "violation_id":57,
-    "location":"士林區",
-    "violation_date":"2024-12-22",
-    "violation_time":"06:00:00",
-    "device_id":"D057",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"MNO3459",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"06:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"MNO-3459"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.653012,24.143982 ]
-    },
-    "properties": {
-    "violation_id":68,
-    "location":"大同區",
-    "violation_date":"2024-12-22",
-    "violation_time":"17:00:00",
-    "device_id":"D068",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"TUV6789",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"17:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"TUV-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.307845,22.619171 ]
-    },
-    "properties": {
-    "violation_id":69,
-    "location":"大同區",
-    "violation_date":"2024-12-22",
-    "violation_time":"18:00:00",
-    "device_id":"D069",
-    "speed_limit":60,
-    "vehicle_speed":90,
-    "license_plate":"WXY2346",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"18:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"WXY-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.232458,23.034186 ]
-    },
-    "properties": {
-    "violation_id":70,
-    "location":"松山區",
-    "violation_date":"2024-12-22",
-    "violation_time":"19:00:00",
-    "device_id":"D070",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"ZAB5679",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"19:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ZAB-5679"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.542389,25.035412 ]
-    },
-    "properties": {
-    "violation_id":71,
-    "location":"內湖區\n",
-    "violation_date":"2024-12-22",
-    "violation_time":"20:00:00",
-    "device_id":"D071",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"CDE9013",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"20:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"CDE-9013"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.465204,25.037892 ]
-    },
-    "properties": {
-    "violation_id":72,
-    "location":"萬華區",
-    "violation_date":"2024-12-22",
-    "violation_time":"21:00:00",
-    "device_id":"D072",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"FGH1235",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"21:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"FGH-1235"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.723451,24.13885 ]
-    },
-    "properties": {
-    "violation_id":73,
-    "location":"萬華區",
-    "violation_date":"2024-12-22",
-    "violation_time":"22:00:00",
-    "device_id":"D073",
-    "speed_limit":60,
-    "vehicle_speed":85,
-    "license_plate":"IJK5679",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"22:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"IJK-5679"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.978067,24.801356 ]
-    },
-    "properties": {
-    "violation_id":74,
-    "location":"萬華區",
-    "violation_date":"2024-12-22",
-    "violation_time":"23:00:00",
-    "device_id":"D074",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"LMN2346",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"23:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"LMN-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.522105,25.051663 ]
-    },
-    "properties": {
-    "violation_id":75,
-    "location":"萬華區",
-    "violation_date":"2024-12-23",
-    "violation_time":"00:00:00",
-    "device_id":"D075",
-    "speed_limit":60,
-    "vehicle_speed":90,
-    "license_plate":"OPQ6789",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"00:15:00",
-    "vehicletype":"機車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"OPQ-6789"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.702119,24.148748 ]
-    },
-    "properties": {
-    "violation_id":76,
-    "location":"萬華區",
-    "violation_date":"2024-12-23",
-    "violation_time":"01:00:00",
-    "device_id":"D076",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"RST2346",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"01:15:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"RST-2346"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.48506,25.011667 ]
-    },
-    "properties": {
-    "violation_id":77,
-    "location":"萬華區",
-    "violation_date":"2024-12-23",
-    "violation_time":"02:00:00",
-    "device_id":"D077",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"UVW5679",
-    "licenseplatereplydate":"2024-12-23",
-    "licenseplatereplytime":"02:15:00",
-    "vehicletype":"大型車",
-    "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"UVW-5679"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 120.711395,24.167199 ]
+       "coordinates":  [ 121.5082398,25.12014771 ]
     },
     "properties": {
     "violation_id":35,
-    "location":"信義區",
     "violation_date":"2024-12-21",
     "violation_time":"08:00:00",
     "device_id":"D035",
     "speed_limit":60,
     "vehicle_speed":90,
-    "license_plate":"YZA9013",
+    "license_plate":"MGJ8906",
     "licenseplatereplydate":"2024-12-22",
     "licenseplatereplytime":"08:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"YZA-9013"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MGJ8906",
+    "location":"北投區",
+    "address":"臺北市北投區西安街二段245號1.2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.306177,22.682439 ]
+       "coordinates":  [ 121.5072632,25.1280632 ]
+    },
+    "properties": {
+    "violation_id":36,
+    "violation_date":"2024-12-21",
+    "violation_time":"09:00:00",
+    "device_id":"D036",
+    "speed_limit":40,
+    "vehicle_speed":60,
+    "license_plate":"MPZ9228",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"09:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MPZ9228",
+    "location":"北投區",
+    "address":"臺北市北投區公?路194、196號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.4912796,25.03534126 ]
+    },
+    "properties": {
+    "violation_id":37,
+    "violation_date":"2024-12-21",
+    "violation_time":"10:00:00",
+    "device_id":"D037",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"2GN090",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"10:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"2GN090",
+    "location":"萬華區",
+    "address":"臺北市萬華區和平西路三段384號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.4935455,25.02655029 ]
+    },
+    "properties": {
+    "violation_id":38,
+    "violation_date":"2024-12-21",
+    "violation_time":"11:00:00",
+    "device_id":"D038",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"EMP5318",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"11:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"EMP5318",
+    "location":"萬華區",
+    "address":"臺北市萬華區西園路二段243之14號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.4935455,25.02655029 ]
+    },
+    "properties": {
+    "violation_id":39,
+    "violation_date":"2024-12-21",
+    "violation_time":"12:00:00",
+    "device_id":"D039",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"MBP2763",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"12:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"1",
+    "license_plate2":"MBP2763",
+    "location":"萬華區",
+    "address":"臺北市萬華區西園路二段243之13號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5128479,25.05978012 ]
+    },
+    "properties": {
+    "violation_id":40,
+    "violation_date":"2024-12-21",
+    "violation_time":"13:00:00",
+    "device_id":"D040",
+    "speed_limit":40,
+    "vehicle_speed":60,
+    "license_plate":"538DNT",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"13:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"538DNT",
+    "location":"大同區",
+    "address":"臺北市大同區甘州街55號3樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5468826,24.9999733 ]
+    },
+    "properties": {
+    "violation_id":41,
+    "violation_date":"2024-12-21",
+    "violation_time":"14:00:00",
+    "device_id":"D041",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"NEE5856",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"14:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NEE5856",
+    "location":"文山區",
+    "address":"臺北市文山區興隆路二段95巷8號3樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5019531,25.12042046 ]
+    },
+    "properties": {
+    "violation_id":42,
+    "violation_date":"2024-12-21",
+    "violation_time":"15:00:00",
+    "device_id":"D042",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"229JJT",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"15:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"229JJT",
+    "location":"北投區",
+    "address":"臺北市北投區公?路194、196號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5121689,25.0841217 ]
+    },
+    "properties": {
+    "violation_id":43,
+    "violation_date":"2024-12-21",
+    "violation_time":"16:00:00",
+    "device_id":"D043",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"810PEY",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"16:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"810PEY",
+    "location":"士林區",
+    "address":"臺北市士林區重慶北路四段162號1-4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5303268,25.12012482 ]
+    },
+    "properties": {
+    "violation_id":44,
+    "violation_date":"2024-12-21",
+    "violation_time":"17:00:00",
+    "device_id":"D044",
+    "speed_limit":60,
+    "vehicle_speed":85,
+    "license_plate":"MEH8588",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"17:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MEH8588",
+    "location":"士林區",
+    "address":"臺北市士林區天玉街38巷18弄18號1-6樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5265427,25.11425209 ]
+    },
+    "properties": {
+    "violation_id":45,
+    "violation_date":"2024-12-21",
+    "violation_time":"18:00:00",
+    "device_id":"D045",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"NEH2515",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"18:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NEH2515",
+    "location":"士林區",
+    "address":"臺北市士林區中山北路六段427巷8號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5271378,25.10788536 ]
+    },
+    "properties": {
+    "violation_id":46,
+    "violation_date":"2024-12-21",
+    "violation_time":"19:00:00",
+    "device_id":"D046",
+    "speed_limit":40,
+    "vehicle_speed":60,
+    "license_plate":"395GWU",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"19:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"395GWU",
+    "location":"士林區",
+    "address":"臺北市士林區德行東路61巷1、2、3號1、2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5273361,25.10889626 ]
+    },
+    "properties": {
+    "violation_id":47,
+    "violation_date":"2024-12-21",
+    "violation_time":"20:00:00",
+    "device_id":"D047",
+    "speed_limit":60,
+    "vehicle_speed":85,
+    "license_plate":"MJW6302",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"20:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MJW6302",
+    "location":"士林區",
+    "address":"臺北市士林區中山北路六段290巷52、54號1樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5290756,25.10870934 ]
+    },
+    "properties": {
+    "violation_id":48,
+    "violation_date":"2024-12-21",
+    "violation_time":"21:00:00",
+    "device_id":"D048",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"ENL1512",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"21:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"ENL1512",
+    "location":"士林區",
+    "address":"臺北市士林區忠誠路二段10巷11、13號1~2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5317383,25.1014595 ]
+    },
+    "properties": {
+    "violation_id":49,
+    "violation_date":"2024-12-21",
+    "violation_time":"22:00:00",
+    "device_id":"D049",
+    "speed_limit":40,
+    "vehicle_speed":60,
+    "license_plate":"NAM2905",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"22:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NAM2905",
+    "location":"士林區",
+    "address":"臺北市士林區至誠路一段305巷3弄14號1-2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5097199,25.07997704 ]
+    },
+    "properties": {
+    "violation_id":50,
+    "violation_date":"2024-12-21",
+    "violation_time":"23:00:00",
+    "device_id":"D050",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"MVF0267",
+    "licenseplatereplydate":"2024-12-22",
+    "licenseplatereplytime":"23:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MVF0267",
+    "location":"士林區",
+    "address":"臺北市士林區葫蘆街33號2~3樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5097199,25.07997704 ]
+    },
+    "properties": {
+    "violation_id":51,
+    "violation_date":"2024-12-22",
+    "violation_time":"00:00:00",
+    "device_id":"D051",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"703GQR",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"00:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"703GQR",
+    "location":"士林區",
+    "address":"臺北市士林區葫蘆街33號4、5、6樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5128479,25.05978012 ]
+    },
+    "properties": {
+    "violation_id":52,
+    "violation_date":"2024-12-22",
+    "violation_time":"01:00:00",
+    "device_id":"D052",
+    "speed_limit":60,
+    "vehicle_speed":90,
+    "license_plate":"MRQ5625",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"01:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MRQ5625",
+    "location":"大同區",
+    "address":"臺北市大同區甘州街55號5~6樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5135956,25.07314873 ]
+    },
+    "properties": {
+    "violation_id":53,
+    "violation_date":"2024-12-22",
+    "violation_time":"02:00:00",
+    "device_id":"D053",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"515LUU",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"02:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"515LUU",
+    "location":"大同區",
+    "address":"臺北市大同區重慶北路三段284號2~4樓、286號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5128479,25.05978012 ]
+    },
+    "properties": {
+    "violation_id":54,
+    "violation_date":"2024-12-22",
+    "violation_time":"03:00:00",
+    "device_id":"D054",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"MLY5892",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"03:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MLY5892",
+    "location":"大同區",
+    "address":"臺北市大同區甘州街55號2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5135956,25.07275963 ]
+    },
+    "properties": {
+    "violation_id":55,
+    "violation_date":"2024-12-22",
+    "violation_time":"04:00:00",
+    "device_id":"D055",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"MVG721",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"04:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MVG721",
+    "location":"大同區",
+    "address":"臺北市大同區重慶北路三段175、177號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5110474,25.06343269 ]
+    },
+    "properties": {
+    "violation_id":56,
+    "violation_date":"2024-12-22",
+    "violation_time":"05:00:00",
+    "device_id":"D056",
+    "speed_limit":60,
+    "vehicle_speed":90,
+    "license_plate":"NNQ6712",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"05:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NNQ6712",
+    "location":"大同區",
+    "address":"臺北市大同區延平北路三段4號2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5167236,25.0520649 ]
+    },
+    "properties": {
+    "violation_id":57,
+    "violation_date":"2024-12-22",
+    "violation_time":"06:00:00",
+    "device_id":"D057",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"MER5079",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"06:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MER5079",
+    "location":"大同區",
+    "address":"臺北市大同區太原路97巷4、6號"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5174637,25.07487679 ]
     },
     "properties": {
     "violation_id":58,
-    "location":"士林區",
     "violation_date":"2024-12-22",
     "violation_time":"07:00:00",
     "device_id":"D058",
     "speed_limit":40,
     "vehicle_speed":60,
-    "license_plate":"PQR9013",
+    "license_plate":"678GTV",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"07:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"PQR-9013"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"678GTV",
+    "location":"大同區",
+    "address":"臺北市大同區敦煌路80巷3號及3-1號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.63356,25.066597 ]
+       "coordinates":  [ 121.5185547,25.05000877 ]
     },
     "properties": {
     "violation_id":59,
-    "location":"士林區",
     "violation_date":"2024-12-22",
     "violation_time":"08:00:00",
     "device_id":"D059",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"STU2346",
+    "license_plate":"MHC1116",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"08:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"STU-2346"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MHC1116",
+    "location":"大同區",
+    "address":"臺北市大同區長安西路78巷4弄11號1~4樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.648361,24.151359 ]
+       "coordinates":  [ 121.5151672,25.05598068 ]
     },
     "properties": {
     "violation_id":60,
-    "location":"士林區",
     "violation_date":"2024-12-22",
     "violation_time":"09:00:00",
     "device_id":"D060",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"VWX6789",
+    "license_plate":"NKF6003",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"09:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":1,
-    "license_plate2":"VWX-6789"
+    "photo_id":"binary data",
+    "recognize":"1",
+    "license_plate2":"NKF6003",
+    "location":"大同區",
+    "address":"臺北市大同區寧夏路32號5樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.151923,23.005041 ]
+       "coordinates":  [ 121.5452957,25.035532 ]
     },
     "properties": {
     "violation_id":61,
-    "location":"士林區",
     "violation_date":"2024-12-22",
     "violation_time":"10:00:00",
     "device_id":"D061",
     "speed_limit":60,
     "vehicle_speed":85,
-    "license_plate":"YZA9015",
+    "license_plate":"MUE6562",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"10:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"YZA-9015"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MUE6562",
+    "location":"大安區",
+    "address":"臺北市大安區復興南路一段279巷14、16號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.487249,25.010549 ]
+       "coordinates":  [ 121.5350113,25.0255127 ]
     },
     "properties": {
     "violation_id":62,
-    "location":"士林區",
     "violation_date":"2024-12-22",
     "violation_time":"11:00:00",
     "device_id":"D062",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"BCD3457",
+    "license_plate":"ADX3556",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"11:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"BCD-3457"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"ADX3556",
+    "location":"大安區",
+    "address":"臺北市大安區新生南路三段7-4號、9-4號、9-5號"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.506451,25.034271 ]
+       "coordinates":  [ 121.5261154,25.02870369 ]
     },
     "properties": {
     "violation_id":63,
-    "location":"士林區",
     "violation_date":"2024-12-22",
     "violation_time":"12:00:00",
     "device_id":"D063",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"EFG5679",
+    "license_plate":"NHA6293",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"12:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"EFG-5679"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NHA6293",
+    "location":"大安區",
+    "address":"臺北市大安區金山南路二段152號2、3、4、5、6樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.980273,24.799682 ]
+       "coordinates":  [ 121.5535049,25.03634071 ]
     },
     "properties": {
     "violation_id":64,
-    "location":"士林區",
     "violation_date":"2024-12-22",
     "violation_time":"13:00:00",
     "device_id":"D064",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"HIJ9013",
+    "license_plate":"NCF3015",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"13:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":1,
-    "license_plate2":"HIJ-9013"
+    "photo_id":"binary data",
+    "recognize":"1",
+    "license_plate2":"NCF3015",
+    "location":"大安區",
+    "address":"臺北市大安區仁愛路四段300巷20弄15號2樓、17號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.714929,24.153735 ]
+       "coordinates":  [ 121.5536194,25.02067757 ]
     },
     "properties": {
     "violation_id":65,
-    "location":"大同區",
     "violation_date":"2024-12-22",
     "violation_time":"14:00:00",
     "device_id":"D065",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"KLM3457",
+    "license_plate":"2376V6",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"14:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"KLM-3457"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"2376V6",
+    "location":"大安區",
+    "address":"臺北市大安區安居街46巷14號1~3樓及臺北市大安區和平東路3段228巷39號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.565087,25.033654 ]
+       "coordinates":  [ 121.5546188,25.02058411 ]
     },
     "properties": {
     "violation_id":66,
-    "location":"大同區",
     "violation_date":"2024-12-22",
     "violation_time":"15:00:00",
     "device_id":"D066",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"NOP6789",
+    "license_plate":"MSD6128",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"15:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"NOP-6789"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MSD6128",
+    "location":"大安區",
+    "address":"臺北市大安區安居街27號4、6樓及29號4、5樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.48407,25.063415 ]
+       "coordinates":  [ 121.5419464,25.06735992 ]
     },
     "properties": {
     "violation_id":67,
-    "location":"大同區",
     "violation_date":"2024-12-22",
     "violation_time":"16:00:00",
     "device_id":"D067",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"QRS1236",
+    "license_plate":"XT6150",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"16:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"QRS-1236"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"XT6150",
+    "location":"中山區",
+    "address":"臺北市中山區民族東路512巷14號1~2樓、16號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.578521,25.041702 ]
+       "coordinates":  [ 121.521637,25.05763626 ]
+    },
+    "properties": {
+    "violation_id":68,
+    "violation_date":"2024-12-22",
+    "violation_time":"17:00:00",
+    "device_id":"D068",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"H5W398",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"17:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"H5W398",
+    "location":"中山區",
+    "address":"臺北市中山區民生西路30號2樓、2樓之1~4"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5235443,25.05995941 ]
+    },
+    "properties": {
+    "violation_id":69,
+    "violation_date":"2024-12-22",
+    "violation_time":"18:00:00",
+    "device_id":"D069",
+    "speed_limit":60,
+    "vehicle_speed":90,
+    "license_plate":"260JRU",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"18:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"260JRU",
+    "location":"中山區",
+    "address":"臺北市中山區錦州街4巷1號2樓、2樓之1"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5410385,25.046978 ]
+    },
+    "properties": {
+    "violation_id":70,
+    "violation_date":"2024-12-22",
+    "violation_time":"19:00:00",
+    "device_id":"D070",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"JZ7033",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"19:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"JZ7033",
+    "location":"中山區",
+    "address":"臺北市中山區八德路二段251號2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5409164,24.99147224 ]
+    },
+    "properties": {
+    "violation_id":71,
+    "violation_date":"2024-12-22",
+    "violation_time":"20:00:00",
+    "device_id":"D071",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"NHC5370",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"20:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NHC5370",
+    "location":"文山區",
+    "address":"臺北市文山區車前路12號3-4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5522919,24.99760628 ]
+    },
+    "properties": {
+    "violation_id":72,
+    "violation_date":"2024-12-22",
+    "violation_time":"21:00:00",
+    "device_id":"D072",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"165CAQ",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"21:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"165CAQ",
+    "location":"文山區",
+    "address":"臺北市文山區辛亥路五段120-1號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5667801,24.98968887 ]
+    },
+    "properties": {
+    "violation_id":73,
+    "violation_date":"2024-12-22",
+    "violation_time":"22:00:00",
+    "device_id":"D073",
+    "speed_limit":60,
+    "vehicle_speed":85,
+    "license_plate":"L28227",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"22:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"L28227",
+    "location":"文山區",
+    "address":"臺北市文山區木柵路三段85巷8弄4-1、4-2號1樓及2、2-1、2-2、4、4-1、4-2號2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5407715,24.99481392 ]
+    },
+    "properties": {
+    "violation_id":74,
+    "violation_date":"2024-12-22",
+    "violation_time":"23:00:00",
+    "device_id":"D074",
+    "speed_limit":50,
+    "vehicle_speed":70,
+    "license_plate":"H5W398",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"23:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"H5W398",
+    "location":"文山區",
+    "address":"臺北市文山區溪口街1巷5號"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5407715,24.99481392 ]
+    },
+    "properties": {
+    "violation_id":75,
+    "violation_date":"2024-12-23",
+    "violation_time":"00:00:00",
+    "device_id":"D075",
+    "speed_limit":60,
+    "vehicle_speed":90,
+    "license_plate":"NNZ6177",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"00:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"NNZ6177",
+    "location":"文山區",
+    "address":"臺北市文山區景仁里溪口街1巷5號1~2樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5432816,24.99110413 ]
+    },
+    "properties": {
+    "violation_id":76,
+    "violation_date":"2024-12-23",
+    "violation_time":"01:00:00",
+    "device_id":"D076",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"L9M295",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"01:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"L9M295",
+    "location":"文山區",
+    "address":"臺北市文山區景興路222號3樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5418091,25.00139236 ]
+    },
+    "properties": {
+    "violation_id":77,
+    "violation_date":"2024-12-23",
+    "violation_time":"02:00:00",
+    "device_id":"D077",
+    "speed_limit":60,
+    "vehicle_speed":80,
+    "license_plate":"MRY0890",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"02:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":2,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MRY0890",
+    "location":"文山區",
+    "address":"臺北市文山區興隆路一段2、4號1~4樓"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5677261,25.00200844 ]
     },
     "properties": {
     "violation_id":78,
-    "location":"中正區",
     "violation_date":"2024-12-23",
     "violation_time":"03:00:00",
     "device_id":"D078",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"XYZ2349",
+    "license_plate":"MSH1103",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"03:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"XYZ-2349"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MSH1103",
+    "location":"文山區",
+    "address":"臺北市文山區萬和街8號3樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.153382,23.03584 ]
+       "coordinates":  [ 121.5516968,25.00085831 ]
     },
     "properties": {
     "violation_id":79,
-    "location":"大安區",
     "violation_date":"2024-12-23",
     "violation_time":"04:00:00",
     "device_id":"D079",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"ABC6789",
+    "license_plate":"MYU5233",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"04:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ABC-6789"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"MYU5233",
+    "location":"文山區",
+    "address":"臺北市文山區興隆路二段154巷11號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.289462,22.635794 ]
+       "coordinates":  [ 121.5604553,24.98859215 ]
     },
     "properties": {
     "violation_id":80,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"05:00:00",
     "device_id":"D080",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"DEF2345",
+    "license_plate":"129JTT",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"05:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"DEF-2345"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"129JTT",
+    "location":"文山區",
+    "address":"臺北市文山區木柵路二段163、165號1~5樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.562033,25.027937 ]
+       "coordinates":  [ 121.5673599,25.00193787 ]
     },
     "properties": {
     "violation_id":81,
-    "location":"南港區",
     "violation_date":"2024-12-23",
     "violation_time":"06:00:00",
     "device_id":"D081",
     "speed_limit":60,
     "vehicle_speed":85,
-    "license_plate":"GHI9013",
+    "license_plate":"917EYA",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"06:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"GHI-9013"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"917EYA",
+    "location":"文山區",
+    "address":"臺北市文山區萬和街6號8樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.459831,25.072691 ]
+       "coordinates":  [ 121.4688263,25.11966324 ]
     },
     "properties": {
     "violation_id":82,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"07:00:00",
     "device_id":"D082",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"JKL2346",
+    "license_plate":"L9W125",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"07:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"JKL-2346"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"L9W125",
+    "location":"北投區",
+    "address":"臺北市北投區關渡路60之1、62之1號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.671128,24.142108 ]
+       "coordinates":  [ 121.5092392,25.12672234 ]
     },
     "properties": {
     "violation_id":83,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"08:00:00",
     "device_id":"D083",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"MNO3457",
+    "license_plate":"BQA3036",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"08:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"MNO-3457"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BQA3036",
+    "location":"北投區",
+    "address":"臺北市北投區公?路231巷20號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.535812,25.088762 ]
+       "coordinates":  [ 121.5092468,25.12665367 ]
     },
     "properties": {
     "violation_id":84,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"09:00:00",
     "device_id":"D084",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"PQR5679",
+    "license_plate":"BSQ5071",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"09:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"PQR-5679"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BSQ5071",
+    "location":"北投區",
+    "address":"臺北市北投區公?路231巷20號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.466084,25.00938 ]
+       "coordinates":  [ 121.5284271,25.12771606 ]
     },
     "properties": {
     "violation_id":85,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"10:00:00",
     "device_id":"D085",
     "speed_limit":60,
     "vehicle_speed":90,
-    "license_plate":"STU9013",
+    "license_plate":"3496UK",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"10:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"STU-9013"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"3496UK",
+    "location":"北投區",
+    "address":"臺北市北投區行義路105號1~2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.344665,22.647397 ]
+       "coordinates":  [ 121.5222549,25.11522484 ]
     },
     "properties": {
     "violation_id":86,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"11:00:00",
     "device_id":"D086",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"UVW1235",
+    "license_plate":"BDX5252",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"11:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"UVW-1235"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BDX5252",
+    "location":"北投區",
+    "address":"臺北市北投區明德路306號1-7樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.700372,24.143675 ]
+       "coordinates":  [ 121.5248718,25.12366486 ]
     },
     "properties": {
     "violation_id":87,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"12:00:00",
     "device_id":"D087",
     "speed_limit":60,
     "vehicle_speed":85,
-    "license_plate":"YZA9014",
+    "license_plate":"789X8",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"12:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"YZA-9014"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"789X8",
+    "location":"北投區",
+    "address":"臺北市北投區石牌路二段357巷1號4~6樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.474389,25.057982 ]
+       "coordinates":  [ 121.5162277,25.10718346 ]
     },
     "properties": {
     "violation_id":88,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"13:00:00",
     "device_id":"D088",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"BCD9013",
+    "license_plate":"0300JM",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"13:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"BCD-9013"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"0300JM",
+    "location":"北投區",
+    "address":"臺北市北投區文林北路166巷5弄2號1~2樓、4號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.552749,25.030526 ]
+       "coordinates":  [ 121.5232925,25.12182045 ]
     },
     "properties": {
     "violation_id":89,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"14:00:00",
     "device_id":"D089",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"EFG3457",
+    "license_plate":"6597G5",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"14:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"EFG-3457"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"6597G5",
+    "location":"北投區",
+    "address":"臺北市北投區石牌路二段317號1~2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.680934,24.135642 ]
+       "coordinates":  [ 121.5248718,25.12366486 ]
     },
     "properties": {
     "violation_id":90,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"15:00:00",
     "device_id":"D090",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"HIJ5679",
+    "license_plate":"GS3770",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"15:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"HIJ-5679"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"GS3770",
+    "location":"北投區",
+    "address":"臺北市北投區石牌路二段357巷1號1~3樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.523879,25.051374 ]
+       "coordinates":  [ 121.528923,25.12663078 ]
     },
     "properties": {
     "violation_id":91,
-    "location":"士林區",
     "violation_date":"2024-12-23",
     "violation_time":"16:00:00",
     "device_id":"D091",
     "speed_limit":60,
     "vehicle_speed":85,
-    "license_plate":"KLM2347",
+    "license_plate":"GS3770",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"16:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"KLM-2347"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"GS3770",
+    "location":"北投區",
+    "address":"臺北市北投區行義路96巷1號1~2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.472564,25.021389 ]
+       "coordinates":  [ 121.521965,25.12274551 ]
     },
     "properties": {
     "violation_id":92,
-    "location":"士林區",
     "violation_date":"2024-12-23",
     "violation_time":"17:00:00",
     "device_id":"D092",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"NOP6780",
+    "license_plate":"180CLW",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"17:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"NOP-6780"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"180CLW",
+    "location":"北投區",
+    "address":"臺北市北投區石牌路二段315巷16弄2、2-1號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.210238,23.010547 ]
+       "coordinates":  [ 121.5177689,25.10647392 ]
     },
     "properties": {
     "violation_id":93,
-    "location":"士林區",
     "violation_date":"2024-12-23",
     "violation_time":"18:00:00",
     "device_id":"D093",
     "speed_limit":60,
     "vehicle_speed":90,
-    "license_plate":"QRS1235",
+    "license_plate":"6816F7",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"18:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"QRS-1235"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"6816F7",
+    "location":"北投區",
+    "address":"臺北市北投區文林北路94巷5弄13號1~2樓、15號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.316404,22.629325 ]
+       "coordinates":  [ 121.5696945,25.05106735 ]
     },
     "properties": {
     "violation_id":94,
-    "location":"萬華區",
     "violation_date":"2024-12-23",
     "violation_time":"19:00:00",
     "device_id":"D094",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"TUV2346",
+    "license_plate":"BNT6666",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"19:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"TUV-2346"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BNT6666",
+    "location":"松山區",
+    "address":"臺北市松山區南京東路五段356號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.723198,24.153081 ]
+       "coordinates":  [ 121.5493012,25.04692078 ]
     },
     "properties": {
     "violation_id":95,
-    "location":"萬華區",
     "violation_date":"2024-12-23",
     "violation_time":"20:00:00",
     "device_id":"D095",
     "speed_limit":60,
     "vehicle_speed":80,
-    "license_plate":"WXY5679",
+    "license_plate":"BCK8088",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"20:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"WXY-5679"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BCK8088",
+    "location":"松山區",
+    "address":"臺北市松山區敦化南路一段7號4樓之1"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.621459,25.069517 ]
+       "coordinates":  [ 121.559021,25.04846382 ]
     },
     "properties": {
     "violation_id":96,
-    "location":"萬華區",
     "violation_date":"2024-12-23",
     "violation_time":"21:00:00",
     "device_id":"D096",
     "speed_limit":50,
     "vehicle_speed":70,
-    "license_plate":"XYZ6789",
+    "license_plate":"8626P2",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"21:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"XYZ-6789"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"8626P2",
+    "location":"松山區",
+    "address":"臺北市松山區八德路四段203、205號1、2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.502392,25.026514 ]
+       "coordinates":  [ 121.5493012,25.04692078 ]
     },
     "properties": {
     "violation_id":97,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"22:00:00",
     "device_id":"D097",
     "speed_limit":60,
     "vehicle_speed":90,
-    "license_plate":"ABC3457",
+    "license_plate":"ARG8892",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"22:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"ABC-3457"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"ARG8892",
+    "location":"松山區",
+    "address":"臺北市松山區敦化南路一段7號4樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.688073,24.164517 ]
+       "coordinates":  [ 121.5808411,25.04490471 ]
     },
     "properties": {
     "violation_id":98,
-    "location":"信義區",
     "violation_date":"2024-12-23",
     "violation_time":"23:00:00",
     "device_id":"D098",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"DEF1235",
+    "license_plate":"ALS0365",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"23:15:00",
     "vehicletype":"小型車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":1,
-    "license_plate2":"DEF-1235"
+    "photo_id":"binary data",
+    "recognize":"1",
+    "license_plate2":"ALS0365",
+    "location":"信義區",
+    "address":"臺北市信義區中坡北路21號1~2樓、23號2樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 120.303446,22.655883 ]
+       "coordinates":  [ 121.5754089,25.03523827 ]
     },
     "properties": {
     "violation_id":99,
-    "location":"松山區",
     "violation_date":"2024-12-23",
     "violation_time":"00:00:00",
     "device_id":"D099",
     "speed_limit":60,
     "vehicle_speed":85,
-    "license_plate":"GHI9015",
+    "license_plate":"BHS2592",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"00:15:00",
     "vehicletype":"大型車",
     "vehiclestatuscode":2,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"GHI-9015"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BHS2592",
+    "location":"信義區",
+    "address":"臺北市信義區信義路六段15巷16號1樓"
     }
   },
   {
     "type": "Feature",
     "geometry": {
        "type": "Point",
-       "coordinates":  [ 121.455876,25.034158 ]
+       "coordinates":  [ 121.5830002,25.04468727 ]
     },
     "properties": {
     "violation_id":100,
-    "location":"松山區",
     "violation_date":"2024-12-23",
     "violation_time":"01:00:00",
     "device_id":"D100",
     "speed_limit":50,
     "vehicle_speed":75,
-    "license_plate":"JKL2347",
+    "license_plate":"BCG1562",
     "licenseplatereplydate":"2024-12-23",
     "licenseplatereplytime":"01:15:00",
     "vehicletype":"機車",
     "vehiclestatuscode":1,
-    "photo_id":"\\x",
-    "recognize":0,
-    "license_plate2":"JKL-2347"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.52559153744765, 25.03520234879873 ]
-    },
-    "properties": {
-    "violation_id":101,
-    "location":"中正區",
-    "violation_date":"2024-01-10",
-    "violation_time":"00:00:00",
-    "device_id":"D004",
-    "speed_limit":50,
-    "vehicle_speed":70,
-    "license_plate":"AFF0666",
-    "licenseplatereplydate":"2024-01-10",
-    "licenseplatereplytime":"00:00:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x413031",
-    "recognize":0,
-    "license_plate2":"AFF-0666"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.53400604908703,25.03399015931706 ]
-    },
-    "properties": {
-    "violation_id":102,
-    "location":"大安區",
-    "violation_date":"2024-01-10",
-    "violation_time":"00:01:00",
-    "device_id":"D005",
-    "speed_limit":50,
-    "vehicle_speed":75,
-    "license_plate":"ALN7568",
-    "licenseplatereplydate":"2024-01-10",
-    "licenseplatereplytime":"00:00:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x413032",
-    "recognize":0,
-    "license_plate2":"ALN-7568"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.54423799511962,25.03378430534537 ]
-    },
-    "properties": {
-    "violation_id":103,
-    "location":"大安區",
-    "violation_date":"2024-01-10",
-    "violation_time":"00:02:00",
-    "device_id":"D006",
-    "speed_limit":50,
-    "vehicle_speed":65,
-    "license_plate":"BGR5851",
-    "licenseplatereplydate":"2024-01-10",
-    "licenseplatereplytime":"00:00:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x413033",
-    "recognize":0,
-    "license_plate2":"BGR-5851"
-    }
-  },
-  {
-    "type": "Feature",
-    "geometry": {
-       "type": "Point",
-       "coordinates":  [ 121.56882062395569,25.03343022963543 ]
-    },
-    "properties": {
-    "violation_id":104,
-    "location":"信義區",
-    "violation_date":"2024-01-10",
-    "violation_time":"00:03:00",
-    "device_id":"D007",
-    "speed_limit":60,
-    "vehicle_speed":80,
-    "license_plate":"NaN",
-    "licenseplatereplydate":"2024-01-10",
-    "licenseplatereplytime":"00:00:00",
-    "vehicletype":"小型車",
-    "vehiclestatuscode":1,
-    "photo_id":"\\x413034",
-    "recognize":2,
-    "license_plate2":"無法辨識"
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BCG1562",
+    "location":"南港區",
+    "address":"臺北市南港區玉成街140巷21、23號2樓"
     }
   }
 ]
