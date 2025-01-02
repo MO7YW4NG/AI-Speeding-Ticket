@@ -224,6 +224,59 @@ CREATE SEQUENCE public."SOCL_export_filter_ppl_ogc_fid_seq"
 
 ALTER SEQUENCE public."SOCL_export_filter_ppl_ogc_fid_seq" OWNER TO postgres;
 
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: abandoned; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.abandoned (
+    violation_id integer NOT NULL,
+    location character varying(255) NOT NULL,
+    violation_date date NOT NULL,
+    violation_time time without time zone NOT NULL,
+    device_id character varying(50) NOT NULL,
+    speed_limit integer NOT NULL,
+    vehicle_speed integer NOT NULL,
+    license_plate character varying(20),
+    licenseplatereplydate date NOT NULL,
+    licenseplatereplytime time without time zone NOT NULL,
+    vehicletype character varying(50),
+    vehiclestatuscode integer NOT NULL,
+    longitude double precision,
+    latitude double precision,
+    photo_id bytea,
+    recongnize integer,
+    reportreason character varying
+);
+
+
+ALTER TABLE public.abandoned OWNER TO postgres;
+
+--
+-- Name: abandoned_violation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.abandoned_violation_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.abandoned_violation_id_seq OWNER TO postgres;
+
+--
+-- Name: abandoned_violation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.abandoned_violation_id_seq OWNED BY public.abandoned.violation_id;
+
+
 --
 -- Name: app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
@@ -307,10 +360,6 @@ CREATE SEQUENCE public.app_calcu_monthly_socl_welfare_people_ppl_seq
 
 
 ALTER SEQUENCE public.app_calcu_monthly_socl_welfare_people_ppl_seq OWNER TO postgres;
-
-SET default_tablespace = '';
-
-SET default_table_access_method = heap;
 
 --
 -- Name: app_calcu_monthly_socl_welfare_people_ppl; Type: TABLE; Schema: public; Owner: postgres
@@ -469,6 +518,46 @@ CREATE SEQUENCE public.app_traffic_metro_capacity_realtime_stat_ogc_fid_seq
 
 
 ALTER SEQUENCE public.app_traffic_metro_capacity_realtime_stat_ogc_fid_seq OWNER TO postgres;
+
+--
+-- Name: artificialrecognition_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.artificialrecognition_log (
+    violation_id integer NOT NULL,
+    employee_id character varying(50) NOT NULL,
+    processorip character varying(45) NOT NULL,
+    eventtype character varying(20) NOT NULL,
+    licenseplate character varying(20) NOT NULL,
+    processing_date date DEFAULT CURRENT_DATE NOT NULL,
+    processing_time time without time zone DEFAULT CURRENT_TIME NOT NULL,
+    CONSTRAINT artificialrecognitionlog_eventtype_check CHECK (((eventtype)::text = ANY (ARRAY[('讀取紀錄'::character varying)::text, ('修正紀錄'::character varying)::text])))
+);
+
+
+ALTER TABLE public.artificialrecognition_log OWNER TO postgres;
+
+--
+-- Name: artificialrecognitionlog_reportid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.artificialrecognitionlog_reportid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.artificialrecognitionlog_reportid_seq OWNER TO postgres;
+
+--
+-- Name: artificialrecognitionlog_reportid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.artificialrecognitionlog_reportid_seq OWNED BY public.artificialrecognition_log.violation_id;
+
 
 --
 -- Name: building_age_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -1421,6 +1510,45 @@ CREATE SEQUENCE public.ethc_fire_check_ogc_fid_seq
 
 
 ALTER SEQUENCE public.ethc_fire_check_ogc_fid_seq OWNER TO postgres;
+
+--
+-- Name: fineprint_log; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.fineprint_log (
+    violation_id integer NOT NULL,
+    employee_id character varying(50) NOT NULL,
+    print_date date DEFAULT CURRENT_DATE NOT NULL,
+    print_time time without time zone DEFAULT CURRENT_TIME NOT NULL,
+    processorip character varying(45) NOT NULL,
+    finedetails json NOT NULL,
+    printimage bytea NOT NULL
+);
+
+
+ALTER TABLE public.fineprint_log OWNER TO postgres;
+
+--
+-- Name: fineprintlog_reportid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.fineprintlog_reportid_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.fineprintlog_reportid_seq OWNER TO postgres;
+
+--
+-- Name: fineprintlog_reportid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.fineprintlog_reportid_seq OWNED BY public.fineprint_log.violation_id;
+
 
 --
 -- Name: fire_hydrant_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -3694,6 +3822,34 @@ CREATE SEQUENCE public.traffic_youbike_two_realtime_history_ogc_fid_seq
 ALTER SEQUENCE public.traffic_youbike_two_realtime_history_ogc_fid_seq OWNER TO postgres;
 
 --
+-- Name: trafficviolation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.trafficviolation (
+    violation_id integer NOT NULL,
+    violation_date date NOT NULL,
+    violation_time time without time zone NOT NULL,
+    device_id character varying(50) NOT NULL,
+    speed_limit integer NOT NULL,
+    vehicle_speed integer,
+    license_plate character varying(20) NOT NULL,
+    licenseplatereplydate date NOT NULL,
+    licenseplatereplytime time without time zone NOT NULL,
+    vehicletype character varying(50),
+    vehiclestatuscode integer NOT NULL,
+    photo_id bytea,
+    recognize integer,
+    license_plate2 character varying,
+    location character varying,
+    address character varying,
+    longitude double precision,
+    latitude double precision
+);
+
+
+ALTER TABLE public.trafficviolation OWNER TO postgres;
+
+--
 -- Name: trafficviolation_test; Type: TABLE; Schema: public; Owner: postgres
 --
 
@@ -3719,6 +3875,28 @@ CREATE TABLE public.trafficviolation_test (
 
 
 ALTER TABLE public.trafficviolation_test OWNER TO postgres;
+
+--
+-- Name: trafficviolation_violation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.trafficviolation_violation_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.trafficviolation_violation_id_seq OWNER TO postgres;
+
+--
+-- Name: trafficviolation_violation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.trafficviolation_violation_id_seq OWNED BY public.trafficviolation.violation_id;
+
 
 --
 -- Name: tran_parking_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -3887,6 +4065,22 @@ CREATE SEQUENCE public.tw_village_ogc_fid_seq
 
 
 ALTER SEQUENCE public.tw_village_ogc_fid_seq OWNER TO postgres;
+
+--
+-- Name: vehicle_registration; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.vehicle_registration (
+    license_plate character varying(20) NOT NULL,
+    registered_color character varying(50) NOT NULL,
+    vehicletype character varying(100) NOT NULL,
+    owner_address character varying(255) NOT NULL,
+    owner_name character varying(100) NOT NULL,
+    license_plate2 character varying DEFAULT 1 NOT NULL
+);
+
+
+ALTER TABLE public.vehicle_registration OWNER TO postgres;
 
 --
 -- Name: work_eco_park_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -4420,200 +4614,6 @@ CREATE SEQUENCE public.work_urban_reserve_ogc_fid_seq
 
 ALTER SEQUENCE public.work_urban_reserve_ogc_fid_seq OWNER TO postgres;
 
-
---
--- Name: abandoned; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.abandoned (
-    violation_id integer NOT NULL,
-    location character varying(255) NOT NULL,
-    violation_date date NOT NULL,
-    violation_time time without time zone NOT NULL,
-    device_id character varying(50) NOT NULL,
-    speed_limit integer NOT NULL,
-    vehicle_speed integer NOT NULL,
-    license_plate character varying(20),
-    licenseplatereplydate date NOT NULL,
-    licenseplatereplytime time without time zone NOT NULL,
-    vehicletype character varying(50),
-    vehiclestatuscode integer NOT NULL,
-    longitude double precision,
-    latitude double precision,
-    photo_id bytea,
-    recongnize integer,
-    reportreason character varying
-);
-
-
-ALTER TABLE public.abandoned OWNER TO postgres;
-
---
--- Name: abandoned_violation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.abandoned_violation_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.abandoned_violation_id_seq OWNER TO postgres;
-
---
--- Name: abandoned_violation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.abandoned_violation_id_seq OWNED BY public.abandoned.violation_id;
-
-
---
--- Name: artificialrecognition_log; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.artificialrecognition_log (
-    violation_id integer NOT NULL,
-    employee_id character varying(50) NOT NULL,
-    processorip character varying(45) NOT NULL,
-    eventtype character varying(20) NOT NULL,
-    licenseplate character varying(20) NOT NULL,
-    processing_date date DEFAULT CURRENT_DATE NOT NULL,
-    processing_time time without time zone DEFAULT CURRENT_TIME NOT NULL,
-    CONSTRAINT artificialrecognitionlog_eventtype_check CHECK (((eventtype)::text = ANY (ARRAY[('讀取紀錄'::character varying)::text, ('修正紀錄'::character varying)::text])))
-);
-
-
-ALTER TABLE public.artificialrecognition_log OWNER TO postgres;
-
---
--- Name: artificialrecognitionlog_reportid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.artificialrecognitionlog_reportid_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.artificialrecognitionlog_reportid_seq OWNER TO postgres;
-
---
--- Name: artificialrecognitionlog_reportid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.artificialrecognitionlog_reportid_seq OWNED BY public.artificialrecognition_log.violation_id;
-
-
---
--- Name: fineprint_log; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.fineprint_log (
-    violation_id integer NOT NULL,
-    employee_id character varying(50) NOT NULL,
-    print_date date DEFAULT CURRENT_DATE NOT NULL,
-    print_time time without time zone DEFAULT CURRENT_TIME NOT NULL,
-    processorip character varying(45) NOT NULL,
-    finedetails json NOT NULL,
-    printimage bytea NOT NULL
-);
-
-
-ALTER TABLE public.fineprint_log OWNER TO postgres;
-
---
--- Name: fineprintlog_reportid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.fineprintlog_reportid_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.fineprintlog_reportid_seq OWNER TO postgres;
-
---
--- Name: fineprintlog_reportid_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.fineprintlog_reportid_seq OWNED BY public.fineprint_log.violation_id;
-
-
---
--- Name: trafficviolation; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.trafficviolation (
-    violation_id integer NOT NULL,
-    location character varying(255) NOT NULL,
-    violation_date date NOT NULL,
-    violation_time time without time zone NOT NULL,
-    device_id character varying(50) NOT NULL,
-    speed_limit integer NOT NULL,
-    vehicle_speed integer,
-    license_plate character varying(20) NOT NULL,
-    licenseplatereplydate date NOT NULL,
-    licenseplatereplytime time without time zone NOT NULL,
-    vehicletype character varying(50),
-    vehiclestatuscode integer NOT NULL,
-    longitude double precision NOT NULL,
-    latitude double precision NOT NULL,
-    photo_id bytea,
-    recognize integer,
-    license_plate2 character varying
-);
-
-
-ALTER TABLE public.trafficviolation OWNER TO postgres;
-
---
--- Name: trafficviolation_violation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE public.trafficviolation_violation_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER SEQUENCE public.trafficviolation_violation_id_seq OWNER TO postgres;
-
---
--- Name: trafficviolation_violation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE public.trafficviolation_violation_id_seq OWNED BY public.trafficviolation.violation_id;
-
-
---
--- Name: vehicle_registration; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.vehicle_registration (
-    license_plate character varying(20) NOT NULL,
-    registered_color character varying(50) NOT NULL,
-    vehicletype character varying(100) NOT NULL,
-    owner_address character varying(255) NOT NULL,
-    owner_name character varying(100) NOT NULL,
-    license_plate2 character varying DEFAULT 1 NOT NULL
-);
-
-
-ALTER TABLE public.vehicle_registration OWNER TO postgres;
-
 --
 -- Name: abandoned violation_id; Type: DEFAULT; Schema: public; Owner: postgres
 --
@@ -4651,245 +4651,6 @@ COPY public.abandoned (violation_id, location, violation_date, violation_time, d
 
 
 --
--- Data for Name: artificialrecognition_log; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.artificialrecognition_log (violation_id, employee_id, processorip, eventtype, licenseplate, processing_date, processing_time) FROM stdin;
-\.
-
-
---
--- Data for Name: fineprint_log; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.fineprint_log (violation_id, employee_id, print_date, print_time, processorip, finedetails, printimage) FROM stdin;
-\.
-
-
---
--- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
-\.
-
-
---
--- Data for Name: trafficviolation; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.trafficviolation (violation_id, location, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licenseplatereplydate, licenseplatereplytime, vehicletype, vehiclestatuscode, longitude, latitude, photo_id, recognize, license_plate2) FROM stdin;
-1	北投區	2024-12-23	14:30:00	D001	50	80	ABC1234	2024-12-24	10:00:00	小客車	1	121.564468	25.033964	\\x	0	ABC-1234
-2	士林區	2024-12-23	09:15:00	D002	40	70	DEF5678	2024-12-24	12:00:00	機車	1	121.462788	25.011004	\\x	0	DEF-5678
-3	大同區	2024-12-22	20:45:00	D003	30	55	GHI9012	2024-12-24	14:30:00	小貨車	1	121.301506	24.993628	\\x	0	GHI-9012
-4	中山區	2024-12-21	14:20:00	D004	60	95	JKL3456	2024-12-24	16:45:00	大客車	1	120.642803	24.163264	\\x	0	JKL-3456
-6	內湖區	2024-12-19	08:45:00	D006	40	65	PQR2345	2024-12-20	09:00:00	小型車	1	120.311928	22.627334	\\x	0	PQR-2345
-7	萬華區	2024-12-20	09:15:00	D007	50	75	STU6789	2024-12-21	09:30:00	大型車	2	121.538469	25.047767	\\x	0	STU-6789
-8	中正區	2024-12-20	10:00:00	D008	60	80	VWX3456	2024-12-21	10:15:00	小型車	1	121.457956	25.016984	\\x	0	VWX-3456
-9	大安區	2024-12-20	11:30:00	D009	50	70	YZA7890	2024-12-21	11:45:00	小型車	2	120.681226	24.146183	\\x	0	YZA-7890
-10	信義區	2024-12-20	12:00:00	D010	40	60	BCD1234	2024-12-21	12:15:00	機車	1	120.195018	22.970689	\\x	0	BCD-1234
-11	南港區	2024-12-20	12:30:00	D011	60	85	EFG5678	2024-12-21	12:45:00	小型車	1	120.297478	22.629298	\\x	0	EFG-5678
-12	北投區	2024-12-20	13:00:00	D012	50	70	HIJ1234	2024-12-21	13:15:00	小型車	2	121.7411	25.126146	\\x	0	HIJ1-234
-13	北投區	2024-12-20	14:00:00	D013	60	80	KLM4567	2024-12-21	14:15:00	大型車	1	121.223246	24.957099	\\x	0	KLM-4567
-14	士林區	2024-12-20	15:00:00	D014	50	65	NOP8901	2024-12-21	15:15:00	小型車	1	120.976106	24.806877	\\x	0	NOP-8901
-15	士林區	2024-12-20	16:00:00	D015	40	60	QRS2346	2024-12-21	16:15:00	機車	2	121.609403	25.071465	\\x	0	QRS-2346
-16	士林區	2024-12-20	16:30:00	D016	50	70	TUV5670	2024-12-21	16:45:00	小型車	1	121.53707	25.037924	\\x	0	TUV-5670
-17	士林區	2024-12-20	17:00:00	D017	60	85	WXY1235	2024-12-21	17:15:00	大型車	2	120.662295	24.140058	\\x	0	WXY-1235
-18	大同區	2024-12-20	17:30:00	D018	50	70	ZAB8902	2024-12-21	17:45:00	小型車	1	121.565084	25.033956	\\x	0	ZAB-8902
-19	中山區	2024-12-20	18:00:00	D019	60	80	CDE2346	2024-12-21	18:15:00	小型車	2	121.439845	25.043911	\\x	0	CDE-2346
-20	士林區	2024-12-20	19:00:00	D020	40	60	FGH5679	2024-12-21	19:15:00	機車	1	121.563755	25.053848	\\x	0	FGH-5679
-5	松山區	2024-12-20	16:10:00	D005	70	120	MNO7890	2024-12-24	18:15:00	機車	1	120.301435	22.627278	\\x	0	MNO-7890
-21	士林區	2024-12-20	19:30:00	D021	50	70	IJK1239	2024-12-21	19:45:00	小型車	2	120.179702	22.956967	\\x	0	IJK-1239
-22	士林區	2024-12-20	20:00:00	D022	60	80	LMN7891	2024-12-21	20:15:00	大型車	1	120.291104	22.607168	\\x	0	LMN-7891
-23	士林區	2024-12-20	21:00:00	D023	50	70	OPQ1235	2024-12-21	21:15:00	小型車	1	121.382514	24.99634	\\x	0	OPQ-1235
-24	士林區	2024-12-20	22:00:00	D024	60	85	RST5679	2024-12-21	22:15:00	大型車	2	120.687423	24.160529	\\x	0	RST-5679
-25	松山區	2024-12-20	23:00:00	D025	50	70	UVW6789	2024-12-21	23:15:00	機車	1	121.531486	25.045174	\\x	0	UVW-6789
-26	內湖區	2024-12-20	23:30:00	D026	40	60	XYZ1235	2024-12-21	23:45:00	小型車	2	121.516325	25.053652	\\x	1	XYZ-1235
-27	萬華區	2024-12-21	00:00:00	D027	60	80	ABC5679	2024-12-22	00:15:00	大型車	1	121.456073	24.983983	\\x	0	ABC-5679
-28	中正區	2024-12-21	01:00:00	D028	50	75	DEF1236	2024-12-22	01:15:00	小型車	2	121.521307	25.038523	\\x	0	DEF-1236
-29	大安區	2024-12-21	02:00:00	D029	60	90	GHI4568	2024-12-22	02:15:00	大型車	1	120.205637	22.979229	\\x	0	GHI-4568
-30	信義區	2024-12-21	03:00:00	D030	50	80	JKL7891	2024-12-22	03:15:00	機車	1	120.332728	22.585671	\\x	0	JKL-7891
-31	信義區	2024-12-21	04:00:00	D031	50	70	MNO1235	2024-12-22	04:15:00	小型車	1	120.684441	24.132669	\\x	0	MNO-1235
-32	信義區	2024-12-21	05:00:00	D032	60	85	PQR6780	2024-12-22	05:15:00	大型車	2	121.547349	25.030365	\\x	0	PQR-6780
-33	信義區	2024-12-21	06:00:00	D033	40	60	STU2347	2024-12-22	06:15:00	小型車	1	121.650298	24.944659	\\x	0	STU-2347
-34	信義區	2024-12-21	07:00:00	D034	50	70	VWX3457	2024-12-22	07:15:00	小型車	2	121.584503	25.033786	\\x	0	VWX-3457
-36	信義區	2024-12-21	09:00:00	D036	40	60	BCD3459	2024-12-22	09:15:00	小型車	2	121.608739	24.986313	\\x	0	BCD-3459
-37	信義區	2024-12-21	10:00:00	D037	50	70	EFG6789	2024-12-22	10:15:00	小型車	1	121.479526	25.060385	\\x	0	EFG-6789
-38	信義區	2024-12-21	11:00:00	D038	60	80	HIJ6789	2024-12-22	11:15:00	大型車	2	121.577181	24.991684	\\x	0	HIJ-6789
-39	信義區	2024-12-21	12:00:00	D039	50	75	KLM9013	2024-12-22	12:15:00	小型車	1	120.255308	23.030631	\\x	1	KLM-9013
-40	信義區	2024-12-21	13:00:00	D040	40	60	NOP2346	2024-12-22	13:15:00	機車	1	120.309548	22.62684	\\x	0	NOP-2346
-41	南港區	2024-12-21	14:00:00	D041	50	70	QRS3457	2024-12-22	14:15:00	大型車	2	120.684902	24.14223	\\x	0	QRS-3457
-42	北投區	2024-12-21	15:00:00	D042	60	80	TUV5679	2024-12-22	15:15:00	小型車	1	121.495842	25.051645	\\x	0	TUV-5679
-43	士林區	2024-12-21	16:00:00	D043	50	70	WXY6789	2024-12-22	16:15:00	小型車	1	121.533665	25.083578	\\x	0	WXY-6789
-44	大同區	2024-12-21	17:00:00	D044	60	85	ZAB2346	2024-12-22	17:15:00	大型車	2	120.970844	24.831122	\\x	0	ZAB-2346
-45	中山區	2024-12-21	18:00:00	D045	50	75	CDE6789	2024-12-22	18:15:00	機車	1	120.650702	24.137972	\\x	0	CDE-6789
-46	松山區	2024-12-21	19:00:00	D046	40	60	FGH9013	2024-12-22	19:15:00	小型車	1	121.5478	25.062353	\\x	0	FGH-9013
-47	內湖區	2024-12-21	20:00:00	D047	60	85	IJK1235	2024-12-22	20:15:00	大型車	2	120.692741	24.156542	\\x	0	IJK-1235
-48	萬華區	2024-12-21	21:00:00	D048	50	70	LMN9013	2024-12-22	21:15:00	小型車	1	121.453243	25.023874	\\x	0	LMN-9013
-49	中正區	2024-12-21	22:00:00	D049	40	60	OPQ2346	2024-12-22	22:15:00	小型車	1	121.641763	25.067249	\\x	0	OPQ-2346
-50	大安區	2024-12-21	23:00:00	D050	60	80	RST6789	2024-12-22	23:15:00	機車	2	120.295122	22.629018	\\x	0	RST-6789
-51	信義區	2024-12-22	00:00:00	D051	50	75	UVW1234	2024-12-23	00:15:00	小型車	1	120.693218	24.147632	\\x	0	UVW-1234
-52	南港區	2024-12-22	01:00:00	D052	60	90	XYZ2346	2024-12-23	01:15:00	大型車	2	121.43567	25.003541	\\x	0	XYZ-2346
-53	北投區	2024-12-22	02:00:00	D053	50	70	ABC6780	2024-12-23	02:15:00	小型車	1	121.55342	25.043548	\\x	0	ABC-6780\n
-54	北投區	2024-12-22	03:00:00	D054	60	80	DEF1237	2024-12-23	03:15:00	大型車	2	120.728309	24.173639	\\x	0	DEF-1237
-55	北投區	2024-12-22	04:00:00	D055	50	70	GHI5679	2024-12-23	04:15:00	機車	1	121.450371	24.872501	\\x	0	GHI-5679
-56	北投區	2024-12-22	05:00:00	D056	60	90	JKL2349	2024-12-23	05:15:00	大型車	2	121.526456	25.037861	\\x	0	JKL-2349
-57	士林區	2024-12-22	06:00:00	D057	50	75	MNO3459	2024-12-23	06:15:00	小型車	1	120.698411	24.130524	\\x	0	MNO-3459
-68	大同區	2024-12-22	17:00:00	D068	50	75	TUV6789	2024-12-23	17:15:00	小型車	1	120.653012	24.143982	\\x	0	TUV-6789
-69	大同區	2024-12-22	18:00:00	D069	60	90	WXY2346	2024-12-23	18:15:00	大型車	2	120.307845	22.619171	\\x	0	WXY-2346
-70	松山區	2024-12-22	19:00:00	D070	50	70	ZAB5679	2024-12-23	19:15:00	機車	1	120.232458	23.034186	\\x	0	ZAB-5679
-71	內湖區\n	2024-12-22	20:00:00	D071	60	80	CDE9013	2024-12-23	20:15:00	大型車	2	121.542389	25.035412	\\x	0	CDE-9013
-72	萬華區	2024-12-22	21:00:00	D072	50	75	FGH1235	2024-12-23	21:15:00	小型車	1	121.465204	25.037892	\\x	0	FGH-1235
-73	萬華區	2024-12-22	22:00:00	D073	60	85	IJK5679	2024-12-23	22:15:00	大型車	2	120.723451	24.13885	\\x	0	IJK-5679
-74	萬華區	2024-12-22	23:00:00	D074	50	70	LMN2346	2024-12-23	23:15:00	小型車	1	120.978067	24.801356	\\x	0	LMN-2346
-75	萬華區	2024-12-23	00:00:00	D075	60	90	OPQ6789	2024-12-23	00:15:00	機車	2	121.522105	25.051663	\\x	0	OPQ-6789
-76	萬華區	2024-12-23	01:00:00	D076	50	75	RST2346	2024-12-23	01:15:00	小型車	1	120.702119	24.148748	\\x	0	RST-2346
-77	萬華區	2024-12-23	02:00:00	D077	60	80	UVW5679	2024-12-23	02:15:00	大型車	2	121.48506	25.011667	\\x	0	UVW-5679
-35	信義區	2024-12-21	08:00:00	D035	60	90	YZA9013	2024-12-22	08:15:00	機車	1	120.711395	24.167199	\\x	0	YZA-9013
-58	士林區	2024-12-22	07:00:00	D058	40	60	PQR9013	2024-12-23	07:15:00	小型車	1	120.306177	22.682439	\\x	0	PQR-9013
-59	士林區	2024-12-22	08:00:00	D059	60	80	STU2346	2024-12-23	08:15:00	大型車	2	121.63356	25.066597	\\x	0	STU-2346
-60	士林區	2024-12-22	09:00:00	D060	50	70	VWX6789	2024-12-23	09:15:00	機車	1	120.648361	24.151359	\\x	1	VWX-6789
-61	士林區	2024-12-22	10:00:00	D061	60	85	YZA9015	2024-12-23	10:15:00	大型車	2	120.151923	23.005041	\\x	0	YZA-9015
-62	士林區	2024-12-22	11:00:00	D062	50	70	BCD3457	2024-12-23	11:15:00	小型車	1	121.487249	25.010549	\\x	0	BCD-3457
-63	士林區	2024-12-22	12:00:00	D063	60	80	EFG5679	2024-12-23	12:15:00	大型車	2	121.506451	25.034271	\\x	0	EFG-5679
-64	士林區	2024-12-22	13:00:00	D064	50	70	HIJ9013	2024-12-23	13:15:00	小型車	1	120.980273	24.799682	\\x	1	HIJ-9013
-65	大同區	2024-12-22	14:00:00	D065	60	80	KLM3457	2024-12-23	14:15:00	機車	2	120.714929	24.153735	\\x	0	KLM-3457
-66	大同區	2024-12-22	15:00:00	D066	50	70	NOP6789	2024-12-23	15:15:00	小型車	1	121.565087	25.033654	\\x	0	NOP-6789
-67	大同區	2024-12-22	16:00:00	D067	60	80	QRS1236	2024-12-23	16:15:00	大型車	2	121.48407	25.063415	\\x	0	QRS-1236
-78	中正區	2024-12-23	03:00:00	D078	50	75	XYZ2349	2024-12-23	03:15:00	小型車	1	121.578521	25.041702	\\x	0	XYZ-2349
-79	大安區	2024-12-23	04:00:00	D079	60	80	ABC6789	2024-12-23	04:15:00	大型車	2	120.153382	23.03584	\\x	0	ABC-6789
-80	信義區	2024-12-23	05:00:00	D080	50	70	DEF2345	2024-12-23	05:15:00	機車	1	120.289462	22.635794	\\x	0	DEF-2345
-81	南港區	2024-12-23	06:00:00	D081	60	85	GHI9013	2024-12-23	06:15:00	大型車	2	121.562033	25.027937	\\x	0	GHI-9013
-82	信義區	2024-12-23	07:00:00	D082	50	75	JKL2346	2024-12-23	07:15:00	小型車	1	121.459831	25.072691	\\x	0	JKL-2346
-83	信義區	2024-12-23	08:00:00	D083	60	80	MNO3457	2024-12-23	08:15:00	大型車	2	120.671128	24.142108	\\x	0	MNO-3457
-84	信義區	2024-12-23	09:00:00	D084	50	70	PQR5679	2024-12-23	09:15:00	小型車	1	121.535812	25.088762	\\x	0	PQR-5679
-85	信義區	2024-12-23	10:00:00	D085	60	90	STU9013	2024-12-23	10:15:00	機車	2	121.466084	25.00938	\\x	0	STU-9013
-86	信義區	2024-12-23	11:00:00	D086	50	70	UVW1235	2024-12-23	11:15:00	小型車	1	120.344665	22.647397	\\x	0	UVW-1235
-87	信義區	2024-12-23	12:00:00	D087	60	85	YZA9014	2024-12-23	12:15:00	大型車	2	120.700372	24.143675	\\x	0	YZA-9014
-88	信義區	2024-12-23	13:00:00	D088	50	75	BCD9013	2024-12-23	13:15:00	小型車	1	121.474389	25.057982	\\x	0	BCD-9013
-89	信義區	2024-12-23	14:00:00	D089	60	80	EFG3457	2024-12-23	14:15:00	大型車	2	121.552749	25.030526	\\x	0	EFG-3457
-90	信義區	2024-12-23	15:00:00	D090	50	75	HIJ5679	2024-12-23	15:15:00	機車	1	120.680934	24.135642	\\x	0	HIJ-5679
-91	士林區	2024-12-23	16:00:00	D091	60	85	KLM2347	2024-12-23	16:15:00	大型車	2	121.523879	25.051374	\\x	0	KLM-2347
-92	士林區	2024-12-23	17:00:00	D092	50	75	NOP6780	2024-12-23	17:15:00	小型車	1	121.472564	25.021389	\\x	0	NOP-6780
-93	士林區	2024-12-23	18:00:00	D093	60	90	QRS1235	2024-12-23	18:15:00	大型車	2	120.210238	23.010547	\\x	0	QRS-1235
-94	萬華區	2024-12-23	19:00:00	D094	50	70	TUV2346	2024-12-23	19:15:00	小型車	1	120.316404	22.629325	\\x	0	TUV-2346
-95	萬華區	2024-12-23	20:00:00	D095	60	80	WXY5679	2024-12-23	20:15:00	機車	2	120.723198	24.153081	\\x	0	WXY-5679
-96	萬華區	2024-12-23	21:00:00	D096	50	70	XYZ6789	2024-12-23	21:15:00	小型車	1	121.621459	25.069517	\\x	0	XYZ-6789
-97	信義區	2024-12-23	22:00:00	D097	60	90	ABC3457	2024-12-23	22:15:00	大型車	2	121.502392	25.026514	\\x	0	ABC-3457
-98	信義區	2024-12-23	23:00:00	D098	50	75	DEF1235	2024-12-23	23:15:00	小型車	1	120.688073	24.164517	\\x	1	DEF-1235
-99	松山區	2024-12-23	00:00:00	D099	60	85	GHI9015	2024-12-23	00:15:00	大型車	2	120.303446	22.655883	\\x	0	GHI-9015
-100	松山區	2024-12-23	01:00:00	D100	50	75	JKL2347	2024-12-23	01:15:00	機車	1	121.455876	25.034158	\\x	0	JKL-2347
-\.
-
-
---
--- Data for Name: vehicle_registration; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.vehicle_registration (license_plate, registered_color, vehicletype, owner_address, owner_name, license_plate2) FROM stdin;
-ABC1234	碧綠色	小客車	台中市北區	王靜怡	ABC-1234
-DEF5678	藍色	機車	高雄市苓雅區	李俊傑	DEF-5678
-GHI9012	紫色	小貨車	台北市信義區	劉志明	GHI-9012
-JKL3456	綠色	大客車	台中市東區	鄭志強	JKL-3456
-MNO7890	橙色	小客車	高雄市三民區	張家瑋	MNO-7890
-PQR2345	金色	小型車	台北市內湖區	陳彥廷	PQR-2345
-STU6789	白色	大型車	新北市板橋區	李怡君	STU-6789
-VWX3456	紅色	小型車	台中市南區	黃子瑋	VWX-3456
-YZA7890	藍色	小型車	高雄市左營區	林志偉	YZA-7890
-BCD1234	黑色	機車	台北市松山區	劉家凱	BCD-1234
-EFG5678	紫色	小型車	台中市西區	陳雅婷	EFG-5678
-HIJ1234	藍色	小型車	高雄市前鎮區	黃宇翔	HIJ1-234
-KLM4567	黃色	大型車	台北市大安區	蔡佳慧	KLM-4567
-NOP8901	綠色	小型車	新北市中和區	楊士豪	NOP-8901
-QRS2346	白色	機車	台中市東區	許博遠	QRS-2346
-TUV5670	藍色	小型車	高雄市三民區	張家瑋	TUV-5670
-WXY1235	紅色	大型車	台北市信義區	陳志強	WXY-1235
-ZAB8902	黃色	小型車	台中市北區	李妍君	ZAB-8902
-CDE2346	粉紅色	小型車	高雄市苓雅區	徐麗君	CDE-2346
-FGH5679	紫色	機車	新北市新莊區	劉俊彥	FGH-5679
-IJK1239	綠色	小型車	台中市西區	林雅琴	IJK-1239
-LMN7891	藍色	大型車	台北市中山區	王奕涵	LMN-7891
-OPQ1235	金色	小型車	高雄市前鎮區	王志誠	OPQ-1235
-RST5679	橙色	大型車	台北市南港區	林宇翔	RST-5679
-UVW6789	紅色	機車	新北市三重區	鄭佳慧	UVW-6789
-XYZ1235	紫色	小型車	台中市東區	黃子涵	XYZ-1235
-ABC5679	黃色	大型車	高雄市前鎮區	鄭婷婷	ABC-5679
-DEF1236	綠色	小型車	台北市大安區	張家瑜	DEF-1236
-GHI4568	藍色	大型車	新北市板橋區	曾文賢	GHI-4568
-JKL7891	黑色	機車	台中市北區	林志豪	JKL-7891
-MNO1235	紅色	小型車	台北市信義區	邱立慧	MNO-1235
-PQR6780	藍色	大型車	高雄市三民區	何柏翔	PQR-6780
-STU2347	金色	小型車	台北市內湖區	李宜庭	STU-2347
-VWX3457	紫色	小型車	台中市南區	林志偉	VWX-3457
-YZA9013	綠色	機車	高雄市左營區	邱家俊	YZA-9013
-BCD3459	橙色	小型車	台北市松山區	陳小婷	BCD-3459
-EFG6789	黃色	小型車	台中市西區	周怡君	EFG-6789
-HIJ6789	粉紅色	大型車	高雄市苓雅區	林子涵	HIJ-6789
-KLM9013	藍色	小型車	新北市中和區	楊宇翔	KLM-9013
-NOP2346	紅色	機車	台北市大安區	吳依婷	NOP-2346
-QRS3457	金色	大型車	高雄市左營區	黃子瑋	QRS-3457
-TUV5679	紫色	小型車	台中市東區	林彥廷	TUV-5679
-WXY6789	藍色	小型車	台北市信義區	吳雨婷	WXY-6789
-ZAB2346	綠色	大型車	台中市北區	李婉君	ZAB-2346
-CDE6789	橙色	機車	高雄市三民區	周志誠	CDE-6789
-FGH9013	黃色	小型車	台北市中山區	黃欣怡	FGH-9013
-IJK1235	粉紅色	大型車	台中市南區	蔡家瑋	IJK-1235
-LMN9013	紫色	小型車	新北市新莊區	吳依婷	LMN-9013
-OPQ2346	藍色	小型車	高雄市前鎮區	劉家凱	OPQ-2346
-RST6789	綠色	機車	台北市南港區	黃志強	RST-6789
-UVW1234	橙色	小型車	台中市東區	林雅婷	UVW-1234
-XYZ2346	金色	大型車	新北市三重區	周子瑋	XYZ-2346
-ABC6780	紅色	小型車	高雄市苓雅區	鄭家彥	ABC-6780
-DEF1237	紫色	大型車	台北市大安區	蔡婉如	DEF-1237
-GHI5679	藍色	機車	高雄市三民區	劉怡君	GHI-5679
-JKL2349	綠色	大型車	台中市西區	黃佳怡	JKL-2349
-MNO3459	橙色	小型車	台北市松山區	周家瑋	MNO-3459
-PQR9013	黃色	小型車	高雄市左營區	林志強	PQR-9013
-STU2346	粉紅色	大型車	台北市內湖區	李怡君	STU-2346
-VWX6789	藍色	機車	台中市北區	陳佩君	VWX-6789
-YZA9015	金色	大型車	高雄市三民區	黃宇翔	YZA-9015
-BCD3457	紅色	小型車	台北市信義區	吳雨婷	BCD-3457
-EFG5679	紫色	大型車	新北市板橋區	劉宇翔	EFG-5679
-HIJ9013	綠色	小型車	台中市南區	蔡家瑋	HIJ-9013
-KLM3457	藍色	機車	台北市大安區	王佳欣	KLM-3457
-NOP6789	粉紅色	小型車	高雄市苓雅區	鄭家瑋	NOP-6789
-QRS1236	橙色	大型車	台中市東區	林怡君	QRS-1236
-TUV6789	黃色	小型車	台北市南港區	李志強	TUV-6789
-WXY2346	白色	大型車	新北市三重區	蔡怡君	WXY-2346
-ZAB5679	藍色	機車	高雄市左營區	張家瑋	ZAB-5679
-CDE9013	紅色	大型車	台北市中山區	李宇翔	CDE-9013
-FGH1235	紫色	小型車	台中市北區	黃佳怡	FGH-1235
-IJK5679	綠色	大型車	高雄市三民區	張雅婷	IJK-5679
-LMN2346	金色	小型車	台北市大安區	蔡佳瑋	LMN-2346
-OPQ6789	藍色	機車	新北市新莊區	王子瑋	OPQ-6789
-RST2346	紅色	小型車	高雄市左營區	陳家瑋	RST-2346
-UVW5679	紫色	大型車	台中市西區	李家豪	UVW-5679
-XYZ2349	綠色	小型車	台北市松山區	林雅婷	XYZ-2349
-ABC6789	橙色	大型車	高雄市前鎮區	鄭家瑋	ABC-6789
-DEF2345	黃色	機車	台北市內湖區	蔡佩君	DEF-2345
-GHI9013	藍色	大型車	新北市板橋區	鄭宇翔	GHI-9013
-JKL2346	紅色	小型車	台中市東區	李佳瑋	JKL-2346
-MNO3457	金色	大型車	高雄市苓雅區	林子涵	MNO-3457
-PQR5679	紫色	小型車	台北市信義區	張家瑋	PQR-5679
-STU9013	綠色	機車	台中市南區	鄭怡君	STU-9013
-UVW1235	藍色	小型車	高雄市三民區	王怡君	UVW-1235
-YZA9014	粉紅色	大型車	台北市大安區	蔡志強	YZA-9014
-BCD9013	黃色	小型車	台中市西區	陳子瑋	BCD-9013
-EFG3457	紅色	大型車	高雄市前鎮區	李家凱	EFG-3457
-HIJ5679	藍色	機車	新北市三重區	黃宇翔	HIJ-5679
-KLM2347	綠色	大型車	台北市松山區	王佩君	KLM-2347
-NOP6780	橙色	小型車	高雄市苓雅區	張家瑋	NOP-6780
-QRS1235	黃色	大型車	台中市北區	李志瑋	QRS-1235
-TUV2346	紫色	小型車	台北市大安區	鄭家欣	TUV-2346
-WXY5679	藍色	機車	高雄市三民區	王怡君	WXY-5679
-XYZ6789	綠色	小型車	台北市松山區	周怡君	XYZ-6789
-ABC3457	黑色	大型車	新北市中和區	李志遠	ABC-3457
-DEF1235	紫色	小型車	台中市東區	李小兵	DEF-1235
-GHI9015	紅色	大型車	高雄市前鎮區	王心怡	GHI-9015
-JKL2347	藍色	機車	台北市信義區	陳家瑋	JKL-2347
-\.
-
---
 -- Data for Name: app_calcu_monthly_socl_welfare_people_ppl; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -4906,6 +4667,14 @@ COPY public.app_calcu_monthly_socl_welfare_people_ppl (district, is_low_middle_i
 中正區	513	6415	238	1785	2023-09-02 00:00:09.443476+00	2023-09-02 00:00:09.443476+00	245
 萬華區	2549	11303	763	6807	2023-09-02 00:00:09.443476+00	2023-09-02 00:00:09.443476+00	246
 信義區	1242	10239	444	3208	2023-09-02 00:00:09.443476+00	2023-09-02 00:00:09.443476+00	247
+\.
+
+
+--
+-- Data for Name: artificialrecognition_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.artificialrecognition_log (violation_id, employee_id, processorip, eventtype, licenseplate, processing_date, processing_time) FROM stdin;
 \.
 
 
@@ -5063,6 +4832,14 @@ COPY public.building_unsued_public (full_key, "建物管理機關", "行政區",
 44	\N	士林區	陽明路1段48巷8號2樓	力行段三小段EO381建號	600110	\N	\N	\N	宿舍	臺北市	\N	\N	基地為國有，使用受限。	2023-09-19 19:00:21.881162+00	2023-09-19 19:00:21.881162+00
 45	\N	南港區	同德路100號	玉成段五小段03213建號	670626	\N	\N	\N	提供標租使用	臺北市	\N	\N	現況維管。	2023-09-19 19:00:21.881162+00	2023-09-19 19:00:21.881162+00
 46	\N	中山區	長春路75號	吉林段四小段03818建號	420101	\N	\N	\N	辦公廳舍	臺北市	\N	\N	已納入都市更新範圍，待參與都市更新改建。	2023-09-19 19:00:21.881162+00	2023-09-19 19:00:21.881162+00
+\.
+
+
+--
+-- Data for Name: fineprint_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.fineprint_log (violation_id, employee_id, print_date, print_time, processorip, finedetails, printimage) FROM stdin;
 \.
 
 
@@ -5854,6 +5631,114 @@ COPY public.speed_camera ("設置縣市", "設置市區鄉鎮", "設置地址", 
 
 
 --
+-- Data for Name: trafficviolation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.trafficviolation (violation_id, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licenseplatereplydate, licenseplatereplytime, vehicletype, vehiclestatuscode, photo_id, recognize, license_plate2, location, address, longitude, latitude) FROM stdin;
+1	2024-12-23	14:30:00	D001	50	80	K9C123	2024-12-24	10:00:00	小客車	1	\\x62696e6172792064617461	0	K9C123	南港區	臺北市南港區東明里南港路二段60巷17號2樓	121.6044617	25.05466652
+2	2024-12-23	09:15:00	D002	40	70	EME7268	2024-12-24	12:00:00	機車	1	\\x62696e6172792064617461	0	EME7268	文山區	臺北市文山區政大二街129號	121.5841904	24.98931503
+3	2024-12-22	20:45:00	D003	30	55	NHI891	2024-12-24	14:30:00	小貨車	1	\\x62696e6172792064617461	0	NHI891	信義區	臺北市信義區大仁里福德街１	121.5812759	25.0371933
+4	2024-12-21	14:20:00	D004	60	95	MHC1251	2024-12-24	16:45:00	大客車	1	\\x62696e6172792064617461	0	MHC1251	士林區	臺北市士林區永福里1鄰仰德大道二段2巷50號	121.5430145	25.10202217
+5	2024-12-20	16:10:00	D005	70	120	589HPG	2024-12-24	18:15:00	機車	1	\\x62696e6172792064617461	0	589HPG	大安區	臺北市大安區光復南路116巷1、3、5號5樓及3號6樓	121.5565491	25.04299355
+6	2024-12-19	08:45:00	D006	40	65	505NKK	2024-12-20	09:00:00	小型車	1	\\x62696e6172792064617461	0	505NKK	萬華區	臺北市萬華區水源路187號	121.5107727	25.02360153
+7	2024-12-20	09:15:00	D007	50	75	NMD3033	2024-12-21	09:30:00	大型車	2	\\x62696e6172792064617461	0	NMD3033	中山區	臺北市中山區中山北路二段96巷19號3樓	121.5219727	25.05989265
+8	2024-12-20	10:00:00	D008	60	80	NBD3997	2024-12-21	10:15:00	小型車	1	\\x62696e6172792064617461	0	NBD3997	北投區	臺北市北投區致遠二路96巷3弄1、3號1樓	121.5127487	25.11644936
+9	2024-12-20	11:30:00	D009	50	70	MYB3600	2024-12-21	11:45:00	小型車	2	\\x62696e6172792064617461	0	MYB3600	萬華區	臺北市萬華區峨眉街124、124之1號1樓	121.5023575	25.04452133
+10	2024-12-20	12:00:00	D010	40	60	623NGD	2024-12-21	12:15:00	機車	1	\\x62696e6172792064617461	0	623NGD	中山區	臺北市中山區民族東路512巷14號3~5樓	121.5419464	25.06735992
+11	2024-12-20	12:30:00	D011	60	85	030PFS	2024-12-21	12:45:00	小型車	1	\\x62696e6172792064617461	0	030PFS	中山區	臺北市中山區松江路374、380、382號4樓	121.5327377	25.06795311
+12	2024-12-20	13:00:00	D012	50	70	NFH1708	2024-12-21	13:15:00	小型車	2	\\x62696e6172792064617461	0	NFH1708	中山區	臺北市中山區松江路374、380、382號7樓	121.5327377	25.06795311
+13	2024-12-20	14:00:00	D013	60	80	379NRC	2024-12-21	14:15:00	大型車	1	\\x62696e6172792064617461	0	379NRC	中山區	臺北市中山區長安東路一段63號4樓	121.5272141	25.04865265
+14	2024-12-20	15:00:00	D014	50	65	MVD0077	2024-12-21	15:15:00	小型車	1	\\x62696e6172792064617461	0	MVD0077	中正區	臺北市中正區新生南路一段124之3號1~4樓	121.532486	25.03775406
+15	2024-12-20	16:00:00	D015	40	60	NZ8008	2024-12-21	16:15:00	機車	2	\\x62696e6172792064617461	0	NZ8008	中正區	臺北市中正區連雲街3號1、3樓、3之4號及新生南路1段124之3號5樓	121.5323029	25.03763771
+16	2024-12-20	16:30:00	D016	50	70	MRF6676	2024-12-21	16:45:00	小型車	1	\\x62696e6172792064617461	0	MRF6676	中正區	臺北市中正區詔安街220巷2、4號1樓	121.5091705	25.02619934
+17	2024-12-20	17:00:00	D017	60	85	163JGZ	2024-12-21	17:15:00	大型車	2	\\x62696e6172792064617461	0	163JGZ	中正區	臺北市中正區汀州路三段56號2樓	121.5309219	25.01579475
+18	2024-12-20	17:30:00	D018	50	70	MXT2372	2024-12-21	17:45:00	小型車	1	\\x62696e6172792064617461	0	MXT2372	內湖區	臺北市內湖區陽光街70-2、70-3、72、72-1號1樓	121.576355	25.07274628
+19	2024-12-20	18:00:00	D019	60	80	739TCR	2024-12-21	18:15:00	小型車	2	\\x62696e6172792064617461	0	739TCR	內湖區	臺北市內湖區內湖路二段253巷1弄1、3號1-2樓	121.5899811	25.08249664
+20	2024-12-20	19:00:00	D020	40	60	NDP5031	2024-12-21	19:15:00	機車	1	\\x62696e6172792064617461	0	NDP5031	內湖區	臺北市內湖區內湖路二段179巷58、60號1樓	121.5866013	25.08285332
+21	2024-12-20	19:30:00	D021	50	70	NFQ2820	2024-12-21	19:45:00	小型車	2	\\x62696e6172792064617461	0	NFQ2820	內湖區	臺北市內湖區民權東路六段280巷19弄1、3、5、7號1樓	121.6049957	25.0715847
+22	2024-12-20	20:00:00	D022	60	80	859NGF	2024-12-21	20:15:00	大型車	1	\\x62696e6172792064617461	0	859NGF	內湖區	臺北市內湖區成功路三段88、90、92號2樓、76巷9號2樓	121.5907822	25.08038139
+23	2024-12-20	21:00:00	D023	50	70	NDF0113	2024-12-21	21:15:00	小型車	1	\\x62696e6172792064617461	0	NDF0113	內湖區	臺北市內湖區成功路二段488號2~5樓、490號2~4樓	121.5896835	25.07325363
+24	2024-12-20	22:00:00	D024	60	85	689LDS	2024-12-21	22:15:00	大型車	2	\\x62696e6172792064617461	0	689LDS	北投區	臺北市北投區建民路22、24、26、26之1號1樓	121.5216065	25.1136837
+25	2024-12-20	23:00:00	D025	50	70	MXM8258	2024-12-21	23:15:00	機車	1	\\x62696e6172792064617461	0	MXM8258	北投區	臺北市北投區義理街63巷4弄7、11之1~3號1樓	121.5156097	25.11821747
+26	2024-12-20	23:30:00	D026	40	60	MYN0123	2024-12-21	23:45:00	小型車	2	\\x62696e6172792064617461	1	MYN0123	北投區	臺北市北投區磺港路156號1~3樓	121.5029831	25.12865257
+27	2024-12-21	00:00:00	D027	60	80	MXV6155	2024-12-22	00:15:00	大型車	1	\\x62696e6172792064617461	0	MXV6155	北投區	臺北市北投區知行路52巷1號及54號1~2樓	121.4674225	25.11811638
+28	2024-12-21	01:00:00	D028	50	75	NFV7559	2024-12-22	01:15:00	小型車	2	\\x62696e6172792064617461	0	NFV7559	北投區	臺北市北投區石牌路二段343巷17號1~2樓	121.523468	25.12265968
+29	2024-12-21	02:00:00	D029	60	90	MDL0361	2024-12-22	02:15:00	大型車	1	\\x62696e6172792064617461	0	MDL0361	北投區	臺北市北投區紗帽路116號	121.5471649	25.15086746
+30	2024-12-21	03:00:00	D030	50	80	MQU5805	2024-12-22	03:15:00	機車	1	\\x62696e6172792064617461	0	MQU5805	北投區	臺北市北投區稻香路321號1樓	121.486557	25.1429348
+31	2024-12-21	04:00:00	D031	50	70	897PJT	2024-12-22	04:15:00	小型車	1	\\x62696e6172792064617461	0	897PJT	北投區	臺北市北投區石牌路二段315巷34弄14、16號1樓	121.5223846	25.12383652
+32	2024-12-21	05:00:00	D032	60	85	728DMU	2024-12-22	05:15:00	大型車	2	\\x62696e6172792064617461	0	728DMU	北投區	臺北市北投區中和街錫安巷112號1-2樓及地下1樓	121.5008545	25.14749146
+33	2024-12-21	06:00:00	D033	40	60	MXD1689	2024-12-22	06:15:00	小型車	1	\\x62696e6172792064617461	0	MXD1689	北投區	臺北市北投區大業路452巷2號6~9樓	121.4971466	25.1315155
+34	2024-12-21	07:00:00	D034	50	70	HRB710	2024-12-22	07:15:00	小型車	2	\\x62696e6172792064617461	0	HRB710	北投區	臺北市北投區大業路452巷2號2~5樓	121.4971466	25.1315155
+35	2024-12-21	08:00:00	D035	60	90	MGJ8906	2024-12-22	08:15:00	機車	1	\\x62696e6172792064617461	0	MGJ8906	北投區	臺北市北投區西安街二段245號1.2樓	121.5082398	25.12014771
+36	2024-12-21	09:00:00	D036	40	60	MPZ9228	2024-12-22	09:15:00	小型車	2	\\x62696e6172792064617461	0	MPZ9228	北投區	臺北市北投區公?路194、196號1樓	121.5072632	25.1280632
+37	2024-12-21	10:00:00	D037	50	70	2GN090	2024-12-22	10:15:00	小型車	1	\\x62696e6172792064617461	0	2GN090	萬華區	臺北市萬華區和平西路三段384號1樓	121.4912796	25.03534126
+38	2024-12-21	11:00:00	D038	60	80	EMP5318	2024-12-22	11:15:00	大型車	2	\\x62696e6172792064617461	0	EMP5318	萬華區	臺北市萬華區西園路二段243之14號1~4樓	121.4935455	25.02655029
+39	2024-12-21	12:00:00	D039	50	75	MBP2763	2024-12-22	12:15:00	小型車	1	\\x62696e6172792064617461	1	MBP2763	萬華區	臺北市萬華區西園路二段243之13號1~4樓	121.4935455	25.02655029
+40	2024-12-21	13:00:00	D040	40	60	538DNT	2024-12-22	13:15:00	機車	1	\\x62696e6172792064617461	0	538DNT	大同區	臺北市大同區甘州街55號3樓	121.5128479	25.05978012
+41	2024-12-21	14:00:00	D041	50	70	NEE5856	2024-12-22	14:15:00	大型車	2	\\x62696e6172792064617461	0	NEE5856	文山區	臺北市文山區興隆路二段95巷8號3樓	121.5468826	24.9999733
+42	2024-12-21	15:00:00	D042	60	80	229JJT	2024-12-22	15:15:00	小型車	1	\\x62696e6172792064617461	0	229JJT	北投區	臺北市北投區公?路194、196號1樓	121.5019531	25.12042046
+43	2024-12-21	16:00:00	D043	50	70	810PEY	2024-12-22	16:15:00	小型車	1	\\x62696e6172792064617461	0	810PEY	士林區	臺北市士林區重慶北路四段162號1-4樓	121.5121689	25.0841217
+44	2024-12-21	17:00:00	D044	60	85	MEH8588	2024-12-22	17:15:00	大型車	2	\\x62696e6172792064617461	0	MEH8588	士林區	臺北市士林區天玉街38巷18弄18號1-6樓	121.5303268	25.12012482
+45	2024-12-21	18:00:00	D045	50	75	NEH2515	2024-12-22	18:15:00	機車	1	\\x62696e6172792064617461	0	NEH2515	士林區	臺北市士林區中山北路六段427巷8號1~4樓	121.5265427	25.11425209
+46	2024-12-21	19:00:00	D046	40	60	395GWU	2024-12-22	19:15:00	小型車	1	\\x62696e6172792064617461	0	395GWU	士林區	臺北市士林區德行東路61巷1、2、3號1、2樓	121.5271378	25.10788536
+47	2024-12-21	20:00:00	D047	60	85	MJW6302	2024-12-22	20:15:00	大型車	2	\\x62696e6172792064617461	0	MJW6302	士林區	臺北市士林區中山北路六段290巷52、54號1樓	121.5273361	25.10889626
+48	2024-12-21	21:00:00	D048	50	70	ENL1512	2024-12-22	21:15:00	小型車	1	\\x62696e6172792064617461	0	ENL1512	士林區	臺北市士林區忠誠路二段10巷11、13號1~2樓	121.5290756	25.10870934
+49	2024-12-21	22:00:00	D049	40	60	NAM2905	2024-12-22	22:15:00	小型車	1	\\x62696e6172792064617461	0	NAM2905	士林區	臺北市士林區至誠路一段305巷3弄14號1-2樓	121.5317383	25.1014595
+50	2024-12-21	23:00:00	D050	60	80	MVF0267	2024-12-22	23:15:00	機車	2	\\x62696e6172792064617461	0	MVF0267	士林區	臺北市士林區葫蘆街33號2~3樓	121.5097199	25.07997704
+51	2024-12-22	00:00:00	D051	50	75	703GQR	2024-12-23	00:15:00	小型車	1	\\x62696e6172792064617461	0	703GQR	士林區	臺北市士林區葫蘆街33號4、5、6樓	121.5097199	25.07997704
+52	2024-12-22	01:00:00	D052	60	90	MRQ5625	2024-12-23	01:15:00	大型車	2	\\x62696e6172792064617461	0	MRQ5625	大同區	臺北市大同區甘州街55號5~6樓	121.5128479	25.05978012
+53	2024-12-22	02:00:00	D053	50	70	515LUU	2024-12-23	02:15:00	小型車	1	\\x62696e6172792064617461	0	515LUU	大同區	臺北市大同區重慶北路三段284號2~4樓、286號1~4樓	121.5135956	25.07314873
+54	2024-12-22	03:00:00	D054	60	80	MLY5892	2024-12-23	03:15:00	大型車	2	\\x62696e6172792064617461	0	MLY5892	大同區	臺北市大同區甘州街55號2樓	121.5128479	25.05978012
+55	2024-12-22	04:00:00	D055	50	70	MVG721	2024-12-23	04:15:00	機車	1	\\x62696e6172792064617461	0	MVG721	大同區	臺北市大同區重慶北路三段175、177號1~4樓	121.5135956	25.07275963
+56	2024-12-22	05:00:00	D056	60	90	NNQ6712	2024-12-23	05:15:00	大型車	2	\\x62696e6172792064617461	0	NNQ6712	大同區	臺北市大同區延平北路三段4號2樓	121.5110474	25.06343269
+57	2024-12-22	06:00:00	D057	50	75	MER5079	2024-12-23	06:15:00	小型車	1	\\x62696e6172792064617461	0	MER5079	大同區	臺北市大同區太原路97巷4、6號	121.5167236	25.0520649
+58	2024-12-22	07:00:00	D058	40	60	678GTV	2024-12-23	07:15:00	小型車	1	\\x62696e6172792064617461	0	678GTV	大同區	臺北市大同區敦煌路80巷3號及3-1號1樓	121.5174637	25.07487679
+59	2024-12-22	08:00:00	D059	60	80	MHC1116	2024-12-23	08:15:00	大型車	2	\\x62696e6172792064617461	0	MHC1116	大同區	臺北市大同區長安西路78巷4弄11號1~4樓	121.5185547	25.05000877
+60	2024-12-22	09:00:00	D060	50	70	NKF6003	2024-12-23	09:15:00	機車	1	\\x62696e6172792064617461	1	NKF6003	大同區	臺北市大同區寧夏路32號5樓	121.5151672	25.05598068
+61	2024-12-22	10:00:00	D061	60	85	MUE6562	2024-12-23	10:15:00	大型車	2	\\x62696e6172792064617461	0	MUE6562	大安區	臺北市大安區復興南路一段279巷14、16號1樓	121.5452957	25.035532
+62	2024-12-22	11:00:00	D062	50	70	ADX3556	2024-12-23	11:15:00	小型車	1	\\x62696e6172792064617461	0	ADX3556	大安區	臺北市大安區新生南路三段7-4號、9-4號、9-5號	121.5350113	25.0255127
+63	2024-12-22	12:00:00	D063	60	80	NHA6293	2024-12-23	12:15:00	大型車	2	\\x62696e6172792064617461	0	NHA6293	大安區	臺北市大安區金山南路二段152號2、3、4、5、6樓	121.5261154	25.02870369
+64	2024-12-22	13:00:00	D064	50	70	NCF3015	2024-12-23	13:15:00	小型車	1	\\x62696e6172792064617461	1	NCF3015	大安區	臺北市大安區仁愛路四段300巷20弄15號2樓、17號2樓	121.5535049	25.03634071
+65	2024-12-22	14:00:00	D065	60	80	2376V6	2024-12-23	14:15:00	機車	2	\\x62696e6172792064617461	0	2376V6	大安區	臺北市大安區安居街46巷14號1~3樓及臺北市大安區和平東路3段228巷39號2樓	121.5536194	25.02067757
+66	2024-12-22	15:00:00	D066	50	70	MSD6128	2024-12-23	15:15:00	小型車	1	\\x62696e6172792064617461	0	MSD6128	大安區	臺北市大安區安居街27號4、6樓及29號4、5樓	121.5546188	25.02058411
+67	2024-12-22	16:00:00	D067	60	80	XT6150	2024-12-23	16:15:00	大型車	2	\\x62696e6172792064617461	0	XT6150	中山區	臺北市中山區民族東路512巷14號1~2樓、16號2樓	121.5419464	25.06735992
+68	2024-12-22	17:00:00	D068	50	75	H5W398	2024-12-23	17:15:00	小型車	1	\\x62696e6172792064617461	0	H5W398	中山區	臺北市中山區民生西路30號2樓、2樓之1~4	121.521637	25.05763626
+69	2024-12-22	18:00:00	D069	60	90	260JRU	2024-12-23	18:15:00	大型車	2	\\x62696e6172792064617461	0	260JRU	中山區	臺北市中山區錦州街4巷1號2樓、2樓之1	121.5235443	25.05995941
+70	2024-12-22	19:00:00	D070	50	70	JZ7033	2024-12-23	19:15:00	機車	1	\\x62696e6172792064617461	0	JZ7033	中山區	臺北市中山區八德路二段251號2樓	121.5410385	25.046978
+71	2024-12-22	20:00:00	D071	60	80	NHC5370	2024-12-23	20:15:00	大型車	2	\\x62696e6172792064617461	0	NHC5370	文山區	臺北市文山區車前路12號3-4樓	121.5409164	24.99147224
+72	2024-12-22	21:00:00	D072	50	75	165CAQ	2024-12-23	21:15:00	小型車	1	\\x62696e6172792064617461	0	165CAQ	文山區	臺北市文山區辛亥路五段120-1號1~4樓	121.5522919	24.99760628
+73	2024-12-22	22:00:00	D073	60	85	L28227	2024-12-23	22:15:00	大型車	2	\\x62696e6172792064617461	0	L28227	文山區	臺北市文山區木柵路三段85巷8弄4-1、4-2號1樓及2、2-1、2-2、4、4-1、4-2號2樓	121.5667801	24.98968887
+74	2024-12-22	23:00:00	D074	50	70	H5W398	2024-12-23	23:15:00	小型車	1	\\x62696e6172792064617461	0	H5W398	文山區	臺北市文山區溪口街1巷5號	121.5407715	24.99481392
+75	2024-12-23	00:00:00	D075	60	90	NNZ6177	2024-12-23	00:15:00	機車	2	\\x62696e6172792064617461	0	NNZ6177	文山區	臺北市文山區景仁里溪口街1巷5號1~2樓	121.5407715	24.99481392
+76	2024-12-23	01:00:00	D076	50	75	L9M295	2024-12-23	01:15:00	小型車	1	\\x62696e6172792064617461	0	L9M295	文山區	臺北市文山區景興路222號3樓	121.5432816	24.99110413
+77	2024-12-23	02:00:00	D077	60	80	MRY0890	2024-12-23	02:15:00	大型車	2	\\x62696e6172792064617461	0	MRY0890	文山區	臺北市文山區興隆路一段2、4號1~4樓	121.5418091	25.00139236
+78	2024-12-23	03:00:00	D078	50	75	MSH1103	2024-12-23	03:15:00	小型車	1	\\x62696e6172792064617461	0	MSH1103	文山區	臺北市文山區萬和街8號3樓	121.5677261	25.00200844
+79	2024-12-23	04:00:00	D079	60	80	MYU5233	2024-12-23	04:15:00	大型車	2	\\x62696e6172792064617461	0	MYU5233	文山區	臺北市文山區興隆路二段154巷11號1樓	121.5516968	25.00085831
+80	2024-12-23	05:00:00	D080	50	70	129JTT	2024-12-23	05:15:00	機車	1	\\x62696e6172792064617461	0	129JTT	文山區	臺北市文山區木柵路二段163、165號1~5樓	121.5604553	24.98859215
+81	2024-12-23	06:00:00	D081	60	85	917EYA	2024-12-23	06:15:00	大型車	2	\\x62696e6172792064617461	0	917EYA	文山區	臺北市文山區萬和街6號8樓	121.5673599	25.00193787
+82	2024-12-23	07:00:00	D082	50	75	L9W125	2024-12-23	07:15:00	小型車	1	\\x62696e6172792064617461	0	L9W125	北投區	臺北市北投區關渡路60之1、62之1號1樓	121.4688263	25.11966324
+83	2024-12-23	08:00:00	D083	60	80	BQA3036	2024-12-23	08:15:00	大型車	2	\\x62696e6172792064617461	0	BQA3036	北投區	臺北市北投區公?路231巷20號1樓	121.5092392	25.12672234
+84	2024-12-23	09:00:00	D084	50	70	BSQ5071	2024-12-23	09:15:00	小型車	1	\\x62696e6172792064617461	0	BSQ5071	北投區	臺北市北投區公?路231巷20號1樓	121.5092468	25.12665367
+85	2024-12-23	10:00:00	D085	60	90	3496UK	2024-12-23	10:15:00	機車	2	\\x62696e6172792064617461	0	3496UK	北投區	臺北市北投區行義路105號1~2樓	121.5284271	25.12771606
+86	2024-12-23	11:00:00	D086	50	70	BDX5252	2024-12-23	11:15:00	小型車	1	\\x62696e6172792064617461	0	BDX5252	北投區	臺北市北投區明德路306號1-7樓	121.5222549	25.11522484
+87	2024-12-23	12:00:00	D087	60	85	789X8	2024-12-23	12:15:00	大型車	2	\\x62696e6172792064617461	0	789X8	北投區	臺北市北投區石牌路二段357巷1號4~6樓	121.5248718	25.12366486
+88	2024-12-23	13:00:00	D088	50	75	0300JM	2024-12-23	13:15:00	小型車	1	\\x62696e6172792064617461	0	0300JM	北投區	臺北市北投區文林北路166巷5弄2號1~2樓、4號1樓	121.5162277	25.10718346
+89	2024-12-23	14:00:00	D089	60	80	6597G5	2024-12-23	14:15:00	大型車	2	\\x62696e6172792064617461	0	6597G5	北投區	臺北市北投區石牌路二段317號1~2樓	121.5232925	25.12182045
+90	2024-12-23	15:00:00	D090	50	75	GS3770	2024-12-23	15:15:00	機車	1	\\x62696e6172792064617461	0	GS3770	北投區	臺北市北投區石牌路二段357巷1號1~3樓	121.5248718	25.12366486
+91	2024-12-23	16:00:00	D091	60	85	GS3770	2024-12-23	16:15:00	大型車	2	\\x62696e6172792064617461	0	GS3770	北投區	臺北市北投區行義路96巷1號1~2樓	121.528923	25.12663078
+92	2024-12-23	17:00:00	D092	50	75	180CLW	2024-12-23	17:15:00	小型車	1	\\x62696e6172792064617461	0	180CLW	北投區	臺北市北投區石牌路二段315巷16弄2、2-1號1樓	121.521965	25.12274551
+93	2024-12-23	18:00:00	D093	60	90	6816F7	2024-12-23	18:15:00	大型車	2	\\x62696e6172792064617461	0	6816F7	北投區	臺北市北投區文林北路94巷5弄13號1~2樓、15號2樓	121.5177689	25.10647392
+94	2024-12-23	19:00:00	D094	50	70	BNT6666	2024-12-23	19:15:00	小型車	1	\\x62696e6172792064617461	0	BNT6666	松山區	臺北市松山區南京東路五段356號2樓	121.5696945	25.05106735
+95	2024-12-23	20:00:00	D095	60	80	BCK8088	2024-12-23	20:15:00	機車	2	\\x62696e6172792064617461	0	BCK8088	松山區	臺北市松山區敦化南路一段7號4樓之1	121.5493012	25.04692078
+96	2024-12-23	21:00:00	D096	50	70	8626P2	2024-12-23	21:15:00	小型車	1	\\x62696e6172792064617461	0	8626P2	松山區	臺北市松山區八德路四段203、205號1、2樓	121.559021	25.04846382
+97	2024-12-23	22:00:00	D097	60	90	ARG8892	2024-12-23	22:15:00	大型車	2	\\x62696e6172792064617461	0	ARG8892	松山區	臺北市松山區敦化南路一段7號4樓	121.5493012	25.04692078
+98	2024-12-23	23:00:00	D098	50	75	ALS0365	2024-12-23	23:15:00	小型車	1	\\x62696e6172792064617461	1	ALS0365	信義區	臺北市信義區中坡北路21號1~2樓、23號2樓	121.5808411	25.04490471
+99	2024-12-23	00:00:00	D099	60	85	BHS2592	2024-12-23	00:15:00	大型車	2	\\x62696e6172792064617461	0	BHS2592	信義區	臺北市信義區信義路六段15巷16號1樓	121.5754089	25.03523827
+100	2024-12-23	01:00:00	D100	50	75	BCG1562	2024-12-23	01:15:00	機車	1	\\x62696e6172792064617461	0	BCG1562	南港區	臺北市南港區玉成街140巷21、23號2樓	121.5830002	25.04468727
+\.
+
+
+--
 -- Data for Name: trafficviolation_test; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -5912,6 +5797,114 @@ COPY public.trafficviolation_test (violation_id, photo_id, location, longitude, 
 
 
 --
+-- Data for Name: vehicle_registration; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.vehicle_registration (license_plate, registered_color, vehicletype, owner_address, owner_name, license_plate2) FROM stdin;
+ABC1234	碧綠色	小客車	台中市北區	王靜怡	ABC-1234
+DEF5678	藍色	機車	高雄市苓雅區	李俊傑	DEF-5678
+GHI9012	紫色	小貨車	台北市信義區	劉志明	GHI-9012
+JKL3456	綠色	大客車	台中市東區	鄭志強	JKL-3456
+MNO7890	橙色	小客車	高雄市三民區	張家瑋	MNO-7890
+PQR2345	金色	小型車	台北市內湖區	陳彥廷	PQR-2345
+STU6789	白色	大型車	新北市板橋區	李怡君	STU-6789
+VWX3456	紅色	小型車	台中市南區	黃子瑋	VWX-3456
+YZA7890	藍色	小型車	高雄市左營區	林志偉	YZA-7890
+BCD1234	黑色	機車	台北市松山區	劉家凱	BCD-1234
+EFG5678	紫色	小型車	台中市西區	陳雅婷	EFG-5678
+HIJ1234	藍色	小型車	高雄市前鎮區	黃宇翔	HIJ1-234
+KLM4567	黃色	大型車	台北市大安區	蔡佳慧	KLM-4567
+NOP8901	綠色	小型車	新北市中和區	楊士豪	NOP-8901
+QRS2346	白色	機車	台中市東區	許博遠	QRS-2346
+TUV5670	藍色	小型車	高雄市三民區	張家瑋	TUV-5670
+WXY1235	紅色	大型車	台北市信義區	陳志強	WXY-1235
+ZAB8902	黃色	小型車	台中市北區	李妍君	ZAB-8902
+CDE2346	粉紅色	小型車	高雄市苓雅區	徐麗君	CDE-2346
+FGH5679	紫色	機車	新北市新莊區	劉俊彥	FGH-5679
+IJK1239	綠色	小型車	台中市西區	林雅琴	IJK-1239
+LMN7891	藍色	大型車	台北市中山區	王奕涵	LMN-7891
+OPQ1235	金色	小型車	高雄市前鎮區	王志誠	OPQ-1235
+RST5679	橙色	大型車	台北市南港區	林宇翔	RST-5679
+UVW6789	紅色	機車	新北市三重區	鄭佳慧	UVW-6789
+XYZ1235	紫色	小型車	台中市東區	黃子涵	XYZ-1235
+ABC5679	黃色	大型車	高雄市前鎮區	鄭婷婷	ABC-5679
+DEF1236	綠色	小型車	台北市大安區	張家瑜	DEF-1236
+GHI4568	藍色	大型車	新北市板橋區	曾文賢	GHI-4568
+JKL7891	黑色	機車	台中市北區	林志豪	JKL-7891
+MNO1235	紅色	小型車	台北市信義區	邱立慧	MNO-1235
+PQR6780	藍色	大型車	高雄市三民區	何柏翔	PQR-6780
+STU2347	金色	小型車	台北市內湖區	李宜庭	STU-2347
+VWX3457	紫色	小型車	台中市南區	林志偉	VWX-3457
+YZA9013	綠色	機車	高雄市左營區	邱家俊	YZA-9013
+BCD3459	橙色	小型車	台北市松山區	陳小婷	BCD-3459
+EFG6789	黃色	小型車	台中市西區	周怡君	EFG-6789
+HIJ6789	粉紅色	大型車	高雄市苓雅區	林子涵	HIJ-6789
+KLM9013	藍色	小型車	新北市中和區	楊宇翔	KLM-9013
+NOP2346	紅色	機車	台北市大安區	吳依婷	NOP-2346
+QRS3457	金色	大型車	高雄市左營區	黃子瑋	QRS-3457
+TUV5679	紫色	小型車	台中市東區	林彥廷	TUV-5679
+WXY6789	藍色	小型車	台北市信義區	吳雨婷	WXY-6789
+ZAB2346	綠色	大型車	台中市北區	李婉君	ZAB-2346
+CDE6789	橙色	機車	高雄市三民區	周志誠	CDE-6789
+FGH9013	黃色	小型車	台北市中山區	黃欣怡	FGH-9013
+IJK1235	粉紅色	大型車	台中市南區	蔡家瑋	IJK-1235
+LMN9013	紫色	小型車	新北市新莊區	吳依婷	LMN-9013
+OPQ2346	藍色	小型車	高雄市前鎮區	劉家凱	OPQ-2346
+RST6789	綠色	機車	台北市南港區	黃志強	RST-6789
+UVW1234	橙色	小型車	台中市東區	林雅婷	UVW-1234
+XYZ2346	金色	大型車	新北市三重區	周子瑋	XYZ-2346
+ABC6780	紅色	小型車	高雄市苓雅區	鄭家彥	ABC-6780
+DEF1237	紫色	大型車	台北市大安區	蔡婉如	DEF-1237
+GHI5679	藍色	機車	高雄市三民區	劉怡君	GHI-5679
+JKL2349	綠色	大型車	台中市西區	黃佳怡	JKL-2349
+MNO3459	橙色	小型車	台北市松山區	周家瑋	MNO-3459
+PQR9013	黃色	小型車	高雄市左營區	林志強	PQR-9013
+STU2346	粉紅色	大型車	台北市內湖區	李怡君	STU-2346
+VWX6789	藍色	機車	台中市北區	陳佩君	VWX-6789
+YZA9015	金色	大型車	高雄市三民區	黃宇翔	YZA-9015
+BCD3457	紅色	小型車	台北市信義區	吳雨婷	BCD-3457
+EFG5679	紫色	大型車	新北市板橋區	劉宇翔	EFG-5679
+HIJ9013	綠色	小型車	台中市南區	蔡家瑋	HIJ-9013
+KLM3457	藍色	機車	台北市大安區	王佳欣	KLM-3457
+NOP6789	粉紅色	小型車	高雄市苓雅區	鄭家瑋	NOP-6789
+QRS1236	橙色	大型車	台中市東區	林怡君	QRS-1236
+TUV6789	黃色	小型車	台北市南港區	李志強	TUV-6789
+WXY2346	白色	大型車	新北市三重區	蔡怡君	WXY-2346
+ZAB5679	藍色	機車	高雄市左營區	張家瑋	ZAB-5679
+CDE9013	紅色	大型車	台北市中山區	李宇翔	CDE-9013
+FGH1235	紫色	小型車	台中市北區	黃佳怡	FGH-1235
+IJK5679	綠色	大型車	高雄市三民區	張雅婷	IJK-5679
+LMN2346	金色	小型車	台北市大安區	蔡佳瑋	LMN-2346
+OPQ6789	藍色	機車	新北市新莊區	王子瑋	OPQ-6789
+RST2346	紅色	小型車	高雄市左營區	陳家瑋	RST-2346
+UVW5679	紫色	大型車	台中市西區	李家豪	UVW-5679
+XYZ2349	綠色	小型車	台北市松山區	林雅婷	XYZ-2349
+ABC6789	橙色	大型車	高雄市前鎮區	鄭家瑋	ABC-6789
+DEF2345	黃色	機車	台北市內湖區	蔡佩君	DEF-2345
+GHI9013	藍色	大型車	新北市板橋區	鄭宇翔	GHI-9013
+JKL2346	紅色	小型車	台中市東區	李佳瑋	JKL-2346
+MNO3457	金色	大型車	高雄市苓雅區	林子涵	MNO-3457
+PQR5679	紫色	小型車	台北市信義區	張家瑋	PQR-5679
+STU9013	綠色	機車	台中市南區	鄭怡君	STU-9013
+UVW1235	藍色	小型車	高雄市三民區	王怡君	UVW-1235
+YZA9014	粉紅色	大型車	台北市大安區	蔡志強	YZA-9014
+BCD9013	黃色	小型車	台中市西區	陳子瑋	BCD-9013
+EFG3457	紅色	大型車	高雄市前鎮區	李家凱	EFG-3457
+HIJ5679	藍色	機車	新北市三重區	黃宇翔	HIJ-5679
+KLM2347	綠色	大型車	台北市松山區	王佩君	KLM-2347
+NOP6780	橙色	小型車	高雄市苓雅區	張家瑋	NOP-6780
+QRS1235	黃色	大型車	台中市北區	李志瑋	QRS-1235
+TUV2346	紫色	小型車	台北市大安區	鄭家欣	TUV-2346
+WXY5679	藍色	機車	高雄市三民區	王怡君	WXY-5679
+XYZ6789	綠色	小型車	台北市松山區	周怡君	XYZ-6789
+ABC3457	黑色	大型車	新北市中和區	李志遠	ABC-3457
+DEF1235	紫色	小型車	台中市東區	李小兵	DEF-1235
+GHI9015	紅色	大型車	高雄市前鎮區	王心怡	GHI-9015
+JKL2347	藍色	機車	台北市信義區	陳家瑋	JKL-2347
+\.
+
+
+--
 -- Data for Name: geocode_settings; Type: TABLE DATA; Schema: tiger; Owner: postgres
 --
 
@@ -5958,33 +5951,6 @@ COPY topology.topology (id, name, srid, "precision", hasz) FROM stdin;
 COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_column, feature_type, level, child_id) FROM stdin;
 \.
 
---
--- Name: abandoned_violation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.abandoned_violation_id_seq', 1, false);
-
-
---
--- Name: artificialrecognitionlog_reportid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.artificialrecognitionlog_reportid_seq', 1, false);
-
-
---
--- Name: fineprintlog_reportid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.fineprintlog_reportid_seq', 1, false);
-
-
---
--- Name: trafficviolation_violation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('public.trafficviolation_violation_id_seq', 3, true);
-
 
 --
 -- Name:  building_publand_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -5998,6 +5964,13 @@ SELECT pg_catalog.setval('public." building_publand_ogc_fid_seq"', 1, true);
 --
 
 SELECT pg_catalog.setval('public."SOCL_export_filter_ppl_ogc_fid_seq"', 1, true);
+
+
+--
+-- Name: abandoned_violation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.abandoned_violation_id_seq', 1, false);
 
 
 --
@@ -6110,6 +6083,13 @@ SELECT pg_catalog.setval('public.app_traffic_lives_accident_ogc_fid_seq', 223, t
 --
 
 SELECT pg_catalog.setval('public.app_traffic_metro_capacity_realtime_stat_ogc_fid_seq', 391928384, true);
+
+
+--
+-- Name: artificialrecognitionlog_reportid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.artificialrecognitionlog_reportid_seq', 1, false);
 
 
 --
@@ -6558,6 +6538,13 @@ SELECT pg_catalog.setval('public.ethc_check_summary_ogc_fid_seq', 651, true);
 --
 
 SELECT pg_catalog.setval('public.ethc_fire_check_ogc_fid_seq', 9385, true);
+
+
+--
+-- Name: fineprintlog_reportid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.fineprintlog_reportid_seq', 1, false);
 
 
 --
@@ -7653,6 +7640,13 @@ SELECT pg_catalog.setval('public.traffic_youbike_two_realtime_history_ogc_fid_se
 
 
 --
+-- Name: trafficviolation_violation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.trafficviolation_violation_id_seq', 3, true);
+
+
+--
 -- Name: tran_parking_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -8008,53 +8002,13 @@ SELECT pg_catalog.setval('public.work_urban_reserve_ogc_fid_seq', 4086, true);
 
 SELECT pg_catalog.setval('topology.topology_id_seq', 1, false);
 
+
 --
 -- Name: abandoned abandoned_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.abandoned
     ADD CONSTRAINT abandoned_pkey PRIMARY KEY (violation_id);
-
-
---
--- Name: artificialrecognition_log artificialrecognitionlog_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.artificialrecognition_log
-    ADD CONSTRAINT artificialrecognitionlog_pkey PRIMARY KEY (violation_id);
-
-
---
--- Name: fineprint_log fineprintlog_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.fineprint_log
-    ADD CONSTRAINT fineprintlog_pkey PRIMARY KEY (violation_id);
-
-
---
--- Name: trafficviolation trafficviolation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.trafficviolation
-    ADD CONSTRAINT trafficviolation_pkey PRIMARY KEY (violation_id);
-
-
---
--- Name: vehicle_registration vehicle_registration_license_plate_key; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.vehicle_registration
-    ADD CONSTRAINT vehicle_registration_license_plate_key UNIQUE (license_plate);
-
-
---
--- Name: vehicle_registration vehicle_registration_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY public.vehicle_registration
-    ADD CONSTRAINT vehicle_registration_pkey PRIMARY KEY (license_plate);
-
 
 
 --
@@ -8066,11 +8020,27 @@ ALTER TABLE ONLY public.app_calcu_monthly_socl_welfare_people_ppl
 
 
 --
+-- Name: artificialrecognition_log artificialrecognitionlog_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.artificialrecognition_log
+    ADD CONSTRAINT artificialrecognitionlog_pkey PRIMARY KEY (violation_id);
+
+
+--
 -- Name: building_unsued_land building_unsued_land_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.building_unsued_land
     ADD CONSTRAINT building_unsued_land_pkey PRIMARY KEY (ogc_fid);
+
+
+--
+-- Name: fineprint_log fineprintlog_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.fineprint_log
+    ADD CONSTRAINT fineprintlog_pkey PRIMARY KEY (violation_id);
 
 
 --
@@ -8098,11 +8068,35 @@ ALTER TABLE ONLY public.socl_welfare_organization_plc
 
 
 --
+-- Name: trafficviolation trafficviolation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.trafficviolation
+    ADD CONSTRAINT trafficviolation_pkey PRIMARY KEY (violation_id);
+
+
+--
 -- Name: trafficviolation_test trafficviolation_test_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.trafficviolation_test
     ADD CONSTRAINT trafficviolation_test_pkey PRIMARY KEY (violation_id);
+
+
+--
+-- Name: vehicle_registration vehicle_registration_license_plate_key; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.vehicle_registration
+    ADD CONSTRAINT vehicle_registration_license_plate_key UNIQUE (license_plate);
+
+
+--
+-- Name: vehicle_registration vehicle_registration_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.vehicle_registration
+    ADD CONSTRAINT vehicle_registration_pkey PRIMARY KEY (license_plate);
 
 
 --
