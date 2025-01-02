@@ -45,17 +45,21 @@ def get_unrecognized_license_plates_by_AI():
     entries = cursor.fetchall()
     # entries = cursor.fetchone()
     
+    # print(entries[1][11])
+    
     for entry in entries:
         # Convert the bytea image to base64
-        image_data = entry[12]  
+        image_data = entry[11]  
         base64_image = base64.b64encode(image_data).decode('utf-8')
         entry = list(entry)
-        entry[12] = base64_image
+        entry[11] = base64_image
         entry = tuple(entry)
+        
+    # print(entries)
     
     return entries
 
-# get_unrecognized_license_plates_by_AI()
+get_unrecognized_license_plates_by_AI()
         
 @app.post("/violation/update")
 def articial_recognize_license_plate(violation_id, new_license_plate):
@@ -109,10 +113,10 @@ def get_all_issuable_violations():
     
     for entry in entries:
         # Convert the bytea image to base64
-        image_data = entry[12]  
+        image_data = entry[11]  
         base64_image = base64.b64encode(image_data).decode('utf-8')
         entry = list(entry)
-        entry[12] = base64_image
+        entry[11] = base64_image
         entry = tuple(entry)
 
     # Close the cursor and connection
@@ -120,6 +124,8 @@ def get_all_issuable_violations():
     conn.close()
 
     return entries
+
+# print(get_all_issuable_violations())
 
 @app.get("/vehicle/get")
 def get_vehicle(plate_number):
