@@ -1,21 +1,24 @@
 from fastapi import FastAPI, File, UploadFile
 import psycopg2
 import main
+import base64
 
 app = FastAPI()
 
+conn = psycopg2.connect(
+    database='dashboard',
+    user='postgres',
+    password='1234',
+    host='localhost',
+    port='5432'
+)
+
+conn.autocommit = True
+cursor = conn.cursor()
+
 @app.get("/recognize_license_plate")
 def recognize_license_plate():
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
 
     # Use parameterized query to safely insert the name
     sql = '''SELECT * FROM trafficviolation'''
@@ -32,16 +35,7 @@ def recognize_license_plate():
         
 @app.get("/violation/get_all_unrecognized")
 def get_unrecognized_license_plates_by_AI():
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-    
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
     
     # Use parameterized query to safely insert the name
     sql = '''SELECT * FROM trafficviolation WHERE recognize = 1''' # 1 means not recognized by AI
@@ -49,21 +43,23 @@ def get_unrecognized_license_plates_by_AI():
     cursor.execute(sql)
     
     entries = cursor.fetchall()
+    # entries = cursor.fetchone()
+    
+    for entry in entries:
+        # Convert the bytea image to base64
+        image_data = entry[12]  
+        base64_image = base64.b64encode(image_data).decode('utf-8')
+        entry = list(entry)
+        entry[12] = base64_image
+        entry = tuple(entry)
     
     return entries
+
+# get_unrecognized_license_plates_by_AI()
         
 @app.post("/violation/update")
 def articial_recognize_license_plate(violation_id, new_license_plate):
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-    
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
     
     # Use parameterized query to safely insert the name
     sql =  '''UPDATE trafficviolation SET license_plate = %s AND recgonize = 0 WHERE violation_id = %s'''
@@ -74,16 +70,7 @@ def articial_recognize_license_plate(violation_id, new_license_plate):
     
 @app.post("/violation/remove")
 def move_and_delete_unrecognized_license_plate(violation_id):
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
 
     # Select the entry to be moved
     select_sql = '''SELECT * FROM trafficviolation WHERE violation_id = %s'''
@@ -109,16 +96,7 @@ def move_and_delete_unrecognized_license_plate(violation_id):
           
 @app.get("/violation/get_all")
 def get_all_issuable_violations():
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
 
     # Use parameterized query to safely insert the name
     sql = '''SELECT * FROM trafficviolation where recognize = 0''' # 0 means recognized by AI and human
@@ -127,28 +105,25 @@ def get_all_issuable_violations():
     cursor.execute(sql)
 
     # Fetch the results
-    result = cursor.fetchall()
-    for line in result:
-        print(line)
+    entries = cursor.fetchall()
+    
+    for entry in entries:
+        # Convert the bytea image to base64
+        image_data = entry[12]  
+        base64_image = base64.b64encode(image_data).decode('utf-8')
+        entry = list(entry)
+        entry[12] = base64_image
+        entry = tuple(entry)
 
     # Close the cursor and connection
     cursor.close()
     conn.close()
 
-    return result
+    return entries
 
 @app.get("/vehicle/get")
 def get_vehicle(plate_number):
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-    
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
     
     # Use parameterized query to safely insert the name
     sql = '''SELECT * FROM vehicles WHERE plateNumber = %s'''
@@ -167,16 +142,7 @@ def get_vehicle(plate_number):
 
 @app.post("/violation/issue")
 def update_traffic_violation(violation_id):
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
 
     # Use parameterized query to safely insert the name
     sql = '''UPDATE trafficviolation SET is_issued = 1 WHERE violation_id = %s'''
@@ -188,16 +154,7 @@ def update_traffic_violation(violation_id):
 
 @app.post("/delete_ticket")
 def delete_ticket(license_plate):
-    conn = psycopg2.connect(
-        database='dashboard',
-        user='postgres',
-        password='1234',
-        host='localhost',
-        port='5432'
-    )
-
-    conn.autocommit = True
-    cursor = conn.cursor()
+    global conn, cursor
 
     # Use parameterized query to safely insert the name
     sql = '''DELETE * FROM tickets WHERE license_plate = %s'''
