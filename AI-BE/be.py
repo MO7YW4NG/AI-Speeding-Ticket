@@ -86,6 +86,7 @@ def move_and_delete_unrecognized_license_plate(violation_id):
 
 @router.get("/violation/get_all")
 def get_all_issuable_violations():
+    entries = []
     with psycopg.connect(conninfo,autocommit=True) as conn:
         with conn.cursor() as cursor:
 
@@ -96,15 +97,16 @@ def get_all_issuable_violations():
             cursor.execute(sql)
 
             # Fetch the results
-            entries = cursor.fetchall()
+            fetched_entries = cursor.fetchall()
             
-            for entry in entries:
+            for entry in fetched_entries:
                 # Convert the bytea image to base64
                 image_data = entry[11]  
                 base64_image = base64.b64encode(image_data).decode('utf-8')
+                
                 entry = list(entry)
                 entry[11] = base64_image
-                entry = tuple(entry)
+                entries.append(tuple(entry))
                 
     return entries
 

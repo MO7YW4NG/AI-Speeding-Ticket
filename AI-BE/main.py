@@ -3,8 +3,21 @@ from recognizer import PlateRecognizer,ExtractedPlate
 import tempfile
 import time
 from be import router as be_router  # Import the router from be.py
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "*",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/recognize", response_model=ExtractedPlate)
 async def recognize_license_plate(file: UploadFile = File(...)):
