@@ -1,3 +1,4 @@
+'''
 import psycopg2
 from PIL import Image
 import io
@@ -37,3 +38,4 @@ except Exception as e:
 # 關閉連線
 cursor.close()
 conn.close()
+'''
