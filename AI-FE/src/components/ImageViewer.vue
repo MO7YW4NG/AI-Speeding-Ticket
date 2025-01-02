@@ -1,15 +1,15 @@
 <template>
     <div class="flex-1 bg-gray-800 rounded-lg border border-gray-700 p-4 m-4">
       <h2 class="text-xl font-semibold text-white mb-4">{{ title }}</h2>
-      <div
-        class="image-container rounded-lg border border-gray-600"
-        :class="{ 'zoomable': zoomable }"
-      >
+      <div v-if="images.length > 0" class="image-container rounded-lg border border-gray-600">
         <img
-          :src="currentImage"
+          :src="`data:image/jpeg;base64,${images[currentImageIndex]}`"
           :alt="'車牌照片 ' + (currentImageIndex + 1)"
           class="w-full h-full object-contain"
         />
+      </div>
+      <div v-else>
+        <p class="text-white">無法載入圖片</p>
       </div>
       <div class="flex gap-2 justify-center mt-4">
         <!-- 切換圖片按鈕 -->
@@ -31,54 +31,48 @@
   
   <script>
   import { ref, computed, onMounted } from "vue";
+  import { getUnrecognizedPlates } from "@/services/photoService";
   
   export default {
     props: {
-      zoomable: {
-        type: Boolean,
-        default: false, // 默認不啟用放大功能
-      },
       title: {
         type: String,
         default: "圖片檢視器",
       },
     },
     setup() {
+      const images = ref([]);
       const currentImageIndex = ref(0);
-      const randomImages = ref([]);
   
-      // 動態加載圖片
-      const loadRandomImages = () => {
-        const images = import.meta.glob("/public/assets/test_images/*.jpg", {
-          eager: true,
-        });
-        const allImages = Object.keys(images);
-  
-        // 隨機選擇三張圖片
-        const shuffled = allImages.sort(() => 0.5 - Math.random());
-        randomImages.value = shuffled.slice(0, 3);
+      // 加載圖片
+      const loadImages = async () => {
+        try {
+          const response = await getUnrecognizedPlates();
+          images.value = response.data.map((entry) => entry[11]); // 第 11 個字段是圖片
+        } catch (error) {
+          console.error("無法加載圖片資料：", error);
+        }
       };
   
-      const currentImage = computed(
-        () => randomImages.value[currentImageIndex.value]
-      );
+      const currentImage = computed(() => images.value[currentImageIndex.value]);
   
       const nextImage = () => {
         currentImageIndex.value =
-          (currentImageIndex.value + 1) % randomImages.value.length;
+          (currentImageIndex.value + 1) % images.value.length;
       };
   
       const prevImage = () => {
         currentImageIndex.value =
-          (currentImageIndex.value - 1 + randomImages.value.length) %
-          randomImages.value.length;
+          (currentImageIndex.value - 1 + images.value.length) %
+          images.value.length;
       };
   
       onMounted(() => {
-        loadRandomImages(); // 在組件掛載時加載圖片
+        loadImages();
       });
   
       return {
+        images,
         currentImageIndex,
         currentImage,
         nextImage,
@@ -95,27 +89,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%; /* 限制寬度 */
-    height: 80vh; /* 調整高度，讓圖片稍微大一些 */
+    width: 100%;
+    height: 80vh;
   }
   
   .image-container img {
     max-width: 100%;
     max-height: 100%;
     transition: transform 0.3s ease;
-  }
-  
-  .image-container.zoomable:hover img {
-    transform: scale(1.8); /* 增加放大倍率 */
-    cursor: zoom-in;
-  }
-  
-  .image-container img {
-    cursor: auto;
-  }
-  
-  .image-container.zoomable img {
-    cursor: zoom-in;
   }
   </style>
   
