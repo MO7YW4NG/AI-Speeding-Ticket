@@ -2,10 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.1 (Debian 16.1-1.pgdg110+1)
--- Dumped by pg_dump version 16.1
-
--- Started on 2024-02-16 10:54:01 UTC
+-- Dumped from database version 16.4 (Debian 16.4-1.pgdg110+2)
+-- Dumped by pg_dump version 16.4 (Debian 16.4-1.pgdg110+2)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,31 +17,40 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- TOC entry 11 (class 2615 OID 19300)
--- Name: tiger; Type: SCHEMA; Schema: -; Owner: -
+-- Name: tiger; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
 CREATE SCHEMA tiger;
 
 
+ALTER SCHEMA tiger OWNER TO postgres;
+
 --
--- TOC entry 12 (class 2615 OID 19556)
--- Name: tiger_data; Type: SCHEMA; Schema: -; Owner: -
+-- Name: tiger_data; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
 CREATE SCHEMA tiger_data;
 
 
+ALTER SCHEMA tiger_data OWNER TO postgres;
+
 --
--- TOC entry 10 (class 2615 OID 19121)
--- Name: topology; Type: SCHEMA; Schema: -; Owner: -
+-- Name: topology; Type: SCHEMA; Schema: -; Owner: postgres
 --
 
 CREATE SCHEMA topology;
 
 
+ALTER SCHEMA topology OWNER TO postgres;
+
 --
--- TOC entry 4 (class 3079 OID 19288)
+-- Name: SCHEMA topology; Type: COMMENT; Schema: -; Owner: postgres
+--
+
+COMMENT ON SCHEMA topology IS 'PostGIS Topology schema';
+
+
+--
 -- Name: fuzzystrmatch; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -51,7 +58,13 @@ CREATE EXTENSION IF NOT EXISTS fuzzystrmatch WITH SCHEMA public;
 
 
 --
--- TOC entry 2 (class 3079 OID 18043)
+-- Name: EXTENSION fuzzystrmatch; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION fuzzystrmatch IS 'determine similarities and distance between strings';
+
+
+--
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -59,7 +72,13 @@ CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
 
 
 --
--- TOC entry 5 (class 3079 OID 19301)
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry and geography spatial types and functions';
+
+
+--
 -- Name: postgis_tiger_geocoder; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -67,7 +86,13 @@ CREATE EXTENSION IF NOT EXISTS postgis_tiger_geocoder WITH SCHEMA tiger;
 
 
 --
--- TOC entry 3 (class 3079 OID 19122)
+-- Name: EXTENSION postgis_tiger_geocoder; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis_tiger_geocoder IS 'PostGIS tiger geocoder and reverse geocoder';
+
+
+--
 -- Name: postgis_topology; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -75,8 +100,14 @@ CREATE EXTENSION IF NOT EXISTS postgis_topology WITH SCHEMA topology;
 
 
 --
--- TOC entry 648 (class 1255 OID 19727)
--- Name: trigger_auto_accumulate_been_used_count(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: EXTENSION postgis_topology; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis_topology IS 'PostGIS topology spatial types and functions';
+
+
+--
+-- Name: trigger_auto_accumulate_been_used_count(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.trigger_auto_accumulate_been_used_count() RETURNS trigger
@@ -89,9 +120,10 @@ END;
 $$;
 
 
+ALTER FUNCTION public.trigger_auto_accumulate_been_used_count() OWNER TO postgres;
+
 --
--- TOC entry 1141 (class 1255 OID 19728)
--- Name: trigger_been_used_count_accumulator(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: trigger_been_used_count_accumulator(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.trigger_been_used_count_accumulator() RETURNS trigger
@@ -104,9 +136,10 @@ END;
 $$;
 
 
+ALTER FUNCTION public.trigger_been_used_count_accumulator() OWNER TO postgres;
+
 --
--- TOC entry 1396 (class 1255 OID 19729)
--- Name: trigger_set_backup_time(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: trigger_set_backup_time(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.trigger_set_backup_time() RETURNS trigger
@@ -119,9 +152,10 @@ END;
 $$;
 
 
+ALTER FUNCTION public.trigger_set_backup_time() OWNER TO postgres;
+
 --
--- TOC entry 1094 (class 1255 OID 19730)
--- Name: trigger_set_timestamp(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: trigger_set_timestamp(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.trigger_set_timestamp() RETURNS trigger
@@ -134,9 +168,10 @@ END;
 $$;
 
 
+ALTER FUNCTION public.trigger_set_timestamp() OWNER TO postgres;
+
 --
--- TOC entry 1339 (class 1255 OID 19731)
--- Name: update_app_calcu_hourly_patrol_rainfall_view(); Type: FUNCTION; Schema: public; Owner: -
+-- Name: update_app_calcu_hourly_patrol_rainfall_view(); Type: FUNCTION; Schema: public; Owner: postgres
 --
 
 CREATE FUNCTION public.update_app_calcu_hourly_patrol_rainfall_view() RETURNS trigger
@@ -159,9 +194,10 @@ BEGIN
 $$;
 
 
+ALTER FUNCTION public.update_app_calcu_hourly_patrol_rainfall_view() OWNER TO postgres;
+
 --
--- TOC entry 284 (class 1259 OID 19732)
--- Name:  building_publand_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name:  building_publand_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public." building_publand_ogc_fid_seq"
@@ -172,9 +208,10 @@ CREATE SEQUENCE public." building_publand_ogc_fid_seq"
     CACHE 1;
 
 
+ALTER SEQUENCE public." building_publand_ogc_fid_seq" OWNER TO postgres;
+
 --
--- TOC entry 285 (class 1259 OID 19733)
--- Name: SOCL_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: SOCL_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."SOCL_export_filter_ppl_ogc_fid_seq"
@@ -185,9 +222,10 @@ CREATE SEQUENCE public."SOCL_export_filter_ppl_ogc_fid_seq"
     CACHE 1;
 
 
+ALTER SEQUENCE public."SOCL_export_filter_ppl_ogc_fid_seq" OWNER TO postgres;
+
 --
--- TOC entry 286 (class 1259 OID 19734)
--- Name: app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq
@@ -198,9 +236,10 @@ CREATE SEQUENCE public.app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 287 (class 1259 OID 19735)
--- Name: app_calcu_hour_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_hour_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_hour_traffic_info_histories_ogc_fid_seq
@@ -211,9 +250,10 @@ CREATE SEQUENCE public.app_calcu_hour_traffic_info_histories_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_hour_traffic_info_histories_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 288 (class 1259 OID 19736)
--- Name: app_calcu_hour_traffic_youbike_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_hour_traffic_youbike_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_hour_traffic_youbike_ogc_fid_seq
@@ -224,9 +264,10 @@ CREATE SEQUENCE public.app_calcu_hour_traffic_youbike_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_hour_traffic_youbike_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 289 (class 1259 OID 19737)
--- Name: app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_seq
@@ -237,9 +278,10 @@ CREATE SEQUENCE public.app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_se
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_seq OWNER TO postgres;
+
 --
--- TOC entry 290 (class 1259 OID 19738)
--- Name: app_calcu_month_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_month_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_month_traffic_info_histories_ogc_fid_seq
@@ -250,9 +292,10 @@ CREATE SEQUENCE public.app_calcu_month_traffic_info_histories_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_month_traffic_info_histories_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 291 (class 1259 OID 19739)
--- Name: app_calcu_monthly_socl_welfare_people_ppl_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_monthly_socl_welfare_people_ppl_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_monthly_socl_welfare_people_ppl_seq
@@ -263,9 +306,14 @@ CREATE SEQUENCE public.app_calcu_monthly_socl_welfare_people_ppl_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_monthly_socl_welfare_people_ppl_seq OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
 --
--- TOC entry 292 (class 1259 OID 19740)
--- Name: app_calcu_monthly_socl_welfare_people_ppl; Type: TABLE; Schema: public; Owner: -
+-- Name: app_calcu_monthly_socl_welfare_people_ppl; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.app_calcu_monthly_socl_welfare_people_ppl (
@@ -280,9 +328,10 @@ CREATE TABLE public.app_calcu_monthly_socl_welfare_people_ppl (
 );
 
 
+ALTER TABLE public.app_calcu_monthly_socl_welfare_people_ppl OWNER TO postgres;
+
 --
--- TOC entry 293 (class 1259 OID 19748)
--- Name: app_calcu_patrol_rainfall_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_patrol_rainfall_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_patrol_rainfall_ogc_fid_seq
@@ -293,9 +342,10 @@ CREATE SEQUENCE public.app_calcu_patrol_rainfall_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_patrol_rainfall_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 294 (class 1259 OID 19749)
--- Name: app_calcu_sentiment_dispatch_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_sentiment_dispatch_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_sentiment_dispatch_ogc_fid_seq
@@ -306,9 +356,10 @@ CREATE SEQUENCE public.app_calcu_sentiment_dispatch_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_sentiment_dispatch_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 295 (class 1259 OID 19750)
--- Name: app_calcu_traffic_todaywork_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_traffic_todaywork_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_traffic_todaywork_ogc_fid_seq
@@ -319,9 +370,10 @@ CREATE SEQUENCE public.app_calcu_traffic_todaywork_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_traffic_todaywork_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 296 (class 1259 OID 19751)
--- Name: app_calcu_weekly_dispatching_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_weekly_dispatching_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_weekly_dispatching_ogc_fid_seq
@@ -332,9 +384,10 @@ CREATE SEQUENCE public.app_calcu_weekly_dispatching_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_weekly_dispatching_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 297 (class 1259 OID 19752)
--- Name: app_calcu_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_weekly_hellotaipei_ogc_fid_seq
@@ -345,9 +398,10 @@ CREATE SEQUENCE public.app_calcu_weekly_hellotaipei_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_weekly_hellotaipei_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 298 (class 1259 OID 19753)
--- Name: app_calcu_weekly_metro_capacity_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_weekly_metro_capacity_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_weekly_metro_capacity_ogc_fid_seq
@@ -358,9 +412,10 @@ CREATE SEQUENCE public.app_calcu_weekly_metro_capacity_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_weekly_metro_capacity_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 299 (class 1259 OID 19754)
--- Name: app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq
@@ -371,9 +426,10 @@ CREATE SEQUENCE public.app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 300 (class 1259 OID 19755)
--- Name: app_calcul_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_calcul_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_calcul_weekly_hellotaipei_ogc_fid_seq
@@ -384,9 +440,10 @@ CREATE SEQUENCE public.app_calcul_weekly_hellotaipei_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_calcul_weekly_hellotaipei_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 301 (class 1259 OID 19756)
--- Name: app_traffic_lives_accident_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_traffic_lives_accident_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_traffic_lives_accident_ogc_fid_seq
@@ -397,9 +454,10 @@ CREATE SEQUENCE public.app_traffic_lives_accident_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_traffic_lives_accident_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 302 (class 1259 OID 19757)
--- Name: app_traffic_metro_capacity_realtime_stat_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: app_traffic_metro_capacity_realtime_stat_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.app_traffic_metro_capacity_realtime_stat_ogc_fid_seq
@@ -410,9 +468,10 @@ CREATE SEQUENCE public.app_traffic_metro_capacity_realtime_stat_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.app_traffic_metro_capacity_realtime_stat_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 303 (class 1259 OID 19758)
--- Name: building_age_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_age_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_age_ogc_fid_seq
@@ -423,9 +482,10 @@ CREATE SEQUENCE public.building_age_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_age_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 304 (class 1259 OID 19759)
--- Name: building_cadastralmap_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_cadastralmap_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_cadastralmap_ogc_fid_seq
@@ -436,9 +496,10 @@ CREATE SEQUENCE public.building_cadastralmap_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_cadastralmap_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 305 (class 1259 OID 19760)
--- Name: building_landuse_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_landuse_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_landuse_ogc_fid_seq
@@ -449,9 +510,10 @@ CREATE SEQUENCE public.building_landuse_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_landuse_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 306 (class 1259 OID 19761)
--- Name: building_license_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_license_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_license_history_ogc_fid_seq
@@ -462,9 +524,10 @@ CREATE SEQUENCE public.building_license_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_license_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 307 (class 1259 OID 19762)
--- Name: building_license_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_license_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_license_ogc_fid_seq
@@ -475,9 +538,10 @@ CREATE SEQUENCE public.building_license_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_license_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 308 (class 1259 OID 19763)
--- Name: building_permit_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_permit_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_permit_history_ogc_fid_seq
@@ -488,9 +552,10 @@ CREATE SEQUENCE public.building_permit_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_permit_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 309 (class 1259 OID 19764)
--- Name: building_permit_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_permit_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_permit_ogc_fid_seq
@@ -501,9 +566,10 @@ CREATE SEQUENCE public.building_permit_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_permit_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 310 (class 1259 OID 19765)
--- Name: building_publand_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_publand_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_publand_history_ogc_fid_seq
@@ -514,9 +580,10 @@ CREATE SEQUENCE public.building_publand_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_publand_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 311 (class 1259 OID 19766)
--- Name: building_publand_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_publand_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_publand_ogc_fid_seq
@@ -527,9 +594,10 @@ CREATE SEQUENCE public.building_publand_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_publand_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 312 (class 1259 OID 19767)
--- Name: building_renewarea_10_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewarea_10_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewarea_10_history_ogc_fid_seq
@@ -540,9 +608,10 @@ CREATE SEQUENCE public.building_renewarea_10_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewarea_10_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 313 (class 1259 OID 19768)
--- Name: building_renewarea_10_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewarea_10_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewarea_10_ogc_fid_seq
@@ -553,9 +622,10 @@ CREATE SEQUENCE public.building_renewarea_10_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewarea_10_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 314 (class 1259 OID 19769)
--- Name: building_renewarea_40_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewarea_40_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewarea_40_history_ogc_fid_seq
@@ -566,9 +636,10 @@ CREATE SEQUENCE public.building_renewarea_40_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewarea_40_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 315 (class 1259 OID 19770)
--- Name: building_renewarea_40_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewarea_40_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewarea_40_ogc_fid_seq
@@ -579,9 +650,10 @@ CREATE SEQUENCE public.building_renewarea_40_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewarea_40_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 316 (class 1259 OID 19771)
--- Name: building_renewunit_12_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewunit_12_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewunit_12_history_ogc_fid_seq
@@ -592,9 +664,10 @@ CREATE SEQUENCE public.building_renewunit_12_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewunit_12_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 317 (class 1259 OID 19772)
--- Name: building_renewunit_12_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewunit_12_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewunit_12_ogc_fid_seq
@@ -605,9 +678,10 @@ CREATE SEQUENCE public.building_renewunit_12_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewunit_12_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 318 (class 1259 OID 19773)
--- Name: building_renewunit_20_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewunit_20_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewunit_20_history_ogc_fid_seq
@@ -618,9 +692,10 @@ CREATE SEQUENCE public.building_renewunit_20_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewunit_20_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 319 (class 1259 OID 19774)
--- Name: building_renewunit_20_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewunit_20_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewunit_20_ogc_fid_seq
@@ -631,9 +706,10 @@ CREATE SEQUENCE public.building_renewunit_20_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewunit_20_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 320 (class 1259 OID 19775)
--- Name: building_renewunit_30_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewunit_30_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewunit_30_history_ogc_fid_seq
@@ -644,9 +720,10 @@ CREATE SEQUENCE public.building_renewunit_30_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewunit_30_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 321 (class 1259 OID 19776)
--- Name: building_renewunit_30_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_renewunit_30_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_renewunit_30_ogc_fid_seq
@@ -657,9 +734,10 @@ CREATE SEQUENCE public.building_renewunit_30_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_renewunit_30_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 322 (class 1259 OID 19777)
--- Name: building_social_house_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_social_house_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_social_house_history_ogc_fid_seq
@@ -670,9 +748,10 @@ CREATE SEQUENCE public.building_social_house_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_social_house_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 323 (class 1259 OID 19778)
--- Name: building_social_house_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_social_house_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_social_house_ogc_fid_seq
@@ -683,9 +762,10 @@ CREATE SEQUENCE public.building_social_house_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_social_house_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 324 (class 1259 OID 19779)
--- Name: building_unsued_land_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_unsued_land_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_unsued_land_ogc_fid_seq
@@ -696,9 +776,10 @@ CREATE SEQUENCE public.building_unsued_land_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_unsued_land_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 325 (class 1259 OID 19780)
--- Name: building_unsued_land; Type: TABLE; Schema: public; Owner: -
+-- Name: building_unsued_land; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.building_unsued_land (
@@ -725,9 +806,10 @@ CREATE TABLE public.building_unsued_land (
 );
 
 
+ALTER TABLE public.building_unsued_land OWNER TO postgres;
+
 --
--- TOC entry 326 (class 1259 OID 19788)
--- Name: building_unsued_land_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_unsued_land_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_unsued_land_history_ogc_fid_seq
@@ -738,9 +820,10 @@ CREATE SEQUENCE public.building_unsued_land_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_unsued_land_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 327 (class 1259 OID 19789)
--- Name: building_unsued_nonpublic_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_unsued_nonpublic_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_unsued_nonpublic_history_ogc_fid_seq
@@ -751,9 +834,10 @@ CREATE SEQUENCE public.building_unsued_nonpublic_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_unsued_nonpublic_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 328 (class 1259 OID 19790)
--- Name: building_unsued_nonpublic_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_unsued_nonpublic_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_unsued_nonpublic_ogc_fid_seq
@@ -764,9 +848,10 @@ CREATE SEQUENCE public.building_unsued_nonpublic_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_unsued_nonpublic_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 329 (class 1259 OID 19791)
--- Name: building_unsued_public; Type: TABLE; Schema: public; Owner: -
+-- Name: building_unsued_public; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.building_unsued_public (
@@ -789,9 +874,10 @@ CREATE TABLE public.building_unsued_public (
 );
 
 
+ALTER TABLE public.building_unsued_public OWNER TO postgres;
+
 --
--- TOC entry 330 (class 1259 OID 19798)
--- Name: building_unsued_public_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_unsued_public_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_unsued_public_history_ogc_fid_seq
@@ -802,9 +888,10 @@ CREATE SEQUENCE public.building_unsued_public_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_unsued_public_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 331 (class 1259 OID 19799)
--- Name: building_unsued_public_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: building_unsued_public_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.building_unsued_public_ogc_fid_seq
@@ -815,9 +902,10 @@ CREATE SEQUENCE public.building_unsued_public_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.building_unsued_public_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 332 (class 1259 OID 19800)
--- Name: cvil_public_opinion_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cvil_public_opinion_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cvil_public_opinion_evn_ogc_fid_seq
@@ -828,9 +916,10 @@ CREATE SEQUENCE public.cvil_public_opinion_evn_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cvil_public_opinion_evn_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 333 (class 1259 OID 19801)
--- Name: cvil_public_opinion_maintype_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cvil_public_opinion_maintype_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cvil_public_opinion_maintype_ogc_fid_seq
@@ -841,9 +930,10 @@ CREATE SEQUENCE public.cvil_public_opinion_maintype_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cvil_public_opinion_maintype_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 334 (class 1259 OID 19802)
--- Name: cvil_public_opinion_subtype_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cvil_public_opinion_subtype_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cvil_public_opinion_subtype_ogc_fid_seq
@@ -854,9 +944,10 @@ CREATE SEQUENCE public.cvil_public_opinion_subtype_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cvil_public_opinion_subtype_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 335 (class 1259 OID 19803)
--- Name: cwb_city_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_city_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_city_weather_forecast_history_ogc_fid_seq
@@ -867,9 +958,10 @@ CREATE SEQUENCE public.cwb_city_weather_forecast_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_city_weather_forecast_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 336 (class 1259 OID 19804)
--- Name: cwb_city_weather_forecast_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_city_weather_forecast_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_city_weather_forecast_ogc_fid_seq
@@ -880,9 +972,10 @@ CREATE SEQUENCE public.cwb_city_weather_forecast_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_city_weather_forecast_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 337 (class 1259 OID 19805)
--- Name: cwb_daily_weather_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_daily_weather_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_daily_weather_ogc_fid_seq
@@ -893,9 +986,10 @@ CREATE SEQUENCE public.cwb_daily_weather_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_daily_weather_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 338 (class 1259 OID 19806)
--- Name: cwb_hourly_weather_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_hourly_weather_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_hourly_weather_ogc_fid_seq
@@ -906,9 +1000,10 @@ CREATE SEQUENCE public.cwb_hourly_weather_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_hourly_weather_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 339 (class 1259 OID 19807)
--- Name: cwb_now_weather_auto_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_now_weather_auto_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_now_weather_auto_station_history_ogc_fid_seq
@@ -919,9 +1014,10 @@ CREATE SEQUENCE public.cwb_now_weather_auto_station_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_now_weather_auto_station_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 340 (class 1259 OID 19808)
--- Name: cwb_now_weather_auto_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_now_weather_auto_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_now_weather_auto_station_ogc_fid_seq
@@ -932,9 +1028,10 @@ CREATE SEQUENCE public.cwb_now_weather_auto_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_now_weather_auto_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 341 (class 1259 OID 19809)
--- Name: cwb_now_weather_bureau_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_now_weather_bureau_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_now_weather_bureau_station_history_ogc_fid_seq
@@ -945,9 +1042,10 @@ CREATE SEQUENCE public.cwb_now_weather_bureau_station_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_now_weather_bureau_station_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 342 (class 1259 OID 19810)
--- Name: cwb_now_weather_bureau_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_now_weather_bureau_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_now_weather_bureau_station_ogc_fid_seq
@@ -958,9 +1056,10 @@ CREATE SEQUENCE public.cwb_now_weather_bureau_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_now_weather_bureau_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 343 (class 1259 OID 19811)
--- Name: cwb_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_rainfall_station_location_history_ogc_fid_seq
@@ -971,9 +1070,10 @@ CREATE SEQUENCE public.cwb_rainfall_station_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_rainfall_station_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 344 (class 1259 OID 19812)
--- Name: cwb_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_rainfall_station_location_ogc_fid_seq
@@ -984,9 +1084,10 @@ CREATE SEQUENCE public.cwb_rainfall_station_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_rainfall_station_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 345 (class 1259 OID 19813)
--- Name: cwb_town_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_town_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_town_weather_forecast_history_ogc_fid_seq
@@ -997,9 +1098,10 @@ CREATE SEQUENCE public.cwb_town_weather_forecast_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_town_weather_forecast_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 346 (class 1259 OID 19814)
--- Name: cwb_town_weather_forecast_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: cwb_town_weather_forecast_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.cwb_town_weather_forecast_ogc_fid_seq
@@ -1010,9 +1112,10 @@ CREATE SEQUENCE public.cwb_town_weather_forecast_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.cwb_town_weather_forecast_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 347 (class 1259 OID 19815)
--- Name: edu_elementary_school_district_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_elementary_school_district_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_elementary_school_district_history_ogc_fid_seq
@@ -1023,9 +1126,10 @@ CREATE SEQUENCE public.edu_elementary_school_district_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_elementary_school_district_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 348 (class 1259 OID 19816)
--- Name: edu_elementary_school_district_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_elementary_school_district_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_elementary_school_district_ogc_fid_seq
@@ -1036,9 +1140,10 @@ CREATE SEQUENCE public.edu_elementary_school_district_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_elementary_school_district_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 349 (class 1259 OID 19817)
--- Name: edu_eleschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_eleschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_eleschool_dist_by_administrative_history_ogc_fid_seq
@@ -1049,9 +1154,10 @@ CREATE SEQUENCE public.edu_eleschool_dist_by_administrative_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_eleschool_dist_by_administrative_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 350 (class 1259 OID 19818)
--- Name: edu_eleschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_eleschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_eleschool_dist_by_administrative_ogc_fid_seq
@@ -1062,9 +1168,10 @@ CREATE SEQUENCE public.edu_eleschool_dist_by_administrative_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_eleschool_dist_by_administrative_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 351 (class 1259 OID 19819)
--- Name: edu_jhschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_jhschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_jhschool_dist_by_administrative_history_ogc_fid_seq
@@ -1075,9 +1182,10 @@ CREATE SEQUENCE public.edu_jhschool_dist_by_administrative_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_jhschool_dist_by_administrative_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 352 (class 1259 OID 19820)
--- Name: edu_jhschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_jhschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_jhschool_dist_by_administrative_ogc_fid_seq
@@ -1088,9 +1196,10 @@ CREATE SEQUENCE public.edu_jhschool_dist_by_administrative_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_jhschool_dist_by_administrative_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 353 (class 1259 OID 19821)
--- Name: edu_junior_high_school_district_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_junior_high_school_district_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_junior_high_school_district_history_ogc_fid_seq
@@ -1101,9 +1210,10 @@ CREATE SEQUENCE public.edu_junior_high_school_district_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_junior_high_school_district_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 354 (class 1259 OID 19822)
--- Name: edu_junior_high_school_district_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_junior_high_school_district_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_junior_high_school_district_ogc_fid_seq
@@ -1114,9 +1224,10 @@ CREATE SEQUENCE public.edu_junior_high_school_district_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_junior_high_school_district_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 355 (class 1259 OID 19823)
--- Name: edu_school_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_school_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_school_history_ogc_fid_seq
@@ -1127,9 +1238,10 @@ CREATE SEQUENCE public.edu_school_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_school_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 356 (class 1259 OID 19824)
--- Name: edu_school_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_school_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_school_ogc_fid_seq
@@ -1140,9 +1252,10 @@ CREATE SEQUENCE public.edu_school_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_school_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 357 (class 1259 OID 19825)
--- Name: edu_school_romm_status_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_school_romm_status_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_school_romm_status_history_ogc_fid_seq
@@ -1153,9 +1266,10 @@ CREATE SEQUENCE public.edu_school_romm_status_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_school_romm_status_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 358 (class 1259 OID 19826)
--- Name: edu_school_romm_status_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: edu_school_romm_status_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.edu_school_romm_status_ogc_fid_seq
@@ -1166,9 +1280,10 @@ CREATE SEQUENCE public.edu_school_romm_status_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.edu_school_romm_status_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 359 (class 1259 OID 19827)
--- Name: eoc_accommodate_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: eoc_accommodate_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.eoc_accommodate_history_ogc_fid_seq
@@ -1179,9 +1294,10 @@ CREATE SEQUENCE public.eoc_accommodate_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.eoc_accommodate_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 360 (class 1259 OID 19828)
--- Name: eoc_accommodate_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: eoc_accommodate_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.eoc_accommodate_ogc_fid_seq
@@ -1192,9 +1308,10 @@ CREATE SEQUENCE public.eoc_accommodate_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.eoc_accommodate_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 361 (class 1259 OID 19829)
--- Name: eoc_disaster_case_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: eoc_disaster_case_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.eoc_disaster_case_history_ogc_fid_seq
@@ -1205,9 +1322,10 @@ CREATE SEQUENCE public.eoc_disaster_case_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.eoc_disaster_case_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 362 (class 1259 OID 19830)
--- Name: eoc_disaster_case_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: eoc_disaster_case_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.eoc_disaster_case_ogc_fid_seq
@@ -1218,9 +1336,10 @@ CREATE SEQUENCE public.eoc_disaster_case_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.eoc_disaster_case_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 363 (class 1259 OID 19831)
--- Name: eoc_leave_house_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: eoc_leave_house_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.eoc_leave_house_history_ogc_fid_seq
@@ -1231,9 +1350,10 @@ CREATE SEQUENCE public.eoc_leave_house_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.eoc_leave_house_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 364 (class 1259 OID 19832)
--- Name: eoc_leave_house_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: eoc_leave_house_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.eoc_leave_house_ogc_fid_seq
@@ -1244,9 +1364,10 @@ CREATE SEQUENCE public.eoc_leave_house_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.eoc_leave_house_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 365 (class 1259 OID 19833)
--- Name: ethc_building_check_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ethc_building_check_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.ethc_building_check_ogc_fid_seq
@@ -1257,9 +1378,10 @@ CREATE SEQUENCE public.ethc_building_check_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.ethc_building_check_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 366 (class 1259 OID 19834)
--- Name: ethc_check_calcu_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ethc_check_calcu_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.ethc_check_calcu_ogc_fid_seq
@@ -1270,9 +1392,10 @@ CREATE SEQUENCE public.ethc_check_calcu_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.ethc_check_calcu_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 367 (class 1259 OID 19835)
--- Name: ethc_check_summary_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ethc_check_summary_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.ethc_check_summary_ogc_fid_seq
@@ -1283,9 +1406,10 @@ CREATE SEQUENCE public.ethc_check_summary_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.ethc_check_summary_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 368 (class 1259 OID 19836)
--- Name: ethc_fire_check_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: ethc_fire_check_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.ethc_fire_check_ogc_fid_seq
@@ -1296,9 +1420,10 @@ CREATE SEQUENCE public.ethc_fire_check_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.ethc_fire_check_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 369 (class 1259 OID 19837)
--- Name: fire_hydrant_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: fire_hydrant_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.fire_hydrant_location_history_ogc_fid_seq
@@ -1309,9 +1434,10 @@ CREATE SEQUENCE public.fire_hydrant_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.fire_hydrant_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 370 (class 1259 OID 19838)
--- Name: fire_hydrant_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: fire_hydrant_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.fire_hydrant_location_ogc_fid_seq
@@ -1322,9 +1448,10 @@ CREATE SEQUENCE public.fire_hydrant_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.fire_hydrant_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 371 (class 1259 OID 19839)
--- Name: fire_to_hospital_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: fire_to_hospital_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.fire_to_hospital_ppl_ogc_fid_seq
@@ -1335,9 +1462,10 @@ CREATE SEQUENCE public.fire_to_hospital_ppl_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.fire_to_hospital_ppl_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 372 (class 1259 OID 19840)
--- Name: heal_aed_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: heal_aed_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.heal_aed_history_ogc_fid_seq
@@ -1348,9 +1476,10 @@ CREATE SEQUENCE public.heal_aed_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.heal_aed_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 373 (class 1259 OID 19841)
--- Name: heal_aed_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: heal_aed_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.heal_aed_ogc_fid_seq
@@ -1361,9 +1490,10 @@ CREATE SEQUENCE public.heal_aed_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.heal_aed_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 374 (class 1259 OID 19842)
--- Name: heal_clinic_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: heal_clinic_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.heal_clinic_history_ogc_fid_seq
@@ -1374,9 +1504,10 @@ CREATE SEQUENCE public.heal_clinic_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.heal_clinic_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 375 (class 1259 OID 19843)
--- Name: heal_clinic_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: heal_clinic_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.heal_clinic_ogc_fid_seq
@@ -1387,9 +1518,10 @@ CREATE SEQUENCE public.heal_clinic_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.heal_clinic_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 376 (class 1259 OID 19844)
--- Name: heal_hospital_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: heal_hospital_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.heal_hospital_history_ogc_fid_seq
@@ -1400,9 +1532,10 @@ CREATE SEQUENCE public.heal_hospital_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.heal_hospital_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 377 (class 1259 OID 19845)
--- Name: heal_hospital_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: heal_hospital_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.heal_hospital_ogc_fid_seq
@@ -1413,9 +1546,10 @@ CREATE SEQUENCE public.heal_hospital_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.heal_hospital_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 378 (class 1259 OID 19846)
--- Name: heal_suicide_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: heal_suicide_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.heal_suicide_evn_ogc_fid_seq
@@ -1426,9 +1560,10 @@ CREATE SEQUENCE public.heal_suicide_evn_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.heal_suicide_evn_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 379 (class 1259 OID 19847)
--- Name: it_5G_smart_pole_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_5G_smart_pole_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public."it_5G_smart_pole_ogc_fid_seq"
@@ -1439,9 +1574,10 @@ CREATE SEQUENCE public."it_5G_smart_pole_ogc_fid_seq"
     CACHE 1;
 
 
+ALTER SEQUENCE public."it_5G_smart_pole_ogc_fid_seq" OWNER TO postgres;
+
 --
--- TOC entry 380 (class 1259 OID 19848)
--- Name: it_5g_smart_all_pole_device_log_history_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_device_log_history_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_5g_smart_all_pole_device_log_history_seq
@@ -1452,9 +1588,10 @@ CREATE SEQUENCE public.it_5g_smart_all_pole_device_log_history_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_5g_smart_all_pole_device_log_history_seq OWNER TO postgres;
+
 --
--- TOC entry 381 (class 1259 OID 19849)
--- Name: it_5g_smart_all_pole_device_log_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_device_log_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_5g_smart_all_pole_device_log_ogc_fid_seq
@@ -1465,9 +1602,10 @@ CREATE SEQUENCE public.it_5g_smart_all_pole_device_log_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_5g_smart_all_pole_device_log_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 382 (class 1259 OID 19850)
--- Name: it_5g_smart_all_pole_log_history_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_log_history_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_5g_smart_all_pole_log_history_seq
@@ -1478,9 +1616,10 @@ CREATE SEQUENCE public.it_5g_smart_all_pole_log_history_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_5g_smart_all_pole_log_history_seq OWNER TO postgres;
+
 --
--- TOC entry 383 (class 1259 OID 19851)
--- Name: it_5g_smart_all_pole_log_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_log_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_5g_smart_all_pole_log_seq
@@ -1491,9 +1630,10 @@ CREATE SEQUENCE public.it_5g_smart_all_pole_log_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_5g_smart_all_pole_log_seq OWNER TO postgres;
+
 --
--- TOC entry 384 (class 1259 OID 19852)
--- Name: it_5g_smart_pole_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_5g_smart_pole_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_5g_smart_pole_ogc_fid_seq
@@ -1504,9 +1644,10 @@ CREATE SEQUENCE public.it_5g_smart_pole_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_5g_smart_pole_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 385 (class 1259 OID 19853)
--- Name: it_signal_population_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_signal_population_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_signal_population_history_ogc_fid_seq
@@ -1517,9 +1658,10 @@ CREATE SEQUENCE public.it_signal_population_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_signal_population_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 386 (class 1259 OID 19854)
--- Name: it_signal_population_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_signal_population_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_signal_population_ogc_fid_seq
@@ -1530,9 +1672,10 @@ CREATE SEQUENCE public.it_signal_population_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_signal_population_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 387 (class 1259 OID 19855)
--- Name: it_signal_tourist_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_signal_tourist_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_signal_tourist_history_ogc_fid_seq
@@ -1543,9 +1686,10 @@ CREATE SEQUENCE public.it_signal_tourist_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_signal_tourist_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 388 (class 1259 OID 19856)
--- Name: it_signal_tourist_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_signal_tourist_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_signal_tourist_ogc_fid_seq
@@ -1556,9 +1700,10 @@ CREATE SEQUENCE public.it_signal_tourist_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_signal_tourist_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 389 (class 1259 OID 19857)
--- Name: it_taipeiexpo_people_flow_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_taipeiexpo_people_flow_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_taipeiexpo_people_flow_history_ogc_fid_seq
@@ -1569,9 +1714,10 @@ CREATE SEQUENCE public.it_taipeiexpo_people_flow_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_taipeiexpo_people_flow_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 390 (class 1259 OID 19858)
--- Name: it_taipeiexpo_people_flow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_taipeiexpo_people_flow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_taipeiexpo_people_flow_ogc_fid_seq
@@ -1582,9 +1728,10 @@ CREATE SEQUENCE public.it_taipeiexpo_people_flow_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_taipeiexpo_people_flow_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 391 (class 1259 OID 19859)
--- Name: it_tpe_ticket_event_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpe_ticket_event_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpe_ticket_event_ogc_fid_seq
@@ -1595,9 +1742,10 @@ CREATE SEQUENCE public.it_tpe_ticket_event_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpe_ticket_event_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 392 (class 1259 OID 19860)
--- Name: it_tpe_ticket_member_hold_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpe_ticket_member_hold_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpe_ticket_member_hold_ogc_fid_seq
@@ -1608,9 +1756,10 @@ CREATE SEQUENCE public.it_tpe_ticket_member_hold_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpe_ticket_member_hold_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 393 (class 1259 OID 19861)
--- Name: it_tpe_ticket_place_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpe_ticket_place_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpe_ticket_place_ogc_fid_seq
@@ -1621,9 +1770,10 @@ CREATE SEQUENCE public.it_tpe_ticket_place_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpe_ticket_place_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 394 (class 1259 OID 19862)
--- Name: it_tpe_ticket_ticket_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpe_ticket_ticket_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpe_ticket_ticket_ogc_fid_seq
@@ -1634,9 +1784,10 @@ CREATE SEQUENCE public.it_tpe_ticket_ticket_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpe_ticket_ticket_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 395 (class 1259 OID 19863)
--- Name: it_tpefree_daily_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpefree_daily_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpefree_daily_history_ogc_fid_seq
@@ -1647,9 +1798,10 @@ CREATE SEQUENCE public.it_tpefree_daily_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpefree_daily_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 396 (class 1259 OID 19864)
--- Name: it_tpefree_daily_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpefree_daily_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpefree_daily_ogc_fid_seq
@@ -1660,9 +1812,10 @@ CREATE SEQUENCE public.it_tpefree_daily_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpefree_daily_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 397 (class 1259 OID 19865)
--- Name: it_tpefree_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpefree_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpefree_location_history_ogc_fid_seq
@@ -1673,9 +1826,10 @@ CREATE SEQUENCE public.it_tpefree_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpefree_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 398 (class 1259 OID 19866)
--- Name: it_tpefree_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpefree_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpefree_location_ogc_fid_seq
@@ -1686,9 +1840,10 @@ CREATE SEQUENCE public.it_tpefree_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpefree_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 399 (class 1259 OID 19867)
--- Name: it_tpefree_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpefree_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpefree_realtime_history_ogc_fid_seq
@@ -1699,9 +1854,10 @@ CREATE SEQUENCE public.it_tpefree_realtime_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpefree_realtime_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 400 (class 1259 OID 19868)
--- Name: it_tpefree_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpefree_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpefree_realtime_ogc_fid_seq
@@ -1712,9 +1868,10 @@ CREATE SEQUENCE public.it_tpefree_realtime_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpefree_realtime_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 401 (class 1259 OID 19869)
--- Name: it_tpmo_poc_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpmo_poc_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpmo_poc_location_history_ogc_fid_seq
@@ -1725,9 +1882,10 @@ CREATE SEQUENCE public.it_tpmo_poc_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpmo_poc_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 402 (class 1259 OID 19870)
--- Name: it_tpmo_poc_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_tpmo_poc_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_tpmo_poc_location_ogc_fid_seq
@@ -1738,9 +1896,10 @@ CREATE SEQUENCE public.it_tpmo_poc_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_tpmo_poc_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 403 (class 1259 OID 19871)
--- Name: it_venue_people_flow_history_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_venue_people_flow_history_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_venue_people_flow_history_seq
@@ -1751,9 +1910,10 @@ CREATE SEQUENCE public.it_venue_people_flow_history_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_venue_people_flow_history_seq OWNER TO postgres;
+
 --
--- TOC entry 404 (class 1259 OID 19872)
--- Name: it_venue_people_flow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: it_venue_people_flow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.it_venue_people_flow_ogc_fid_seq
@@ -1764,9 +1924,10 @@ CREATE SEQUENCE public.it_venue_people_flow_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.it_venue_people_flow_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 405 (class 1259 OID 19873)
--- Name: mrtp_carweight_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: mrtp_carweight_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.mrtp_carweight_history_ogc_fid_seq
@@ -1777,9 +1938,10 @@ CREATE SEQUENCE public.mrtp_carweight_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.mrtp_carweight_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 406 (class 1259 OID 19874)
--- Name: mrtp_carweight_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: mrtp_carweight_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.mrtp_carweight_ogc_fid_seq
@@ -1790,9 +1952,10 @@ CREATE SEQUENCE public.mrtp_carweight_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.mrtp_carweight_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 407 (class 1259 OID 19875)
--- Name: patrol_artificial_slope_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_artificial_slope_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_artificial_slope_history_ogc_fid_seq
@@ -1803,9 +1966,10 @@ CREATE SEQUENCE public.patrol_artificial_slope_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_artificial_slope_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 408 (class 1259 OID 19876)
--- Name: patrol_artificial_slope_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_artificial_slope_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_artificial_slope_ogc_fid_seq
@@ -1816,9 +1980,10 @@ CREATE SEQUENCE public.patrol_artificial_slope_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_artificial_slope_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 409 (class 1259 OID 19877)
--- Name: patrol_box_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_box_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_box_ogc_fid_seq
@@ -1829,9 +1994,10 @@ CREATE SEQUENCE public.patrol_box_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_box_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 410 (class 1259 OID 19878)
--- Name: patrol_camera_hls_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_camera_hls_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_camera_hls_ogc_fid_seq
@@ -1842,9 +2008,10 @@ CREATE SEQUENCE public.patrol_camera_hls_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_camera_hls_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 411 (class 1259 OID 19879)
--- Name: patrol_car_theft_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_car_theft_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_car_theft_ogc_fid_seq
@@ -1855,9 +2022,10 @@ CREATE SEQUENCE public.patrol_car_theft_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_car_theft_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 412 (class 1259 OID 19880)
--- Name: patrol_criminal_case_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_criminal_case_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_criminal_case_ogc_fid_seq
@@ -1868,9 +2036,10 @@ CREATE SEQUENCE public.patrol_criminal_case_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_criminal_case_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 413 (class 1259 OID 19881)
--- Name: patrol_criminal_case; Type: TABLE; Schema: public; Owner: -
+-- Name: patrol_criminal_case; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.patrol_criminal_case (
@@ -1892,9 +2061,10 @@ CREATE TABLE public.patrol_criminal_case (
 );
 
 
+ALTER TABLE public.patrol_criminal_case OWNER TO postgres;
+
 --
--- TOC entry 414 (class 1259 OID 19889)
--- Name: patrol_debris_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_debris_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_debris_history_ogc_fid_seq
@@ -1905,9 +2075,10 @@ CREATE SEQUENCE public.patrol_debris_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_debris_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 415 (class 1259 OID 19890)
--- Name: patrol_debris_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_debris_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_debris_ogc_fid_seq
@@ -1918,9 +2089,10 @@ CREATE SEQUENCE public.patrol_debris_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_debris_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 416 (class 1259 OID 19891)
--- Name: patrol_debrisarea_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_debrisarea_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_debrisarea_history_ogc_fid_seq
@@ -1931,9 +2103,10 @@ CREATE SEQUENCE public.patrol_debrisarea_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_debrisarea_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 417 (class 1259 OID 19892)
--- Name: patrol_debrisarea_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_debrisarea_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_debrisarea_ogc_fid_seq
@@ -1944,9 +2117,10 @@ CREATE SEQUENCE public.patrol_debrisarea_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_debrisarea_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 418 (class 1259 OID 19893)
--- Name: patrol_designate_place_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_designate_place_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_designate_place_history_ogc_fid_seq
@@ -1957,9 +2131,10 @@ CREATE SEQUENCE public.patrol_designate_place_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_designate_place_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 419 (class 1259 OID 19894)
--- Name: patrol_designate_place_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_designate_place_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_designate_place_ogc_fid_seq
@@ -1970,9 +2145,10 @@ CREATE SEQUENCE public.patrol_designate_place_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_designate_place_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 420 (class 1259 OID 19895)
--- Name: patrol_district_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_district_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_district_ogc_fid_seq
@@ -1983,9 +2159,10 @@ CREATE SEQUENCE public.patrol_district_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_district_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 421 (class 1259 OID 19896)
--- Name: patrol_eoc_case_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_eoc_case_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_eoc_case_history_ogc_fid_seq
@@ -1996,9 +2173,10 @@ CREATE SEQUENCE public.patrol_eoc_case_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_eoc_case_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 422 (class 1259 OID 19897)
--- Name: patrol_eoc_case_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_eoc_case_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_eoc_case_ogc_fid_seq
@@ -2009,9 +2187,10 @@ CREATE SEQUENCE public.patrol_eoc_case_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_eoc_case_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 423 (class 1259 OID 19898)
--- Name: patrol_eoc_designate_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_eoc_designate_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_eoc_designate_history_ogc_fid_seq
@@ -2022,9 +2201,10 @@ CREATE SEQUENCE public.patrol_eoc_designate_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_eoc_designate_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 424 (class 1259 OID 19899)
--- Name: patrol_eoc_designate_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_eoc_designate_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_eoc_designate_ogc_fid_seq
@@ -2035,9 +2215,10 @@ CREATE SEQUENCE public.patrol_eoc_designate_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_eoc_designate_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 425 (class 1259 OID 19900)
--- Name: patrol_fire_brigade_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_fire_brigade_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_fire_brigade_history_ogc_fid_seq
@@ -2048,9 +2229,10 @@ CREATE SEQUENCE public.patrol_fire_brigade_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_fire_brigade_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 426 (class 1259 OID 19901)
--- Name: patrol_fire_brigade_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_fire_brigade_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_fire_brigade_ogc_fid_seq
@@ -2061,9 +2243,10 @@ CREATE SEQUENCE public.patrol_fire_brigade_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_fire_brigade_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 427 (class 1259 OID 19902)
--- Name: patrol_fire_disqualified_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_fire_disqualified_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_fire_disqualified_history_ogc_fid_seq
@@ -2074,9 +2257,10 @@ CREATE SEQUENCE public.patrol_fire_disqualified_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_fire_disqualified_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 428 (class 1259 OID 19903)
--- Name: patrol_fire_disqualified_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_fire_disqualified_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_fire_disqualified_ogc_fid_seq
@@ -2087,9 +2271,10 @@ CREATE SEQUENCE public.patrol_fire_disqualified_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_fire_disqualified_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 429 (class 1259 OID 19904)
--- Name: patrol_fire_rescure_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_fire_rescure_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_fire_rescure_history_ogc_fid_seq
@@ -2100,9 +2285,10 @@ CREATE SEQUENCE public.patrol_fire_rescure_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_fire_rescure_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 430 (class 1259 OID 19905)
--- Name: patrol_fire_rescure_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_fire_rescure_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_fire_rescure_ogc_fid_seq
@@ -2113,9 +2299,10 @@ CREATE SEQUENCE public.patrol_fire_rescure_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_fire_rescure_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 431 (class 1259 OID 19906)
--- Name: patrol_flood_100_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_flood_100_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_flood_100_ogc_fid_seq
@@ -2126,9 +2313,10 @@ CREATE SEQUENCE public.patrol_flood_100_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_flood_100_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 432 (class 1259 OID 19907)
--- Name: patrol_flood_130_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_flood_130_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_flood_130_ogc_fid_seq
@@ -2139,9 +2327,10 @@ CREATE SEQUENCE public.patrol_flood_130_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_flood_130_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 433 (class 1259 OID 19908)
--- Name: patrol_flood_78_8_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_flood_78_8_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_flood_78_8_ogc_fid_seq
@@ -2152,9 +2341,10 @@ CREATE SEQUENCE public.patrol_flood_78_8_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_flood_78_8_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 434 (class 1259 OID 19909)
--- Name: patrol_motorcycle_theft_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_motorcycle_theft_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_motorcycle_theft_ogc_fid_seq
@@ -2165,9 +2355,10 @@ CREATE SEQUENCE public.patrol_motorcycle_theft_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_motorcycle_theft_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 435 (class 1259 OID 19910)
--- Name: patrol_old_settlement_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_old_settlement_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_old_settlement_history_ogc_fid_seq
@@ -2178,9 +2369,10 @@ CREATE SEQUENCE public.patrol_old_settlement_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_old_settlement_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 436 (class 1259 OID 19911)
--- Name: patrol_old_settlement_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_old_settlement_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_old_settlement_ogc_fid_seq
@@ -2191,9 +2383,10 @@ CREATE SEQUENCE public.patrol_old_settlement_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_old_settlement_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 437 (class 1259 OID 19912)
--- Name: patrol_police_region_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_police_region_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_police_region_ogc_fid_seq
@@ -2204,9 +2397,10 @@ CREATE SEQUENCE public.patrol_police_region_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_police_region_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 438 (class 1259 OID 19913)
--- Name: patrol_police_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_police_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_police_station_history_ogc_fid_seq
@@ -2217,9 +2411,10 @@ CREATE SEQUENCE public.patrol_police_station_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_police_station_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 439 (class 1259 OID 19914)
--- Name: patrol_police_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_police_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_police_station_ogc_fid_seq
@@ -2230,9 +2425,10 @@ CREATE SEQUENCE public.patrol_police_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_police_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 440 (class 1259 OID 19915)
--- Name: patrol_police_station_ogc_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_police_station_ogc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_police_station_ogc_id_seq
@@ -2243,9 +2439,10 @@ CREATE SEQUENCE public.patrol_police_station_ogc_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_police_station_ogc_id_seq OWNER TO postgres;
+
 --
--- TOC entry 441 (class 1259 OID 19916)
--- Name: patrol_rain_floodgate_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_rain_floodgate_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_rain_floodgate_ogc_fid_seq
@@ -2256,9 +2453,10 @@ CREATE SEQUENCE public.patrol_rain_floodgate_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_rain_floodgate_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 442 (class 1259 OID 19917)
--- Name: patrol_rain_floodgate; Type: TABLE; Schema: public; Owner: -
+-- Name: patrol_rain_floodgate; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.patrol_rain_floodgate (
@@ -2279,9 +2477,10 @@ CREATE TABLE public.patrol_rain_floodgate (
 );
 
 
+ALTER TABLE public.patrol_rain_floodgate OWNER TO postgres;
+
 --
--- TOC entry 443 (class 1259 OID 19925)
--- Name: patrol_rain_floodgate_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_rain_floodgate_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_rain_floodgate_history_ogc_fid_seq
@@ -2292,9 +2491,10 @@ CREATE SEQUENCE public.patrol_rain_floodgate_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_rain_floodgate_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 444 (class 1259 OID 19926)
--- Name: patrol_rain_rainfall_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_rain_rainfall_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_rain_rainfall_history_ogc_fid_seq
@@ -2305,9 +2505,10 @@ CREATE SEQUENCE public.patrol_rain_rainfall_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_rain_rainfall_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 445 (class 1259 OID 19927)
--- Name: patrol_rain_rainfall_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_rain_rainfall_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_rain_rainfall_ogc_fid_seq
@@ -2318,9 +2519,10 @@ CREATE SEQUENCE public.patrol_rain_rainfall_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_rain_rainfall_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 446 (class 1259 OID 19928)
--- Name: patrol_rain_sewer_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_rain_sewer_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_rain_sewer_history_ogc_fid_seq
@@ -2331,9 +2533,10 @@ CREATE SEQUENCE public.patrol_rain_sewer_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_rain_sewer_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 447 (class 1259 OID 19929)
--- Name: patrol_rain_sewer_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_rain_sewer_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_rain_sewer_ogc_fid_seq
@@ -2344,9 +2547,10 @@ CREATE SEQUENCE public.patrol_rain_sewer_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_rain_sewer_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 448 (class 1259 OID 19930)
--- Name: patrol_rain_sewer_ogc_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_rain_sewer_ogc_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_rain_sewer_ogc_id_seq
@@ -2357,9 +2561,10 @@ CREATE SEQUENCE public.patrol_rain_sewer_ogc_id_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_rain_sewer_ogc_id_seq OWNER TO postgres;
+
 --
--- TOC entry 449 (class 1259 OID 19931)
--- Name: patrol_random_robber_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_random_robber_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_random_robber_ogc_fid_seq
@@ -2370,9 +2575,10 @@ CREATE SEQUENCE public.patrol_random_robber_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_random_robber_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 450 (class 1259 OID 19932)
--- Name: patrol_random_snatch_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_random_snatch_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_random_snatch_ogc_fid_seq
@@ -2383,9 +2589,10 @@ CREATE SEQUENCE public.patrol_random_snatch_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_random_snatch_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 451 (class 1259 OID 19933)
--- Name: patrol_residential_burglary_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: patrol_residential_burglary_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.patrol_residential_burglary_ogc_fid_seq
@@ -2396,9 +2603,10 @@ CREATE SEQUENCE public.patrol_residential_burglary_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.patrol_residential_burglary_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 452 (class 1259 OID 19934)
--- Name: poli_traffic_violation_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: poli_traffic_violation_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.poli_traffic_violation_evn_ogc_fid_seq
@@ -2409,9 +2617,10 @@ CREATE SEQUENCE public.poli_traffic_violation_evn_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.poli_traffic_violation_evn_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 453 (class 1259 OID 19935)
--- Name: poli_traffic_violation_mapping_code_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: poli_traffic_violation_mapping_code_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.poli_traffic_violation_mapping_code_ogc_fid_seq
@@ -2422,9 +2631,10 @@ CREATE SEQUENCE public.poli_traffic_violation_mapping_code_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.poli_traffic_violation_mapping_code_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 454 (class 1259 OID 19936)
--- Name: record_db_mtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: record_db_mtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.record_db_mtime_ogc_fid_seq
@@ -2435,9 +2645,10 @@ CREATE SEQUENCE public.record_db_mtime_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.record_db_mtime_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 455 (class 1259 OID 19937)
--- Name: sentiment_councillor_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sentiment_councillor_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.sentiment_councillor_109_ogc_fid_seq
@@ -2448,9 +2659,10 @@ CREATE SEQUENCE public.sentiment_councillor_109_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sentiment_councillor_109_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 456 (class 1259 OID 19938)
--- Name: sentiment_dispatching_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sentiment_dispatching_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.sentiment_dispatching_ogc_fid_seq
@@ -2461,9 +2673,10 @@ CREATE SEQUENCE public.sentiment_dispatching_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sentiment_dispatching_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 457 (class 1259 OID 19939)
--- Name: sentiment_hello_taipei_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sentiment_hello_taipei_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.sentiment_hello_taipei_109_ogc_fid_seq
@@ -2474,9 +2687,10 @@ CREATE SEQUENCE public.sentiment_hello_taipei_109_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sentiment_hello_taipei_109_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 458 (class 1259 OID 19940)
--- Name: sentiment_hello_taipei_109_test_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sentiment_hello_taipei_109_test_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.sentiment_hello_taipei_109_test_ogc_fid_seq
@@ -2487,9 +2701,10 @@ CREATE SEQUENCE public.sentiment_hello_taipei_109_test_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sentiment_hello_taipei_109_test_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 459 (class 1259 OID 19941)
--- Name: sentiment_hotnews_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sentiment_hotnews_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.sentiment_hotnews_ogc_fid_seq
@@ -2500,9 +2715,10 @@ CREATE SEQUENCE public.sentiment_hotnews_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sentiment_hotnews_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 460 (class 1259 OID 19942)
--- Name: sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.sentiment_voice1999_109_ogc_fid_seq
@@ -2513,9 +2729,10 @@ CREATE SEQUENCE public.sentiment_voice1999_109_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.sentiment_voice1999_109_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 461 (class 1259 OID 19943)
--- Name: socl_case_study_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_case_study_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_case_study_ppl_ogc_fid_seq
@@ -2526,9 +2743,10 @@ CREATE SEQUENCE public.socl_case_study_ppl_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_case_study_ppl_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 462 (class 1259 OID 19944)
--- Name: socl_dept_epidemic_info_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_dept_epidemic_info_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_dept_epidemic_info_ogc_fid_seq
@@ -2539,9 +2757,10 @@ CREATE SEQUENCE public.socl_dept_epidemic_info_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_dept_epidemic_info_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 463 (class 1259 OID 19945)
--- Name: socl_domestic_violence_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_domestic_violence_evn_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_domestic_violence_evn_ogc_fid_seq
@@ -2552,9 +2771,10 @@ CREATE SEQUENCE public.socl_domestic_violence_evn_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_domestic_violence_evn_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 464 (class 1259 OID 19946)
--- Name: socl_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_export_filter_ppl_ogc_fid_seq
@@ -2565,9 +2785,10 @@ CREATE SEQUENCE public.socl_export_filter_ppl_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_export_filter_ppl_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 465 (class 1259 OID 19947)
--- Name: socl_order_concern_mapping_code_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_order_concern_mapping_code_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_order_concern_mapping_code_ogc_fid_seq
@@ -2578,9 +2799,10 @@ CREATE SEQUENCE public.socl_order_concern_mapping_code_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_order_concern_mapping_code_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 466 (class 1259 OID 19948)
--- Name: socl_order_concern_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_order_concern_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_order_concern_ppl_ogc_fid_seq
@@ -2591,9 +2813,10 @@ CREATE SEQUENCE public.socl_order_concern_ppl_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_order_concern_ppl_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 467 (class 1259 OID 19949)
--- Name: socl_welfare_dis_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_dis_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_dis_history_ogc_fid_seq
@@ -2604,9 +2827,10 @@ CREATE SEQUENCE public.socl_welfare_dis_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_dis_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 468 (class 1259 OID 19950)
--- Name: socl_welfare_dis_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_dis_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_dis_ogc_fid_seq
@@ -2617,9 +2841,10 @@ CREATE SEQUENCE public.socl_welfare_dis_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_dis_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 469 (class 1259 OID 19951)
--- Name: socl_welfare_dislow_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_dislow_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_dislow_history_ogc_fid_seq
@@ -2630,9 +2855,10 @@ CREATE SEQUENCE public.socl_welfare_dislow_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_dislow_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 470 (class 1259 OID 19952)
--- Name: socl_welfare_dislow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_dislow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_dislow_ogc_fid_seq
@@ -2643,9 +2869,10 @@ CREATE SEQUENCE public.socl_welfare_dislow_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_dislow_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 471 (class 1259 OID 19953)
--- Name: socl_welfare_low_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_low_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_low_history_ogc_fid_seq
@@ -2656,9 +2883,10 @@ CREATE SEQUENCE public.socl_welfare_low_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_low_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 472 (class 1259 OID 19954)
--- Name: socl_welfare_low_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_low_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_low_ogc_fid_seq
@@ -2669,9 +2897,10 @@ CREATE SEQUENCE public.socl_welfare_low_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_low_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 473 (class 1259 OID 19955)
--- Name: socl_welfare_midlow_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_midlow_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_midlow_history_ogc_fid_seq
@@ -2682,9 +2911,10 @@ CREATE SEQUENCE public.socl_welfare_midlow_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_midlow_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 474 (class 1259 OID 19956)
--- Name: socl_welfare_midlow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_midlow_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_midlow_ogc_fid_seq
@@ -2695,9 +2925,10 @@ CREATE SEQUENCE public.socl_welfare_midlow_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_midlow_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 475 (class 1259 OID 19957)
--- Name: socl_welfare_organization_plc_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_organization_plc_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_organization_plc_ogc_fid_seq
@@ -2708,9 +2939,10 @@ CREATE SEQUENCE public.socl_welfare_organization_plc_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_organization_plc_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 476 (class 1259 OID 19958)
--- Name: socl_welfare_organization_plc; Type: TABLE; Schema: public; Owner: -
+-- Name: socl_welfare_organization_plc; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE public.socl_welfare_organization_plc (
@@ -2726,9 +2958,10 @@ CREATE TABLE public.socl_welfare_organization_plc (
 );
 
 
+ALTER TABLE public.socl_welfare_organization_plc OWNER TO postgres;
+
 --
--- TOC entry 477 (class 1259 OID 19966)
--- Name: socl_welfare_organization_plc_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_organization_plc_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_organization_plc_history_ogc_fid_seq
@@ -2739,9 +2972,10 @@ CREATE SEQUENCE public.socl_welfare_organization_plc_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_organization_plc_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 478 (class 1259 OID 19967)
--- Name: socl_welfare_people_ppl_history_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_people_ppl_history_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_people_ppl_history_seq
@@ -2752,9 +2986,10 @@ CREATE SEQUENCE public.socl_welfare_people_ppl_history_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_people_ppl_history_seq OWNER TO postgres;
+
 --
--- TOC entry 479 (class 1259 OID 19968)
--- Name: socl_welfare_people_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: socl_welfare_people_ppl_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.socl_welfare_people_ppl_ogc_fid_seq
@@ -2765,9 +3000,29 @@ CREATE SEQUENCE public.socl_welfare_people_ppl_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.socl_welfare_people_ppl_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 480 (class 1259 OID 19969)
--- Name: tdx_bus_live_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: speed_camera; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.speed_camera (
+    "設置縣市" text,
+    "設置市區鄉鎮" text,
+    "設置地址" text,
+    "管轄警局" text,
+    "管轄分局" text,
+    "經度" numeric,
+    "緯度" numeric,
+    "拍攝方向" text,
+    "速限" integer
+);
+
+
+ALTER TABLE public.speed_camera OWNER TO postgres;
+
+--
+-- Name: tdx_bus_live_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tdx_bus_live_ogc_fid_seq
@@ -2778,9 +3033,10 @@ CREATE SEQUENCE public.tdx_bus_live_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tdx_bus_live_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 481 (class 1259 OID 19970)
--- Name: tdx_bus_route_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tdx_bus_route_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tdx_bus_route_history_ogc_fid_seq
@@ -2791,9 +3047,10 @@ CREATE SEQUENCE public.tdx_bus_route_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tdx_bus_route_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 482 (class 1259 OID 19971)
--- Name: tdx_bus_route_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tdx_bus_route_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tdx_bus_route_ogc_fid_seq
@@ -2804,9 +3061,10 @@ CREATE SEQUENCE public.tdx_bus_route_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tdx_bus_route_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 483 (class 1259 OID 19972)
--- Name: tdx_bus_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tdx_bus_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tdx_bus_station_history_ogc_fid_seq
@@ -2817,9 +3075,10 @@ CREATE SEQUENCE public.tdx_bus_station_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tdx_bus_station_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 484 (class 1259 OID 19973)
--- Name: tdx_bus_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tdx_bus_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tdx_bus_station_ogc_fid_seq
@@ -2830,9 +3089,10 @@ CREATE SEQUENCE public.tdx_bus_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tdx_bus_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 485 (class 1259 OID 19974)
--- Name: tdx_metro_line_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tdx_metro_line_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tdx_metro_line_ogc_fid_seq
@@ -2843,9 +3103,10 @@ CREATE SEQUENCE public.tdx_metro_line_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tdx_metro_line_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 486 (class 1259 OID 19975)
--- Name: tdx_metro_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tdx_metro_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tdx_metro_station_ogc_fid_seq
@@ -2856,9 +3117,10 @@ CREATE SEQUENCE public.tdx_metro_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tdx_metro_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 487 (class 1259 OID 19976)
--- Name: tour_2023_lantern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tour_2023_lantern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tour_2023_lantern_festival_mapping_table_ogc_fid_seq
@@ -2869,9 +3131,10 @@ CREATE SEQUENCE public.tour_2023_lantern_festival_mapping_table_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tour_2023_lantern_festival_mapping_table_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 488 (class 1259 OID 19977)
--- Name: tour_2023_lantern_festival_zone_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tour_2023_lantern_festival_zone_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tour_2023_lantern_festival_zone_ogc_fid_seq
@@ -2882,9 +3145,10 @@ CREATE SEQUENCE public.tour_2023_lantern_festival_zone_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tour_2023_lantern_festival_zone_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 489 (class 1259 OID 19978)
--- Name: tour_2023_latern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tour_2023_latern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tour_2023_latern_festival_mapping_table_ogc_fid_seq
@@ -2895,9 +3159,10 @@ CREATE SEQUENCE public.tour_2023_latern_festival_mapping_table_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tour_2023_latern_festival_mapping_table_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 490 (class 1259 OID 19979)
--- Name: tour_2023_latern_festival_point_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tour_2023_latern_festival_point_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tour_2023_latern_festival_point_ogc_fid_seq
@@ -2908,9 +3173,10 @@ CREATE SEQUENCE public.tour_2023_latern_festival_point_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tour_2023_latern_festival_point_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 491 (class 1259 OID 19980)
--- Name: tour_lantern_festival_sysmemorialhall_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tour_lantern_festival_sysmemorialhall_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tour_lantern_festival_sysmemorialhall_ogc_fid_seq
@@ -2921,9 +3187,10 @@ CREATE SEQUENCE public.tour_lantern_festival_sysmemorialhall_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tour_lantern_festival_sysmemorialhall_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 492 (class 1259 OID 19981)
--- Name: tp_building_bim_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_building_bim_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_building_bim_ogc_fid_seq
@@ -2934,9 +3201,10 @@ CREATE SEQUENCE public.tp_building_bim_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_building_bim_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 493 (class 1259 OID 19982)
--- Name: tp_building_height_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_building_height_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_building_height_ogc_fid_seq
@@ -2947,9 +3215,10 @@ CREATE SEQUENCE public.tp_building_height_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_building_height_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 494 (class 1259 OID 19983)
--- Name: tp_cht_grid_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_cht_grid_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_cht_grid_ogc_fid_seq
@@ -2960,9 +3229,10 @@ CREATE SEQUENCE public.tp_cht_grid_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_cht_grid_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 495 (class 1259 OID 19984)
--- Name: tp_district_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_district_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_district_history_ogc_fid_seq
@@ -2973,9 +3243,10 @@ CREATE SEQUENCE public.tp_district_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_district_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 496 (class 1259 OID 19985)
--- Name: tp_fet_age_hr_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_fet_age_hr_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_fet_age_hr_ogc_fid_seq
@@ -2986,9 +3257,10 @@ CREATE SEQUENCE public.tp_fet_age_hr_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_fet_age_hr_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 497 (class 1259 OID 19986)
--- Name: tp_fet_hourly_popu_by_vil_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_fet_hourly_popu_by_vil_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_fet_hourly_popu_by_vil_ogc_fid_seq
@@ -2999,9 +3271,10 @@ CREATE SEQUENCE public.tp_fet_hourly_popu_by_vil_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_fet_hourly_popu_by_vil_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 498 (class 1259 OID 19987)
--- Name: tp_fet_work_live_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_fet_work_live_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_fet_work_live_ogc_fid_seq
@@ -3012,9 +3285,10 @@ CREATE SEQUENCE public.tp_fet_work_live_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_fet_work_live_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 499 (class 1259 OID 19988)
--- Name: tp_road_center_line_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_road_center_line_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_road_center_line_ogc_fid_seq
@@ -3025,9 +3299,10 @@ CREATE SEQUENCE public.tp_road_center_line_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_road_center_line_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 500 (class 1259 OID 19989)
--- Name: tp_village_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_village_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_village_history_ogc_fid_seq
@@ -3038,9 +3313,10 @@ CREATE SEQUENCE public.tp_village_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_village_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 501 (class 1259 OID 19990)
--- Name: tp_village_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tp_village_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tp_village_ogc_fid_seq
@@ -3051,9 +3327,10 @@ CREATE SEQUENCE public.tp_village_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tp_village_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 502 (class 1259 OID 19991)
--- Name: traffic_accident_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_accident_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_accident_location_ogc_fid_seq
@@ -3064,9 +3341,10 @@ CREATE SEQUENCE public.traffic_accident_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_accident_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 503 (class 1259 OID 19992)
--- Name: traffic_accident_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_accident_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_accident_ogc_fid_seq
@@ -3077,9 +3355,10 @@ CREATE SEQUENCE public.traffic_accident_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_accident_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 504 (class 1259 OID 19993)
--- Name: traffic_bus_route_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_bus_route_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_bus_route_history_ogc_fid_seq
@@ -3090,9 +3369,10 @@ CREATE SEQUENCE public.traffic_bus_route_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_bus_route_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 505 (class 1259 OID 19994)
--- Name: traffic_bus_route_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_bus_route_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_bus_route_ogc_fid_seq
@@ -3103,9 +3383,10 @@ CREATE SEQUENCE public.traffic_bus_route_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_bus_route_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 506 (class 1259 OID 19995)
--- Name: traffic_bus_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_bus_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_bus_station_history_ogc_fid_seq
@@ -3116,9 +3397,10 @@ CREATE SEQUENCE public.traffic_bus_station_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_bus_station_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 507 (class 1259 OID 19996)
--- Name: traffic_bus_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_bus_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_bus_station_ogc_fid_seq
@@ -3129,9 +3411,10 @@ CREATE SEQUENCE public.traffic_bus_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_bus_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 508 (class 1259 OID 19997)
--- Name: traffic_bus_stop_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_bus_stop_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_bus_stop_ogc_fid_seq
@@ -3142,9 +3425,10 @@ CREATE SEQUENCE public.traffic_bus_stop_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_bus_stop_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 509 (class 1259 OID 19998)
--- Name: traffic_info_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_info_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_info_histories_ogc_fid_seq
@@ -3155,9 +3439,10 @@ CREATE SEQUENCE public.traffic_info_histories_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_info_histories_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 510 (class 1259 OID 19999)
--- Name: traffic_lives_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_lives_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_lives_history_ogc_fid_seq
@@ -3168,9 +3453,10 @@ CREATE SEQUENCE public.traffic_lives_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_lives_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 511 (class 1259 OID 20000)
--- Name: traffic_lives_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_lives_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_lives_ogc_fid_seq
@@ -3181,9 +3467,10 @@ CREATE SEQUENCE public.traffic_lives_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_lives_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 512 (class 1259 OID 20001)
--- Name: traffic_metro_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_capacity_realtime_history_ogc_fid_seq
@@ -3194,9 +3481,10 @@ CREATE SEQUENCE public.traffic_metro_capacity_realtime_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_capacity_realtime_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 513 (class 1259 OID 20002)
--- Name: traffic_metro_capacity_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_capacity_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_capacity_realtime_ogc_fid_seq
@@ -3207,9 +3495,10 @@ CREATE SEQUENCE public.traffic_metro_capacity_realtime_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_capacity_realtime_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 514 (class 1259 OID 20003)
--- Name: traffic_metro_capacity_rtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_capacity_rtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_capacity_rtime_ogc_fid_seq
@@ -3220,9 +3509,10 @@ CREATE SEQUENCE public.traffic_metro_capacity_rtime_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_capacity_rtime_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 515 (class 1259 OID 20004)
--- Name: traffic_metro_line_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_line_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_line_history_ogc_fid_seq
@@ -3233,9 +3523,10 @@ CREATE SEQUENCE public.traffic_metro_line_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_line_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 516 (class 1259 OID 20005)
--- Name: traffic_metro_line_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_line_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_line_ogc_fid_seq
@@ -3246,9 +3537,10 @@ CREATE SEQUENCE public.traffic_metro_line_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_line_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 517 (class 1259 OID 20006)
--- Name: traffic_metro_realtime_position_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_realtime_position_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_realtime_position_history_ogc_fid_seq
@@ -3259,9 +3551,10 @@ CREATE SEQUENCE public.traffic_metro_realtime_position_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_realtime_position_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 518 (class 1259 OID 20007)
--- Name: traffic_metro_realtime_position_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_realtime_position_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_realtime_position_ogc_fid_seq
@@ -3272,9 +3565,10 @@ CREATE SEQUENCE public.traffic_metro_realtime_position_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_realtime_position_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 519 (class 1259 OID 20008)
--- Name: traffic_metro_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_station_history_ogc_fid_seq
@@ -3285,9 +3579,10 @@ CREATE SEQUENCE public.traffic_metro_station_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_station_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 520 (class 1259 OID 20009)
--- Name: traffic_metro_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_station_ogc_fid_seq
@@ -3298,9 +3593,10 @@ CREATE SEQUENCE public.traffic_metro_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 521 (class 1259 OID 20010)
--- Name: traffic_metro_unusual_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_unusual_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_unusual_history_ogc_fid_seq
@@ -3311,9 +3607,10 @@ CREATE SEQUENCE public.traffic_metro_unusual_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_unusual_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 522 (class 1259 OID 20011)
--- Name: traffic_metro_unusual_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_metro_unusual_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_metro_unusual_ogc_fid_seq
@@ -3324,9 +3621,10 @@ CREATE SEQUENCE public.traffic_metro_unusual_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_metro_unusual_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 523 (class 1259 OID 20012)
--- Name: traffic_todayworks_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_todayworks_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_todayworks_history_ogc_fid_seq
@@ -3337,9 +3635,10 @@ CREATE SEQUENCE public.traffic_todayworks_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_todayworks_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 524 (class 1259 OID 20013)
--- Name: traffic_youbike_one_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_youbike_one_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_youbike_one_realtime_history_ogc_fid_seq
@@ -3350,9 +3649,10 @@ CREATE SEQUENCE public.traffic_youbike_one_realtime_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_youbike_one_realtime_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 525 (class 1259 OID 20014)
--- Name: traffic_youbike_realtime_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_youbike_realtime_histories_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_youbike_realtime_histories_ogc_fid_seq
@@ -3363,9 +3663,10 @@ CREATE SEQUENCE public.traffic_youbike_realtime_histories_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_youbike_realtime_histories_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 526 (class 1259 OID 20015)
--- Name: traffic_youbike_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_youbike_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_youbike_station_ogc_fid_seq
@@ -3376,9 +3677,10 @@ CREATE SEQUENCE public.traffic_youbike_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_youbike_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 527 (class 1259 OID 20016)
--- Name: traffic_youbike_two_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: traffic_youbike_two_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.traffic_youbike_two_realtime_history_ogc_fid_seq
@@ -3389,9 +3691,37 @@ CREATE SEQUENCE public.traffic_youbike_two_realtime_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.traffic_youbike_two_realtime_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 528 (class 1259 OID 20017)
--- Name: tran_parking_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: trafficviolation; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.trafficviolation (
+    violation_id integer NOT NULL,
+    photo_id character varying(20),
+    location character varying(255),
+    longitude character varying(50),
+    latitude character varying(50),
+    violation_date date,
+    violation_time time without time zone,
+    device_id character varying(50),
+    speed_limit integer,
+    vehicle_speed integer,
+    license_plate character varying(20),
+    licensplatereplydate date,
+    licenseplatereplytime time without time zone,
+    owner_name character varying(50),
+    vehicletype character varying(50),
+    owner_address character varying(50),
+    vehiclestatuscode integer
+);
+
+
+ALTER TABLE public.trafficviolation OWNER TO postgres;
+
+--
+-- Name: tran_parking_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_parking_capacity_realtime_history_ogc_fid_seq
@@ -3402,9 +3732,10 @@ CREATE SEQUENCE public.tran_parking_capacity_realtime_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_parking_capacity_realtime_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 529 (class 1259 OID 20018)
--- Name: tran_parking_capacity_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_parking_capacity_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_parking_capacity_realtime_ogc_fid_seq
@@ -3415,9 +3746,10 @@ CREATE SEQUENCE public.tran_parking_capacity_realtime_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_parking_capacity_realtime_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 530 (class 1259 OID 20019)
--- Name: tran_parking_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_parking_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_parking_history_ogc_fid_seq
@@ -3428,9 +3760,10 @@ CREATE SEQUENCE public.tran_parking_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_parking_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 531 (class 1259 OID 20020)
--- Name: tran_parking_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_parking_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_parking_ogc_fid_seq
@@ -3441,9 +3774,10 @@ CREATE SEQUENCE public.tran_parking_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_parking_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 532 (class 1259 OID 20021)
--- Name: tran_ubike_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_ubike_realtime_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_ubike_realtime_history_ogc_fid_seq
@@ -3454,9 +3788,10 @@ CREATE SEQUENCE public.tran_ubike_realtime_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_ubike_realtime_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 533 (class 1259 OID 20022)
--- Name: tran_ubike_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_ubike_realtime_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_ubike_realtime_ogc_fid_seq
@@ -3467,9 +3802,10 @@ CREATE SEQUENCE public.tran_ubike_realtime_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_ubike_realtime_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 534 (class 1259 OID 20023)
--- Name: tran_ubike_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_ubike_station_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_ubike_station_history_ogc_fid_seq
@@ -3480,9 +3816,10 @@ CREATE SEQUENCE public.tran_ubike_station_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_ubike_station_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 535 (class 1259 OID 20024)
--- Name: tran_ubike_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_ubike_station_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_ubike_station_ogc_fid_seq
@@ -3493,9 +3830,10 @@ CREATE SEQUENCE public.tran_ubike_station_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_ubike_station_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 536 (class 1259 OID 20025)
--- Name: tran_urban_bike_path_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_urban_bike_path_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_urban_bike_path_history_ogc_fid_seq
@@ -3506,9 +3844,10 @@ CREATE SEQUENCE public.tran_urban_bike_path_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_urban_bike_path_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 537 (class 1259 OID 20026)
--- Name: tran_urban_bike_path_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tran_urban_bike_path_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tran_urban_bike_path_ogc_fid_seq
@@ -3519,9 +3858,10 @@ CREATE SEQUENCE public.tran_urban_bike_path_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tran_urban_bike_path_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 538 (class 1259 OID 20027)
--- Name: tw_village_center_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tw_village_center_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tw_village_center_ogc_fid_seq
@@ -3532,9 +3872,10 @@ CREATE SEQUENCE public.tw_village_center_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tw_village_center_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 539 (class 1259 OID 20028)
--- Name: tw_village_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: tw_village_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.tw_village_ogc_fid_seq
@@ -3545,9 +3886,10 @@ CREATE SEQUENCE public.tw_village_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.tw_village_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 540 (class 1259 OID 20029)
--- Name: work_eco_park_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_eco_park_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_eco_park_history_ogc_fid_seq
@@ -3558,9 +3900,10 @@ CREATE SEQUENCE public.work_eco_park_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_eco_park_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 541 (class 1259 OID 20030)
--- Name: work_eco_park_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_eco_park_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_eco_park_ogc_fid_seq
@@ -3571,9 +3914,10 @@ CREATE SEQUENCE public.work_eco_park_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_eco_park_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 542 (class 1259 OID 20031)
--- Name: work_floodgate_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_floodgate_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_floodgate_location_history_ogc_fid_seq
@@ -3584,9 +3928,10 @@ CREATE SEQUENCE public.work_floodgate_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_floodgate_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 543 (class 1259 OID 20032)
--- Name: work_floodgate_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_floodgate_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_floodgate_location_ogc_fid_seq
@@ -3597,9 +3942,10 @@ CREATE SEQUENCE public.work_floodgate_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_floodgate_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 544 (class 1259 OID 20033)
--- Name: work_garden_city_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_garden_city_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_garden_city_history_ogc_fid_seq
@@ -3610,9 +3956,10 @@ CREATE SEQUENCE public.work_garden_city_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_garden_city_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 545 (class 1259 OID 20034)
--- Name: work_garden_city_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_garden_city_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_garden_city_ogc_fid_seq
@@ -3623,9 +3970,10 @@ CREATE SEQUENCE public.work_garden_city_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_garden_city_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 546 (class 1259 OID 20035)
--- Name: work_goose_sanctuary_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_goose_sanctuary_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_goose_sanctuary_history_ogc_fid_seq
@@ -3636,9 +3984,10 @@ CREATE SEQUENCE public.work_goose_sanctuary_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_goose_sanctuary_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 547 (class 1259 OID 20036)
--- Name: work_goose_sanctuary_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_goose_sanctuary_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_goose_sanctuary_ogc_fid_seq
@@ -3649,9 +3998,10 @@ CREATE SEQUENCE public.work_goose_sanctuary_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_goose_sanctuary_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 548 (class 1259 OID 20037)
--- Name: work_nature_reserve_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_nature_reserve_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_nature_reserve_history_ogc_fid_seq
@@ -3662,9 +4012,10 @@ CREATE SEQUENCE public.work_nature_reserve_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_nature_reserve_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 549 (class 1259 OID 20038)
--- Name: work_nature_reserve_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_nature_reserve_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_nature_reserve_ogc_fid_seq
@@ -3675,9 +4026,10 @@ CREATE SEQUENCE public.work_nature_reserve_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_nature_reserve_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 550 (class 1259 OID 20039)
--- Name: work_park_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_park_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_park_history_ogc_fid_seq
@@ -3688,9 +4040,10 @@ CREATE SEQUENCE public.work_park_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_park_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 551 (class 1259 OID 20040)
--- Name: work_park_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_park_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_park_ogc_fid_seq
@@ -3701,9 +4054,10 @@ CREATE SEQUENCE public.work_park_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_park_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 552 (class 1259 OID 20041)
--- Name: work_pumping_station_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_pumping_station_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_pumping_station_location_history_ogc_fid_seq
@@ -3714,9 +4068,10 @@ CREATE SEQUENCE public.work_pumping_station_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_pumping_station_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 553 (class 1259 OID 20042)
--- Name: work_pumping_station_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_pumping_station_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_pumping_station_location_ogc_fid_seq
@@ -3727,9 +4082,10 @@ CREATE SEQUENCE public.work_pumping_station_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_pumping_station_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 554 (class 1259 OID 20043)
--- Name: work_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_rainfall_station_location_history_ogc_fid_seq
@@ -3740,9 +4096,10 @@ CREATE SEQUENCE public.work_rainfall_station_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_rainfall_station_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 555 (class 1259 OID 20044)
--- Name: work_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_rainfall_station_location_ogc_fid_seq
@@ -3753,9 +4110,10 @@ CREATE SEQUENCE public.work_rainfall_station_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_rainfall_station_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 556 (class 1259 OID 20045)
--- Name: work_riverside_bike_path_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_riverside_bike_path_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_riverside_bike_path_history_ogc_fid_seq
@@ -3766,9 +4124,10 @@ CREATE SEQUENCE public.work_riverside_bike_path_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_riverside_bike_path_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 557 (class 1259 OID 20046)
--- Name: work_riverside_bike_path_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_riverside_bike_path_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_riverside_bike_path_ogc_fid_seq
@@ -3779,9 +4138,10 @@ CREATE SEQUENCE public.work_riverside_bike_path_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_riverside_bike_path_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 558 (class 1259 OID 20047)
--- Name: work_riverside_park_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_riverside_park_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_riverside_park_history_ogc_fid_seq
@@ -3792,9 +4152,10 @@ CREATE SEQUENCE public.work_riverside_park_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_riverside_park_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 559 (class 1259 OID 20048)
--- Name: work_riverside_park_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_riverside_park_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_riverside_park_ogc_fid_seq
@@ -3805,9 +4166,10 @@ CREATE SEQUENCE public.work_riverside_park_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_riverside_park_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 560 (class 1259 OID 20049)
--- Name: work_school_greening_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_school_greening_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_school_greening_history_ogc_fid_seq
@@ -3818,9 +4180,10 @@ CREATE SEQUENCE public.work_school_greening_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_school_greening_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 561 (class 1259 OID 20050)
--- Name: work_school_greening_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_school_greening_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_school_greening_ogc_fid_seq
@@ -3831,9 +4194,10 @@ CREATE SEQUENCE public.work_school_greening_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_school_greening_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 562 (class 1259 OID 20051)
--- Name: work_sewer_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_sewer_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_sewer_location_history_ogc_fid_seq
@@ -3844,9 +4208,10 @@ CREATE SEQUENCE public.work_sewer_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_sewer_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 563 (class 1259 OID 20052)
--- Name: work_sewer_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_sewer_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_sewer_location_ogc_fid_seq
@@ -3857,9 +4222,10 @@ CREATE SEQUENCE public.work_sewer_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_sewer_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 564 (class 1259 OID 20053)
--- Name: work_sidewalk_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_sidewalk_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_sidewalk_history_ogc_fid_seq
@@ -3870,9 +4236,10 @@ CREATE SEQUENCE public.work_sidewalk_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_sidewalk_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 565 (class 1259 OID 20054)
--- Name: work_sidewalk_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_sidewalk_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_sidewalk_ogc_fid_seq
@@ -3883,9 +4250,10 @@ CREATE SEQUENCE public.work_sidewalk_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_sidewalk_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 566 (class 1259 OID 20055)
--- Name: work_soil_liquefaction_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_soil_liquefaction_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_soil_liquefaction_history_ogc_fid_seq
@@ -3896,9 +4264,10 @@ CREATE SEQUENCE public.work_soil_liquefaction_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_soil_liquefaction_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 567 (class 1259 OID 20056)
--- Name: work_soil_liquefaction_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_soil_liquefaction_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_soil_liquefaction_ogc_fid_seq
@@ -3909,9 +4278,10 @@ CREATE SEQUENCE public.work_soil_liquefaction_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_soil_liquefaction_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 568 (class 1259 OID 20057)
--- Name: work_street_light_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_street_light_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_street_light_history_ogc_fid_seq
@@ -3922,9 +4292,10 @@ CREATE SEQUENCE public.work_street_light_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_street_light_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 569 (class 1259 OID 20058)
--- Name: work_street_light_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_street_light_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_street_light_ogc_fid_seq
@@ -3935,9 +4306,10 @@ CREATE SEQUENCE public.work_street_light_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_street_light_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 570 (class 1259 OID 20059)
--- Name: work_street_tree_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_street_tree_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_street_tree_history_ogc_fid_seq
@@ -3948,9 +4320,10 @@ CREATE SEQUENCE public.work_street_tree_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_street_tree_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 571 (class 1259 OID 20060)
--- Name: work_street_tree_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_street_tree_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_street_tree_ogc_fid_seq
@@ -3961,9 +4334,10 @@ CREATE SEQUENCE public.work_street_tree_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_street_tree_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 572 (class 1259 OID 20061)
--- Name: work_underpass_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_underpass_location_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_underpass_location_history_ogc_fid_seq
@@ -3974,9 +4348,10 @@ CREATE SEQUENCE public.work_underpass_location_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_underpass_location_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 573 (class 1259 OID 20062)
--- Name: work_underpass_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_underpass_location_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_underpass_location_ogc_fid_seq
@@ -3987,9 +4362,10 @@ CREATE SEQUENCE public.work_underpass_location_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_underpass_location_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 574 (class 1259 OID 20063)
--- Name: work_urban_agricultural_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_urban_agricultural_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_urban_agricultural_history_ogc_fid_seq
@@ -4000,9 +4376,10 @@ CREATE SEQUENCE public.work_urban_agricultural_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_urban_agricultural_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 575 (class 1259 OID 20064)
--- Name: work_urban_agricultural_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_urban_agricultural_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_urban_agricultural_ogc_fid_seq
@@ -4013,9 +4390,10 @@ CREATE SEQUENCE public.work_urban_agricultural_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_urban_agricultural_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 576 (class 1259 OID 20065)
--- Name: work_urban_reserve_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_urban_reserve_history_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_urban_reserve_history_ogc_fid_seq
@@ -4026,9 +4404,10 @@ CREATE SEQUENCE public.work_urban_reserve_history_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_urban_reserve_history_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 577 (class 1259 OID 20066)
--- Name: work_urban_reserve_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: -
+-- Name: work_urban_reserve_ogc_fid_seq; Type: SEQUENCE; Schema: public; Owner: postgres
 --
 
 CREATE SEQUENCE public.work_urban_reserve_ogc_fid_seq
@@ -4039,10 +4418,10 @@ CREATE SEQUENCE public.work_urban_reserve_ogc_fid_seq
     CACHE 1;
 
 
+ALTER SEQUENCE public.work_urban_reserve_ogc_fid_seq OWNER TO postgres;
+
 --
--- TOC entry 5001 (class 0 OID 19740)
--- Dependencies: 292
--- Data for Name: app_calcu_monthly_socl_welfare_people_ppl; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: app_calcu_monthly_socl_welfare_people_ppl; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.app_calcu_monthly_socl_welfare_people_ppl (district, is_low_middle_income, is_disabled, is_disabled_allowance, is_low_income, _ctime, _mtime, ogc_fid) FROM stdin;
@@ -4062,9 +4441,7 @@ COPY public.app_calcu_monthly_socl_welfare_people_ppl (district, is_low_middle_i
 
 
 --
--- TOC entry 5034 (class 0 OID 19780)
--- Dependencies: 325
--- Data for Name: building_unsued_land; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: building_unsued_land; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.building_unsued_land (thekey, thename, thelink, aa48, aa49, aa10, aa21, aa22, kcnt, cada_text, aa17, aa16, aa46, "cadastral map_key_地籍圖key值", "10712土地_1_土地權屬情形", "10712土地_1_管理機關", area, _ctime, _mtime, ogc_fid) FROM stdin;
@@ -4167,9 +4544,7 @@ COPY public.building_unsued_land (thekey, thename, thelink, aa48, aa49, aa10, aa
 
 
 --
--- TOC entry 5038 (class 0 OID 19791)
--- Dependencies: 329
--- Data for Name: building_unsued_public; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: building_unsued_public; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.building_unsued_public (full_key, "建物管理機關", "行政區", "門牌", "建物標示", "建築完成日期", "閒置樓層_閒置樓層/該建物總樓層", "閒置面積㎡", "房屋現況", "原使用用途", "基地所有權人", "基地管理機關", "土地使用分區", "目前執行情形", _ctime, _mtime) FROM stdin;
@@ -4223,9 +4598,7 @@ COPY public.building_unsued_public (full_key, "建物管理機關", "行政區",
 
 
 --
--- TOC entry 5122 (class 0 OID 19881)
--- Dependencies: 413
--- Data for Name: patrol_criminal_case; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: patrol_criminal_case; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.patrol_criminal_case ("破獲件數/總計[件]", "破獲率[%]", "犯罪人口率[人/十萬人]", "嫌疑犯[人]", "發生件數[件]", "破獲件數/他轄[件]", "破獲件數/積案[件]", _id, "破獲件數/當期[件]", "發生率[件/十萬人]", "實際員警人數[人]", "年月別", _ctime, _mtime, ogc_fid) FROM stdin;
@@ -4253,9 +4626,7 @@ COPY public.patrol_criminal_case ("破獲件數/總計[件]", "破獲率[%]", "�
 
 
 --
--- TOC entry 5151 (class 0 OID 19917)
--- Dependencies: 442
--- Data for Name: patrol_rain_floodgate; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: patrol_rain_floodgate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.patrol_rain_floodgate (ogc_fid, station_no, station_name, rec_time, all_pumb_lights, pumb_num, door_num, river_basin, warning_level, start_pumping_level, lng, lat, _ctime, _mtime) FROM stdin;
@@ -4337,9 +4708,7 @@ COPY public.patrol_rain_floodgate (ogc_fid, station_no, station_name, rec_time, 
 
 
 --
--- TOC entry 5185 (class 0 OID 19958)
--- Dependencies: 476
--- Data for Name: socl_welfare_organization_plc; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: socl_welfare_organization_plc; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.socl_welfare_organization_plc (main_type, sub_type, name, address, lon, lat, _ctime, _mtime, ogc_fid) FROM stdin;
@@ -4927,9 +5296,7 @@ COPY public.socl_welfare_organization_plc (main_type, sub_type, name, address, l
 
 
 --
--- TOC entry 4777 (class 0 OID 18361)
--- Dependencies: 223
--- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
@@ -4937,9 +5304,146 @@ COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM
 
 
 --
--- TOC entry 4781 (class 0 OID 19307)
--- Dependencies: 234
--- Data for Name: geocode_settings; Type: TABLE DATA; Schema: tiger; Owner: -
+-- Data for Name: speed_camera; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.speed_camera ("設置縣市", "設置市區鄉鎮", "設置地址", "管轄警局", "管轄分局", "經度", "緯度", "拍攝方向", "速限") FROM stdin;
+臺北市	松山區	復興北路車行地下道南出口處	臺北市政府警察局	松山分局	121.54438	25.066849	往南	40
+臺北市	松山區	民生東路四段97巷口	臺北市政府警察局	松山分局	121.552055	25.05797	西向東	50
+臺北市	松山區	民權東路4段 民權公園前	臺北市政府警察局	松山分局	121.55749	25.06205	東西雙向	50
+臺北市	松山區	健康路300號	臺北市政府警察局	松山分局	121.5656	25.054245	往東	50
+臺北市	松山區	塔悠路近撫遠街261巷口	臺北市政府警察局	松山分局	121.568436	25.06195	往南	50
+臺北市	信義區	忠孝東路四段逸仙路口附近	臺北市政府警察局	信義分局	121.55998	25.04131	東西雙向	50
+臺北市	信義區	市民大道五段50號前	臺北市政府警察局	信義分局	121.56399	25.047602	往東	50
+臺北市	信義區	忠孝東路5段210號	臺北市政府警察局	信義分局	121.57064	25.04102	往東	50
+臺北市	大安區	和平東路一段國立師範大學前(西向東)	臺北市政府警察局	大安分局	121.52677	25.026665	往東	50
+臺北市	大安區	新生南路金華街(北向南)	臺北市政府警察局	大安分局	121.53368	25.030283	往南	50
+臺北市	大安區	新生南路三段58號台大側門	臺北市政府警察局	大安分局	121.53406	25.020033	往北	50
+臺北市	大安區	建國南路2段179號往北	臺北市政府警察局	大安分局	121.53691	25.048212	往北	50
+臺北市	大安區	建國高架道和平東路上方(北向南)	臺北市政府警察局	大安分局	121.53762	25.026205	往南	70
+臺北市	大安區	市民大道三段214號前(西向東)	臺北市政府警察局	大安分局	121.53994	25.044518	往東	40
+臺北市	大安區	基隆路 長興街	臺北市政府警察局	大安分局	121.54371	25.016603	往北	50
+臺北市	大安區	基隆高架道下敦化南路段(南向北)	臺北市政府警察局	大安分局	121.545944	25.018555	往北	60
+臺北市	大安區	辛亥路3段157巷	臺北市政府警察局	\N	121.54879	25.01714	往西	50
+臺北市	大安區	辛亥路三段157巷(下北二高)(東向西)	臺北市政府警察局	大安分局	121.54883	25.017244	往西	50
+臺北市	中山區	新生北路高架道民族東路入口(往南)	臺北市政府警察局	中山分局	121.5277	25.066557	往南	70
+臺北市	中山區	北安路 海軍司令部前	臺北市政府警察局	中山分局	121.53627	25.077879	往西	50
+臺北市	中山區	建國高架道長春路入口(北向南)	臺北市政府警察局	中山分局	121.53678	25.052633	往南	70
+臺北市	中山區	明水路325號	臺北市政府警察局	中山分局	121.540924	25.077658	東西雙向	50
+臺北市	中山區	復興北路(車行地下道北出口處)	臺北市政府警察局	中山分局	121.54434	25.071774	往北	40
+臺北市	中山區	樂群一路(基湖路口西往東天橋下(金泰公園))	臺北市政府警察局	中山分局	121.566376	25.076668	往東	50
+臺北市	中正區	中華路1段53號前（南向北）	臺北市政府警察局	中正一局	121.50858	25.043074	往北	50
+臺北市	中正區	重慶南路3段27巷口(往北)	臺北市政府警察局	中正二局	121.515686	25.028524	南北雙向	50
+臺北市	中正區	市民大道高架 京站百貨前	臺北市政府警察局	中正一局	121.51977	25.048206	往東	80
+臺北市	中正區	水源快速道路同安街口（快車道）	臺北市政府警察局	中正第二分局	121.52033	25.020802	往北	60
+臺北市	中正區	仁愛路臨沂街口(東向西)	臺北市政府警察局	中正一局	121.53017	25.038351	往西	50
+臺北市	中正區	水源快道路往南(景福匝道口)	臺北市政府警察局	中正第二分局	121.53528	24.999609	往南	60
+臺北市	大同區	環河北路近敦煌路(北向南)	臺北市政府警察局	大同分局	121.50822	25.079073	往南	60
+臺北市	大同區	承德路3段 敦煌路	臺北市政府警察局	大同分局	121.51978	25.074602	南北雙向	50
+臺北市	大同區	承德路4段 通河街	臺北市政府警察局	大同分局	121.52216	25.080551	南北雙向	50
+臺北市	萬華區	萬板大橋台北端引道(往台北市)	臺北市政府警察局	萬華分局	121.48961	25.03056	往市區	50
+臺北市	萬華區	艋舺大道297號台糖公司前(東向西)	臺北市政府警察局	萬華分局	121.49679	25.033098	往西	50
+臺北市	萬華區	萬大路華中橋頭(南北雙向)	臺北市政府警察局	萬華分局	121.49712	25.019234	南北雙向	50
+臺北市	萬華區	環河南路1段77號對面(北向南)	臺北市政府警察局	萬華分局	121.50114	25.044512	往南	50
+臺北市	萬華區	水源路205號前(東向西)	臺北市政府警察局	萬華分局	121.50312	25.01948	往西	60
+臺北市	文山區	羅斯福路5段240號(往南)	臺北市政府警察局	文山二局	121.53909	25.001425	往南	50
+臺北市	文山區	羅斯福路6段226號(往南)	臺北市政府警察局	文山二局	121.54062	24.992655	往南	50
+臺北市	文山區	辛亥路6段 懷恩隧道出口	臺北市政府警察局	文山一局	121.551506	24.99144	往南	50
+臺北市	文山區	辛亥路4段辛亥隧道出口(往南)	臺北市政府警察局	文山二局	121.557304	25.009743	往南	50
+臺北市	文山區	信義快速道路(北往南文山隧道出口處)	臺北市政府警察局	文山一局	121.581245	25.008957	往南	70
+臺北市	文山區	木柵路五段(西向東) 100之3號	臺北市政府警察局	文山一局	121.59344	24.9989	往東	50
+臺北市	南港區	市民大道七段與忠孝東路六段159巷口	臺北市政府警察局	南港分局	121.58609	25.050062	往東	50
+臺北市	南港區	市民大道7段 近昆陽街口	臺北市政府警察局	南港分局	121.59186	25.050976	往西	50
+臺北市	南港區	忠孝東路七段511號	臺北市政府警察局	南港分局	121.61159	25.052607	往東	50
+臺北市	南港區	市民大道8段與東南街口(東往西)	臺北市政府警察局	南港分局	121.61222	25.05411	往西	50
+臺北市	南港區	市民大道8段 500號	臺北市政府警察局	南港分局	121.613174	25.053974	往東	50
+臺北市	南港區	三重路19-5號前(北向南)	臺北市政府警察局	南港分局	121.614105	25.057318	往南	50
+臺北市	內湖區	承德路四段320號（福港街口）	臺北市政府警察局	內湖分局	121.51826	25.089705	北往南	50
+臺北市	內湖區	內湖路1段324號	臺北市政府警察局	內湖分局	121.56998	25.08173	往東	50
+臺北市	內湖區	行善路233號	臺北市政府警察局	內湖分局	121.58296	25.060823	往東	50
+臺北市	內湖區	環東大道(南京東路6段368巷口上方)	臺北市政府警察局	內湖分局	121.586334	25.059874	往西	80
+臺北市	內湖區	成功路2段373號	臺北市政府警察局	內湖分局	121.59	25.074547	往北	50
+臺北市	內湖區	金湖路200號前	臺北市政府警察局	內湖分局	121.60028	25.077787	往北	50
+臺北市	內湖區	成功路5段152巷口	臺北市政府警察局	內湖分局	121.604034	25.083036	往東	50
+臺北市	內湖區	民權東路六段423巷口(東向西)	臺北市政府警察局	內湖分局	121.60418	25.071262	往西	50
+臺北市	士林區	環河北路3段葫蘆街口	臺北市政府警察局	士林分局	121.50743	25.082521	往北	50
+臺北市	士林區	承德路四段百齡高中前(南向北)	臺北市政府警察局	士林分局	121.52306	25.08667	往北	50
+臺北市	士林區	仰德大道2段29巷	臺北市政府警察局	士林分局	121.54252	25.104025	往下山方向	40
+臺北市	士林區	仰德大道2段115巷口	臺北市政府警察局	士林分局	121.546036	25.10817	下山	40
+臺北市	士林區	仰德大道四段75號前(下山方向)	臺北市政府警察局	士林分局	121.54652	25.132162	下山	40
+臺北市	北投區	學園路 台北藝術大學門口	臺北市政府警察局	北投分局	121.46587	25.130178	下山方向	30
+臺北市	北投區	大度路往台北方向	臺北市政府警察局	北投分局	121.47776	25.122429	往南	70
+臺北市	北投區	大度路往淡水方向	臺北市政府警察局	北投分局	121.480316	25.122408	往北	70
+臺北市	北投區	大業路412號前	臺北市政府警察局	北投分局	121.49684	25.13034	往北	60
+臺北市	北投區	洲美快速道路(南向避車彎處)	臺北市政府警察局	北投分局	121.49871	25.107931	往南	80
+臺北市	北投區	洲美快速道路(北向避車彎處)	臺北市政府警察局	北投分局	121.49899	25.106007	往北	80
+臺北市	北投區	立賢路101號	臺北市政府警察局	北投分局	121.50257	25.114443	往北	50
+臺北市	北投區	承德路6段	臺北市政府警察局	北投分局	121.51186	25.104881	往南	60
+臺北市	北投區	承德路6段	臺北市政府警察局	北投分局	121.51211	25.103973	往北	60
+臺北市	北投區	陽金公路53號燈桿後方竹子湖路2-2號對面	臺北市政府警察局	北投分局	121.543755	25.164951	往市區	40
+\.
+
+
+--
+-- Data for Name: trafficviolation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.trafficviolation (violation_id, photo_id, location, longitude, latitude, violation_date, violation_time, device_id, speed_limit, vehicle_speed, license_plate, licensplatereplydate, licenseplatereplytime, owner_name, vehicletype, owner_address, vehiclestatuscode) FROM stdin;
+1	P12345	大安區	121.5433	25.0277	2025-01-01	08:30:00	D001	50	65	ABC-1234	2025-01-02	09:00:00	張三	轎車	台北市信義路101號	1
+2	P12346	中正區	121.5079	25.0320	2025-01-01	09:00:00	D002	50	60	XYZ-5678	2025-01-02	09:30:00	李四	SUV	台北市和平東路202號	1
+3	P12347	松山區	121.5932	25.0575	2025-01-01	10:15:00	D003	40	55	LMN-2345	2025-01-02	10:00:00	王五	摩托車	台北市忠孝東路303號	1
+4	P12348	士林區	121.5212	25.0971	2025-01-01	11:00:00	D004	60	80	OPQ-6789	2025-01-02	11:00:00	赵六	貨車	台北市中山北路404號	1
+5	P12349	內湖區	121.6071	25.0799	2025-01-01	12:00:00	D005	50	75	JKL-9876	2025-01-02	12:30:00	林七	轎車	台北市內湖路505號	1
+6	P12350	南港區	121.6100	25.0332	2025-01-01	13:30:00	D006	50	70	DEF-2345	2025-01-02	13:00:00	周八	貨車	台北市南港路606號	1
+7	P12351	北投區	121.4820	25.1372	2025-01-01	14:00:00	D007	40	50	GHI-5678	2025-01-02	14:00:00	錢九	摩托車	台北市北投路707號	1
+8	P12352	文山區	121.5613	24.9901	2025-01-01	15:30:00	D008	60	85	JKL-8765	2025-01-02	15:30:00	孫十	轎車	台北市文山路808號	1
+9	P12353	信義區	121.5650	25.0338	2025-01-01	16:00:00	D009	50	65	XYZ-1234	2025-01-02	16:30:00	周十一	轎車	台北市信義路909號	1
+10	P12354	大安區	121.5433	25.0277	2025-01-01	17:00:00	D010	50	60	ABC-2345	2025-01-02	17:30:00	李十二	SUV	台北市大安路1010號	1
+11	P12355	中正區	121.5079	25.0320	2025-01-01	18:00:00	D011	40	55	DEF-3456	2025-01-02	18:00:00	張十三	摩托車	台北市中正路1111號	1
+12	P12356	松山區	121.5932	25.0575	2025-01-01	19:00:00	D012	60	75	LMN-4567	2025-01-02	19:00:00	王十四	貨車	台北市松山路1212號	1
+13	P12357	士林區	121.5212	25.0971	2025-01-01	20:00:00	D013	50	60	OPQ-5678	2025-01-02	20:30:00	赵十五	轎車	台北市士林路1313號	1
+14	P12358	內湖區	121.6071	25.0799	2025-01-01	21:00:00	D014	50	70	JKL-6789	2025-01-02	21:00:00	林十六	SUV	台北市內湖路1414號	1
+15	P12359	南港區	121.6100	25.0332	2025-01-01	22:00:00	D015	40	55	DEF-7890	2025-01-02	22:30:00	周十七	摩托車	台北市南港路1515號	1
+16	P12360	北投區	121.4820	25.1372	2025-01-01	23:00:00	D016	60	80	GHI-8901	2025-01-02	23:00:00	錢十八	貨車	台北市北投路1616號	1
+17	P12361	文山區	121.5613	24.9901	2025-01-02	00:30:00	D017	50	65	JKL-9012	2025-01-02	00:30:00	孫十九	轎車	台北市文山路1717號	1
+18	P12362	信義區	121.5650	25.0338	2025-01-02	01:00:00	D018	50	60	XYZ-0123	2025-01-02	01:30:00	周二十	SUV	台北市信義路1818號	1
+19	P12363	大安區	121.5433	25.0277	2025-01-02	02:00:00	D019	50	65	ABC-1234	2025-01-02	02:30:00	李二十	摩托車	台北市大安路1919號	1
+20	P12364	中正區	121.5079	25.0320	2025-01-02	03:00:00	D020	40	50	XYZ-3456	2025-01-02	03:30:00	張二十	轎車	台北市中正路2020號	1
+21	P12365	大安區	121.5433	25.0277	2025-01-02	04:00:00	D021	50	60	ABC-2345	2025-01-02	04:30:00	張三	轎車	台北市信義路101號	1
+22	P12366	中正區	121.5079	25.0320	2025-01-02	05:00:00	D022	50	65	XYZ-5678	2025-01-02	05:30:00	李四	SUV	台北市和平東路202號	1
+23	P12367	松山區	121.5932	25.0575	2025-01-02	06:00:00	D023	40	50	LMN-2345	2025-01-02	06:30:00	王五	摩托車	台北市忠孝東路303號	1
+24	P12368	士林區	121.5212	25.0971	2025-01-02	07:00:00	D024	60	75	OPQ-6789	2025-01-02	07:30:00	赵六	貨車	台北市中山北路404號	1
+25	P12369	內湖區	121.6071	25.0799	2025-01-02	08:00:00	D025	50	70	JKL-9876	2025-01-02	08:30:00	林七	轎車	台北市內湖路505號	1
+26	P12370	南港區	121.6100	25.0332	2025-01-02	09:00:00	D026	50	65	DEF-2345	2025-01-02	09:30:00	周八	貨車	台北市南港路606號	1
+27	P12371	北投區	121.4820	25.1372	2025-01-02	10:00:00	D027	40	55	GHI-5678	2025-01-02	10:30:00	錢九	摩托車	台北市北投路707號	1
+28	P12372	文山區	121.5613	24.9901	2025-01-02	11:00:00	D028	60	85	JKL-8765	2025-01-02	11:30:00	孫十	轎車	台北市文山路808號	1
+29	P12373	信義區	121.5650	25.0338	2025-01-02	12:00:00	D029	50	60	XYZ-1234	2025-01-02	12:30:00	周十一	轎車	台北市信義路909號	1
+30	P12374	大安區	121.5433	25.0277	2025-01-02	13:00:00	D030	50	65	ABC-2345	2025-01-02	13:30:00	李十二	SUV	台北市大安路1010號	1
+31	P12375	中正區	121.5079	25.0320	2025-01-02	14:00:00	D031	40	50	DEF-3456	2025-01-02	14:30:00	張十三	摩托車	台北市中正路1111號	1
+32	P12376	松山區	121.5932	25.0575	2025-01-02	15:00:00	D032	60	75	LMN-4567	2025-01-02	15:30:00	王十四	貨車	台北市松山路1212號	1
+33	P12377	士林區	121.5212	25.0971	2025-01-02	16:00:00	D033	50	60	OPQ-5678	2025-01-02	16:30:00	赵十五	轎車	台北市士林路1313號	1
+34	P12378	內湖區	121.6071	25.0799	2025-01-02	17:00:00	D034	50	70	JKL-6789	2025-01-02	17:30:00	林十六	SUV	台北市內湖路1414號	1
+35	P12379	南港區	121.6100	25.0332	2025-01-02	18:00:00	D035	40	55	DEF-7890	2025-01-02	18:30:00	周十七	摩托車	台北市南港路1515號	1
+36	P12380	北投區	121.4820	25.1372	2025-01-02	19:00:00	D036	60	80	GHI-8901	2025-01-02	19:30:00	錢十八	貨車	台北市北投路1616號	1
+37	P12381	文山區	121.5613	24.9901	2025-01-02	20:00:00	D037	50	65	JKL-9012	2025-01-02	20:30:00	孫十九	轎車	台北市文山路1717號	1
+38	P12382	信義區	121.5650	25.0338	2025-01-02	21:00:00	D038	50	60	XYZ-0123	2025-01-02	21:30:00	周二十	SUV	台北市信義路1818號	1
+39	P12383	大安區	121.5433	25.0277	2025-01-02	22:00:00	D039	50	65	ABC-1234	2025-01-02	22:30:00	李二十	摩托車	台北市大安路1919號	1
+40	P12384	中正區	121.5079	25.0320	2025-01-02	23:00:00	D040	40	50	XYZ-3456	2025-01-02	23:30:00	張二十	轎車	台北市中正路2020號	1
+41	P12385	松山區	121.5932	25.0575	2025-01-03	00:00:00	D041	60	75	LMN-2345	2025-01-03	00:30:00	王二十	貨車	台北市松山路2121號	1
+42	P12386	士林區	121.5212	25.0971	2025-01-03	01:00:00	D042	50	60	OPQ-6789	2025-01-03	01:30:00	赵二十	轎車	台北市士林路2222號	1
+43	P12387	內湖區	121.6071	25.0799	2025-01-03	02:00:00	D043	50	70	JKL-9876	2025-01-03	02:30:00	林二十	SUV	台北市內湖路2323號	1
+44	P12388	南港區	121.6100	25.0332	2025-01-03	03:00:00	D044	40	55	DEF-2345	2025-01-03	03:30:00	周二十	摩托車	台北市南港路2424號	1
+45	P12389	北投區	121.4820	25.1372	2025-01-03	04:00:00	D045	60	80	GHI-3456	2025-01-03	04:30:00	錢二十	貨車	台北市北投路2525號	1
+46	P12390	文山區	121.5613	24.9901	2025-01-03	05:00:00	D046	50	65	JKL-4567	2025-01-03	05:30:00	孫二十	轎車	台北市文山路2626號	1
+47	P12391	信義區	121.5650	25.0338	2025-01-03	06:00:00	D047	50	60	XYZ-5678	2025-01-03	06:30:00	周二十	轎車	台北市信義路2727號	1
+48	P12392	大安區	121.5433	25.0277	2025-01-03	07:00:00	D048	50	65	ABC-6789	2025-01-03	07:30:00	李二十	SUV	台北市大安路2828號	1
+49	P12393	中正區	121.5079	25.0320	2025-01-03	08:00:00	D049	40	55	XYZ-6789	2025-01-03	08:30:00	張二十	摩托車	台北市中正路2929號	1
+50	P12394	松山區	121.5932	25.0575	2025-01-03	09:00:00	D050	60	75	LMN-7890	2025-01-03	09:30:00	王二十	貨車	台北市松山路3030號	1
+\.
+
+
+--
+-- Data for Name: geocode_settings; Type: TABLE DATA; Schema: tiger; Owner: postgres
 --
 
 COPY tiger.geocode_settings (name, setting, unit, category, short_desc) FROM stdin;
@@ -4947,9 +5451,7 @@ COPY tiger.geocode_settings (name, setting, unit, category, short_desc) FROM std
 
 
 --
--- TOC entry 4782 (class 0 OID 19639)
--- Dependencies: 279
--- Data for Name: pagc_gaz; Type: TABLE DATA; Schema: tiger; Owner: -
+-- Data for Name: pagc_gaz; Type: TABLE DATA; Schema: tiger; Owner: postgres
 --
 
 COPY tiger.pagc_gaz (id, seq, word, stdword, token, is_custom) FROM stdin;
@@ -4957,9 +5459,7 @@ COPY tiger.pagc_gaz (id, seq, word, stdword, token, is_custom) FROM stdin;
 
 
 --
--- TOC entry 4783 (class 0 OID 19649)
--- Dependencies: 281
--- Data for Name: pagc_lex; Type: TABLE DATA; Schema: tiger; Owner: -
+-- Data for Name: pagc_lex; Type: TABLE DATA; Schema: tiger; Owner: postgres
 --
 
 COPY tiger.pagc_lex (id, seq, word, stdword, token, is_custom) FROM stdin;
@@ -4967,9 +5467,7 @@ COPY tiger.pagc_lex (id, seq, word, stdword, token, is_custom) FROM stdin;
 
 
 --
--- TOC entry 4784 (class 0 OID 19659)
--- Dependencies: 283
--- Data for Name: pagc_rules; Type: TABLE DATA; Schema: tiger; Owner: -
+-- Data for Name: pagc_rules; Type: TABLE DATA; Schema: tiger; Owner: postgres
 --
 
 COPY tiger.pagc_rules (id, rule, is_custom) FROM stdin;
@@ -4977,9 +5475,7 @@ COPY tiger.pagc_rules (id, rule, is_custom) FROM stdin;
 
 
 --
--- TOC entry 4779 (class 0 OID 19124)
--- Dependencies: 228
--- Data for Name: topology; Type: TABLE DATA; Schema: topology; Owner: -
+-- Data for Name: topology; Type: TABLE DATA; Schema: topology; Owner: postgres
 --
 
 COPY topology.topology (id, name, srid, "precision", hasz) FROM stdin;
@@ -4987,9 +5483,7 @@ COPY topology.topology (id, name, srid, "precision", hasz) FROM stdin;
 
 
 --
--- TOC entry 4780 (class 0 OID 19136)
--- Dependencies: 229
--- Data for Name: layer; Type: TABLE DATA; Schema: topology; Owner: -
+-- Data for Name: layer; Type: TABLE DATA; Schema: topology; Owner: postgres
 --
 
 COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_column, feature_type, level, child_id) FROM stdin;
@@ -4997,2609 +5491,2030 @@ COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_col
 
 
 --
--- TOC entry 5292 (class 0 OID 0)
--- Dependencies: 284
--- Name:  building_publand_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name:  building_publand_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public." building_publand_ogc_fid_seq"', 1, true);
 
 
 --
--- TOC entry 5293 (class 0 OID 0)
--- Dependencies: 285
--- Name: SOCL_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: SOCL_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."SOCL_export_filter_ppl_ogc_fid_seq"', 1, true);
 
 
 --
--- TOC entry 5294 (class 0 OID 0)
--- Dependencies: 286
--- Name: app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_daily_sentiment_voice1999_109_ogc_fid_seq', 67090, true);
 
 
 --
--- TOC entry 5295 (class 0 OID 0)
--- Dependencies: 287
--- Name: app_calcu_hour_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_hour_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_hour_traffic_info_histories_ogc_fid_seq', 15701, true);
 
 
 --
--- TOC entry 5296 (class 0 OID 0)
--- Dependencies: 288
--- Name: app_calcu_hour_traffic_youbike_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_hour_traffic_youbike_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_hour_traffic_youbike_ogc_fid_seq', 22724, true);
 
 
 --
--- TOC entry 5297 (class 0 OID 0)
--- Dependencies: 289
--- Name: app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_hourly_it_5g_smart_all_pole_device_log_dev13_seq', 4172815, true);
 
 
 --
--- TOC entry 5298 (class 0 OID 0)
--- Dependencies: 290
--- Name: app_calcu_month_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_month_traffic_info_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_month_traffic_info_histories_ogc_fid_seq', 1128, true);
 
 
 --
--- TOC entry 5299 (class 0 OID 0)
--- Dependencies: 291
--- Name: app_calcu_monthly_socl_welfare_people_ppl_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_monthly_socl_welfare_people_ppl_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_monthly_socl_welfare_people_ppl_seq', 247, true);
 
 
 --
--- TOC entry 5300 (class 0 OID 0)
--- Dependencies: 293
--- Name: app_calcu_patrol_rainfall_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_patrol_rainfall_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_patrol_rainfall_ogc_fid_seq', 612676, true);
 
 
 --
--- TOC entry 5301 (class 0 OID 0)
--- Dependencies: 294
--- Name: app_calcu_sentiment_dispatch_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_sentiment_dispatch_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_sentiment_dispatch_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5302 (class 0 OID 0)
--- Dependencies: 295
--- Name: app_calcu_traffic_todaywork_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_traffic_todaywork_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_traffic_todaywork_ogc_fid_seq', 4690, true);
 
 
 --
--- TOC entry 5303 (class 0 OID 0)
--- Dependencies: 296
--- Name: app_calcu_weekly_dispatching_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_weekly_dispatching_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_weekly_dispatching_ogc_fid_seq', 8615, true);
 
 
 --
--- TOC entry 5304 (class 0 OID 0)
--- Dependencies: 297
--- Name: app_calcu_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_weekly_hellotaipei_ogc_fid_seq', 35582, true);
 
 
 --
--- TOC entry 5305 (class 0 OID 0)
--- Dependencies: 298
--- Name: app_calcu_weekly_metro_capacity_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_weekly_metro_capacity_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_weekly_metro_capacity_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5306 (class 0 OID 0)
--- Dependencies: 299
--- Name: app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcu_weekly_metro_capacity_threshould_ogc_fid_seq', 1937419, true);
 
 
 --
--- TOC entry 5307 (class 0 OID 0)
--- Dependencies: 300
--- Name: app_calcul_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_calcul_weekly_hellotaipei_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_calcul_weekly_hellotaipei_ogc_fid_seq', 50276, true);
 
 
 --
--- TOC entry 5308 (class 0 OID 0)
--- Dependencies: 301
--- Name: app_traffic_lives_accident_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_traffic_lives_accident_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_traffic_lives_accident_ogc_fid_seq', 223, true);
 
 
 --
--- TOC entry 5309 (class 0 OID 0)
--- Dependencies: 302
--- Name: app_traffic_metro_capacity_realtime_stat_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: app_traffic_metro_capacity_realtime_stat_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.app_traffic_metro_capacity_realtime_stat_ogc_fid_seq', 391928384, true);
 
 
 --
--- TOC entry 5310 (class 0 OID 0)
--- Dependencies: 303
--- Name: building_age_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_age_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_age_ogc_fid_seq', 258569, true);
 
 
 --
--- TOC entry 5311 (class 0 OID 0)
--- Dependencies: 304
--- Name: building_cadastralmap_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_cadastralmap_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_cadastralmap_ogc_fid_seq', 3438485, true);
 
 
 --
--- TOC entry 5312 (class 0 OID 0)
--- Dependencies: 305
--- Name: building_landuse_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_landuse_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_landuse_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5313 (class 0 OID 0)
--- Dependencies: 306
--- Name: building_license_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_license_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_license_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5314 (class 0 OID 0)
--- Dependencies: 307
--- Name: building_license_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_license_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_license_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5315 (class 0 OID 0)
--- Dependencies: 308
--- Name: building_permit_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_permit_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_permit_history_ogc_fid_seq', 14018365, true);
 
 
 --
--- TOC entry 5316 (class 0 OID 0)
--- Dependencies: 309
--- Name: building_permit_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_permit_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_permit_ogc_fid_seq', 869836, true);
 
 
 --
--- TOC entry 5317 (class 0 OID 0)
--- Dependencies: 310
--- Name: building_publand_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_publand_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_publand_history_ogc_fid_seq', 1259841, true);
 
 
 --
--- TOC entry 5318 (class 0 OID 0)
--- Dependencies: 311
--- Name: building_publand_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_publand_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_publand_ogc_fid_seq', 31804304, true);
 
 
 --
--- TOC entry 5319 (class 0 OID 0)
--- Dependencies: 312
--- Name: building_renewarea_10_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewarea_10_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewarea_10_history_ogc_fid_seq', 136717, true);
 
 
 --
--- TOC entry 5320 (class 0 OID 0)
--- Dependencies: 313
--- Name: building_renewarea_10_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewarea_10_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewarea_10_ogc_fid_seq', 131927, true);
 
 
 --
--- TOC entry 5321 (class 0 OID 0)
--- Dependencies: 314
--- Name: building_renewarea_40_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewarea_40_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewarea_40_history_ogc_fid_seq', 33825, true);
 
 
 --
--- TOC entry 5322 (class 0 OID 0)
--- Dependencies: 315
--- Name: building_renewarea_40_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewarea_40_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewarea_40_ogc_fid_seq', 33105, true);
 
 
 --
--- TOC entry 5323 (class 0 OID 0)
--- Dependencies: 316
--- Name: building_renewunit_12_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewunit_12_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewunit_12_history_ogc_fid_seq', 407217, true);
 
 
 --
--- TOC entry 5324 (class 0 OID 0)
--- Dependencies: 317
--- Name: building_renewunit_12_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewunit_12_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewunit_12_ogc_fid_seq', 392433, true);
 
 
 --
--- TOC entry 5325 (class 0 OID 0)
--- Dependencies: 318
--- Name: building_renewunit_20_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewunit_20_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewunit_20_history_ogc_fid_seq', 16936, true);
 
 
 --
--- TOC entry 5326 (class 0 OID 0)
--- Dependencies: 319
--- Name: building_renewunit_20_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewunit_20_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewunit_20_ogc_fid_seq', 4088, true);
 
 
 --
--- TOC entry 5327 (class 0 OID 0)
--- Dependencies: 320
--- Name: building_renewunit_30_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewunit_30_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewunit_30_history_ogc_fid_seq', 51238740, true);
 
 
 --
--- TOC entry 5328 (class 0 OID 0)
--- Dependencies: 321
--- Name: building_renewunit_30_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_renewunit_30_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_renewunit_30_ogc_fid_seq', 51190290, true);
 
 
 --
--- TOC entry 5329 (class 0 OID 0)
--- Dependencies: 322
--- Name: building_social_house_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_social_house_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_social_house_history_ogc_fid_seq', 46646, true);
 
 
 --
--- TOC entry 5330 (class 0 OID 0)
--- Dependencies: 323
--- Name: building_social_house_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_social_house_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_social_house_ogc_fid_seq', 41822, true);
 
 
 --
--- TOC entry 5331 (class 0 OID 0)
--- Dependencies: 326
--- Name: building_unsued_land_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_unsued_land_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_unsued_land_history_ogc_fid_seq', 19384, true);
 
 
 --
--- TOC entry 5332 (class 0 OID 0)
--- Dependencies: 324
--- Name: building_unsued_land_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_unsued_land_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_unsued_land_ogc_fid_seq', 19429, true);
 
 
 --
--- TOC entry 5333 (class 0 OID 0)
--- Dependencies: 327
--- Name: building_unsued_nonpublic_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_unsued_nonpublic_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_unsued_nonpublic_history_ogc_fid_seq', 2464, true);
 
 
 --
--- TOC entry 5334 (class 0 OID 0)
--- Dependencies: 328
--- Name: building_unsued_nonpublic_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_unsued_nonpublic_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_unsued_nonpublic_ogc_fid_seq', 2452, true);
 
 
 --
--- TOC entry 5335 (class 0 OID 0)
--- Dependencies: 330
--- Name: building_unsued_public_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_unsued_public_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_unsued_public_history_ogc_fid_seq', 20418, true);
 
 
 --
--- TOC entry 5336 (class 0 OID 0)
--- Dependencies: 331
--- Name: building_unsued_public_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: building_unsued_public_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.building_unsued_public_ogc_fid_seq', 19, true);
 
 
 --
--- TOC entry 5337 (class 0 OID 0)
--- Dependencies: 332
--- Name: cvil_public_opinion_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cvil_public_opinion_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cvil_public_opinion_evn_ogc_fid_seq', 8501, true);
 
 
 --
--- TOC entry 5338 (class 0 OID 0)
--- Dependencies: 333
--- Name: cvil_public_opinion_maintype_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cvil_public_opinion_maintype_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cvil_public_opinion_maintype_ogc_fid_seq', 8, true);
 
 
 --
--- TOC entry 5339 (class 0 OID 0)
--- Dependencies: 334
--- Name: cvil_public_opinion_subtype_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cvil_public_opinion_subtype_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cvil_public_opinion_subtype_ogc_fid_seq', 41, true);
 
 
 --
--- TOC entry 5340 (class 0 OID 0)
--- Dependencies: 335
--- Name: cwb_city_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_city_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_city_weather_forecast_history_ogc_fid_seq', 234168, true);
 
 
 --
--- TOC entry 5341 (class 0 OID 0)
--- Dependencies: 336
--- Name: cwb_city_weather_forecast_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_city_weather_forecast_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_city_weather_forecast_ogc_fid_seq', 234168, true);
 
 
 --
--- TOC entry 5342 (class 0 OID 0)
--- Dependencies: 337
--- Name: cwb_daily_weather_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_daily_weather_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_daily_weather_ogc_fid_seq', 653280, true);
 
 
 --
--- TOC entry 5343 (class 0 OID 0)
--- Dependencies: 338
--- Name: cwb_hourly_weather_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_hourly_weather_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_hourly_weather_ogc_fid_seq', 15256546, true);
 
 
 --
--- TOC entry 5344 (class 0 OID 0)
--- Dependencies: 339
--- Name: cwb_now_weather_auto_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_now_weather_auto_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_now_weather_auto_station_history_ogc_fid_seq', 2533563, true);
 
 
 --
--- TOC entry 5345 (class 0 OID 0)
--- Dependencies: 340
--- Name: cwb_now_weather_auto_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_now_weather_auto_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_now_weather_auto_station_ogc_fid_seq', 2533563, true);
 
 
 --
--- TOC entry 5346 (class 0 OID 0)
--- Dependencies: 341
--- Name: cwb_now_weather_bureau_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_now_weather_bureau_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_now_weather_bureau_station_history_ogc_fid_seq', 1387607, true);
 
 
 --
--- TOC entry 5347 (class 0 OID 0)
--- Dependencies: 342
--- Name: cwb_now_weather_bureau_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_now_weather_bureau_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_now_weather_bureau_station_ogc_fid_seq', 1387607, true);
 
 
 --
--- TOC entry 5348 (class 0 OID 0)
--- Dependencies: 343
--- Name: cwb_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_rainfall_station_location_history_ogc_fid_seq', 25222, true);
 
 
 --
--- TOC entry 5349 (class 0 OID 0)
--- Dependencies: 344
--- Name: cwb_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_rainfall_station_location_ogc_fid_seq', 25222, true);
 
 
 --
--- TOC entry 5350 (class 0 OID 0)
--- Dependencies: 345
--- Name: cwb_town_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_town_weather_forecast_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_town_weather_forecast_history_ogc_fid_seq', 258050, true);
 
 
 --
--- TOC entry 5351 (class 0 OID 0)
--- Dependencies: 346
--- Name: cwb_town_weather_forecast_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: cwb_town_weather_forecast_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.cwb_town_weather_forecast_ogc_fid_seq', 241344, true);
 
 
 --
--- TOC entry 5352 (class 0 OID 0)
--- Dependencies: 347
--- Name: edu_elementary_school_district_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_elementary_school_district_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_elementary_school_district_history_ogc_fid_seq', 1584, true);
 
 
 --
--- TOC entry 5353 (class 0 OID 0)
--- Dependencies: 348
--- Name: edu_elementary_school_district_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_elementary_school_district_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_elementary_school_district_ogc_fid_seq', 1584, true);
 
 
 --
--- TOC entry 5354 (class 0 OID 0)
--- Dependencies: 349
--- Name: edu_eleschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_eleschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_eleschool_dist_by_administrative_history_ogc_fid_seq', 6147, true);
 
 
 --
--- TOC entry 5355 (class 0 OID 0)
--- Dependencies: 350
--- Name: edu_eleschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_eleschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_eleschool_dist_by_administrative_ogc_fid_seq', 6147, true);
 
 
 --
--- TOC entry 5356 (class 0 OID 0)
--- Dependencies: 351
--- Name: edu_jhschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_jhschool_dist_by_administrative_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_jhschool_dist_by_administrative_history_ogc_fid_seq', 5380, true);
 
 
 --
--- TOC entry 5357 (class 0 OID 0)
--- Dependencies: 352
--- Name: edu_jhschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_jhschool_dist_by_administrative_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_jhschool_dist_by_administrative_ogc_fid_seq', 5380, true);
 
 
 --
--- TOC entry 5358 (class 0 OID 0)
--- Dependencies: 353
--- Name: edu_junior_high_school_district_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_junior_high_school_district_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_junior_high_school_district_history_ogc_fid_seq', 891, true);
 
 
 --
--- TOC entry 5359 (class 0 OID 0)
--- Dependencies: 354
--- Name: edu_junior_high_school_district_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_junior_high_school_district_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_junior_high_school_district_ogc_fid_seq', 891, true);
 
 
 --
--- TOC entry 5360 (class 0 OID 0)
--- Dependencies: 355
--- Name: edu_school_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_school_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_school_history_ogc_fid_seq', 5704, true);
 
 
 --
--- TOC entry 5361 (class 0 OID 0)
--- Dependencies: 356
--- Name: edu_school_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_school_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_school_ogc_fid_seq', 5704, true);
 
 
 --
--- TOC entry 5362 (class 0 OID 0)
--- Dependencies: 357
--- Name: edu_school_romm_status_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_school_romm_status_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_school_romm_status_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5363 (class 0 OID 0)
--- Dependencies: 358
--- Name: edu_school_romm_status_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: edu_school_romm_status_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.edu_school_romm_status_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5364 (class 0 OID 0)
--- Dependencies: 359
--- Name: eoc_accommodate_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: eoc_accommodate_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.eoc_accommodate_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5365 (class 0 OID 0)
--- Dependencies: 360
--- Name: eoc_accommodate_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: eoc_accommodate_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.eoc_accommodate_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5366 (class 0 OID 0)
--- Dependencies: 361
--- Name: eoc_disaster_case_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: eoc_disaster_case_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.eoc_disaster_case_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5367 (class 0 OID 0)
--- Dependencies: 362
--- Name: eoc_disaster_case_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: eoc_disaster_case_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.eoc_disaster_case_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5368 (class 0 OID 0)
--- Dependencies: 363
--- Name: eoc_leave_house_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: eoc_leave_house_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.eoc_leave_house_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5369 (class 0 OID 0)
--- Dependencies: 364
--- Name: eoc_leave_house_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: eoc_leave_house_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.eoc_leave_house_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5370 (class 0 OID 0)
--- Dependencies: 365
--- Name: ethc_building_check_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: ethc_building_check_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.ethc_building_check_ogc_fid_seq', 25135, true);
 
 
 --
--- TOC entry 5371 (class 0 OID 0)
--- Dependencies: 366
--- Name: ethc_check_calcu_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: ethc_check_calcu_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.ethc_check_calcu_ogc_fid_seq', 9685, true);
 
 
 --
--- TOC entry 5372 (class 0 OID 0)
--- Dependencies: 367
--- Name: ethc_check_summary_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: ethc_check_summary_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.ethc_check_summary_ogc_fid_seq', 651, true);
 
 
 --
--- TOC entry 5373 (class 0 OID 0)
--- Dependencies: 368
--- Name: ethc_fire_check_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: ethc_fire_check_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.ethc_fire_check_ogc_fid_seq', 9385, true);
 
 
 --
--- TOC entry 5374 (class 0 OID 0)
--- Dependencies: 369
--- Name: fire_hydrant_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: fire_hydrant_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.fire_hydrant_location_history_ogc_fid_seq', 29966, true);
 
 
 --
--- TOC entry 5375 (class 0 OID 0)
--- Dependencies: 370
--- Name: fire_hydrant_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: fire_hydrant_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.fire_hydrant_location_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5376 (class 0 OID 0)
--- Dependencies: 371
--- Name: fire_to_hospital_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: fire_to_hospital_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.fire_to_hospital_ppl_ogc_fid_seq', 2519111, true);
 
 
 --
--- TOC entry 5377 (class 0 OID 0)
--- Dependencies: 372
--- Name: heal_aed_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: heal_aed_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.heal_aed_history_ogc_fid_seq', 25751, true);
 
 
 --
--- TOC entry 5378 (class 0 OID 0)
--- Dependencies: 373
--- Name: heal_aed_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: heal_aed_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.heal_aed_ogc_fid_seq', 25751, true);
 
 
 --
--- TOC entry 5379 (class 0 OID 0)
--- Dependencies: 374
--- Name: heal_clinic_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: heal_clinic_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.heal_clinic_history_ogc_fid_seq', 39851, true);
 
 
 --
--- TOC entry 5380 (class 0 OID 0)
--- Dependencies: 375
--- Name: heal_clinic_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: heal_clinic_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.heal_clinic_ogc_fid_seq', 39851, true);
 
 
 --
--- TOC entry 5381 (class 0 OID 0)
--- Dependencies: 376
--- Name: heal_hospital_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: heal_hospital_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.heal_hospital_history_ogc_fid_seq', 380, true);
 
 
 --
--- TOC entry 5382 (class 0 OID 0)
--- Dependencies: 377
--- Name: heal_hospital_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: heal_hospital_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.heal_hospital_ogc_fid_seq', 380, true);
 
 
 --
--- TOC entry 5383 (class 0 OID 0)
--- Dependencies: 378
--- Name: heal_suicide_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: heal_suicide_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.heal_suicide_evn_ogc_fid_seq', 7091, true);
 
 
 --
--- TOC entry 5384 (class 0 OID 0)
--- Dependencies: 379
--- Name: it_5G_smart_pole_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_5G_smart_pole_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public."it_5G_smart_pole_ogc_fid_seq"', 1, true);
 
 
 --
--- TOC entry 5385 (class 0 OID 0)
--- Dependencies: 380
--- Name: it_5g_smart_all_pole_device_log_history_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_device_log_history_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_5g_smart_all_pole_device_log_history_seq', 6783542, true);
 
 
 --
--- TOC entry 5386 (class 0 OID 0)
--- Dependencies: 381
--- Name: it_5g_smart_all_pole_device_log_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_device_log_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_5g_smart_all_pole_device_log_ogc_fid_seq', 9384108, true);
 
 
 --
--- TOC entry 5387 (class 0 OID 0)
--- Dependencies: 382
--- Name: it_5g_smart_all_pole_log_history_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_log_history_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_5g_smart_all_pole_log_history_seq', 644, true);
 
 
 --
--- TOC entry 5388 (class 0 OID 0)
--- Dependencies: 383
--- Name: it_5g_smart_all_pole_log_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_5g_smart_all_pole_log_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_5g_smart_all_pole_log_seq', 644, true);
 
 
 --
--- TOC entry 5389 (class 0 OID 0)
--- Dependencies: 384
--- Name: it_5g_smart_pole_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_5g_smart_pole_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_5g_smart_pole_ogc_fid_seq', 6893026, true);
 
 
 --
--- TOC entry 5390 (class 0 OID 0)
--- Dependencies: 385
--- Name: it_signal_population_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_signal_population_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_signal_population_history_ogc_fid_seq', 6078536, true);
 
 
 --
--- TOC entry 5391 (class 0 OID 0)
--- Dependencies: 386
--- Name: it_signal_population_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_signal_population_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_signal_population_ogc_fid_seq', 6078536, true);
 
 
 --
--- TOC entry 5392 (class 0 OID 0)
--- Dependencies: 387
--- Name: it_signal_tourist_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_signal_tourist_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_signal_tourist_history_ogc_fid_seq', 16738, true);
 
 
 --
--- TOC entry 5393 (class 0 OID 0)
--- Dependencies: 388
--- Name: it_signal_tourist_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_signal_tourist_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_signal_tourist_ogc_fid_seq', 16720, true);
 
 
 --
--- TOC entry 5394 (class 0 OID 0)
--- Dependencies: 389
--- Name: it_taipeiexpo_people_flow_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_taipeiexpo_people_flow_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_taipeiexpo_people_flow_history_ogc_fid_seq', 4314, true);
 
 
 --
--- TOC entry 5395 (class 0 OID 0)
--- Dependencies: 390
--- Name: it_taipeiexpo_people_flow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_taipeiexpo_people_flow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_taipeiexpo_people_flow_ogc_fid_seq', 4314, true);
 
 
 --
--- TOC entry 5396 (class 0 OID 0)
--- Dependencies: 391
--- Name: it_tpe_ticket_event_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpe_ticket_event_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpe_ticket_event_ogc_fid_seq', 26437, true);
 
 
 --
--- TOC entry 5397 (class 0 OID 0)
--- Dependencies: 392
--- Name: it_tpe_ticket_member_hold_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpe_ticket_member_hold_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpe_ticket_member_hold_ogc_fid_seq', 110050, true);
 
 
 --
--- TOC entry 5398 (class 0 OID 0)
--- Dependencies: 393
--- Name: it_tpe_ticket_place_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpe_ticket_place_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpe_ticket_place_ogc_fid_seq', 10702, true);
 
 
 --
--- TOC entry 5399 (class 0 OID 0)
--- Dependencies: 394
--- Name: it_tpe_ticket_ticket_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpe_ticket_ticket_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpe_ticket_ticket_ogc_fid_seq', 12670, true);
 
 
 --
--- TOC entry 5400 (class 0 OID 0)
--- Dependencies: 395
--- Name: it_tpefree_daily_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpefree_daily_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpefree_daily_history_ogc_fid_seq', 6478334, true);
 
 
 --
--- TOC entry 5401 (class 0 OID 0)
--- Dependencies: 396
--- Name: it_tpefree_daily_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpefree_daily_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpefree_daily_ogc_fid_seq', 100814877, true);
 
 
 --
--- TOC entry 5402 (class 0 OID 0)
--- Dependencies: 397
--- Name: it_tpefree_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpefree_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpefree_location_history_ogc_fid_seq', 3802, true);
 
 
 --
--- TOC entry 5403 (class 0 OID 0)
--- Dependencies: 398
--- Name: it_tpefree_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpefree_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpefree_location_ogc_fid_seq', 4142, true);
 
 
 --
--- TOC entry 5404 (class 0 OID 0)
--- Dependencies: 399
--- Name: it_tpefree_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpefree_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpefree_realtime_history_ogc_fid_seq', 50558539, true);
 
 
 --
--- TOC entry 5405 (class 0 OID 0)
--- Dependencies: 400
--- Name: it_tpefree_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpefree_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpefree_realtime_ogc_fid_seq', 92942265, true);
 
 
 --
--- TOC entry 5406 (class 0 OID 0)
--- Dependencies: 401
--- Name: it_tpmo_poc_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpmo_poc_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpmo_poc_location_history_ogc_fid_seq', 31968, true);
 
 
 --
--- TOC entry 5407 (class 0 OID 0)
--- Dependencies: 402
--- Name: it_tpmo_poc_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_tpmo_poc_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_tpmo_poc_location_ogc_fid_seq', 31968, true);
 
 
 --
--- TOC entry 5408 (class 0 OID 0)
--- Dependencies: 403
--- Name: it_venue_people_flow_history_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_venue_people_flow_history_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_venue_people_flow_history_seq', 647366, true);
 
 
 --
--- TOC entry 5409 (class 0 OID 0)
--- Dependencies: 404
--- Name: it_venue_people_flow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: it_venue_people_flow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.it_venue_people_flow_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5410 (class 0 OID 0)
--- Dependencies: 405
--- Name: mrtp_carweight_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: mrtp_carweight_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.mrtp_carweight_history_ogc_fid_seq', 7475523, true);
 
 
 --
--- TOC entry 5411 (class 0 OID 0)
--- Dependencies: 406
--- Name: mrtp_carweight_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: mrtp_carweight_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.mrtp_carweight_ogc_fid_seq', 7475523, true);
 
 
 --
--- TOC entry 5412 (class 0 OID 0)
--- Dependencies: 407
--- Name: patrol_artificial_slope_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_artificial_slope_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_artificial_slope_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5413 (class 0 OID 0)
--- Dependencies: 408
--- Name: patrol_artificial_slope_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_artificial_slope_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_artificial_slope_ogc_fid_seq', 383867, true);
 
 
 --
--- TOC entry 5414 (class 0 OID 0)
--- Dependencies: 409
--- Name: patrol_box_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_box_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_box_ogc_fid_seq', 18491, true);
 
 
 --
--- TOC entry 5415 (class 0 OID 0)
--- Dependencies: 410
--- Name: patrol_camera_hls_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_camera_hls_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_camera_hls_ogc_fid_seq', 1717, true);
 
 
 --
--- TOC entry 5416 (class 0 OID 0)
--- Dependencies: 411
--- Name: patrol_car_theft_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_car_theft_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_car_theft_ogc_fid_seq', 518, true);
 
 
 --
--- TOC entry 5417 (class 0 OID 0)
--- Dependencies: 412
--- Name: patrol_criminal_case_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_criminal_case_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_criminal_case_ogc_fid_seq', 30376, true);
 
 
 --
--- TOC entry 5418 (class 0 OID 0)
--- Dependencies: 414
--- Name: patrol_debris_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_debris_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_debris_history_ogc_fid_seq', 24204, true);
 
 
 --
--- TOC entry 5419 (class 0 OID 0)
--- Dependencies: 415
--- Name: patrol_debris_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_debris_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_debris_ogc_fid_seq', 1726, true);
 
 
 --
--- TOC entry 5420 (class 0 OID 0)
--- Dependencies: 416
--- Name: patrol_debrisarea_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_debrisarea_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_debrisarea_history_ogc_fid_seq', 20521, true);
 
 
 --
--- TOC entry 5421 (class 0 OID 0)
--- Dependencies: 417
--- Name: patrol_debrisarea_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_debrisarea_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_debrisarea_ogc_fid_seq', 22384, true);
 
 
 --
--- TOC entry 5422 (class 0 OID 0)
--- Dependencies: 418
--- Name: patrol_designate_place_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_designate_place_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_designate_place_history_ogc_fid_seq', 103170, true);
 
 
 --
--- TOC entry 5423 (class 0 OID 0)
--- Dependencies: 419
--- Name: patrol_designate_place_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_designate_place_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_designate_place_ogc_fid_seq', 103748, true);
 
 
 --
--- TOC entry 5424 (class 0 OID 0)
--- Dependencies: 420
--- Name: patrol_district_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_district_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_district_ogc_fid_seq', 90, true);
 
 
 --
--- TOC entry 5425 (class 0 OID 0)
--- Dependencies: 421
--- Name: patrol_eoc_case_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_eoc_case_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_eoc_case_history_ogc_fid_seq', 10132, true);
 
 
 --
--- TOC entry 5426 (class 0 OID 0)
--- Dependencies: 422
--- Name: patrol_eoc_case_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_eoc_case_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_eoc_case_ogc_fid_seq', 9321, true);
 
 
 --
--- TOC entry 5427 (class 0 OID 0)
--- Dependencies: 423
--- Name: patrol_eoc_designate_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_eoc_designate_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_eoc_designate_history_ogc_fid_seq', 1066, true);
 
 
 --
--- TOC entry 5428 (class 0 OID 0)
--- Dependencies: 424
--- Name: patrol_eoc_designate_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_eoc_designate_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_eoc_designate_ogc_fid_seq', 1066, true);
 
 
 --
--- TOC entry 5429 (class 0 OID 0)
--- Dependencies: 425
--- Name: patrol_fire_brigade_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_fire_brigade_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_fire_brigade_history_ogc_fid_seq', 19090, true);
 
 
 --
--- TOC entry 5430 (class 0 OID 0)
--- Dependencies: 426
--- Name: patrol_fire_brigade_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_fire_brigade_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_fire_brigade_ogc_fid_seq', 19136, true);
 
 
 --
--- TOC entry 5431 (class 0 OID 0)
--- Dependencies: 427
--- Name: patrol_fire_disqualified_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_fire_disqualified_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_fire_disqualified_history_ogc_fid_seq', 7815, true);
 
 
 --
--- TOC entry 5432 (class 0 OID 0)
--- Dependencies: 428
--- Name: patrol_fire_disqualified_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_fire_disqualified_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_fire_disqualified_ogc_fid_seq', 7778, true);
 
 
 --
--- TOC entry 5433 (class 0 OID 0)
--- Dependencies: 429
--- Name: patrol_fire_rescure_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_fire_rescure_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_fire_rescure_history_ogc_fid_seq', 416367, true);
 
 
 --
--- TOC entry 5434 (class 0 OID 0)
--- Dependencies: 430
--- Name: patrol_fire_rescure_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_fire_rescure_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_fire_rescure_ogc_fid_seq', 415225, true);
 
 
 --
--- TOC entry 5435 (class 0 OID 0)
--- Dependencies: 431
--- Name: patrol_flood_100_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_flood_100_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_flood_100_ogc_fid_seq', 3, true);
 
 
 --
--- TOC entry 5436 (class 0 OID 0)
--- Dependencies: 432
--- Name: patrol_flood_130_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_flood_130_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_flood_130_ogc_fid_seq', 3, true);
 
 
 --
--- TOC entry 5437 (class 0 OID 0)
--- Dependencies: 433
--- Name: patrol_flood_78_8_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_flood_78_8_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_flood_78_8_ogc_fid_seq', 3, true);
 
 
 --
--- TOC entry 5438 (class 0 OID 0)
--- Dependencies: 434
--- Name: patrol_motorcycle_theft_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_motorcycle_theft_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_motorcycle_theft_ogc_fid_seq', 702, true);
 
 
 --
--- TOC entry 5439 (class 0 OID 0)
--- Dependencies: 435
--- Name: patrol_old_settlement_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_old_settlement_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_old_settlement_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5440 (class 0 OID 0)
--- Dependencies: 436
--- Name: patrol_old_settlement_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_old_settlement_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_old_settlement_ogc_fid_seq', 340, true);
 
 
 --
--- TOC entry 5441 (class 0 OID 0)
--- Dependencies: 437
--- Name: patrol_police_region_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_police_region_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_police_region_ogc_fid_seq', 90, true);
 
 
 --
--- TOC entry 5442 (class 0 OID 0)
--- Dependencies: 438
--- Name: patrol_police_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_police_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_police_station_history_ogc_fid_seq', 15488, true);
 
 
 --
--- TOC entry 5443 (class 0 OID 0)
--- Dependencies: 439
--- Name: patrol_police_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_police_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_police_station_ogc_fid_seq', 215783, true);
 
 
 --
--- TOC entry 5444 (class 0 OID 0)
--- Dependencies: 440
--- Name: patrol_police_station_ogc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_police_station_ogc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_police_station_ogc_id_seq', 1, true);
 
 
 --
--- TOC entry 5445 (class 0 OID 0)
--- Dependencies: 443
--- Name: patrol_rain_floodgate_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_rain_floodgate_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_rain_floodgate_history_ogc_fid_seq', 3784767, true);
 
 
 --
--- TOC entry 5446 (class 0 OID 0)
--- Dependencies: 441
--- Name: patrol_rain_floodgate_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_rain_floodgate_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_rain_floodgate_ogc_fid_seq', 3776990, true);
 
 
 --
--- TOC entry 5447 (class 0 OID 0)
--- Dependencies: 444
--- Name: patrol_rain_rainfall_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_rain_rainfall_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_rain_rainfall_history_ogc_fid_seq', 15653401, true);
 
 
 --
--- TOC entry 5448 (class 0 OID 0)
--- Dependencies: 445
--- Name: patrol_rain_rainfall_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_rain_rainfall_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_rain_rainfall_ogc_fid_seq', 13849310, true);
 
 
 --
--- TOC entry 5449 (class 0 OID 0)
--- Dependencies: 446
--- Name: patrol_rain_sewer_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_rain_sewer_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_rain_sewer_history_ogc_fid_seq', 8206620, true);
 
 
 --
--- TOC entry 5450 (class 0 OID 0)
--- Dependencies: 447
--- Name: patrol_rain_sewer_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_rain_sewer_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_rain_sewer_ogc_fid_seq', 7905081, true);
 
 
 --
--- TOC entry 5451 (class 0 OID 0)
--- Dependencies: 448
--- Name: patrol_rain_sewer_ogc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_rain_sewer_ogc_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_rain_sewer_ogc_id_seq', 1, true);
 
 
 --
--- TOC entry 5452 (class 0 OID 0)
--- Dependencies: 449
--- Name: patrol_random_robber_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_random_robber_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_random_robber_ogc_fid_seq', 20, true);
 
 
 --
--- TOC entry 5453 (class 0 OID 0)
--- Dependencies: 450
--- Name: patrol_random_snatch_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_random_snatch_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_random_snatch_ogc_fid_seq', 31, true);
 
 
 --
--- TOC entry 5454 (class 0 OID 0)
--- Dependencies: 451
--- Name: patrol_residential_burglary_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: patrol_residential_burglary_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.patrol_residential_burglary_ogc_fid_seq', 3231, true);
 
 
 --
--- TOC entry 5455 (class 0 OID 0)
--- Dependencies: 452
--- Name: poli_traffic_violation_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: poli_traffic_violation_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.poli_traffic_violation_evn_ogc_fid_seq', 1331036, true);
 
 
 --
--- TOC entry 5456 (class 0 OID 0)
--- Dependencies: 453
--- Name: poli_traffic_violation_mapping_code_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: poli_traffic_violation_mapping_code_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.poli_traffic_violation_mapping_code_ogc_fid_seq', 6, true);
 
 
 --
--- TOC entry 5457 (class 0 OID 0)
--- Dependencies: 454
--- Name: record_db_mtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: record_db_mtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.record_db_mtime_ogc_fid_seq', 227, true);
 
 
 --
--- TOC entry 5458 (class 0 OID 0)
--- Dependencies: 455
--- Name: sentiment_councillor_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: sentiment_councillor_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.sentiment_councillor_109_ogc_fid_seq', 8645017, true);
 
 
 --
--- TOC entry 5459 (class 0 OID 0)
--- Dependencies: 456
--- Name: sentiment_dispatching_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: sentiment_dispatching_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.sentiment_dispatching_ogc_fid_seq', 2354258, true);
 
 
 --
--- TOC entry 5460 (class 0 OID 0)
--- Dependencies: 457
--- Name: sentiment_hello_taipei_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: sentiment_hello_taipei_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.sentiment_hello_taipei_109_ogc_fid_seq', 841010535, true);
 
 
 --
--- TOC entry 5461 (class 0 OID 0)
--- Dependencies: 458
--- Name: sentiment_hello_taipei_109_test_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: sentiment_hello_taipei_109_test_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.sentiment_hello_taipei_109_test_ogc_fid_seq', 9601315, true);
 
 
 --
--- TOC entry 5462 (class 0 OID 0)
--- Dependencies: 459
--- Name: sentiment_hotnews_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: sentiment_hotnews_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.sentiment_hotnews_ogc_fid_seq', 2147485712, true);
 
 
 --
--- TOC entry 5463 (class 0 OID 0)
--- Dependencies: 460
--- Name: sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: sentiment_voice1999_109_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.sentiment_voice1999_109_ogc_fid_seq', 38542042, true);
 
 
 --
--- TOC entry 5464 (class 0 OID 0)
--- Dependencies: 461
--- Name: socl_case_study_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_case_study_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_case_study_ppl_ogc_fid_seq', 210, true);
 
 
 --
--- TOC entry 5465 (class 0 OID 0)
--- Dependencies: 462
--- Name: socl_dept_epidemic_info_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_dept_epidemic_info_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_dept_epidemic_info_ogc_fid_seq', 15600, true);
 
 
 --
--- TOC entry 5466 (class 0 OID 0)
--- Dependencies: 463
--- Name: socl_domestic_violence_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_domestic_violence_evn_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_domestic_violence_evn_ogc_fid_seq', 28494, true);
 
 
 --
--- TOC entry 5467 (class 0 OID 0)
--- Dependencies: 464
--- Name: socl_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_export_filter_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_export_filter_ppl_ogc_fid_seq', 1186, true);
 
 
 --
--- TOC entry 5468 (class 0 OID 0)
--- Dependencies: 465
--- Name: socl_order_concern_mapping_code_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_order_concern_mapping_code_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_order_concern_mapping_code_ogc_fid_seq', 42, true);
 
 
 --
--- TOC entry 5469 (class 0 OID 0)
--- Dependencies: 466
--- Name: socl_order_concern_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_order_concern_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_order_concern_ppl_ogc_fid_seq', 270588, true);
 
 
 --
--- TOC entry 5470 (class 0 OID 0)
--- Dependencies: 467
--- Name: socl_welfare_dis_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_dis_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_dis_history_ogc_fid_seq', 2232259, true);
 
 
 --
--- TOC entry 5471 (class 0 OID 0)
--- Dependencies: 468
--- Name: socl_welfare_dis_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_dis_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_dis_ogc_fid_seq', 9490987, true);
 
 
 --
--- TOC entry 5472 (class 0 OID 0)
--- Dependencies: 469
--- Name: socl_welfare_dislow_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_dislow_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_dislow_history_ogc_fid_seq', 90324, true);
 
 
 --
--- TOC entry 5473 (class 0 OID 0)
--- Dependencies: 470
--- Name: socl_welfare_dislow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_dislow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_dislow_ogc_fid_seq', 158138, true);
 
 
 --
--- TOC entry 5474 (class 0 OID 0)
--- Dependencies: 471
--- Name: socl_welfare_low_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_low_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_low_history_ogc_fid_seq', 711436, true);
 
 
 --
--- TOC entry 5475 (class 0 OID 0)
--- Dependencies: 472
--- Name: socl_welfare_low_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_low_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_low_ogc_fid_seq', 1254473, true);
 
 
 --
--- TOC entry 5476 (class 0 OID 0)
--- Dependencies: 473
--- Name: socl_welfare_midlow_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_midlow_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_midlow_history_ogc_fid_seq', 248365, true);
 
 
 --
--- TOC entry 5477 (class 0 OID 0)
--- Dependencies: 474
--- Name: socl_welfare_midlow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_midlow_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_midlow_ogc_fid_seq', 432236, true);
 
 
 --
--- TOC entry 5478 (class 0 OID 0)
--- Dependencies: 477
--- Name: socl_welfare_organization_plc_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_organization_plc_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_organization_plc_history_ogc_fid_seq', 15277, true);
 
 
 --
--- TOC entry 5479 (class 0 OID 0)
--- Dependencies: 475
--- Name: socl_welfare_organization_plc_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_organization_plc_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_organization_plc_ogc_fid_seq', 11588, true);
 
 
 --
--- TOC entry 5480 (class 0 OID 0)
--- Dependencies: 478
--- Name: socl_welfare_people_ppl_history_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_people_ppl_history_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_people_ppl_history_seq', 2906301, true);
 
 
 --
--- TOC entry 5481 (class 0 OID 0)
--- Dependencies: 479
--- Name: socl_welfare_people_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: socl_welfare_people_ppl_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.socl_welfare_people_ppl_ogc_fid_seq', 3626525, true);
 
 
 --
--- TOC entry 5482 (class 0 OID 0)
--- Dependencies: 480
--- Name: tdx_bus_live_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tdx_bus_live_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tdx_bus_live_ogc_fid_seq', 413748703, true);
 
 
 --
--- TOC entry 5483 (class 0 OID 0)
--- Dependencies: 481
--- Name: tdx_bus_route_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tdx_bus_route_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tdx_bus_route_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5484 (class 0 OID 0)
--- Dependencies: 482
--- Name: tdx_bus_route_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tdx_bus_route_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tdx_bus_route_ogc_fid_seq', 764, true);
 
 
 --
--- TOC entry 5485 (class 0 OID 0)
--- Dependencies: 483
--- Name: tdx_bus_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tdx_bus_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tdx_bus_station_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5486 (class 0 OID 0)
--- Dependencies: 484
--- Name: tdx_bus_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tdx_bus_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tdx_bus_station_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5487 (class 0 OID 0)
--- Dependencies: 485
--- Name: tdx_metro_line_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tdx_metro_line_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tdx_metro_line_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5488 (class 0 OID 0)
--- Dependencies: 486
--- Name: tdx_metro_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tdx_metro_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tdx_metro_station_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5489 (class 0 OID 0)
--- Dependencies: 487
--- Name: tour_2023_lantern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tour_2023_lantern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tour_2023_lantern_festival_mapping_table_ogc_fid_seq', 9873, true);
 
 
 --
--- TOC entry 5490 (class 0 OID 0)
--- Dependencies: 488
--- Name: tour_2023_lantern_festival_zone_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tour_2023_lantern_festival_zone_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tour_2023_lantern_festival_zone_ogc_fid_seq', 1289, true);
 
 
 --
--- TOC entry 5491 (class 0 OID 0)
--- Dependencies: 489
--- Name: tour_2023_latern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tour_2023_latern_festival_mapping_table_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tour_2023_latern_festival_mapping_table_ogc_fid_seq', 1036, true);
 
 
 --
--- TOC entry 5492 (class 0 OID 0)
--- Dependencies: 490
--- Name: tour_2023_latern_festival_point_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tour_2023_latern_festival_point_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tour_2023_latern_festival_point_ogc_fid_seq', 463, true);
 
 
 --
--- TOC entry 5493 (class 0 OID 0)
--- Dependencies: 491
--- Name: tour_lantern_festival_sysmemorialhall_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tour_lantern_festival_sysmemorialhall_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tour_lantern_festival_sysmemorialhall_ogc_fid_seq', 21940, true);
 
 
 --
--- TOC entry 5494 (class 0 OID 0)
--- Dependencies: 492
--- Name: tp_building_bim_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_building_bim_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_building_bim_ogc_fid_seq', 124557, true);
 
 
 --
--- TOC entry 5495 (class 0 OID 0)
--- Dependencies: 493
--- Name: tp_building_height_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_building_height_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_building_height_ogc_fid_seq', 373532, true);
 
 
 --
--- TOC entry 5496 (class 0 OID 0)
--- Dependencies: 494
--- Name: tp_cht_grid_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_cht_grid_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_cht_grid_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5497 (class 0 OID 0)
--- Dependencies: 495
--- Name: tp_district_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_district_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_district_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5498 (class 0 OID 0)
--- Dependencies: 496
--- Name: tp_fet_age_hr_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_fet_age_hr_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_fet_age_hr_ogc_fid_seq', 76311, true);
 
 
 --
--- TOC entry 5499 (class 0 OID 0)
--- Dependencies: 497
--- Name: tp_fet_hourly_popu_by_vil_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_fet_hourly_popu_by_vil_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_fet_hourly_popu_by_vil_ogc_fid_seq', 2147052, true);
 
 
 --
--- TOC entry 5500 (class 0 OID 0)
--- Dependencies: 498
--- Name: tp_fet_work_live_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_fet_work_live_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_fet_work_live_ogc_fid_seq', 3329, true);
 
 
 --
--- TOC entry 5501 (class 0 OID 0)
--- Dependencies: 499
--- Name: tp_road_center_line_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_road_center_line_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_road_center_line_ogc_fid_seq', 42483, true);
 
 
 --
--- TOC entry 5502 (class 0 OID 0)
--- Dependencies: 500
--- Name: tp_village_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_village_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_village_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5503 (class 0 OID 0)
--- Dependencies: 501
--- Name: tp_village_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tp_village_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tp_village_ogc_fid_seq', 7752, true);
 
 
 --
--- TOC entry 5504 (class 0 OID 0)
--- Dependencies: 502
--- Name: traffic_accident_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_accident_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_accident_location_ogc_fid_seq', 14617253, true);
 
 
 --
--- TOC entry 5505 (class 0 OID 0)
--- Dependencies: 503
--- Name: traffic_accident_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_accident_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_accident_ogc_fid_seq', 626605, true);
 
 
 --
--- TOC entry 5506 (class 0 OID 0)
--- Dependencies: 504
--- Name: traffic_bus_route_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_bus_route_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_bus_route_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5507 (class 0 OID 0)
--- Dependencies: 505
--- Name: traffic_bus_route_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_bus_route_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_bus_route_ogc_fid_seq', 382, true);
 
 
 --
--- TOC entry 5508 (class 0 OID 0)
--- Dependencies: 506
--- Name: traffic_bus_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_bus_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_bus_station_history_ogc_fid_seq', 281151, true);
 
 
 --
--- TOC entry 5509 (class 0 OID 0)
--- Dependencies: 507
--- Name: traffic_bus_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_bus_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_bus_station_ogc_fid_seq', 191699, true);
 
 
 --
--- TOC entry 5510 (class 0 OID 0)
--- Dependencies: 508
--- Name: traffic_bus_stop_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_bus_stop_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_bus_stop_ogc_fid_seq', 14574913, true);
 
 
 --
--- TOC entry 5511 (class 0 OID 0)
--- Dependencies: 509
--- Name: traffic_info_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_info_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_info_histories_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5512 (class 0 OID 0)
--- Dependencies: 510
--- Name: traffic_lives_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_lives_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_lives_history_ogc_fid_seq', 39323006, true);
 
 
 --
--- TOC entry 5513 (class 0 OID 0)
--- Dependencies: 511
--- Name: traffic_lives_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_lives_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_lives_ogc_fid_seq', 39327120, true);
 
 
 --
--- TOC entry 5514 (class 0 OID 0)
--- Dependencies: 512
--- Name: traffic_metro_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_capacity_realtime_history_ogc_fid_seq', 14664414, true);
 
 
 --
--- TOC entry 5515 (class 0 OID 0)
--- Dependencies: 513
--- Name: traffic_metro_capacity_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_capacity_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_capacity_realtime_ogc_fid_seq', 15176475, true);
 
 
 --
--- TOC entry 5516 (class 0 OID 0)
--- Dependencies: 514
--- Name: traffic_metro_capacity_rtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_capacity_rtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_capacity_rtime_ogc_fid_seq', 622005, true);
 
 
 --
--- TOC entry 5517 (class 0 OID 0)
--- Dependencies: 515
--- Name: traffic_metro_line_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_line_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_line_history_ogc_fid_seq', 89, true);
 
 
 --
--- TOC entry 5518 (class 0 OID 0)
--- Dependencies: 516
--- Name: traffic_metro_line_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_line_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_line_ogc_fid_seq', 59, true);
 
 
 --
--- TOC entry 5519 (class 0 OID 0)
--- Dependencies: 517
--- Name: traffic_metro_realtime_position_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_realtime_position_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_realtime_position_history_ogc_fid_seq', 57265982, true);
 
 
 --
--- TOC entry 5520 (class 0 OID 0)
--- Dependencies: 518
--- Name: traffic_metro_realtime_position_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_realtime_position_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_realtime_position_ogc_fid_seq', 56605498, true);
 
 
 --
--- TOC entry 5521 (class 0 OID 0)
--- Dependencies: 519
--- Name: traffic_metro_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_station_history_ogc_fid_seq', 4995, true);
 
 
 --
--- TOC entry 5522 (class 0 OID 0)
--- Dependencies: 520
--- Name: traffic_metro_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_station_ogc_fid_seq', 1620, true);
 
 
 --
--- TOC entry 5523 (class 0 OID 0)
--- Dependencies: 521
--- Name: traffic_metro_unusual_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_unusual_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_unusual_history_ogc_fid_seq', 21399, true);
 
 
 --
--- TOC entry 5524 (class 0 OID 0)
--- Dependencies: 522
--- Name: traffic_metro_unusual_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_metro_unusual_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_metro_unusual_ogc_fid_seq', 40, true);
 
 
 --
--- TOC entry 5525 (class 0 OID 0)
--- Dependencies: 523
--- Name: traffic_todayworks_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_todayworks_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_todayworks_history_ogc_fid_seq', 1773800, true);
 
 
 --
--- TOC entry 5526 (class 0 OID 0)
--- Dependencies: 524
--- Name: traffic_youbike_one_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_youbike_one_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_youbike_one_realtime_history_ogc_fid_seq', 17226614, true);
 
 
 --
--- TOC entry 5527 (class 0 OID 0)
--- Dependencies: 525
--- Name: traffic_youbike_realtime_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_youbike_realtime_histories_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_youbike_realtime_histories_ogc_fid_seq', 3422686, true);
 
 
 --
--- TOC entry 5528 (class 0 OID 0)
--- Dependencies: 526
--- Name: traffic_youbike_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_youbike_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_youbike_station_ogc_fid_seq', 9444, true);
 
 
 --
--- TOC entry 5529 (class 0 OID 0)
--- Dependencies: 527
--- Name: traffic_youbike_two_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: traffic_youbike_two_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.traffic_youbike_two_realtime_history_ogc_fid_seq', 17768215, true);
 
 
 --
--- TOC entry 5530 (class 0 OID 0)
--- Dependencies: 528
--- Name: tran_parking_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_parking_capacity_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_parking_capacity_realtime_history_ogc_fid_seq', 82499677, true);
 
 
 --
--- TOC entry 5531 (class 0 OID 0)
--- Dependencies: 529
--- Name: tran_parking_capacity_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_parking_capacity_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_parking_capacity_realtime_ogc_fid_seq', 82499677, true);
 
 
 --
--- TOC entry 5532 (class 0 OID 0)
--- Dependencies: 530
--- Name: tran_parking_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_parking_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_parking_history_ogc_fid_seq', 72536, true);
 
 
 --
--- TOC entry 5533 (class 0 OID 0)
--- Dependencies: 531
--- Name: tran_parking_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_parking_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_parking_ogc_fid_seq', 73972, true);
 
 
 --
--- TOC entry 5534 (class 0 OID 0)
--- Dependencies: 532
--- Name: tran_ubike_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_ubike_realtime_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_ubike_realtime_history_ogc_fid_seq', 54669867, true);
 
 
 --
--- TOC entry 5535 (class 0 OID 0)
--- Dependencies: 533
--- Name: tran_ubike_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_ubike_realtime_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_ubike_realtime_ogc_fid_seq', 54669867, true);
 
 
 --
--- TOC entry 5536 (class 0 OID 0)
--- Dependencies: 534
--- Name: tran_ubike_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_ubike_station_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_ubike_station_history_ogc_fid_seq', 27533, true);
 
 
 --
--- TOC entry 5537 (class 0 OID 0)
--- Dependencies: 535
--- Name: tran_ubike_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_ubike_station_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_ubike_station_ogc_fid_seq', 27533, true);
 
 
 --
--- TOC entry 5538 (class 0 OID 0)
--- Dependencies: 536
--- Name: tran_urban_bike_path_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_urban_bike_path_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_urban_bike_path_history_ogc_fid_seq', 8516, true);
 
 
 --
--- TOC entry 5539 (class 0 OID 0)
--- Dependencies: 537
--- Name: tran_urban_bike_path_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tran_urban_bike_path_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tran_urban_bike_path_ogc_fid_seq', 8516, true);
 
 
 --
--- TOC entry 5540 (class 0 OID 0)
--- Dependencies: 538
--- Name: tw_village_center_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tw_village_center_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tw_village_center_ogc_fid_seq', 7965, true);
 
 
 --
--- TOC entry 5541 (class 0 OID 0)
--- Dependencies: 539
--- Name: tw_village_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: tw_village_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.tw_village_ogc_fid_seq', 7965, true);
 
 
 --
--- TOC entry 5542 (class 0 OID 0)
--- Dependencies: 540
--- Name: work_eco_park_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_eco_park_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_eco_park_history_ogc_fid_seq', 184, true);
 
 
 --
--- TOC entry 5543 (class 0 OID 0)
--- Dependencies: 541
--- Name: work_eco_park_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_eco_park_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_eco_park_ogc_fid_seq', 184, true);
 
 
 --
--- TOC entry 5544 (class 0 OID 0)
--- Dependencies: 542
--- Name: work_floodgate_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_floodgate_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_floodgate_location_history_ogc_fid_seq', 817, true);
 
 
 --
--- TOC entry 5545 (class 0 OID 0)
--- Dependencies: 543
--- Name: work_floodgate_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_floodgate_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_floodgate_location_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5546 (class 0 OID 0)
--- Dependencies: 544
--- Name: work_garden_city_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_garden_city_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_garden_city_history_ogc_fid_seq', 6796, true);
 
 
 --
--- TOC entry 5547 (class 0 OID 0)
--- Dependencies: 545
--- Name: work_garden_city_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_garden_city_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_garden_city_ogc_fid_seq', 6796, true);
 
 
 --
--- TOC entry 5548 (class 0 OID 0)
--- Dependencies: 546
--- Name: work_goose_sanctuary_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_goose_sanctuary_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_goose_sanctuary_history_ogc_fid_seq', 9, true);
 
 
 --
--- TOC entry 5549 (class 0 OID 0)
--- Dependencies: 547
--- Name: work_goose_sanctuary_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_goose_sanctuary_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_goose_sanctuary_ogc_fid_seq', 9, true);
 
 
 --
--- TOC entry 5550 (class 0 OID 0)
--- Dependencies: 548
--- Name: work_nature_reserve_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_nature_reserve_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_nature_reserve_history_ogc_fid_seq', 12, true);
 
 
 --
--- TOC entry 5551 (class 0 OID 0)
--- Dependencies: 549
--- Name: work_nature_reserve_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_nature_reserve_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_nature_reserve_ogc_fid_seq', 12, true);
 
 
 --
--- TOC entry 5552 (class 0 OID 0)
--- Dependencies: 550
--- Name: work_park_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_park_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_park_history_ogc_fid_seq', 7632, true);
 
 
 --
--- TOC entry 5553 (class 0 OID 0)
--- Dependencies: 551
--- Name: work_park_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_park_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_park_ogc_fid_seq', 7632, true);
 
 
 --
--- TOC entry 5554 (class 0 OID 0)
--- Dependencies: 552
--- Name: work_pumping_station_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_pumping_station_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_pumping_station_location_history_ogc_fid_seq', 88, true);
 
 
 --
--- TOC entry 5555 (class 0 OID 0)
--- Dependencies: 553
--- Name: work_pumping_station_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_pumping_station_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_pumping_station_location_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5556 (class 0 OID 0)
--- Dependencies: 554
--- Name: work_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_rainfall_station_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_rainfall_station_location_history_ogc_fid_seq', 164, true);
 
 
 --
--- TOC entry 5557 (class 0 OID 0)
--- Dependencies: 555
--- Name: work_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_rainfall_station_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_rainfall_station_location_ogc_fid_seq', 164, true);
 
 
 --
--- TOC entry 5558 (class 0 OID 0)
--- Dependencies: 556
--- Name: work_riverside_bike_path_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_riverside_bike_path_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_riverside_bike_path_history_ogc_fid_seq', 741, true);
 
 
 --
--- TOC entry 5559 (class 0 OID 0)
--- Dependencies: 557
--- Name: work_riverside_bike_path_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_riverside_bike_path_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_riverside_bike_path_ogc_fid_seq', 749, true);
 
 
 --
--- TOC entry 5560 (class 0 OID 0)
--- Dependencies: 558
--- Name: work_riverside_park_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_riverside_park_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_riverside_park_history_ogc_fid_seq', 742962, true);
 
 
 --
--- TOC entry 5561 (class 0 OID 0)
--- Dependencies: 559
--- Name: work_riverside_park_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_riverside_park_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_riverside_park_ogc_fid_seq', 742962, true);
 
 
 --
--- TOC entry 5562 (class 0 OID 0)
--- Dependencies: 560
--- Name: work_school_greening_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_school_greening_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_school_greening_history_ogc_fid_seq', 270, true);
 
 
 --
--- TOC entry 5563 (class 0 OID 0)
--- Dependencies: 561
--- Name: work_school_greening_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_school_greening_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_school_greening_ogc_fid_seq', 270, true);
 
 
 --
--- TOC entry 5564 (class 0 OID 0)
--- Dependencies: 562
--- Name: work_sewer_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_sewer_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_sewer_location_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5565 (class 0 OID 0)
--- Dependencies: 563
--- Name: work_sewer_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_sewer_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_sewer_location_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5566 (class 0 OID 0)
--- Dependencies: 564
--- Name: work_sidewalk_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_sidewalk_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_sidewalk_history_ogc_fid_seq', 122105, true);
 
 
 --
--- TOC entry 5567 (class 0 OID 0)
--- Dependencies: 565
--- Name: work_sidewalk_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_sidewalk_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_sidewalk_ogc_fid_seq', 122105, true);
 
 
 --
--- TOC entry 5568 (class 0 OID 0)
--- Dependencies: 566
--- Name: work_soil_liquefaction_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_soil_liquefaction_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_soil_liquefaction_history_ogc_fid_seq', 1088, true);
 
 
 --
--- TOC entry 5569 (class 0 OID 0)
--- Dependencies: 567
--- Name: work_soil_liquefaction_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_soil_liquefaction_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_soil_liquefaction_ogc_fid_seq', 1088, true);
 
 
 --
--- TOC entry 5570 (class 0 OID 0)
--- Dependencies: 568
--- Name: work_street_light_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_street_light_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_street_light_history_ogc_fid_seq', 34997771, true);
 
 
 --
--- TOC entry 5571 (class 0 OID 0)
--- Dependencies: 569
--- Name: work_street_light_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_street_light_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_street_light_ogc_fid_seq', 34997771, true);
 
 
 --
--- TOC entry 5572 (class 0 OID 0)
--- Dependencies: 570
--- Name: work_street_tree_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_street_tree_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_street_tree_history_ogc_fid_seq', 1035349, true);
 
 
 --
--- TOC entry 5573 (class 0 OID 0)
--- Dependencies: 571
--- Name: work_street_tree_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_street_tree_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_street_tree_ogc_fid_seq', 1075704, true);
 
 
 --
--- TOC entry 5574 (class 0 OID 0)
--- Dependencies: 572
--- Name: work_underpass_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_underpass_location_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_underpass_location_history_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5575 (class 0 OID 0)
--- Dependencies: 573
--- Name: work_underpass_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_underpass_location_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_underpass_location_ogc_fid_seq', 1, true);
 
 
 --
--- TOC entry 5576 (class 0 OID 0)
--- Dependencies: 574
--- Name: work_urban_agricultural_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_urban_agricultural_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_urban_agricultural_history_ogc_fid_seq', 441, true);
 
 
 --
--- TOC entry 5577 (class 0 OID 0)
--- Dependencies: 575
--- Name: work_urban_agricultural_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_urban_agricultural_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_urban_agricultural_ogc_fid_seq', 441, true);
 
 
 --
--- TOC entry 5578 (class 0 OID 0)
--- Dependencies: 576
--- Name: work_urban_reserve_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_urban_reserve_history_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_urban_reserve_history_ogc_fid_seq', 4086, true);
 
 
 --
--- TOC entry 5579 (class 0 OID 0)
--- Dependencies: 577
--- Name: work_urban_reserve_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+-- Name: work_urban_reserve_ogc_fid_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
 SELECT pg_catalog.setval('public.work_urban_reserve_ogc_fid_seq', 4086, true);
 
 
 --
--- TOC entry 5580 (class 0 OID 0)
--- Dependencies: 227
--- Name: topology_id_seq; Type: SEQUENCE SET; Schema: topology; Owner: -
+-- Name: topology_id_seq; Type: SEQUENCE SET; Schema: topology; Owner: postgres
 --
 
 SELECT pg_catalog.setval('topology.topology_id_seq', 1, false);
 
 
 --
--- TOC entry 4831 (class 2606 OID 20068)
--- Name: app_calcu_monthly_socl_welfare_people_ppl app_calcu_monthly_socl_welfare_people_ppl_seq_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: app_calcu_monthly_socl_welfare_people_ppl app_calcu_monthly_socl_welfare_people_ppl_seq_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.app_calcu_monthly_socl_welfare_people_ppl
@@ -7607,8 +7522,7 @@ ALTER TABLE ONLY public.app_calcu_monthly_socl_welfare_people_ppl
 
 
 --
--- TOC entry 4833 (class 2606 OID 20070)
--- Name: building_unsued_land building_unsued_land_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: building_unsued_land building_unsued_land_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.building_unsued_land
@@ -7616,8 +7530,7 @@ ALTER TABLE ONLY public.building_unsued_land
 
 
 --
--- TOC entry 4835 (class 2606 OID 20072)
--- Name: patrol_criminal_case patrol_criminal_case_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: patrol_criminal_case patrol_criminal_case_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patrol_criminal_case
@@ -7625,8 +7538,7 @@ ALTER TABLE ONLY public.patrol_criminal_case
 
 
 --
--- TOC entry 4837 (class 2606 OID 20074)
--- Name: patrol_rain_floodgate patrol_rain_floodgate_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: patrol_rain_floodgate patrol_rain_floodgate_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.patrol_rain_floodgate
@@ -7634,8 +7546,7 @@ ALTER TABLE ONLY public.patrol_rain_floodgate
 
 
 --
--- TOC entry 4839 (class 2606 OID 20076)
--- Name: socl_welfare_organization_plc socl_welfare_organization_plc_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: socl_welfare_organization_plc socl_welfare_organization_plc_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public.socl_welfare_organization_plc
@@ -7643,46 +7554,47 @@ ALTER TABLE ONLY public.socl_welfare_organization_plc
 
 
 --
--- TOC entry 4840 (class 2620 OID 20077)
--- Name: app_calcu_monthly_socl_welfare_people_ppl auto_app_calcu_monthly_socl_welfare_people_ppl_mtime; Type: TRIGGER; Schema: public; Owner: -
+-- Name: trafficviolation trafficviolation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.trafficviolation
+    ADD CONSTRAINT trafficviolation_pkey PRIMARY KEY (violation_id);
+
+
+--
+-- Name: app_calcu_monthly_socl_welfare_people_ppl auto_app_calcu_monthly_socl_welfare_people_ppl_mtime; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER auto_app_calcu_monthly_socl_welfare_people_ppl_mtime BEFORE INSERT OR UPDATE ON public.app_calcu_monthly_socl_welfare_people_ppl FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
 
 
 --
--- TOC entry 4841 (class 2620 OID 20078)
--- Name: building_unsued_land auto_building_unsued_land_mtime; Type: TRIGGER; Schema: public; Owner: -
+-- Name: building_unsued_land auto_building_unsued_land_mtime; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER auto_building_unsued_land_mtime BEFORE INSERT OR UPDATE ON public.building_unsued_land FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
 
 
 --
--- TOC entry 4842 (class 2620 OID 20079)
--- Name: building_unsued_public auto_building_unsued_public_mtime; Type: TRIGGER; Schema: public; Owner: -
+-- Name: building_unsued_public auto_building_unsued_public_mtime; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER auto_building_unsued_public_mtime BEFORE INSERT OR UPDATE ON public.building_unsued_public FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
 
 
 --
--- TOC entry 4843 (class 2620 OID 20080)
--- Name: patrol_criminal_case auto_patrol_criminal_case_mtime; Type: TRIGGER; Schema: public; Owner: -
+-- Name: patrol_criminal_case auto_patrol_criminal_case_mtime; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER auto_patrol_criminal_case_mtime BEFORE INSERT OR UPDATE ON public.patrol_criminal_case FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
 
 
 --
--- TOC entry 4844 (class 2620 OID 20081)
--- Name: socl_welfare_organization_plc auto_socl_welfare_organization_plc_mtime; Type: TRIGGER; Schema: public; Owner: -
+-- Name: socl_welfare_organization_plc auto_socl_welfare_organization_plc_mtime; Type: TRIGGER; Schema: public; Owner: postgres
 --
 
 CREATE TRIGGER auto_socl_welfare_organization_plc_mtime BEFORE INSERT OR UPDATE ON public.socl_welfare_organization_plc FOR EACH ROW EXECUTE FUNCTION public.trigger_set_timestamp();
 
-
--- Completed on 2024-02-16 10:54:03 UTC
 
 --
 -- PostgreSQL database dump complete
