@@ -129,7 +129,7 @@ CREATE TABLE public.abandoned (
     vehiclestatuscode integer NOT NULL,
     longitude double precision,
     latitude double precision,
-    photo_id integer,
+    photo_id bytea,
     recongnize integer,
     reportreason character varying
 );
