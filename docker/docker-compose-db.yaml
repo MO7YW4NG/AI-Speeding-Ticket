@@ -16,17 +16,6 @@ services:
       POSTGRES_PASSWORD: ${DB_DASHBOARD_PASSWORD}
     volumes:
       - ./db-data/postgres-data:/var/lib/postgresql/data
-
-  postgres-car:
-    image: postgres:16.6-alpine3.21
-    container_name: postgres-car
-    restart: always
-    environment:
-      POSTGRES_DB: ${DB_CAR_DBNAME}
-      POSTGRES_USER: ${DB_CAR_USER}
-      POSTGRES_PASSWORD: ${DB_CAR_PASSWORD}
-    volumes:
-      - ./db-data/postgres-car-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
 
