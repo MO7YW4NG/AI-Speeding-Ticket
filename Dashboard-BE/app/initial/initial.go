@@ -126,27 +126,6 @@ func InitSampleCityData() {
 	}
 }
 
-func InitSampleCarData() {
-	// Check if the "psql" command not exists
-	err := checkPostgreSQLClient()
-	if err != nil {
-		logs.FError("Error checking PostgreSQL client: %s", err)
-		return
-	}
-
-	// get import file path
-	filePath := global.SampleDataDir + global.PostgresCarSampleDataFile
-	if _, err := os.Stat(filePath); os.IsNotExist(err) {
-		panic(fmt.Sprintf("file %s not exist", filePath))
-	}
-	logs.FInfo("import file name: %s", filePath)
-
-	err = executeSQLFile(global.PostgresCar, filePath)
-	if err != nil {
-		logs.FError("error executing SQL file: %s", err)
-	}
-}
-
 // Check if PostgreSQL client is installed
 func checkPostgreSQLClient() error {
 	_, err := exec.LookPath("psql")
