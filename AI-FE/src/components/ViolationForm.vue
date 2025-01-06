@@ -57,7 +57,11 @@
               @change="populateForm"
               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100"
             >
-              <option v-for="violation in issuableViolations" :key="violation.violation_id" :value="violation">
+              <option
+                v-for="violation in issuableViolations"
+                :key="violation.violation_id"
+                :value="violation"
+              >
                 違規 ID: {{ violation.violation_id }} - 車牌號碼: {{ violation.license_plate }}
               </option>
             </select>
@@ -85,25 +89,25 @@
             </button>
           </div>
         </div>
-      </div>
   
-      <!-- 預覽罰單的彈窗 -->
-      <div
-        v-if="showModal"
-        class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center"
-      >
-        <div class="relative bg-gray-800 p-4 rounded-lg">
-          <button
-            @click="showModal = false"
-            class="absolute top-2 right-2 px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded"
-          >
-            關閉
-          </button>
-          <img
-            src="/assets/Jufa_tongzhidan.jpg"
-            alt="罰單預覽"
-            class="max-w-full max-h-[80vh] rounded-md"
-          />
+        <!-- 預覽罰單的彈窗 -->
+        <div
+          v-if="showModal"
+          class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center"
+        >
+          <div class="relative bg-gray-800 p-4 rounded-lg">
+            <button
+              @click="showModal = false"
+              class="absolute top-2 right-2 px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded"
+            >
+              關閉
+            </button>
+            <img
+              src="/assets/Jufa_tongzhidan.jpg"
+              alt="罰單預覽"
+              class="max-w-full max-h-[80vh] rounded-md"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -111,43 +115,63 @@
   
   <script>
   import { reactive, ref, onMounted } from "vue";
-  import { getAllIssuableViolations, createNewTicket, getAllDrivers } from "@/services/violationService";
+  import { getAllIssuableViolations, createNewTicket } from "@/services/violationService";
   
   export default {
     setup() {
+      // 表單數據
       const formData = reactive({
         violationId: "", // 選中的違規 ID
         licensePlate: "", // 車牌號碼
         violationFact: "", // 違規事實
       });
   
-      const currentTime = ref("");
-      const showModal = ref(false);
-      const issuableViolations = ref([]); // 可開單的資料列表
-      const selectedViolation = ref(null);
+      const currentTime = ref(""); // 系統當前時間
+      const showModal = ref(false); // 是否顯示預覽彈窗
+      const issuableViolations = ref([]); // 所有可開單資料
+      const selectedViolation = ref(null); // 當前選中的違規數據
+      const currentViolationIndex = ref(0); // 當前違規資料的索引
   
+      // 更新當前時間
       const updateTime = () => {
         const now = new Date();
         currentTime.value = now.toLocaleString();
       };
   
-      // 獲取所有可開單資料
+      // 獲取所有可以開單的違規資料
       const fetchIssuableViolations = async () => {
         try {
           const response = await getAllIssuableViolations();
-          issuableViolations.value = response.data;
+          issuableViolations.value = response.data; // 將數據存入響應式變量
+          updateViolationForm(0); // 初始化表單為第一筆數據
         } catch (error) {
           console.error("獲取可開單資料失敗:", error);
         }
       };
   
-      // 填充表單數據
-      const populateForm = () => {
-        if (selectedViolation.value) {
-          formData.violationId = selectedViolation.value.violation_id;
-          formData.licensePlate = selectedViolation.value.license_plate;
-          formData.violationFact = selectedViolation.value.violation_fact || "違規描述";
+      // 更新表單數據
+      const updateViolationForm = (index) => {
+        const violation = issuableViolations.value[index];
+        if (violation) {
+          formData.violationId = violation.violation_id;
+          formData.licensePlate = violation.license_plate;
+          formData.violationFact = violation.violation_fact || "違規描述";
         }
+      };
+  
+      // 切換到下一個違規資料
+      const nextViolation = () => {
+        currentViolationIndex.value =
+          (currentViolationIndex.value + 1) % issuableViolations.value.length;
+        updateViolationForm(currentViolationIndex.value);
+      };
+  
+      // 切換到上一個違規資料
+      const prevViolation = () => {
+        currentViolationIndex.value =
+          (currentViolationIndex.value - 1 + issuableViolations.value.length) %
+          issuableViolations.value.length;
+        updateViolationForm(currentViolationIndex.value);
       };
   
       // 提交罰單
@@ -166,14 +190,15 @@
   
           await createNewTicket(payload);
           alert("罰單提交成功！");
-          fetchIssuableViolations(); // 提交後更新列表
-          resetForm(); // 清空表單
+          fetchIssuableViolations(); // 重新獲取可以開單的資料
+          resetForm(); // 重置表單
         } catch (error) {
           console.error("提交罰單失敗:", error);
           alert("提交罰單失敗，請稍後再試！");
         }
       };
   
+      // 重置表單
       const resetForm = () => {
         formData.violationId = "";
         formData.licensePlate = "";
@@ -181,10 +206,16 @@
         selectedViolation.value = null;
       };
   
+      // 預覽罰單
+      const previewTicket = () => {
+        showModal.value = true; // 顯示預覽彈窗
+      };
+  
+      // 初始化
       onMounted(() => {
-        updateTime();
-        setInterval(updateTime, 1000);
-        fetchIssuableViolations();
+        updateTime(); // 更新當前時間
+        setInterval(updateTime, 1000); // 每秒更新時間
+        fetchIssuableViolations(); // 獲取可以開單的資料
       });
   
       return {
@@ -195,16 +226,12 @@
         selectedViolation,
         resetForm,
         submitTicket,
-        populateForm,
+        populateForm: updateViolationForm,
+        nextViolation,
+        prevViolation,
+        previewTicket,
       };
     },
   };
   </script>
-  
-  <style scoped>
-  .flex-1 img {
-    max-height: 100%; /* 確保圖片不超出父容器 */
-    max-width: 100%; /* 確保圖片適應左側寬度 */
-  }
-  </style>
   
