@@ -49,17 +49,26 @@ def get_unrecognized_license_plates_by_AI():
                 
             return entries
         
+@router.post("/violation/new")
+def artificial_recognize_license_plate(data):
+        print("Violation created successfully.")
+        
 @router.post("/violation/update")
-def articial_recognize_license_plate(violation_id, new_license_plate):
-    with psycopg.connect(conninfo,autocommit=True) as conn:
+def artificial_recognize_license_plate(violation_id, new_license_plate):
+    with psycopg.connect(conninfo, autocommit=True) as conn:
         with conn.cursor() as cursor:
-    
-            # Use parameterized query to safely insert the name
-            sql =  '''UPDATE trafficviolation SET license_plate = %s AND recgonize = 0 WHERE violation_id = %s'''
+            
+            sql =   '''  
+                    UPDATE trafficviolation 
+                    SET license_plate = %s, recognize = 0 
+                    WHERE violation_id = %s;
+                    '''
             
             cursor.execute(sql, (new_license_plate, violation_id))
-            
-            print("License plate updated successfully.")
+        
+        print("License plate updated successfully.")
+
+# articial_recognize_license_plate(1, "ABC1234")
     
 @router.post("/violation/remove")
 def move_and_delete_unrecognized_license_plate(violation_id):
@@ -67,14 +76,29 @@ def move_and_delete_unrecognized_license_plate(violation_id):
         with conn.cursor() as cursor:
 
             # Select the entry to be moved
-            select_sql = '''SELECT * FROM trafficviolation WHERE violation_id = %s'''
+            select_sql =    '''
+                            SELECT violation_id, violation_date, violation_time, device_id, 
+                            speed_limit, vehicle_speed, license_plate, licenseplatereplydate, 
+                            licenseplatereplytime, vehicletype, vehiclestatuscode, photo, 
+                            recognize, license_plate2, location, address, longitude, latitude
+                            FROM trafficviolation WHERE violation_id = %s
+                            '''
+            cursor.execute(select_sql, (violation_id,))
+            violation = cursor.fetchone()
             cursor.execute(select_sql, (violation_id,))
             violation = cursor.fetchone()
 
             if violation:
                 # Insert the entry into the abandoned table
-                insert_sql = '''INSERT INTO abandoned (violation_id) VALUES (%s)'''
-                cursor.execute(insert_sql, (violation[0]))
+                insert_sql =    '''
+                                INSERT INTO abandoned (violation_id, violation_date, violation_time, device_id, 
+                                speed_limit, vehicle_speed, license_plate, licenseplatereplydate, 
+                                licenseplatereplytime, vehicletype, vehiclestatuscode, photo, 
+                                recognize, license_plate2, location, address, longitude, latitude)
+                                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
+                                '''
+                
+                cursor.execute(insert_sql, violation) 
 
                 # Delete the entry from the original table
                 delete_sql = '''DELETE FROM trafficviolation WHERE violation_id = %s'''
