@@ -1,7 +1,4 @@
 from pydantic_ai import Agent, RunContext, ModelRetry
-# from pydantic_ai.models.gemini import GeminiModel
-from pydantic_ai.models.groq import GroqModel
-from pydantic_ai.models.openai import OpenAIModel
 from pydantic_ai.exceptions import UnexpectedModelBehavior
 from pydantic import BaseModel, Field
 # from dotenv import load_dotenv
@@ -13,23 +10,23 @@ import numpy as np
 import tempfile
 # import google.generativeai as genai
 from google.api_core.exceptions import InvalidArgument 
-from openai import AsyncOpenAI, RateLimitError
+from openai import RateLimitError
 # from groq import AsyncGroq, RateLimitError
 # import json
+from models import Models
 import time
 import base64
 
 # load_dotenv()
 # Initialize the Groq model with API key
 # agentModel = OpenAIModel('gpt-4o-mini', api_key=os.environ['OPENAI_API_KEY'])
-agentModel = OpenAIModel('llama3-groq-70b-8192-tool-use-preview', base_url='https://api.groq.com/openai/v1', api_key=os.environ['GROQ_API_KEY'])
+agentModel = Models.GROQ.to_pydaic_model('llama3-groq-70b-8192-tool-use-preview')
+# agentModel = Models.DEEPSEEK.to_pydaic_model('deepseek-chat')
 # genai.configure(api_key=os.environ['GEMINI_API_KEY'])
-genai = AsyncOpenAI(api_key=os.environ["GEMINI_API_KEY"],
-        base_url="https://generativelanguage.googleapis.com/v1beta/openai/")
+genai = Models.GEMINI.to_openai_model(is_async=True)
 # Initialize Groq client with API key
 # client = AsyncGroq(api_key=os.environ['GROQ_API_KEY'])
-client = AsyncOpenAI(api_key=os.environ["GROQ_API_KEY"],
-                     base_url="https://api.groq.com/openai/v1")
+client = Models.GROQ.to_openai_model(is_async=True)
 
 @dataclass
 class Deps:
@@ -37,59 +34,28 @@ class Deps:
 
 @dataclass
 class BoundingBox(BaseModel):
-    coordinates: Annotated[list[float], Field(description="Bounding box coordinates in the format [ymin, xmin, ymax, xmax]")]
+    coordinates: Annotated[list[Annotated[int, Field(ge=1)]], Field(description="Bounding box coordinates in the format [ymin, xmin, ymax, xmax]")]
     recog_result: Annotated[int, Field(strict=True, ge=0, le=2, description="Recognition result: 0 if one plate detected, 1 if multiple plates detected, 2 if no plate detected or image is unrecognizable")]
 
 @dataclass
 class ExtractedPlate(BaseModel):
     recog_result: Annotated[int, Field(0, strict=True, ge=0, le=2, description="Passed from the plate_detection tool")]
-    number: Annotated[str, Field(description="Recognized license plate number")]
-    confidence: Annotated[float, Field(description="Confidence score of the recognition; set to 0 if not confident or unclear")]
-
-# visionModel = [
-    # genai.GenerativeModel(
-    #     "gemini-1.5-flash",
-    #     generation_config=genai.GenerationConfig(
-    #         response_mime_type="application/json",
-    #         response_schema=BoundingBox
-    #     )
-    # ),
-    # genai.GenerativeModel(
-    #     "gemini-2.0-flash-exp",
-    #     generation_config=genai.GenerationConfig(
-    #         response_mime_type="application/json",
-    #         response_schema=BoundingBox
-    #     )
-    # ),
-# ]
+    number: Annotated[str, Field(description="Recognized license plate number, dash included")]
+    confidence: Annotated[float, Field(le=1, description="Confidence score of the recognition; set to 0 if not confident or unclear")]
 
 plateExtractor = Agent(
     agentModel,
     system_prompt=(
-        'Be concise, reply with one sentence.'
-        'Your job is to extract the license plate and recognize its number from the given image.'
+        'Be concise, Your job is to extract the license plate and recognize its number from the given image.'
         'First, you must use `plate_detection` tool to get the coordinates of the plate and recog_result.'
         'If the recog_result is 1 or 2, terminate the process.'
         'If a plate is detected, use `crop_image` tool to crop the image,'
         'then use `recognize` tool to recognize the number.'
         ),
+    retries=2,
     result_type=ExtractedPlate,
     deps_type=Deps
 )
-
-# plateRecognizer = Agent(
-#     agentModel,
-#     system_prompt=(
-#         'Be concise, reply with one sentence.'
-#         'Your job is to extract the license plate and recognize its number from the given image.'
-#         'First, you must use `plate_detection` tool to get the coordinates of the plate and the recognition result.'
-#         'If the recog_result is 1 or 2, terminate the process.'
-#         'If a plate is detected, use `crop_image` tool to crop the image,'
-#         'then use `recognize` tool to recognize the number.'
-#         ),
-#     result_type=ExtractedPlate,
-#     deps_type=Deps
-# )
 
 def load_image(image_path):
     """Load an image from the specified file path."""
@@ -114,7 +80,7 @@ def normalize_number(plate_number: str) -> str:
         str(plate_number.encode('utf-8').decode('utf-8'))
         .upper()
         .replace(" ", "")
-        .replace("-", "")
+        # .replace("-", "")
         .replace("_", "")
         .replace('.', "")
         .replace(':', "")
@@ -141,13 +107,13 @@ async def plate_detection(ctx: RunContext[Deps]) -> BoundingBox:
     image = load_image(ctx.deps.image_path)
     data = encode_image(image)
 
-    prompt = '''Return bounding boxes for license plate in the given image. MUST include the entire plate.
-        1. If multiple plates are detected, terminate process, and return 1.
+    prompt = '''Return bounding boxes for license plate in the given image.
+        1. If multiple plates in the image, terminate process, and return 1.
         2. If no plate is detected or the image is unrecognizable, terminate process, and return 2.
         3. If only one plate is successfully detected, continue and return 0.
         '''
     try:
-        response = await genai.beta.chat.completions.parse(model="gemini-2.0-flash-exp",messages=
+        response = await genai.beta.chat.completions.parse(model="gemini-1.5-flash",messages=
             [
                 {
                     "role": "user",
@@ -182,7 +148,7 @@ async def plate_detection(ctx: RunContext[Deps]) -> BoundingBox:
     return result
  
 KERNEL = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]])
-EXTEND = 15
+EXTEND = 12
 
 @plateExtractor.tool
 async def crop_image(ctx: RunContext[Deps], plate_coordinates: list[float]) -> str:
@@ -232,7 +198,7 @@ async def crop_image(ctx: RunContext[Deps], plate_coordinates: list[float]) -> s
 
     return temp_file_path
 
-@plateExtractor.tool
+@plateExtractor.tool(retries=2)
 async def recognize(ctx: RunContext[Deps]) -> ExtractedPlate:
     """
     Recognize and extract the license plate number from the cropped image.
@@ -255,22 +221,22 @@ async def recognize(ctx: RunContext[Deps]) -> ExtractedPlate:
     os.remove(ctx.deps.image_path)
     result = None
     
-    prompt = """Act as a state-of-the-art OCR. Your task is to analyze the given image, extract the textual content, and provide a confidence score for the extracted text.
-                1. Recognize the license plate number from the image.
-                2. The regex pattern will typically be: [A-Z]{3}[0-9]{4}, [0-9]{3}[A-Z]{3}, or [A-Z]{3}[0-9]{3}.
-                3. Check for illegal characters and similar-looking characters like (8, B), (0, O), (W, H, N, M), (5, 3), and (V, Y). If indistinguishable, return '0' as the plate number and a confidence score of 0.
-                4. The confidence score should be a float between 0 and 1.
-                5. The JSON response must follow the schema: {\"number\": \"{PLATE_NUMBER_HERE}\", \"confidence\": {CONFIDENCE_SCORE_HERE}}.
+    prompt = """You are state-of-the-art OCR. Your task is to analyze the given image and follow these steps:
+                Step 1. Extract the license plate number from the image. MUST extract the number with a dash(-) character.
+                Step 2. Double-check similar characters or numbers like `8, B`, `0, O`, `A, W, H, N, M`, `5, 3`, and `V, Y`. As long as is uncertain, return lower confidence.
+                Step 3. Provide a float between 0 and 1 as confidence score for the extracted text.
+                Step 4. The regex pattern will typically be: `^(?:[A-Z]{3}-[0-9]{4}|[0-9]{3}-[A-Z]{3}|[0-9]{4}-[A-Z]{2}|[0-9]{4}-[A-Z]{2}|[A-Z]{3}-[0-9]{3})$`.
+                Step 5. The JSON response must follow the schema: {\"number\": \"{PLATE_NUMBER_HERE}\", \"confidence\": {CONFIDENCE_SCORE_HERE}}.
                 """
-    retry = 0
-    MAX_RETRIES = 3
-    while not result or len(result) == 0:
-        if retry >= MAX_RETRIES:
-            break
-        retry += 1
+    # retry = 0
+    # MAX_RETRIES = 3
+    # while not result or len(result) == 0:
+    #     if retry >= MAX_RETRIES:
+    #         break
+    #     retry += 1
+    try:
         response = await client.chat.completions.create(
-        # response = await client.chat.completions.create(
-            model="llama-3.2-90b-vision-preview",
+            model='llama-3.2-90b-vision-preview',
             messages=[
                 {
                     "role": "user",
@@ -292,9 +258,38 @@ async def recognize(ctx: RunContext[Deps]) -> ExtractedPlate:
             response_format={"type": "json_object"},
             temperature=0
         )
-        result = response.choices[0].message.content
-        
+    except RateLimitError:
+        response = await genai.beta.chat.completions.parse(
+            model="gemini-1.5-flash",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": prompt,
+                        },
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/jpeg;base64,{image_data}"
+                            }
+                        },
+                    ],
+                }
+            ],
+            response_format=ExtractedPlate,
+            temperature=0.5,
+        )
+    result = response.choices[0].message.content
+
     result = ExtractedPlate.model_validate_json(result)
+    return result
+
+@plateExtractor.result_validator
+async def validate_result(ctx: RunContext[Deps], result: ExtractedPlate) -> ExtractedPlate:
+    if '-' not in result.number and result.recog_result == 0:
+        result.recog_result = 2
     result.number = normalize_number(result.number)
     print(result)
     return result
@@ -334,7 +329,9 @@ class PlateRecognizer(object):
             # Switch to OpenAI model in case of rate limiting
             # plateExtractor.model = GroqModel('llama3-groq-8b-8192-tool-use-preview', api_key=os.environ['GROQ_API_KEY'])
             if 'llama3-groq-70b-8192-tool' in e.message:
-                plateExtractor.model = OpenAIModel('gpt-4o-mini', api_key=os.environ['OPENAI_API_KEY'])
+                plateExtractor.model = Models.OPENAI.to_pydaic_model('gpt-4o-mini')
+            elif 'llama-3.2-90b-vision-preview' in e.message:
+                plateExtractor.model = Models.GROQ.to_pydaic_model('llama3-groq-70b-8192-tool-use-preview')
             # Uncomment the following line if using a separate recognizer agent
             # plateRecognizer.model = OpenAIModel('gpt-4o-mini', api_key=os.environ['OPENAI_API_KEY'])
             return await self.recognize()
