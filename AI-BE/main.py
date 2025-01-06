@@ -1,9 +1,11 @@
 from fastapi import FastAPI, File, UploadFile
-from recognizer import PlateRecognizer,ExtractedPlate
+from fastapi.middleware.cors import CORSMiddleware
+from recognizer import PlateRecognizer, ExtractedPlate
+from geocoding import get_geocode
 import tempfile
 import time
+# import os
 from be import router as be_router  # Import the router from be.py
-from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
@@ -34,6 +36,10 @@ async def recognize_license_plate(file: UploadFile = File(...)):
     
     print(f"Time taken: {time.time() - start}")
     return plate
+
+@app.post("/geocoding")
+async def geocoding(address: str):
+    return await get_geocode(address)
 
 app.include_router(be_router)
 
