@@ -18,9 +18,9 @@ class ModelInfo(Enum):
         return OpenAI(base_url=self.base_url, api_key=self.api_key)
     
 class Models(ModelInfo):
-    OPENAI = (None, os.environ['OPENAI_API_KEY'])
-    GROQ = ('https://api.groq.com/openai/v1', os.environ['GROQ_API_KEY'])
-    GEMINI = ("https://generativelanguage.googleapis.com/v1beta/openai/", os.environ['GEMINI_API_KEY'])
-    DEEPSEEK = ('https://api.deepseek.com', os.environ["DEEPSEEK_API_KEY"])
+    OPENAI = (None, os.getenv('OPENAI_API_KEY'))
+    GROQ = ('https://api.groq.com/openai/v1', os.getenv('GROQ_API_KEY'))
+    GEMINI = ("https://generativelanguage.googleapis.com/v1beta/openai/", os.getenv('GEMINI_API_KEY'))
+    DEEPSEEK = ('https://api.deepseek.com', os.getenv("DEEPSEEK_API_KEY"))
     
     
