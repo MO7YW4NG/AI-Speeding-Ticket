@@ -3,6 +3,7 @@ import psycopg
 import main
 import base64
 import os
+
 router = APIRouter()  # Initialize APIRouter instead of FastAPI
 
 conninfo = f"dbname={os.environ['DB_DASHBOARD_DBNAME']} user={os.environ['DB_DASHBOARD_USER']} password={os.environ['DB_DASHBOARD_PASSWORD']} host={os.environ['DB_DASHBOARD_HOST']} port={os.environ['DB_DASHBOARD_PORT']}"
@@ -50,8 +51,28 @@ def get_unrecognized_license_plates_by_AI():
             return entries
         
 @router.post("/violation/new")
-def artificial_recognize_license_plate(data):
-        print("Violation created successfully.")
+def insert_new_violation(data):
+    with psycopg.connect(conninfo, autocommit=True) as conn:
+        with conn.cursor() as cursor:
+            for entry in data['entries']:
+                photo_path = entry['photo_path']
+                photo_path = os.path.abspath(photo_path.replace('\\', '/').lstrip('/'))
+                # Read the photo file as binary data
+                with open(photo_path, 'rb') as file:
+                    photo_data = file.read()
+
+                # Use parameterized query to safely insert the name
+                sql = '''INSERT INTO trafficviolation (violation_date, violation_time, device_id, 
+                        speed_limit, vehicle_speed, license_plate, photo, 
+                        recognize, location, address, longitude, latitude) 
+                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+                        '''
+                
+                cursor.execute(sql, (entry['date'], entry['time'], data['device_id'], entry['speed_limit'],
+                                entry['vehicle_speed'], entry['plate_number'], psycopg.Binary(photo_data), entry['recognize'], 
+                                entry['district'], entry['address'], entry['longitude'], entry['latitude']))
+                
+        print("New violation(s) added successfully.")
         
 @router.post("/violation/update")
 def artificial_recognize_license_plate(violation_id, new_license_plate):

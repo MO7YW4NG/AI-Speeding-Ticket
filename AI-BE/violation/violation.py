@@ -1,8 +1,7 @@
 import json
-import requests
 import main
-import asyncio
-from fastapi import FastAPI, File, UploadFile
+import be
+from fastapi import UploadFile
 from datetime import datetime
 import os
 from io import BytesIO
@@ -12,6 +11,14 @@ def read_json_file(file_path):
     with open(file_path, 'r', encoding="utf-8") as file:
         data = json.load(file)
     return data
+
+# Function to get the district from the address
+def get_district(address):
+    start = address.find('市') + 1
+    end = address.find('區') + 1
+    if start > 0 and end > start:
+        return address[start:end]
+    return None
 
 # Function to get the plate number from the photo
 async def get_plate_number(photo_path):
@@ -28,7 +35,7 @@ async def get_plate_number(photo_path):
         print(f"Failed to retrieve the image. File not found: {photo_path}")
         return None
 
-async def main_function(file_path):
+async def insert_new_violation(file_path):
     data = read_json_file(file_path) 
     
     for entry in data['entries']:
@@ -59,15 +66,10 @@ async def main_function(file_path):
         entry['longitude'] = lon
         entry['latitude'] = long
 
+        entry['district'] = get_district(entry['address'])
+
     print(data)
 
-    # # Send the updated data to the database
-    # url = 'http://localhost:8000/violation/new'
-    # response = requests.post(url, json=data)
-    # print(response.text)
+    # Send the updated data to the database
+    await be.insert_new_violation(data)
 
-
-
-if __name__ == "__main__":
-    file_path = 'static/json/violation.json'
-    asyncio.run(main_function(file_path))
