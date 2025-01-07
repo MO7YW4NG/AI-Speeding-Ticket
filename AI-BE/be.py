@@ -158,7 +158,7 @@ def update_traffic_violation(violation_id):
         with conn.cursor() as cursor:
 
             # Use parameterized query to safely insert the name
-            sql = '''UPDATE trafficviolation SET is_issued = 1 WHERE violation_id = %s'''
+            sql = '''UPDATE trafficviolation SET recognize = 3 WHERE violation_id = %s'''
             
             # Execute the query with the 'name' argument passed as a parameter
             cursor.execute(sql, (violation_id,))
