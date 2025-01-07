@@ -4,14 +4,18 @@ from recognizer import PlateRecognizer, ExtractedPlate
 from geocoding import get_geocode
 import tempfile
 import time
+from fastapi.staticfiles import StaticFiles
 # import os
 from be import router as be_router  # Import the router from be.py
+from violation import main_function
 
 app = FastAPI()
 
 origins = [
     "*",
 ]
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
@@ -40,6 +44,11 @@ async def recognize_license_plate(file: UploadFile = File(...)):
 @app.post("/geocoding")
 async def geocoding(address: str):
     return await get_geocode(address)
+
+@app.post("/process-violations")
+async def process_violations(file_path: str):
+    await main_function(file_path)
+    return {"status": "Processing completed"}
 
 app.include_router(be_router)
 
