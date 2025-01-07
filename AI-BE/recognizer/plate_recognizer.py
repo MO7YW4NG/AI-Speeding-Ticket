@@ -19,8 +19,8 @@ import base64
 
 # load_dotenv()
 # Initialize the Groq model with API key
-# agentModel = OpenAIModel('gpt-4o-mini', api_key=os.environ['OPENAI_API_KEY'])
-agentModel = Models.GROQ.to_pydaic_model('llama3-groq-70b-8192-tool-use-preview')
+# agentModel = Models.GROQ.to_pydaic_model('llama-3.3-70b-versatile')
+agentModel = Models.OPENAI.to_pydaic_model('gpt-4o-mini')
 # agentModel = Models.DEEPSEEK.to_pydaic_model('deepseek-chat')
 # genai.configure(api_key=os.environ['GEMINI_API_KEY'])
 genai = Models.GEMINI.to_openai_model(is_async=True)
@@ -131,6 +131,7 @@ async def plate_detection(ctx: RunContext[Deps]) -> BoundingBox:
                     ]
                 }
             ],
+            temperature=0.5,
             response_format=BoundingBox
         )
     except InvalidArgument as e:
@@ -222,7 +223,7 @@ async def recognize(ctx: RunContext[Deps]) -> ExtractedPlate:
     result = None
     
     prompt = """You are state-of-the-art OCR. Your task is to analyze the given image and follow these steps:
-                Step 1. Extract the license plate number from the image. MUST extract the number with a dash(-) character.
+                Step 1. Extract the license plate number from the image. MUST extract the number with only one dash(-) character.
                 Step 2. Double-check similar characters or numbers like `8, B`, `0, O`, `A, W, H, N, M`, `5, 3`, and `V, Y`. As long as is uncertain, return lower confidence.
                 Step 3. Provide a float between 0 and 1 as confidence score for the extracted text.
                 Step 4. The regex pattern will typically be: `^(?:[A-Z]{3}-[0-9]{4}|[0-9]{3}-[A-Z]{3}|[0-9]{4}-[A-Z]{2}|[0-9]{4}-[A-Z]{2}|[A-Z]{3}-[0-9]{3})$`.
@@ -256,7 +257,7 @@ async def recognize(ctx: RunContext[Deps]) -> ExtractedPlate:
             ],
             # response_format=ExtractedPlate,
             response_format={"type": "json_object"},
-            temperature=0
+            temperature=0.15
         )
     except RateLimitError:
         response = await genai.beta.chat.completions.parse(
