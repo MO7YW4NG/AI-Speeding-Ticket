@@ -46,12 +46,10 @@
               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
             ></textarea>
           </div>
-        </div>
   
-        <div class="mt-6 flex">
-          <!-- 左半邊資料選擇 -->
-          <div class="flex-1 flex flex-col space-y-4">
-            <h3 class="text-md text-gray-100 font-semibold">選擇可以開單的資料</h3>
+          <!-- 選擇可以開單的資料 -->
+          <div class="flex flex-col mt-4">
+            <label class="text-md text-gray-400 mb-1">選擇可以開單的資料</label>
             <select
               v-model="selectedViolation"
               @change="populateForm"
@@ -67,27 +65,55 @@
             </select>
           </div>
   
-          <!-- 右半邊按鈕 -->
-          <div class="flex-1 flex flex-col justify-center space-y-4 pl-4">
-            <button
-              @click="previewTicket"
-              class="w-full px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
-            >
-              預覽罰單
-            </button>
-            <button
-              @click="resetForm"
-              class="w-full px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
-            >
-              重置
-            </button>
-            <button
-              @click="submitTicket"
-              class="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-            >
-              提交罰單
-            </button>
+          <!-- 圖片與按鈕的並排區域 -->
+          <div class="flex mt-6 space-x-4 items-start">
+            <!-- 左半邊圖片 -->
+            <div class="w-1/2 flex justify-center items-center">
+              <img
+                src="/assets/Jufa_tongzhidan.jpg"
+                alt="罰單圖片"
+                class="w-auto max-h-[300px] rounded-md border border-gray-600"
+              />
+            </div>
+  
+            <!-- 右半邊按鈕 -->
+            <div class="w-1/2 flex flex-col justify-center space-y-4">
+              <button
+                @click="previewTicket"
+                class="w-full px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
+              >
+                預覽罰單
+              </button>
+              <button
+                @click="resetForm"
+                class="w-full px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
+              >
+                重置
+              </button>
+              <button
+                @click="submitTicket"
+                class="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+              >
+                提交罰單
+              </button>
+            </div>
           </div>
+        </div>
+  
+        <!-- 切換圖片按鈕 -->
+        <div class="flex justify-center mt-8">
+          <button
+            @click="prevImage"
+            class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
+          >
+            <i class="fas fa-chevron-left text-2xl"></i>
+          </button>
+          <button
+            @click="nextImage"
+            class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
+          >
+            <i class="fas fa-chevron-right text-2xl"></i>
+          </button>
         </div>
   
         <!-- 預覽罰單的彈窗 -->
@@ -113,44 +139,46 @@
     </div>
   </template>
   
+  
   <script>
-  import { reactive, ref, onMounted } from "vue";
+  import { reactive, ref, computed, onMounted } from "vue";
   import { getAllIssuableViolations, createNewTicket } from "@/services/violationService";
+  import eventBus from "@/components/eventBus";
   
   export default {
     setup() {
       // 表單數據
       const formData = reactive({
-        violationId: "", // 選中的違規 ID
-        licensePlate: "", // 車牌號碼
-        violationFact: "", // 違規事實
+        violationId: "",
+        licensePlate: "",
+        violationFact: "",
       });
   
-      const currentTime = ref(""); // 系統當前時間
-      const showModal = ref(false); // 是否顯示預覽彈窗
-      const issuableViolations = ref([]); // 所有可開單資料
-      const selectedViolation = ref(null); // 當前選中的違規數據
-      const currentViolationIndex = ref(0); // 當前違規資料的索引
+      const currentTime = ref("");
+      const showModal = ref(false);
+      const issuableViolations = ref([]);
+      const selectedViolation = ref(null);
+      const currentImageIndex = eventBus.currentImageIndex; // 使用事件總線共享索引
   
-      // 更新當前時間
+      // 更新時間
       const updateTime = () => {
         const now = new Date();
         currentTime.value = now.toLocaleString();
       };
   
-      // 獲取所有可以開單的違規資料
+      // 獲取違規資料
       const fetchIssuableViolations = async () => {
         try {
           const response = await getAllIssuableViolations();
-          issuableViolations.value = response.data; // 將數據存入響應式變量
-          updateViolationForm(0); // 初始化表單為第一筆數據
+          issuableViolations.value = response.data;
+          if (issuableViolations.value.length > 0) populateForm(0); // 初始化表單
         } catch (error) {
           console.error("獲取可開單資料失敗:", error);
         }
       };
   
       // 更新表單數據
-      const updateViolationForm = (index) => {
+      const populateForm = (index) => {
         const violation = issuableViolations.value[index];
         if (violation) {
           formData.violationId = violation.violation_id;
@@ -159,19 +187,16 @@
         }
       };
   
-      // 切換到下一個違規資料
-      const nextViolation = () => {
-        currentViolationIndex.value =
-          (currentViolationIndex.value + 1) % issuableViolations.value.length;
-        updateViolationForm(currentViolationIndex.value);
+      // 切換到下一張圖片
+      const nextImage = () => {
+        eventBus.nextImage(issuableViolations.value.length);
+        populateForm(currentImageIndex.value);
       };
   
-      // 切換到上一個違規資料
-      const prevViolation = () => {
-        currentViolationIndex.value =
-          (currentViolationIndex.value - 1 + issuableViolations.value.length) %
-          issuableViolations.value.length;
-        updateViolationForm(currentViolationIndex.value);
+      // 切換到上一張圖片
+      const prevImage = () => {
+        eventBus.prevImage(issuableViolations.value.length);
+        populateForm(currentImageIndex.value);
       };
   
       // 提交罰單
@@ -181,17 +206,15 @@
             alert("請完整填寫表單！");
             return;
           }
-  
           const payload = {
             violation_id: formData.violationId,
             license_plate: formData.licensePlate,
             violation_fact: formData.violationFact,
           };
-  
           await createNewTicket(payload);
           alert("罰單提交成功！");
-          fetchIssuableViolations(); // 重新獲取可以開單的資料
-          resetForm(); // 重置表單
+          fetchIssuableViolations();
+          resetForm();
         } catch (error) {
           console.error("提交罰單失敗:", error);
           alert("提交罰單失敗，請稍後再試！");
@@ -208,14 +231,14 @@
   
       // 預覽罰單
       const previewTicket = () => {
-        showModal.value = true; // 顯示預覽彈窗
+        showModal.value = true;
       };
   
       // 初始化
       onMounted(() => {
-        updateTime(); // 更新當前時間
-        setInterval(updateTime, 1000); // 每秒更新時間
-        fetchIssuableViolations(); // 獲取可以開單的資料
+        updateTime();
+        setInterval(updateTime, 1000);
+        fetchIssuableViolations();
       });
   
       return {
@@ -226,10 +249,11 @@
         selectedViolation,
         resetForm,
         submitTicket,
-        populateForm: updateViolationForm,
-        nextViolation,
-        prevViolation,
+        populateForm,
         previewTicket,
+        nextImage,
+        prevImage,
+        currentImageIndex,
       };
     },
   };

@@ -12,3 +12,4 @@ export const updateRecognizedPlate = (violationId, newLicensePlate) => {
     new_license_plate: newLicensePlate,
   });
 };
+

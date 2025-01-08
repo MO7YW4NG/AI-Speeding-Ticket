@@ -12,19 +12,7 @@
         <p class="text-white">無法載入圖片</p>
       </div>
       <div class="flex gap-2 justify-center mt-4">
-        <!-- 切換圖片按鈕 -->
-        <button
-          @click="prevImage"
-          class="p-2 rounded bg-gray-600 hover:bg-gray-700 text-white"
-        >
-          <i class="fas fa-chevron-left text-xl"></i>
-        </button>
-        <button
-          @click="nextImage"
-          class="p-2 rounded bg-gray-600 hover:bg-gray-700 text-white"
-        >
-          <i class="fas fa-chevron-right text-xl"></i>
-        </button>
+       
       </div>
     </div>
   </template>
@@ -32,55 +20,42 @@
   <script>
   import { ref, computed, onMounted } from "vue";
   import { getUnrecognizedPlates } from "@/services/photoService";
+  import eventBus from "@/components/eventBus";
   
   export default {
-    props: {
-      title: {
-        type: String,
-        default: "圖片檢視器",
-      },
+  props: {
+    title: {
+      type: String,
+      default: "圖片檢視器",
     },
-    setup() {
-      const images = ref([]);
-      const currentImageIndex = ref(0);
-  
-      // 加載圖片
-      const loadImages = async () => {
-        try {
-          const response = await getUnrecognizedPlates();
-          images.value = response.data.map((entry) => entry[11]); // 第 11 個字段是圖片
-        } catch (error) {
-          console.error("無法加載圖片資料：", error);
-        }
-      };
-  
-      const currentImage = computed(() => images.value[currentImageIndex.value]);
-  
-      const nextImage = () => {
-        currentImageIndex.value =
-          (currentImageIndex.value + 1) % images.value.length;
-      };
-  
-      const prevImage = () => {
-        currentImageIndex.value =
-          (currentImageIndex.value - 1 + images.value.length) %
-          images.value.length;
-      };
-  
-      onMounted(() => {
-        loadImages();
-      });
-  
-      return {
-        images,
-        currentImageIndex,
-        currentImage,
-        nextImage,
-        prevImage,
-      };
-    },
-  };
-  </script>
+  },
+  setup() {
+    const images = ref([]);
+
+    // 同步事件總線的圖片索引
+    const currentImageIndex = eventBus.currentImageIndex;
+
+    // 加載圖片
+    const loadImages = async () => {
+      try {
+        const response = await getUnrecognizedPlates();
+        images.value = response.data.map((entry) => entry[11]);
+      } catch (error) {
+        console.error("無法加載圖片資料：", error);
+      }
+    };
+
+    onMounted(() => {
+      loadImages();
+    });
+
+    return {
+      images,
+      currentImageIndex,
+    };
+  },
+};
+</script>
   
   <style>
   .image-container {

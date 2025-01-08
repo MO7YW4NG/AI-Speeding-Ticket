@@ -38,7 +38,7 @@
             </select>
           </div>
   
-          <!-- 時間 (系統時間) -->
+          <!-- 時間 -->
           <div class="flex flex-col">
             <label class="text-md text-gray-400 mb-1">時間</label>
             <input
@@ -59,123 +59,193 @@
               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
             />
           </div>
-        </div>
   
-        <!-- 按鈕區域 -->
-        <div class="flex mt-4 space-x-4">
-          <!-- 提交區域 -->
-          <div class="flex-1 flex flex-col justify-between bg-gray-800 rounded-lg p-4">
-            <button @click="prevImage" class="w-full px-3 py-2 rounded bg-gray-600 hover:bg-gray-700 text-white">
-              上一圖片
-            </button>
-            <button @click="submitForm" class="w-full px-3 py-2 rounded bg-blue-600 hover:bg-blue-700 text-white">
-              提交
-            </button>
-            <button @click="nextImage" class="w-full px-3 py-2 rounded bg-gray-600 hover:bg-gray-700 text-white">
-              下一圖片
-            </button>
+          <!-- 處理單位位置 (IP) -->
+          <div class="flex flex-col">
+            <label class="text-md text-gray-400 mb-1">處理單位位置</label>
+            <input
+              type="text"
+              v-model="formData.ipLocation"
+              placeholder="192.168.0.1"
+              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
+            />
           </div>
+  
+          <!-- 員工ID -->
+          <div class="flex flex-col">
+            <label class="text-md text-gray-400 mb-1">員工ID</label>
+            <input
+              type="text"
+              v-model="formData.employeeId"
+              placeholder="EMP001"
+              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
+            />
+          </div>
+  
+          <!-- 底部區域 -->
+          <div class="flex justify-between mt-6">
+            <!-- 回報原因區塊 -->
+            <div class="flex-1 pr-4">
+              <label class="text-md text-gray-400 mb-2 block">回報原因</label>
+              <select
+                v-model="formData.reportReason"
+                class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
+              >
+                <option value="錯誤">錯誤</option>
+                <option value="其他">其他</option>
+              </select>
+              <button
+                @click="confirmReport"
+                class="w-full mt-4 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md"
+              >
+                確認回報
+              </button>
+            </div>
+  
+            <!-- 按鈕區域 -->
+            <div class="flex-1 pl-4">
+              <button
+                @click="resetForm"
+                class="w-full mt-8 mb-4 px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-md"
+              >
+                重置
+              </button>
+              <button
+                @click="submitForm"
+                class="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
+              >
+                提交
+              </button>
+            </div>
+       
+          </div>
+          
         </div>
+            
       </div>
+           <!-- 切換圖片按鈕 -->
+    <div class="flex justify-center mt-8">
+      <button
+        @click="prevImage"
+        class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
+      >
+        <i class="fas fa-chevron-left text-2xl"></i>
+      </button>
+      <button
+        @click="nextImage"
+        class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
+      >
+        <i class="fas fa-chevron-right text-2xl"></i>
+      </button>
+    </div>
     </div>
   </template>
   
   <script>
- 
-import { reactive, ref, onMounted } from "vue"; // 引入 Vue 的核心功能
-import { getUnrecognizedPlates, updateRecognizedPlate } from "@/services/recognitionService"; // 引入與後端交互的 API 方法
+  import { reactive, ref, computed, onMounted } from "vue";
+  import { getUnrecognizedPlates, updateRecognizedPlate } from "@/services/recognitionService";
+  import eventBus from "@/components/eventBus"; // 引入事件總線
 
-export default {
-  setup() {
-    // 定義表單數據，並初始化值
-    const formData = reactive({
-      aiErrorReason: "無法辨識車牌", // AI 無法辨識車牌的原因
-      licensePlate: "", // 用戶輸入的車牌號
-      eventType: "超速", // 預設事件類型
-      serialNumber: "", // 舉發 ID
-    });
+  export default {
+    setup() {
+      // 表單數據
+      const formData = reactive({
+        aiErrorReason: "無法辨識車牌",
+        licensePlate: "",
+        eventType: "超速",
+        serialNumber: "",
+        ipLocation: "192.168.0.1",
+        employeeId: "EMP001",
+        reportReason: "錯誤",
+      });
 
-    // 定義其他響應式數據
-    const currentTime = ref(""); // 當前時間，用於顯示系統時間
-    const images = ref([]); // 存儲所有圖片（Base64 格式）
-    const plates = ref([]); // 存儲所有未辨識的車牌資料
-    const currentImageIndex = ref(0); // 當前顯示的圖片索引
+      // 時間和圖片數據
+      const currentTime = ref("");
+      const images = ref([]);
+      const plates = ref([]);
+      const currentImageIndex = eventBus.currentImageIndex; // 使用事件總線的共享索引
 
-    // 更新當前時間的方法，格式化為本地時間字符串
-    const updateTime = () => {
-      const now = new Date(); // 獲取當前時間
-      currentTime.value = now.toLocaleString(); // 將時間格式化為本地字符串
-    };
+      // 更新時間
+      const updateTime = () => {
+        const now = new Date();
+        currentTime.value = now.toLocaleString();
+      };
 
-    // 獲取未辨識車牌的數據，並初始化圖片和表單
-    const fetchUnrecognizedPlates = async () => {
-      try {
-        // 調用後端 API 獲取數據
-        const response = await getUnrecognizedPlates();
-        plates.value = response.data; // 將返回的數據存入 plates
-        images.value = plates.value.map((plate) => plate.image); // 提取圖片字段，存入 images
-        if (plates.value.length > 0) updateFormData(0); // 如果有數據，初始化表單為第一筆數據
-      } catch (error) {
-        console.error("獲取需要辨識的車牌失敗:", error); // 如果調用失敗，記錄錯誤
-      }
-    };
-
-    // 更新表單數據的方法，根據圖片索引切換表單內容
-    const updateFormData = (index) => {
-      const plate = plates.value[index]; // 根據索引取出對應的車牌數據
-      formData.aiErrorReason = plate.aiErrorReason || "無"; // 更新 AI 辨識錯誤原因
-      formData.licensePlate = plate.licensePlate || ""; // 更新車牌號碼
-      formData.serialNumber = plate.violationId; // 更新舉發 ID
-    };
-
-    // 切換到下一圖片的方法
-    const nextImage = () => {
-      currentImageIndex.value =
-        (currentImageIndex.value + 1) % images.value.length; // 計算下一張圖片索引
-      updateFormData(currentImageIndex.value); // 更新表單為下一圖片對應的數據
-    };
-
-    // 切換到上一圖片的方法
-    const prevImage = () => {
-      currentImageIndex.value =
-        (currentImageIndex.value - 1 + images.value.length) % images.value.length; // 計算上一張圖片索引
-      updateFormData(currentImageIndex.value); // 更新表單為上一圖片對應的數據
-    };
-
-    // 提交表單的方法，將數據發送到後端
-    const submitForm = async () => {
-      try {
-        if (!formData.licensePlate) {
-          alert("請輸入車牌號碼！"); // 如果車牌號碼為空，提示用戶
-          return;
+      // 加載數據
+      const fetchUnrecognizedPlates = async () => {
+        try {
+          const response = await getUnrecognizedPlates();
+          plates.value = response.data;
+          images.value = plates.value.map((plate) => plate.image);
+          if (plates.value.length > 0) updateFormData(currentImageIndex.value); // 初始化表單
+        } catch (error) {
+          console.error("獲取需要辨識的車牌失敗:", error);
         }
-        // 調用後端 API 提交數據
-        await updateRecognizedPlate(formData.serialNumber, formData.licensePlate);
-        alert("表單提交成功！"); // 提示提交成功
-        fetchUnrecognizedPlates(); // 重新加載未辨識的車牌數據
-      } catch (error) {
-        console.error("表單提交失敗:", error); // 如果提交失敗，記錄錯誤
-        alert("表單提交失敗，請稍後再試！");
-      }
-    };
+      };
 
-    // Vue 組件掛載時調用的方法
-    onMounted(() => {
-      updateTime(); // 更新當前時間
-      setInterval(updateTime, 1000); // 每秒更新時間一次
-      fetchUnrecognizedPlates(); // 加載未辨識的車牌數據
-    });
+      // 更新表單數據
+      const updateFormData = (index) => {
+        const plate = plates.value[index];
+        formData.aiErrorReason = plate?.aiErrorReason || "無";
+        formData.licensePlate = plate?.licensePlate || "";
+        formData.serialNumber = plate?.violationId || "";
+      };
 
-    // 返回數據和方法，供模板中使用
-    return {
-      formData, // 表單數據
-      currentTime, // 當前時間
-      images, // 圖片數據
-      nextImage, // 下一圖片方法
-      prevImage, // 上一圖片方法
-      submitForm, // 提交表單方法
-    };
-  },
-};
+      // 表單重置
+      const resetForm = () => {
+        formData.licensePlate = "";
+        formData.eventType = "超速";
+        formData.ipLocation = "192.168.0.1";
+        formData.employeeId = "EMP001";
+        formData.reportReason = "錯誤";
+      };
 
-  </script>
+      // 提交表單
+      const submitForm = async () => {
+        try {
+          if (!formData.licensePlate) {
+            alert("請輸入車牌號碼！");
+            return;
+          }
+          await updateRecognizedPlate(formData.serialNumber, formData.licensePlate);
+          alert("表單提交成功！");
+          fetchUnrecognizedPlates();
+        } catch (error) {
+          console.error("表單提交失敗:", error);
+          alert("表單提交失敗，請稍後再試！");
+        }
+      };
+
+      // 切換到下一張圖片
+      const nextImage = () => {
+        eventBus.nextImage(images.value.length); // 通過事件總線切換索引
+        updateFormData(currentImageIndex.value); // 更新表單
+      };
+
+      // 切換到上一張圖片
+      const prevImage = () => {
+        eventBus.prevImage(images.value.length); // 通過事件總線切換索引
+        updateFormData(currentImageIndex.value); // 更新表單
+      };
+
+      // 組件掛載時初始化數據
+      onMounted(() => {
+        updateTime();
+        setInterval(updateTime, 1000);
+        fetchUnrecognizedPlates();
+      });
+
+      return {
+        formData,
+        currentTime,
+        images,
+        resetForm,
+        submitForm,
+        nextImage,
+        prevImage,
+        currentImage: computed(() => images.value[currentImageIndex.value]), // 動態計算當前圖片
+      };
+    },
+  };
+</script>
+

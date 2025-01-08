@@ -1,9 +1,9 @@
 {
-  "compilerOptions": {
-    "paths": {
-      "@/*": ["./src/*"],
-      "@public/*": ["./public/*"]
-    }
-  },
-  "exclude": ["node_modules", "dist"]
-}
+    "compilerOptions": {
+      "paths": {
+        "@/*": ["./src/*"],
+        "@public/*": ["./public/*"]
+      }
+    },
+    "exclude": ["node_modules", "dist"]
+  }
