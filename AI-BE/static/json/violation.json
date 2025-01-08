@@ -1,0 +1,27 @@
+{
+    "device_id": "D123",
+    "entries": [
+      {
+        "photo_path": "static\\image\\1.jpg",
+        "car_speed_kmh": 75,
+        "speed_limit_kmh": 60,
+        "datetime": "2025-01-06T08:45:00",
+        "address": "臺北市中山區松江路374號"
+      },
+      {
+        "photo_path": "static\\image\\2.jpg",
+        "car_speed_kmh": 100,
+        "speed_limit_kmh": 70,
+        "datetime": "2025-01-06T09:00:00",
+        "address": "臺北市中正區汀州路三段56號"
+      },
+      {
+        "photo_path": "static\\image\\3.jpg",
+        "car_speed_kmh": 75,
+        "speed_limit_kmh": 60,
+        "datetime": "2025-01-06T09:15:00",
+        "address": "臺北市中山區錦州街4巷1號"
+      }
+    ]
+  }
+  
