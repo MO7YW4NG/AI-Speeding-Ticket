@@ -58,7 +58,8 @@ image_items = list(image_bytes_dict.items())[:100]
 # 更新到資料庫
 for idx, (file_name, image_bytes) in enumerate(image_items):
     try:
-        cursor.execute("UPDATE trafficviolation SET photo_id = %s WHERE violation_id = %s", (psycopg2.Binary(image_bytes), idx + 1))
+        print(f"正在更新圖片：{file_name} 到資料庫，violation_id={idx + 1}")
+        cursor.execute("UPDATE traffic_violation SET photo = %s WHERE violation_id = %s", (psycopg2.Binary(image_bytes), idx + 1))
         print(f"成功更新圖片：{file_name} 到資料庫")
     except Exception as e:
         print(f"無法更新圖片 {file_name} 到資料庫: {e}")

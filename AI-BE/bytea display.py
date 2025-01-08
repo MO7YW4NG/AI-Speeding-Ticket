@@ -1,4 +1,3 @@
-'''
 import psycopg2
 from PIL import Image
 import io
@@ -23,7 +22,7 @@ except Exception as e:
 
 # 查詢前 100 筆記錄
 try:
-    cursor.execute("SELECT violation_id, photo_id FROM trafficviolation WHERE violation_id BETWEEN 1 AND 100")
+    cursor.execute("SELECT violation_id, photo FROM traffic_violation WHERE violation_id BETWEEN 1 AND 100")
     records = cursor.fetchall()
     for record in records:
         violation_id, photo_id = record
@@ -37,5 +36,3 @@ except Exception as e:
 
 # 關閉連線
 cursor.close()
-conn.close()
-'''
