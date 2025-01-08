@@ -1,0 +1,83 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5808411,25.04490471 ]
+    },
+    "properties": {
+    "violation_id":0,
+    "violation_date":"2024-12-23",
+    "violation_time":"23:00:00",
+    "device_id":"D098",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"ALS0365",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"23:15:00",
+    "vehicletype":"小型車",
+    "vehiclestatuscode":"0",
+    "photo":"NULL",
+    "recognize":"1",
+    "license_plate2":"ALS0365",
+    "location":"信義區",
+    "address":"臺北市信義區中坡北路21號",
+    "report_reason":"圖片模糊"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5754089,25.03523827 ]
+    },
+    "properties": {
+    "violation_id":1,
+    "violation_date":"2024-12-23",
+    "violation_time":"00:00:00",
+    "device_id":"D099",
+    "speed_limit":60,
+    "vehicle_speed":85,
+    "license_plate":"BHS2592",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"00:15:00",
+    "vehicletype":"大型車",
+    "vehiclestatuscode":"1",
+    "photo":"NULL",
+    "recognize":"0",
+    "license_plate2":"BHS2592",
+    "location":"信義區",
+    "address":"臺北市信義區信義路六段15巷16號",
+    "report_reason":"車牌遮擋"
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5830002,25.04468727 ]
+    },
+    "properties": {
+    "violation_id":2,
+    "violation_date":"2024-12-23",
+    "violation_time":"01:00:00",
+    "device_id":"D100",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"BCG1562",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"01:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":"0",
+    "photo":"NULL",
+    "recognize":"0",
+    "license_plate2":"BCG1562",
+    "location":"南港區",
+    "address":"臺北市南港區玉成街140巷21號",
+    "report_reason":"多車牌"
+    }
+  }
+]
+}

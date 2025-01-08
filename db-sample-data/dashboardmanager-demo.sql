@@ -648,7 +648,7 @@ COPY public.auth_user_group_roles (auth_user_id, group_id, role_id) FROM stdin;
 --
 
 COPY public.auth_users (id, name, email, password, idno, uuid, tp_account, member_type, verify_level, is_admin, is_active, is_whitelist, is_blacked, expired_at, created_at, login_at) FROM stdin;
-1	Schumi	schumiy.tw@gmail.com	8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92	\N	\N	\N	\N	\N	t	t	t	f	\N	2024-12-24 18:01:16.226405+00	2025-01-02 12:07:50.471553+00
+1	Schumi	schumiy.tw@gmail.com	8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92	\N	\N	\N	\N	\N	t	t	t	f	\N	2024-12-24 18:01:16.226405+00	2025-01-08 04:36:22.134529+00
 \.
 
 
@@ -657,13 +657,15 @@ COPY public.auth_users (id, name, email, password, idno, uuid, tp_account, membe
 --
 
 COPY public.component_charts (index, color, types, unit) FROM stdin;
-pump_status	{#ff9800}	{GuageChart,BarPercentChart}	站
 welfare_institutions	{#F65658,#F49F36,#F5C860,#9AC17C,#4CB495,#569C9A,#60819C,#2F8AB1}	{BarChart,DonutChart}	間
 building_unsued	{#d16ae2,#655fad}	{MapLegend}	處
 patrol_criminalcase	{#FD5696,#00A9E0}	{TimelineSeparateChart,TimelineStackedChart,ColumnLineChart}	件
 welfare_population	{#2e999b,#80e3d4,#1f9b85,#a5ece0}	{ColumnChart,BarPercentChart,DistrictChart}	人
-speed_camera	{#F49F36,#F5C860,#9AC17C,#569C9A,#4CB495,#2F8AB1,#60819C}	{DistrictChart,BarChart}	處
-trafficviolation	{#2F8AB1,#60819C,#569C9A,#9AC17C,#4CB495}	{BarChart,DistrictChart}	件
+trafficviolation	{#ff4c4c,#2F8AB1,#60819C,#569C9A,#9AC17C,#4CB495}	{DistrictChart,ColumnChart}	件
+trafficviolation_poly	{#FF9999,#CC6666,#993333,#800000}	{TreemapChart,ColumnChart,DistrictChart}	件
+speed_camera	{#569C9A}	{DistrictChart,RadarChart}	處
+pump_status	{#ff9800}	{GuageChart,BarPercentChart}	站
+abandoned	{#BF40BF}	{ColumnChart}	件
 \.
 
 
@@ -677,8 +679,10 @@ COPY public.component_maps (id, index, title, type, source, size, icon, paint, p
 60	patrol_rain_sewer	下水道	circle	geojson	big	\N	{"circle-color": ["interpolate", ["linear"], ["to-number", ["get", "ground_far"]], -100, "#F92623", 0.51, "#81bcf5"]}	[{"key": "station_no", "name": "NO"}, {"key": "station_name", "name": "站名"}, {"key": "ground_far", "name": "距地面高[公尺]"}, {"key": "level_out", "name": "水位高[公尺]"}, {"key": "rec_time", "name": "紀錄時間"}]
 64	socl_welfare_organization_plc	社福機構	circle	geojson	big	\N	{"circle-color": ["match", ["get", "main_type"], "銀髮族服務", "#F49F36", "身障機構", "#F65658", "兒童與少年服務", "#F5C860", "社區服務、NPO", "#9AC17C", "婦女服務", "#4CB495", "貧困危機家庭服務", "#569C9A", "保護性服務", "#60819C", "#2F8AB1"]}	[{"key": "main_type", "name": "主要類別"}, {"key": "sub_type", "name": "次要分類"}, {"key": "name", "name": "名稱"}, {"key": "address", "name": "地址"}]
 43	building_unsued_public	閒置市有(公用)建物	circle	geojson	big	\N	{"circle-color":"#655fad"}	[{"key":"門牌","name":"門牌"},{"key":"房屋現況","name":"房屋現況"},{"key":"目前執行情形","name":"目前執行情形"},{"key":"閒置樓層_閒置樓層/該建物總樓層","name":"閒置樓層/總樓層"},{"key":"閒置面積㎡","name":"閒置面積㎡"},{"key":"基地管理機關","name":"基地管理機關"},{"key":"建物管理機關","name":"建物管理機關"},{"key":"原使用用途","name":"原使用用途"},{"key":"基地所有權人","name":"基地所有權人"},{"key":"建物標示","name":"建物標示"},{"key":"建築完成日期","name":"建築完成日期"}]
-92	speed_camera	測速執法設置點	circle	geojson	big	\N	{"circle-color":"#F65658"}	[{"key":"設置市區鄉鎮","name":"設置行政區區"},{"key":"管轄警局","name":"管轄警局"},{"key":"管轄分局","name":"管轄分局"},{"key":"設置地址","name":"地址"}]
-93	trafficviolation	台北市違規案件	fill	geojson	\N	\N	{"fill-color":["interpolate",["linear"],["get","number"],1,"#F9FBFF",10,"#66A8F1",50,"#003366"],"fill-opacity":0.3}	[{"key":"location","name":"行政區"},{"key":"number","name":"違規案件數量"}]
+93	trafficviolation_polygon	台北市違規案件分佈	fill	geojson	\N	\N	{"fill-color":["interpolate",["linear"],["get","number"],1,"#FFEBEB",10,"#FF4C4C",50,"#660000"],"fill-opacity":0.3}	[{"key":"location","name":"行政區"},{"key":"number","name":"違規案件數量"}]
+92	speed_camera	測速執法設置點	circle	geojson	big	\N	{"circle-color":"#569C9A"}	[{"key":"設置市區鄉鎮","name":"設置行政區區"},{"key":"管轄警局","name":"管轄警局"},{"key":"管轄分局","name":"管轄分局"},{"key":"設置地址","name":"地址"}]
+95	abandoned	無法辨識案件	circle	geojson	big	\N	{"circle-color":"#BF40BF"}	[{"key":"violation_id","name":"案件編號"},{"key":"location","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"},{"key":"report_reason","name":"無法辨識原因"}]
+94	trafficviolation	台北市違規案件	circle	geojson	big	\N	{"circle-color":"#F65658"}	[{"key":"violation_id","name":"案件編號"},{"key":"location","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"}]
 \.
 
 
@@ -687,13 +691,15 @@ COPY public.component_maps (id, index, title, type, source, size, icon, paint, p
 --
 
 COPY public.components (id, index, name, history_config, map_config_ids, map_config, chart_config, map_filter, time_from, time_to, update_freq, update_freq_unit, source, short_desc, long_desc, use_case, links, contributors, created_at, updated_at, query_type, query_chart, query_history) FROM stdin;
-90	welfare_population	社福人口	\N	{}	\N	\N	\N	static	\N	\N	\N	社會局	顯示社會福利人口（身障、低收、中低收、低收身障）的比例	顯示社會福利人口（身障、低收、中低收、低收身障）的比例，資料來源為台北市社會局內部資料，每月15號更新。	社福人口比例的資料能讓我們了解台北市社會福利的需求變化，從而規劃更貼近民眾需求的社會福利措施。	{}	{tuic}	2023-12-20 05:56:00+00	2024-01-09 03:32:59.233032+00	three_d	SELECT x_axis, y_axis, data FROM (SELECT district AS x_axis, '低收' AS y_axis, is_low_income AS data FROM app_calcu_monthly_socl_welfare_people_ppl UNION ALL SELECT district AS x_axis, '中低收' AS y_axis, is_low_middle_income AS data FROM app_calcu_monthly_socl_welfare_people_ppl UNION ALL SELECT district AS x_axis, '身障補助' AS y_axis, is_disabled_allowance AS data FROM app_calcu_monthly_socl_welfare_people_ppl UNION ALL SELECT district AS x_axis, '身障' AS y_axis, is_disabled AS data FROM app_calcu_monthly_socl_welfare_people_ppl) AS combined_data WHERE x_axis != 'e' ORDER BY ARRAY_POSITION(ARRAY['北投區', '士林區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大同區', '中正區', '萬華區', '大安區', '文山區']::varchar[], combined_data.x_axis), ARRAY_POSITION(ARRAY['低收', '中低收', '身障補助', '身障'], combined_data.y_axis);	\N
 82	welfare_institutions	社福機構	\N	{64}	\N	\N	{"mode": "byParam", "byParam": {"xParam": "main_type"}}	static	\N	\N	\N	社會局	顯示社會福利機構點位及機構類型	顯示社會福利機構點位及機構類型，資料來源為台北市社會局內部資料，每月15日更新。	根據機構空間的分佈情況，檢視社會福利機構是否均勻分布，同時整合市有土地、社會住宅等潛在可使用之空間，以研擬增設位置與類型的方案。	{https://data.taipei/dataset/detail?id=cabdf272-e0ec-4e4e-9136-f4b8596f35d9}	{tuic}	2023-12-20 05:56:00+00	2023-12-20 05:56:00+00	two_d	select main_type as x_axis,count(*) as data from socl_welfare_organization_plc group by main_type order by data desc	\N
-7	patrol_criminalcase	刑事統計	\N	{}	\N	\N	\N	year_ago	now	1	month	警察局	顯示近兩年每月的刑案統計資訊	顯示近兩年每月的刑案統計資訊，資料來源為台北市主計處開放資料，每月更新。	藉由掌握台北市刑事案件近2年的統計資訊，我們可以瞭解案件的增減趨勢及相關特徵，有助於制定更有效的治安策略。	{https://data.taipei/dataset/detail?id=dc7e246a-a88e-42f8-8cd6-9739209af774}	{tuic}	2023-12-20 05:56:00+00	2024-01-17 06:53:41.810511+00	time	WITH date_range AS (\n  SELECT\n    '%s'::timestamp with time zone AS start_time,\n    '%s'::timestamp with time zone AS end_time\n)\nSELECT "年月別" as x_axis, '發生件數' as y_axis, "發生件數[件]" as data FROM public.patrol_criminal_case \nWHERE 年月別 BETWEEN  (SELECT start_time FROM date_range) AND (SELECT end_time FROM date_range)\nUNION ALL\nSELECT "年月別" as x_axis, '破獲件數' as y_axis, "破獲件數/總計[件]" as data FROM public.patrol_criminal_case\nWHERE 年月別 BETWEEN  (SELECT start_time FROM date_range) AND (SELECT end_time FROM date_range)	\N
 30	building_unsued	閒置市有財產	\N	{42,43}	\N	\N	{"mode":"byLayer"}	static	\N	\N	\N	財政局	\N	\N	\N	{}	{tuic}	2023-12-20 05:56:00+00	2024-01-11 06:01:02.392686+00	map_legend	select '閒置市有公有地' as name, count(*) as value, 'fill' as type from building_unsued_land\nunion all\nselect '閒置市有(公用)建物' as name, count(*) as value, 'circle' as type from building_unsued_public	\N
-43	pump_status	抽水站狀態	\N	{50}	\N	\N	{"mode":"byParam","byParam":{"yParam":"all_pumb_lights"}}	current	\N	10	minute	工務局水利處	顯示當前全市開啟的抽水站數量	顯示當前全市開啟的抽水站數量，資料來源為工務局水利處內部資料，每十分鐘更新。	考慮當日天氣及「水位監測」組件的資料，來探討抽水站的運作狀況與水位異常之間的關聯性。	{}	{tuic}	2023-12-20 05:56:00+00	2024-01-25 09:36:14.565347+00	percent	select '啟動抽水站' as x_axis, y_axis, data from \n(\nselect '啟動中' as y_axis, count(*) as data from patrol_rain_floodgate where all_pumb_lights = '+'\nunion all\nselect '未啟動' as y_axis, count(*) as data from patrol_rain_floodgate where all_pumb_lights != '+'\n) as parsed_data	\N
-70	trafficviolation	台北市違規案件	null	{93}	\N	\N	{"mode":"byParam","byParam":{"xParam":"location"}}	static	\N	\N	\N	ChatGPT	顯示今日違規事件	顯示今日違規事件	顯示今日違規事件	{}	{ChatGPT}	2025-01-01 04:20:00+00	2025-01-01 14:31:05.309097+00	two_d	SELECT location AS x_axis, COUNT(*) AS data\nFROM public.trafficviolation\nWHERE location IS NOT NULL\nGROUP BY location ORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], location\n);	\N
-69	speed_camera	測速執法設置點	null	{92}	\N	\N	{"mode":"byParam","byParam":{"xParam":"設置市區鄉鎮"}}	static	\N	\N	\N	政府開放資料平台	提供全國各警察機關測速執法地點等資訊。	提供全國各警察機關測速執法地點等資訊。	顯示全國各警察機關測速執法地點、速限等資訊。	{}	{tuic}	2025-01-01 04:20:00+00	2025-01-01 14:20:39.915768+00	two_d	SELECT 設置市區鄉鎮 AS x_axis, COUNT(*) AS data\nFROM public.speed_camera\nWHERE 設置市區鄉鎮 IS NOT NULL\nGROUP BY 設置市區鄉鎮\nORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], 設置市區鄉鎮\n);\n	\N
+43	pump_status	抽水站狀態	\N	{50}	\N	\N	{"mode":"byParam","byParam":{"yParam":"all_pumb_lights"}}	current	\N	10	minute	工務局水利處	顯示當前全市開啟的抽水站數量	顯示當前全市開啟的抽水站數量，資料來源為工務局水利處內部資料，每十分鐘更新。	考慮當日天氣及「水位監測」組件的資料，來探討抽水站的運作狀況與水位異常之間的關聯性。	{}	{tuic}	2023-12-20 05:56:00+00	2024-01-25 09:36:14.565347+00	percent	SELECT\n  '啟動抽水站' AS x_axis,\n  CASE\n    WHEN all_pumb_lights = '+' THEN '啟動中'\n    WHEN all_pumb_lights = '-' THEN '未啟動'\n    ELSE '未啟用'\n  END AS y_axis,\n  COUNT(*) AS data\nFROM patrol_rain_floodgate\nGROUP BY\n  CASE\n    WHEN all_pumb_lights = '+' THEN '啟動中'\n    WHEN all_pumb_lights = '-' THEN '未啟動'\n    ELSE '未啟用'\n  END;	\N
+90	welfare_population	社福人口	\N	{}	\N	\N	\N	static	\N	\N	\N	社會局	顯示社會福利人口（身障、低收、中低收、低收身障）的比例	顯示社會福利人口（身障、低收、中低收、低收身障）的比例，資料來源為台北市社會局內部資料，每月15號更新。	社福人口比例的資料能讓我們了解台北市社會福利的需求變化，從而規劃更貼近民眾需求的社會福利措施。	{}	{tuic}	2023-12-20 05:56:00+00	2024-01-09 03:32:59.233032+00	three_d	SELECT x_axis, y_axis, data FROM (SELECT district AS x_axis, '低收' AS y_axis, is_low_income AS data FROM app_calcu_monthly_socl_welfare_people_ppl UNION ALL SELECT district AS x_axis, '中低收' AS y_axis, is_low_middle_income AS data FROM app_calcu_monthly_socl_welfare_people_ppl UNION ALL SELECT district AS x_axis, '身障補助' AS y_axis, is_disabled_allowance AS data FROM app_calcu_monthly_socl_welfare_people_ppl UNION ALL SELECT district AS x_axis, '身障' AS y_axis, is_disabled AS data FROM app_calcu_monthly_socl_welfare_people_ppl) AS combined_data WHERE x_axis != 'e' ORDER BY ARRAY_POSITION(ARRAY['北投區', '士林區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大同區', '中正區', '萬華區', '大安區', '文山區']::varchar[], combined_data.x_axis), ARRAY_POSITION(ARRAY['低收', '中低收', '身障補助', '身障'], combined_data.y_axis);	\N
+7	patrol_criminalcase	刑事統計	\N	{}	\N	\N	\N	year_ago	now	1	month	警察局	顯示近兩年每月的刑案統計資訊	顯示近兩年每月的刑案統計資訊，資料來源為台北市主計處開放資料，每月更新。	藉由掌握台北市刑事案件近2年的統計資訊，我們可以瞭解案件的增減趨勢及相關特徵，有助於制定更有效的治安策略。	{https://data.taipei/dataset/detail?id=dc7e246a-a88e-42f8-8cd6-9739209af774}	{tuic}	2023-12-20 05:56:00+00	2024-01-17 06:53:41.810511+00	time	WITH date_range AS (\n  SELECT\n    '2022-01-01 00:00:00+00'::timestamp with time zone AS start_time,\n    '2025-12-31 00:00:00+00'::timestamp with time zone AS end_time\n)\nSELECT "年月別" as x_axis, '發生件數' as y_axis, "發生件數[件]" as data FROM public.patrol_criminal_case \nWHERE 年月別 BETWEEN  (SELECT start_time FROM date_range) AND (SELECT end_time FROM date_range)\nUNION ALL\nSELECT "年月別" as x_axis, '破獲件數' as y_axis, "破獲件數/總計[件]" as data FROM public.patrol_criminal_case\nWHERE 年月別 BETWEEN  (SELECT start_time FROM date_range) AND (SELECT end_time FROM date_range)	\N
+72	abandoned	無法辨識案件	null	{95}	\N	\N	null	static	\N	\N	\N	交通AI辨識系統	提供AI辨識系統無法辨識案件	提供AI辨識系統無法辨識案件	提供AI辨識系統無法辨識案件	{}	{AI辨識子系統}	2025-01-07 23:20:00+00	2025-01-08 04:36:53.57383+00	two_d	SELECT location AS x_axis, COUNT(*) AS data\nFROM public.abandoned\nWHERE location IS NOT NULL\nGROUP BY location ORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], location\n);	\N
+69	speed_camera	測速執法設置點	null	{92}	\N	\N	{"mode":"byParam","byParam":{"xParam":"設置市區鄉鎮"}}	static	\N	\N	\N	政府開放資料平台	提供全國各警察機關測速執法地點等資訊。	提供全國各警察機關測速執法地點等資訊。	顯示全國各警察機關測速執法地點、速限等資訊。	{}	{ChatGPT}	2025-01-01 04:20:00+00	2025-01-07 17:13:45.339759+00	two_d	SELECT 設置市區鄉鎮 AS x_axis, COUNT(*) AS data\nFROM public.speed_camera\nWHERE 設置市區鄉鎮 IS NOT NULL\nGROUP BY 設置市區鄉鎮\nORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], 設置市區鄉鎮\n);	\N
+71	trafficviolation	台北市違規案件	null	{94}	\N	\N	{"mode":"byParam","byParam":{"xParam":"location"}}	static	\N	\N	\N	ChatGPT	顯示違規事件	顯示違規事件	顯示違規事件	{}	{ChatGPT}	2025-01-02 04:20:00+00	2025-01-07 17:12:12.560633+00	two_d	SELECT location AS x_axis, COUNT(*) AS data\nFROM public.trafficviolation\nWHERE location IS NOT NULL\nGROUP BY location ORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], location\n);	\N
+70	trafficviolation_poly	違規案件分佈	null	{93}	\N	\N	{"mode":"byParam","byParam":{"xParam":"location"}}	static	\N	\N	\N	ChatGPT	顯示交通違規分佈	顯示交通違規分佈	顯示交通違規分佈	{}	{ChatGPT}	2025-01-02 23:20:00+00	2025-01-07 17:12:41.774866+00	two_d	SELECT location AS x_axis, COUNT(*) AS data\nFROM public.trafficviolation\nWHERE location IS NOT NULL\nGROUP BY location ORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], location\n);	\N
 \.
 
 
@@ -723,9 +729,9 @@ COPY public.dashboard_groups (dashboard_id, group_id) FROM stdin;
 
 COPY public.dashboards (id, index, name, components, icon, updated_at, created_at) FROM stdin;
 72	9428d4c744c6	收藏組件	\N	favorite	2024-12-24 18:01:16.241158+00	2024-12-24 18:01:16.241158+00
-1	demo-components	範例組件	{7,43,82,90,69,70}	bug_report	2025-01-01 12:38:32.983393+00	2023-12-27 06:11:56.841132+00
-73	Taipei_traffic_violations	台北交通違規案件	{69,70}	traffic	2025-01-02 12:06:00.26019+00	2025-01-01 12:49:12.106472+00
 74	map-layers	圖資資訊	{30}	star	2025-01-02 12:09:24.03392+00	2025-01-02 12:09:24.03392+00
+1	demo-components	範例組件	{7,43,82,90}	bug_report	2025-01-02 14:06:28.728202+00	2023-12-27 06:11:56.841132+00
+73	Taipei_traffic_violations	台北交通違規案件	{69,71,70,72}	traffic	2025-01-07 08:31:11.637273+00	2025-01-01 12:49:12.106472+00
 \.
 
 
@@ -763,6 +769,9 @@ COPY public.roles (id, name, access_control, modify, read) FROM stdin;
 1	admin	t	t	t
 2	editor	f	t	t
 3	viewer	f	f	t
+4	admin	t	t	t
+5	editor	f	t	t
+6	viewer	f	f	t
 \.
 
 
@@ -834,7 +843,7 @@ COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_col
 -- Name: auth_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.auth_users_id_seq', 1, true);
+SELECT pg_catalog.setval('public.auth_users_id_seq', 2, true);
 
 
 --
@@ -848,7 +857,7 @@ SELECT pg_catalog.setval('public.component_maps_id_seq', 93, true);
 -- Name: components_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.components_id_seq', 70, true);
+SELECT pg_catalog.setval('public.components_id_seq', 71, true);
 
 
 --
@@ -890,7 +899,7 @@ SELECT pg_catalog.setval('public.issues_id_seq', 1, false);
 -- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.roles_id_seq', 3, true);
+SELECT pg_catalog.setval('public.roles_id_seq', 6, true);
 
 
 --
