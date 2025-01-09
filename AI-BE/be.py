@@ -3,8 +3,11 @@ import psycopg
 import main
 import base64
 import os
+from pydantic import BaseModel
 
 router = APIRouter()  # Initialize APIRouter instead of FastAPI
+
+print(os.environ['DB_DASHBOARD_DBNAME'], os.environ['DB_DASHBOARD_USER'], os.environ['DB_DASHBOARD_PASSWORD'], os.environ['DB_DASHBOARD_HOST'], os.environ['DB_DASHBOARD_PORT'])
 
 conninfo = f"dbname={os.environ['DB_DASHBOARD_DBNAME']} user={os.environ['DB_DASHBOARD_USER']} password={os.environ['DB_DASHBOARD_PASSWORD']} host={os.environ['DB_DASHBOARD_HOST']} port={os.environ['DB_DASHBOARD_PORT']}"
 
@@ -26,7 +29,7 @@ def recognize_license_plate():
                 print(license_plate)
         
 @router.get("/violation/get_all_unrecognized")
-def get_unrecognized_license_plates_by_AI():
+def get_unrecognized_license_plates_by_AI(employee_id):
     entries = []
     with psycopg.connect(conninfo,autocommit=True) as conn:
         with conn.cursor() as cursor:
@@ -73,77 +76,79 @@ def insert_new_violation(data):
                                 entry['address'], entry['longitude'], entry['latitude']))
                 
         return ("New violation(s) added successfully.")
+    
+class UpdateLicensePlateRequest(BaseModel):
+    new_license_plate: str
+    employee_id: str
+    processor_ip: str
+    respond_code: int
         
-@router.post("/violation/update_license_plate")
-def artificial_recognize_license_plate(violation_id, new_license_plate):
+@router.post("/violation/update_status/{violation_id}")
+def artificial_recognize_license_plate(violation_id: int, request: UpdateLicensePlateRequest):
     with psycopg.connect(conninfo, autocommit=True) as conn:
-        with conn.cursor() as cursor:
-            
-            sql =   '''  
-                    UPDATE traffic_violation 
-                    SET license_plate = %s, status_code = 0 
-                    WHERE violation_id = %s;
-                    '''
-            
-            cursor.execute(sql, (new_license_plate, violation_id))
+        response = request.respond_code
         
-        return ("License plate updated successfully.")
-
-    
-# @router.post("/violation/remove")
-# def move_and_delete_unrecognized_license_plate(violation_id):
-#     with psycopg.connect(conninfo,autocommit=True) as conn:
-#         with conn.cursor() as cursor:
-
-#             # Select the entry to be moved
-#             select_sql =    '''
-#                             SELECT violation_id, violation_date, violation_time, device_id, 
-#                             speed_limit, vehicle_speed, license_plate, licenseplatereplydate, 
-#                             licenseplatereplytime, vehicletype, vehiclestatuscode, photo, 
-#                             recognize, license_plate2, location, address, longitude, latitude
-#                             FROM trafficviolation WHERE violation_id = %s
-#                             '''
-#             cursor.execute(select_sql, (violation_id,))
-#             violation = cursor.fetchone()
-#             cursor.execute(select_sql, (violation_id,))
-#             violation = cursor.fetchone()
-
-#             if violation:
-#                 # Insert the entry into the abandoned table
-#                 insert_sql =    '''
-#                                 INSERT INTO abandoned (violation_id, violation_date, violation_time, device_id, 
-#                                 speed_limit, vehicle_speed, license_plate, licenseplatereplydate, 
-#                                 licenseplatereplytime, vehicletype, vehiclestatuscode, photo, 
-#                                 recognize, license_plate2, location, address, longitude, latitude)
-#                                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-#                                 '''
+        # If license plate is recognizable
+        if response == 0: 
+            with conn.cursor() as cursor:
+                sql = '''
+                    SELECT license_plate FROM traffic_violation WHERE violation_id = %s;
+                '''
                 
-#                 cursor.execute(insert_sql, violation) 
-
-#                 # Delete the entry from the original table
-#                 delete_sql = '''DELETE FROM trafficviolation WHERE violation_id = %s'''
-#                 cursor.execute(delete_sql, (violation_id,))
-
-#                 print("License plate moved and deleted successfully.")
-#             else:
-#                 print("Violation ID not found.")
-
-@router.post("/violation/update_status")
-def update_traffic_violation(violation_id, status_code):
-    with psycopg.connect(conninfo,autocommit=True) as conn:
-        with conn.cursor() as cursor:
-
-            # Use parameterized query to safely insert the name
-            sql = '''  
-                    UPDATE traffic_violation 
-                    SET status_code = %s
-                    WHERE violation_id = %s;
+                cursor.execute(sql, (violation_id,))
+                old_license_plate = cursor.fetchone()
+                
+                if old_license_plate:
+                    old_license_plate = old_license_plate[0]  # Extract the string value from the tuple
+                    
+                    sql = '''
+                        INSERT INTO artificial_recognition_log (employee_id, processor_ip, event_detail,
+                        license_plate)
+                        VALUES (%s, %s, %s, %s);
                     '''
+                    
+                    event_detail = f"Made changes to ID: {violation_id}, updated license plate from {old_license_plate} to {request.new_license_plate}."
+                    cursor.execute(sql, (request.employee_id, request.processor_ip, event_detail, request.new_license_plate))
+                    
+                    sql = '''
+                        UPDATE traffic_violation 
+                        SET license_plate = %s, status_code = 0 
+                        WHERE violation_id = %s;
+                    '''
+                    
+                    cursor.execute(sql, (request.new_license_plate, violation_id))
+                    
+            return "License plate updated successfully."
+        
+        #if license plate is unrecognizable
+        elif response in [1, 2, 3]:
+            with conn.cursor() as cursor:
+                sql =   '''
+                        SELECT license_plate FROM traffic_violation WHERE violation_id = %s;
+                        '''
+                
+                cursor.execute(sql, (violation_id,))
+                old_license_plate = cursor.fetchone()
+
+                sql =   '''
+                    INSERT INTO artificial_recognition_log (employee_id, processor_ip, event_detail,
+                    license_plate)
+                    VALUES (%s, %s, %s, %s);
+                    '''
+
+                if response == 1:
+                    reason = "License plate is blurry."
+                elif response == 2:
+                    reason = "License plate is obscured."
+                elif response == 3:
+                    reason = "The image has more than one license plate visible."    
+                cursor.execute(sql, (request.employee_id, request.processor_ip, f"Cannot recognize license plate. Reason: {reason}.",
+                                        old_license_plate[0]))
             
-            # Execute the query with the 'name' argument passed as a parameter
-            cursor.execute(sql, (status_code, violation_id,))
-    
-    return ("Traffic violation status updated successfully.")
+            return "License plate unrecognizable. Log created."
+        
+    return "Invalid response code."
+
 
 @router.get("/violation/get_all")
 def get_all_issuable_violations():
