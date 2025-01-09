@@ -16,10 +16,11 @@
   
           <!-- 辨識車牌號碼 -->
           <div class="flex flex-col mb-4">
-            <label class="text-md text-gray-400 mb-1">辨識車牌號碼</label>
+            <label class="text-md text-gray-400 mb-1">辨識車牌號碼(更改欄位)</label>
             <input
               type="text"
               v-model="formData.licensePlate"
+              id="license-plate"
               placeholder="請輸入車牌號碼"
               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
             />
@@ -86,20 +87,17 @@
           <div class="flex justify-between mt-6">
             <!-- 回報原因區塊 -->
             <div class="flex-1 pr-4">
-              <label class="text-md text-gray-400 mb-2 block">回報原因</label>
+              <label class="text-md mt-8 text-gray-400 mb-2 block">回報原因</label>
               <select
                 v-model="formData.reportReason"
                 class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
               >
-                <option value="錯誤">錯誤</option>
-                <option value="其他">其他</option>
+              <option value="錯誤">無</option>
+                <option value="錯誤">圖片模糊</option>
+                <option value="其他">車牌遮擋</option>
+                <option value="其他">多車牌</option>
               </select>
-              <button
-                @click="confirmReport"
-                class="w-full mt-4 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-md"
-              >
-                確認回報
-              </button>
+              
             </div>
   
             <!-- 按鈕區域 -->
@@ -143,7 +141,7 @@
   
   <script>
   import { reactive, ref, computed, onMounted } from "vue";
-  import { getUnrecognizedPlates, updateRecognizedPlate } from "@/services/recognitionService";
+  import { getUnrecognizedPlates, updateRecognizedPlate, updateViolationStatus } from "@/services/recognitionService";
   import eventBus from "@/components/eventBus"; // 引入事件總線
 
   export default {
@@ -153,7 +151,7 @@
         aiErrorReason: "無法辨識車牌",
         licensePlate: "",
         eventType: "超速",
-        serialNumber: "",
+        serialNumber: "", 
         ipLocation: "192.168.0.1",
         employeeId: "EMP001",
         reportReason: "錯誤",
@@ -171,25 +169,53 @@
         currentTime.value = now.toLocaleString();
       };
 
-      // 加載數據
-      const fetchUnrecognizedPlates = async () => {
-        try {
-          const response = await getUnrecognizedPlates();
-          plates.value = response.data;
-          images.value = plates.value.map((plate) => plate.image);
-          if (plates.value.length > 0) updateFormData(currentImageIndex.value); // 初始化表單
-        } catch (error) {
-          console.error("獲取需要辨識的車牌失敗:", error);
-        }
-      };
+     // 加載數據
+const fetchUnrecognizedPlates = async () => {
+  try {
+    // 從後端獲取需要人工辨識的資料
+    const response = await getUnrecognizedPlates();
+    console.log(response.data); // 確認後端返回的數據結構
+    plates.value = response.data;
 
-      // 更新表單數據
-      const updateFormData = (index) => {
-        const plate = plates.value[index];
-        formData.aiErrorReason = plate?.aiErrorReason || "無";
-        formData.licensePlate = plate?.licensePlate || "";
-        formData.serialNumber = plate?.violationId || "";
-      };
+    // 將圖片數據提取出來，與違規資料對應
+    images.value = plates.value.map((plate) => plate.image);
+
+    // 如果有數據，初始化第一筆資料到表單
+    if (plates.value.length > 0) {
+      updateFormData(currentImageIndex.value);
+    } else {
+      // 如果沒有需要辨識的資料，清空表單
+      resetForm();
+    }
+  } catch (error) {
+    console.error("獲取需要辨識的車牌失敗:", error);
+  }
+};
+
+// 更新表單數據
+const updateFormData = (index) => {
+  if (plates.value.length === 0) {
+    resetForm(); // 如果沒有資料，清空表單
+    return;
+  }
+
+  const plate = plates.value[index];
+
+  // 更新表單數據，包括 AI 錯誤原因、車牌號碼與舉發ID
+  formData.aiErrorReason = plate?.aiErrorReason || "無法辨識車牌";
+  formData.licensePlate = plate[6] || "";
+  formData.serialNumber = plate[0] || "";
+
+  if (plate[11] === 11) {
+    formData.aiErrorReason = "多車牌"; // status_code = 11 時顯示 "多車牌"
+  } else if (plate[11] === 12) {
+    formData.aiErrorReason = "其他原因"; // status_code = 12 時顯示 "其他原因"
+  } else {
+    formData.aiErrorReason = ""; // 如果無匹配，顯示空
+  }
+};
+
+
 
       // 表單重置
       const resetForm = () => {
@@ -200,21 +226,21 @@
         formData.reportReason = "錯誤";
       };
 
-      // 提交表單
       const submitForm = async () => {
-        try {
-          if (!formData.licensePlate) {
-            alert("請輸入車牌號碼！");
-            return;
-          }
-          await updateRecognizedPlate(formData.serialNumber, formData.licensePlate);
-          alert("表單提交成功！");
-          fetchUnrecognizedPlates();
-        } catch (error) {
-          console.error("表單提交失敗:", error);
-          alert("表單提交失敗，請稍後再試！");
+      try {
+        if (!formData.licensePlate) {
+          alert("請輸入車牌號碼！");
+          return;
         }
-      };
+        // 調用後端 API，將車牌號碼回傳至資料庫
+        await updateRecognizedPlate(formData.serialNumber, formData.licensePlate);
+       
+        alert("車牌號碼已成功提交至資料庫！");
+      } catch (error) {
+        console.error("提交失敗:", error);
+        alert("提交失敗，請稍後再試！");
+      }
+    };
 
       // 切換到下一張圖片
       const nextImage = () => {

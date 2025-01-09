@@ -18,11 +18,11 @@
   </template>
   
   <script>
-  import { ref, computed, onMounted } from "vue";
-  import { getUnrecognizedPlates } from "@/services/photoService";
-  import eventBus from "@/components/eventBus";
-  
-  export default {
+import { ref, onMounted } from "vue";
+import { getUnrecognizedPlates } from "@/services/photoService";
+import eventBus from "@/components/eventBus";
+
+export default {
   props: {
     title: {
       type: String,
@@ -30,21 +30,37 @@
     },
   },
   setup() {
+    // 保存圖片數據
     const images = ref([]);
-
-    // 同步事件總線的圖片索引
+    // 設置當前圖片索引，使用全局共享的 EventBus
     const currentImageIndex = eventBus.currentImageIndex;
 
-    // 加載圖片
+    // 加載圖片數據
     const loadImages = async () => {
       try {
         const response = await getUnrecognizedPlates();
-        images.value = response.data.map((entry) => entry[11]);
+        if (response.data && response.data.length > 0) {
+          // 解析並保存圖片的 base64 數據
+          images.value = response.data.map((entry) => entry[10]); // 確認是圖片欄位的索引
+        } else {
+          console.warn("沒有獲取到圖片數據");
+        }
       } catch (error) {
         console.error("無法加載圖片資料：", error);
       }
     };
 
+    // 切換到下一張圖片
+    const nextImage = () => {
+      eventBus.nextImage(images.value.length);
+    };
+
+    // 切換到上一張圖片
+    const prevImage = () => {
+      eventBus.prevImage(images.value.length);
+    };
+
+    // 組件掛載後加載圖片數據
     onMounted(() => {
       loadImages();
     });
@@ -52,10 +68,13 @@
     return {
       images,
       currentImageIndex,
+      nextImage,
+      prevImage,
     };
   },
 };
 </script>
+
   
   <style>
   .image-container {
