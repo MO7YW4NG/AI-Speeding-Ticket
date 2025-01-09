@@ -1,2 +1,2 @@
 from violation.violation import insert_new_violation
-from violation.letter_printer import print_letter
+from violation.letter_printer import print_letter, PrinterData
