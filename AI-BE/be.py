@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 router = APIRouter()  # Initialize APIRouter instead of FastAPI
 
-print(os.environ['DB_DASHBOARD_DBNAME'], os.environ['DB_DASHBOARD_USER'], os.environ['DB_DASHBOARD_PASSWORD'], os.environ['DB_DASHBOARD_HOST'], os.environ['DB_DASHBOARD_PORT'])
+# print(os.environ['DB_DASHBOARD_DBNAME'], os.environ['DB_DASHBOARD_USER'], os.environ['DB_DASHBOARD_PASSWORD'], os.environ['DB_DASHBOARD_HOST'], os.environ['DB_DASHBOARD_PORT'])
 
 conninfo = f"dbname={os.environ['DB_DASHBOARD_DBNAME']} user={os.environ['DB_DASHBOARD_USER']} password={os.environ['DB_DASHBOARD_PASSWORD']} host={os.environ['DB_DASHBOARD_HOST']} port={os.environ['DB_DASHBOARD_PORT']}"
 
@@ -221,3 +221,21 @@ def update_traffic_violation(violation_id, employee_id, processor_ip):
             cursor.execute(sql, (violation_id,))
     
     return ("Traffic violation issued successfully.")
+
+
+# API BELOW IS FOR GETGEOJSON
+
+@router.get("/geojson/get_today_violations")
+def get_today_violations():
+    with psycopg.connect(conninfo,autocommit=True) as conn:
+        with conn.cursor() as cursor:
+            sql = '''SELECT violation_id, violation_date, violation_time, device_id, speed_limit, vehicle_speed, 
+                       license_plate, licenseplate_reply_date, licenseplate_reply_time, vehicle_type,
+                       status_code, district, address, longitude, latitude
+                       FROM traffic_violation WHERE violation_date = CURRENT_DATE'''
+            
+            cursor.execute(sql)
+            violations = cursor.fetchall()
+            print (violations)
+            return violations
+        
