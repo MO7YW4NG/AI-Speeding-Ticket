@@ -1,0 +1,30 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.5830002,25.04468727 ]
+    },
+    "properties": {
+    "violation_id":100,
+    "violation_date":"2024-01-10",
+    "violation_time":"01:00:00",
+    "device_id":"D100",
+    "speed_limit":50,
+    "vehicle_speed":75,
+    "license_plate":"BCG1562",
+    "licenseplatereplydate":"2024-12-23",
+    "licenseplatereplytime":"01:15:00",
+    "vehicletype":"機車",
+    "vehiclestatuscode":1,
+    "photo_id":"binary data",
+    "recognize":"0",
+    "license_plate2":"BCG1562",
+    "location":"南港區",
+    "address":"臺北市南港區玉成街140巷21、23號2樓"
+    }
+  }
+]
+}
