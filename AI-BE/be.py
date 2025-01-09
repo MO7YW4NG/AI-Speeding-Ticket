@@ -29,10 +29,13 @@ def recognize_license_plate():
                 print(license_plate)
         
 @router.get("/violation/get_all_unrecognized")
-def get_unrecognized_license_plates_by_AI(employee_id):
+def get_unrecognized_license_plates_by_AI(employee_id, processor_ip):
     entries = []
     with psycopg.connect(conninfo,autocommit=True) as conn:
         with conn.cursor() as cursor:
+
+            sql = '''INSERT INTO artificial_recognition_log (employee_id, processor_ip, event_detail) VALUES (%s, %s, %s);'''
+            cursor.execute(sql, (employee_id, processor_ip, "Logged into the system."))
     
             # Use parameterized query to safely insert the name
             sql = '''SELECT * FROM traffic_violation WHERE status_code IN (11, 12);''' # 11 / 12 means not recognized by AI
