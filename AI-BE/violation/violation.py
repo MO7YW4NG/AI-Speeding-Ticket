@@ -35,27 +35,66 @@ async def get_plate_number(photo_path):
         print(f"Failed to retrieve the image. File not found: {photo_path}")
         return None
 
+# Function to get the vehicle details from the plate number
+async def get_vehicle_details(plate_number):
+    if plate_number is not None:
+        temp = be.get_vehicle_details(plate_number)
+        print("Vehicle detail:", temp)
+    if len(temp) > 0:
+        if temp[0][5] == 0: # 0 means the owner is alive
+            result = { "vehicletype": temp[0][2],
+                    "vehiclestatuscode": 0}
+            return result
+        if temp[0][5] == 1: # 1 means the owner is dead
+            result = { "vehicletype": temp[0][2],
+                    "vehiclestatuscode": 24}
+            return result
+    else:
+        result = { "vehicletype": "Not registered",
+                   "vehiclestatuscode": 27}
+        return result
+    
+
 async def insert_new_violation(file_path):
     data = read_json_file(file_path) 
     
     for entry in data['entries']:
         photo_path = entry['photo_path']
         plate_number = await get_plate_number(photo_path)
-        # print(f"Plate Number: {plate_number}")
+
+        current_datetime = datetime.now()
+
+        reply_date = current_datetime.date().isoformat()
+        reply_time = current_datetime.strftime("%H:%M:%S")
+        print(f"Plate Number: {plate_number}")
 
         if plate_number is not None:
-            if plate_number.confidence >= 0.9:
-                entry['plate_number'] = plate_number.number
-                entry['recognize'] = 0
+            if plate_number.recog_result == 1:  # 1 means multiple plate numbers
+                entry['plate_number'] = "Unrecognized"
+                entry['status'] = 11
 
-            elif plate_number.confidence < 0.9 and plate_number.confidence > 0:
-                entry['plate_number'] = plate_number.number
-                entry['recognize'] = 1
+            elif plate_number.recog_result == 2:  # 2 means recognition failed
+                entry['plate_number'] = "Unrecognized"
+                entry['status'] = 12
+            elif plate_number.recog_result == 0:
+                if plate_number.confidence >= 0.85:
+                    entry['plate_number'] = plate_number.number
+                    entry['status'] = 0
+                elif plate_number.confidence < 0.85:
+                    entry['plate_number'] = plate_number.number
+                    entry['status'] = 12
             else:
-                entry['plate_number'] = None
-                entry['recognize'] = 1
+                print("Plate number doesn't meet any condition above.")
         else:
             print("Failed to get the plate number.")
+
+        if entry['status'] == 0:
+            details = await get_vehicle_details(plate_number.number)
+            entry['vehicletype'] = details['vehicletype']
+            entry['status'] = details['vehiclestatuscode']
+        else:
+            entry['vehicletype'] = None
+            entry['status'] = None
     
         # Extract date and time from datetime
         dt = datetime.fromisoformat(entry['datetime'])
@@ -66,10 +105,16 @@ async def insert_new_violation(file_path):
         entry['longitude'] = lon
         entry['latitude'] = long
 
+        entry['reply_date'] = reply_date
+        entry['reply_time'] = reply_time
+
         entry['district'] = get_district(entry['address'])
+
 
     print(data)
 
     # Send the updated data to the database
-    await be.insert_new_violation(data)
+    be.insert_new_violation(data)
+
+    return ("Data inserted successfully.")
 
