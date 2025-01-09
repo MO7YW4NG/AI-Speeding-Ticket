@@ -7,7 +7,7 @@ import time
 from fastapi.staticfiles import StaticFiles
 # import os
 from be import router as be_router  # Import the router from be.py
-from violation import insert_new_violation
+from violation import insert_new_violation, print_letter, PrinterData
 
 app = FastAPI()
 
@@ -49,6 +49,12 @@ async def geocoding(address: str):
 async def process_violations(file_path: str):
     await insert_new_violation(file_path)
     return {"status": "Processing completed"}
+
+
+@app.post("/print-letter")
+async def letter_print(data: PrinterData):
+    await print_letter(data)
+    return {"status": "Printing completed"}
 
 app.include_router(be_router)
 
