@@ -154,10 +154,13 @@ def artificial_recognize_license_plate(violation_id: int, request: UpdateLicense
 
 
 @router.get("/violation/get_all_issuable")
-def get_all_issuable_violations():
+def get_all_issuable_violations(employee_id, processor_ip):
     entries = []
     with psycopg.connect(conninfo,autocommit=True) as conn:
         with conn.cursor() as cursor:
+
+            sql = '''INSERT INTO final_print_log (employee_id, processor_ip, event_detail) VALUES (%s, %s, %s);'''
+            cursor.execute(sql, (employee_id, processor_ip, "Logged into the system."))
 
             # Use parameterized query to safely insert the name
             sql = '''SELECT * FROM traffic_violation where status_code = 0''' # 0 means recognized by AI and human
@@ -197,9 +200,19 @@ def get_vehicle_details(plate_number):
     return result
 
 @router.post("/violation/issue")
-def update_traffic_violation(violation_id):
+def update_traffic_violation(violation_id, employee_id, processor_ip):
     with psycopg.connect(conninfo,autocommit=True) as conn:
         with conn.cursor() as cursor:
+
+            sql = '''SELECT speed_limit, vehicle_speed, photo FROM traffic_violation WHERE violation_id = %s'''
+            cursor.execute(sql, (violation_id,))
+
+            violation_data = cursor.fetchone()
+
+            sql = '''INSERT INTO final_print_log (employee_id, processor_ip, print_image, speed_limit, vehicle_speed, event_detail)
+                     VALUES (%s, %s, %s, %s, %s, %s);'''
+
+            cursor.execute(sql, (employee_id, processor_ip, violation_data[2], violation_data[0], violation_data[1], "Issued a new ticket."))
 
             # Use parameterized query to safely insert the name
             sql = '''UPDATE traffic_violation SET status_code = 30 WHERE violation_id = %s'''
