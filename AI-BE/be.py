@@ -142,7 +142,7 @@ def artificial_recognize_license_plate(violation_id: int, request: UpdateLicense
                     reason = "License plate is obscured."
                 elif response == 3:
                     reason = "The image has more than one license plate visible."    
-                cursor.execute(sql, (request.employee_id, request.processor_ip, f"Cannot recognize license plate. Reason: {reason}.",
+                cursor.execute(sql, (request.employee_id, request.processor_ip, f"Cannot recognize license plate. Reason: {reason}",
                                         old_license_plate[0]))
             
             return "License plate unrecognizable. Log created."
@@ -150,7 +150,7 @@ def artificial_recognize_license_plate(violation_id: int, request: UpdateLicense
     return "Invalid response code."
 
 
-@router.get("/violation/get_all")
+@router.get("/violation/get_all_issuable")
 def get_all_issuable_violations():
     entries = []
     with psycopg.connect(conninfo,autocommit=True) as conn:
