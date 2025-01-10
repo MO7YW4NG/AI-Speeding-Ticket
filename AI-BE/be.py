@@ -295,7 +295,7 @@ def get_sus_licenseplates():
             sql = '''SELECT violation_id, violation_date, violation_time, device_id, speed_limit, vehicle_speed, 
                        license_plate, licenseplate_reply_date, licenseplate_reply_time, vehicle_type,
                        status_code, district, address, longitude, latitude
-                       FROM traffic_violation WHERE status_code >= 24 AND status_code <= 26'''
+                       FROM traffic_violation WHERE status_code >= 24 AND status_code <= 25'''
             
             cursor.execute(sql)
             violations = cursor.fetchall()

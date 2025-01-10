@@ -2,6 +2,17 @@ from geojson import Point, Feature, FeatureCollection, MultiPolygon
 import json
 import be
 
+violation_mapping = {
+    0: '可開單', 
+    11: '多車牌',
+    12: '辨識失敗', 
+    22: '車牌遮擋',  
+    23: '多車牌',
+    24: '車牌合格、車主死亡', 
+    25: '車牌不合格', 
+    30: '已處理案件 (已開單)',
+}
+
 async def update_trafficviolation_today_geojson():
     violations = be.get_today_violations()
     
@@ -24,7 +35,7 @@ async def update_trafficviolation_today_geojson():
                 "licenseplate_reply_date": violation[7].isoformat(),
                 "licenseplate_reply_time": violation[8].strftime("%H:%M:%S"),
                 "vehicle_type": violation[9],
-                "status_code": violation[10],
+                "status_code": violation_mapping.get(violation[10]),
                 "district": violation[11],
                 "address": violation[12]
             }
@@ -62,7 +73,7 @@ async def update_trafficviolation_geojson():
                 "licenseplate_reply_date": violation[7].isoformat(),
                 "licenseplate_reply_time": violation[8].strftime("%H:%M:%S"),
                 "vehicle_type": violation[9],
-                "status_code": violation[10],
+                "status_code": violation_mapping.get(violation[10]),
                 "district": violation[11],
                 "address": violation[12]
             }
@@ -122,7 +133,7 @@ async def update_abandoned_trafficviolation_geojson():
                 "licenseplate_reply_date": violation[7].isoformat(),
                 "licenseplate_reply_time": violation[8].strftime("%H:%M:%S"),
                 "vehicle_type": violation[9],
-                "status_code": violation[10],
+                "status_code": violation_mapping.get(violation[10]),
                 "district": violation[11],
                 "address": violation[12]
             }
@@ -160,7 +171,7 @@ async def update_sus_licenseplate_geojson():
                 "licenseplate_reply_date": violation[7].isoformat(),
                 "licenseplate_reply_time": violation[8].strftime("%H:%M:%S"),
                 "vehicle_type": violation[9],
-                "status_code": violation[10],
+                "status_code": violation_mapping.get(violation[10]),
                 "district": violation[11],
                 "address": violation[12]
             }
