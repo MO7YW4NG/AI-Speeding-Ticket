@@ -12,21 +12,6 @@ router = APIRouter()  # Initialize APIRouter instead of FastAPI
 conninfo = f"dbname={os.environ['DB_DASHBOARD_DBNAME']} user={os.environ['DB_DASHBOARD_USER']} password={os.environ['DB_DASHBOARD_PASSWORD']} host={os.environ['DB_DASHBOARD_HOST']} port={os.environ['DB_DASHBOARD_PORT']}"
 
 # Replace @app.get and @app.post with @router.get and @router.post
-@router.get("/recognize_license_plate")
-def recognize_license_plate():
-    with psycopg.connect(conninfo,autocommit=True) as conn:
-        with conn.cursor() as cursor:
-            # Use parameterized query to safely insert the name
-            sql = '''SELECT * FROM traffic_violation'''
-
-            cursor.execute(sql)
-
-            violations = cursor.fetchall()
-
-            for violation in violations:
-                image = violation[1] # assuming the image is in the second column
-                license_plate = main.recognize_license_plate(image)
-                print(license_plate)
         
 @router.get("/violation/get_all_unrecognized")
 def get_unrecognized_license_plates_by_AI(employee_id, processor_ip):
