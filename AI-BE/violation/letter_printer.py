@@ -3,9 +3,9 @@ from datetime import timedelta, datetime
 import io
 from pydantic import BaseModel
 import base64
-BASE_IMG = 'base.jpg'
+BASE_IMG = 'violation/base.jpg'
 FONT_SIZE = 26
-FONT_PATH = 'C:/Windows/fonts/kaiu.ttf'
+FONT_PATH = 'violation/KAIU.TTF'
 COLOR = 'black'
 PADDING = 20
 
