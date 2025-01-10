@@ -64,7 +64,7 @@
   
           // 模擬完成程序後跳轉
           setTimeout(() => {
-            this.$router.push("/test1"); // 替換為主要程式的路由
+            this.$router.push("/Recognition"); // 替換為主要程式的路由
           }, 2000);
         }, 300); // 閃光動畫持續時間
       },
