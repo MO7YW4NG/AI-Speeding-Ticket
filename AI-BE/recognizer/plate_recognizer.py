@@ -48,7 +48,7 @@ plateExtractor = Agent(
     system_prompt=(
         'Be concise, Your job is to extract the license plate and recognize its number from the given image.'
         'First, you must use `plate_detection` tool to get the coordinates of the plate and recog_result.'
-        'If the recog_result is 1 or 2, terminate the process.'
+        'If recog_result == 1 or 2, terminate and return with no number and confidence.'
         'If a plate is detected, use `crop_image` tool to crop the image,'
         'then use `recognize` tool to recognize the number.'
         ),
@@ -107,10 +107,12 @@ async def plate_detection(ctx: RunContext[Deps]) -> BoundingBox:
     image = load_image(ctx.deps.image_path)
     data = encode_image(image)
 
-    prompt = '''Return bounding boxes for license plate in the given image.
-        1. If multiple plates in the image, terminate process, and return 1.
-        2. If no plate is detected or the image is unrecognizable, terminate process, and return 2.
+    prompt = '''<goal>Return bounding boxes for license plate in the given image</goal>
+        <guidelines>
+        1. Once there're over one license plate found in given image, terminate and return with recog_result 1.
+        2. If no plate is detected or the image is unrecognizable, terminate and return with recog_result 2.
         3. If only one plate is successfully detected, continue and return 0.
+        </guidelines>
         '''
     try:
         response = await genai.beta.chat.completions.parse(model="gemini-1.5-flash",messages=
@@ -222,11 +224,11 @@ async def recognize(ctx: RunContext[Deps]) -> ExtractedPlate:
     os.remove(ctx.deps.image_path)
     result = None
     
-    prompt = """You are state-of-the-art OCR. Your task is to analyze the given image and follow these steps:
-                Step 1. Extract the license plate number from the image. MUST extract the number with only one dash(-) character.
-                Step 2. Double-check similar characters or numbers like `8, B`, `0, O`, `A, W, H, N, M`, `5, 3`, and `V, Y`. As long as is uncertain, return lower confidence.
-                Step 3. Provide a float between 0 and 1 as confidence score for the extracted text.
-                Step 4. The regex pattern will typically be: `^(?:[A-Z]{3}-[0-9]{4}|[0-9]{3}-[A-Z]{3}|[0-9]{4}-[A-Z]{2}|[0-9]{4}-[A-Z]{2}|[A-Z]{3}-[0-9]{3})$`.
+    prompt = """Act as a state-of-the-art OCR. Your task is to analyze the given image and follow these steps:
+                Step 1. Extract the license plate number from the image. MUST extract the number with exactly one dash(-) character.
+                Step 2. Double-check similar characters or numbers like `8, B`, `0, O, D, U`, `A, W, H, N, M`, `5, 3`, `Q, G`, and `V, Y`. Once is uncertain, return lower confidence.
+                Step 3. The regex pattern will follow: `^(?:[A-Z]{3}-[0-9]{4}|[0-9]{3}-[A-Z]{3}|[0-9]{4}-[A-Z]{2}|[0-9]{4}-[A-Z]{2}|[A-Z]{3}-[0-9]{3})$`.
+                Step 4. Provide a float between 0 and 1 as confidence score for the extracted text honestly.
                 Step 5. The JSON response must follow the schema: {\"number\": \"{PLATE_NUMBER_HERE}\", \"confidence\": {CONFIDENCE_SCORE_HERE}}.
                 """
     # retry = 0
@@ -257,7 +259,7 @@ async def recognize(ctx: RunContext[Deps]) -> ExtractedPlate:
             ],
             # response_format=ExtractedPlate,
             response_format={"type": "json_object"},
-            temperature=0.15
+            temperature=0.015
         )
     except RateLimitError:
         response = await genai.beta.chat.completions.parse(
