@@ -103,12 +103,12 @@ async def print_letter(data: PrinterData):
     draw_texts(draw, font, texts_positions)
     
     # Load attach image from base64 string
-    missing_padding = len(data.photo) % 4
-    if missing_padding:
-        data.photo += '=' * (4 - missing_padding)
-    attached_image_data = base64.b64decode(data.photo)
-    attached_image = Image.open(io.BytesIO(attached_image_data))
-    image = extend_image(image, attached_image)
+    # missing_padding = len(data.photo) % 4
+    # if missing_padding:
+    #     data.photo += '=' * (4 - missing_padding)
+    # attached_image_data = base64.b64decode(data.photo)
+    # attached_image = Image.open(io.BytesIO(attached_image_data))
+    # image = extend_image(image, attached_image)
     
     # image to base64 string
     image = image.convert('RGB')
