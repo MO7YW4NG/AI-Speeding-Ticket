@@ -1,9 +1,26 @@
 <template>
+
+<div class="flex-1 bg-gray-800 rounded-lg border border-gray-700 p-4 m-4">
+        <div v-if="images.length > 0" class="image-container rounded-lg border border-gray-600">
+          <img
+            :src="`data:image/jpeg;base64,${images[currentImageIndex]}`"
+            :alt="'車牌照片' + (currentImageIndex + 1)"
+            class="w-full h-full object-contain"
+          />
+        </div>
+        <div v-else class="flex items-center justify-center h-full">
+  <p class="text-white text-2xl font-semibold">現已沒有需要辨識的照片</p>
+</div>
+      </div>
     <div class="flex-1 bg-gray-800 rounded-lg border border-gray-700 p-4 m-4">
+       
       <h2 class="text-xl text-gray-100 font-semibold mb-4">人工辨識紀錄</h2>
-      <ImageViewer title="人工辨識系統" :isViolationSystem="false" />
       <div class="p-4">
+       
         <div class="flex flex-col space-y-2">
+
+            
+     
           <!-- AI辨識錯誤的原因 -->
           <div class="flex flex-col">
             <label class="text-md text-gray-400 mb-1">AI辨識錯誤的原因</label>
@@ -151,8 +168,7 @@
     
     <script>
 import { reactive, ref, computed, onMounted } from "vue";
-import { getAllUnrecognized, updateStatus } from "@/services/recognitionService";
-import eventBus from "@/components/eventBus";
+import { getAllUnrecognizedViolations, updateStatus } from "@/services/recognitionService";
 
 export default {
   setup() {
@@ -174,7 +190,8 @@ export default {
     const currentTime = ref("");
     const plates = ref([]);
     const images = ref([]);
-    const currentImageIndex = eventBus.currentImageIndex;
+    const Unrecognized = ref([]);
+    const currentImageIndex = ref(0);
 
     const updateTime = () => {
       // 1) 顯示在畫面的 currentTime，如 2025/01/10 11:55:32
@@ -185,29 +202,48 @@ export default {
       formData.replyDate = now.toISOString().split("T")[0]; // "YYYY-MM-DD"
       formData.replyTime = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
     };
-
-    // 2. 從後端取得需要人工辨識的資料
     const fetchUnrecognizedPlates = async () => {
-      try {     
-        // 改用 getAllUnrecognized(employeeId, processorIp)
-        const response = await getAllUnrecognized(
-          formData.employeeId,
-          formData.ipLocation
-        );
-        console.log("人工辨識資料:", response.data);
-        plates.value = response.data;
+  try {
+    const response = await getAllUnrecognizedViolations(formData.employeeId, formData.processorIp);
+    console.log("後端返回的數據:", response.data);
 
-        // 假設第 10 欄是 base64 image
-        images.value = plates.value.map((p) => p[10]);
-        if (plates.value.length > 0) {
-          updateFormData(currentImageIndex.value);
-        } else {
-          resetForm();
-        }
-      } catch (error) {
-        console.error("獲取需要辨識的車牌失敗:", error);
-      }
-    };
+    Unrecognized.value = response.data.map((entry) => ({
+      id: entry[0],
+      licensePlate: entry[6],
+      image: entry[10],
+      reason: entry[11],
+    }));
+
+    images.value = Unrecognized.value.map((violation) => violation.image);
+
+    if (Unrecognized.value.length > 0) {
+      currentImageIndex.value = 0;
+      populateForm();
+    } else {
+      alert("未找到需要人工辨識的數據！");
+    }
+  } catch (error) {
+    console.error("獲取可開單資料失敗：", error.response || error.message);
+  }
+};
+
+
+  
+const populateForm = () => {
+  if (Unrecognized.value[currentImageIndex.value]) {
+    const violation = Unrecognized.value[currentImageIndex.value];
+    formData.serialNumber = violation.id || "";
+    formData.licensePlate = violation.licensePlate || "";
+    formData.aiErrorReason = violation.reason === 11
+      ? "多車牌"
+      : violation.reason === 12
+      ? "其他原因"
+      : "無法辨識車牌";
+  } else {
+    resetForm(); // 若無數據，清空表單
+  }
+};
+
 
     // 3. 更新表單
     const updateFormData = (index) => {
@@ -230,10 +266,7 @@ export default {
         formData.aiErrorReason = "無法辨識車牌";
       }
 
-      // 若要自動帶本機時間，亦可在這裡加：
-      // let now = new Date();
-      // formData.replyDate = now.toISOString().split("T")[0];
-      // formData.replyTime = now.toTimeString().split(" ")[0];
+     
     };
 
     // 4. 重置表單
@@ -275,6 +308,11 @@ export default {
           reply_time: formData.replyTime,
         };
 
+         // 如果 respondCode 是 1/2/3，更新 status_code 為 21
+    if ([1, 2, 3].includes(formData.respondCode)) {
+      payload.status_code = 21; // 在 Payload 中新增 status_code
+    }
+
         await updateStatus(formData.serialNumber, payload);
         alert("表單提交成功！");
         fetchUnrecognizedPlates(); // 重新載入
@@ -285,15 +323,23 @@ export default {
       }
     };
 
-    // 6. 圖片切換
     const nextImage = () => {
-      eventBus.nextImage(images.value.length);
-      updateFormData(currentImageIndex.value);
-    };
-    const prevImage = () => {
-      eventBus.prevImage(images.value.length);
-      updateFormData(currentImageIndex.value);
-    };
+        if (currentImageIndex.value < images.value.length - 1) {
+          currentImageIndex.value++;
+        } else {
+          currentImageIndex.value = 0;
+        }
+        populateForm();
+      };
+  
+      const prevImage = () => {
+        if (currentImageIndex.value > 0) {
+          currentImageIndex.value--;
+        } else {
+          currentImageIndex.value = images.value.length - 1;
+        }
+        populateForm();
+      };    
 
      // 掛載時
      onMounted(() => {
@@ -326,3 +372,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .image-container {
+    height: 80vh;
+  }
+  </style>
