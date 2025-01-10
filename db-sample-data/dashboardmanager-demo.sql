@@ -665,10 +665,10 @@ speed_camera	{#569C9A}	{DistrictChart,RadarChart}	處
 pump_status	{#ff9800}	{GuageChart,BarPercentChart}	站
 abandoned	{#BF40BF}	{ColumnChart}	件
 trafficviolation_poly	{#FF9999,#CC6666,#993333,#800000}	{TreemapChart,ColumnChart,DistrictChart}	件
-vehicle_model	{#1d3557,#2a5d84,#457b84,#6a8d92,#a8dadc,#d0e6f3}	{DonutChart,ColumnChart}	件
 order_rate	{#9ac17c}	{GuageChart,BarPercentChart}	件
 trafficviolation	{#ff4c4c,#2F8AB1,#60819C,#569C9A,#9AC17C,#4CB495}	{DistrictChart,ColumnChart}	件
 illegal_plate	{#fcba03}	{ColumnChart}	件
+vehicle_model	{#1d3557,#2a5d84,#457b84,#6a8d92,#a8dadc,#d0e6f3}	{DonutChart,ColumnChart}	%
 \.
 
 
@@ -684,10 +684,10 @@ COPY public.component_maps (id, index, title, type, source, size, icon, paint, p
 43	building_unsued_public	閒置市有(公用)建物	circle	geojson	big	\N	{"circle-color":"#655fad"}	[{"key":"門牌","name":"門牌"},{"key":"房屋現況","name":"房屋現況"},{"key":"目前執行情形","name":"目前執行情形"},{"key":"閒置樓層_閒置樓層/該建物總樓層","name":"閒置樓層/總樓層"},{"key":"閒置面積㎡","name":"閒置面積㎡"},{"key":"基地管理機關","name":"基地管理機關"},{"key":"建物管理機關","name":"建物管理機關"},{"key":"原使用用途","name":"原使用用途"},{"key":"基地所有權人","name":"基地所有權人"},{"key":"建物標示","name":"建物標示"},{"key":"建築完成日期","name":"建築完成日期"}]
 92	speed_camera	測速執法設置點	circle	geojson	big	\N	{"circle-color":"#569C9A"}	[{"key":"設置市區鄉鎮","name":"設置行政區區"},{"key":"管轄警局","name":"管轄警局"},{"key":"管轄分局","name":"管轄分局"},{"key":"設置地址","name":"地址"}]
 93	trafficviolation_polygon	台北市違規案件分佈	fill	geojson	\N	\N	{"fill-color":["interpolate",["linear"],["get","number"],1,"#FFEBEB",10,"#FF4C4C",50,"#660000"],"fill-opacity":0.3}	[{"key":"location","name":"行政區"},{"key":"number","name":"違規案件數量"}]
-95	abandoned	無法辨識案件	circle	geojson	big	\N	{"circle-color":"#BF40BF"}	[{"key":"violation_id","name":"案件編號"},{"key":"location","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"},{"key":"report_reason","name":"無法辨識原因"}]
-96	illegal_plate	非法車牌案件	circle	geojson	big	\N	{"circle-color":"#fcba03"}	[{"key":"violation_id","name":"案件編號"},{"key":"district","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"},{"key":"report_reason","name":"無法辨識原因"}]
+95	trafficviolation_abandoned	無法辨識案件	circle	geojson	big	\N	{"circle-color":"#BF40BF"}	[{"key":"violation_id","name":"案件編號"},{"key":"location","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"},{"key":"report_reason","name":"無法辨識原因"}]
 91	trafficviolation_today	當日違規案件	circle	geojson	big		{"circle-color":"#FF0808"}	[{"key":"violation_id","name":"案件編號"},{"key":"district","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"}]
 94	trafficviolation	台北市違規案件	circle	geojson	big	\N	{"circle-color":"#fc888a"}	[{"key":"violation_id","name":"案件編號"},{"key":"district","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"}]
+96	trafficviolation_sus_licenseplates	非法車牌案件	circle	geojson	big	\N	{"circle-color":"#fcba03"}	[{"key":"violation_id","name":"案件編號"},{"key":"district","name":"行政區"},{"key":"address","name":"案件地址"},{"key":"violation_date","name":"案件日期"},{"key":"violation_time","name":"案件時間"},{"key":"report_reason","name":"無法辨識原因"}]
 \.
 
 
@@ -703,9 +703,9 @@ COPY public.components (id, index, name, history_config, map_config_ids, map_con
 69	speed_camera	測速執法設置點	null	{92}	\N	\N	{"mode":"byParam","byParam":{"xParam":"設置市區鄉鎮"}}	static	\N	\N	\N	政府開放資料平台	提供全國各警察機關測速執法地點等資訊。	提供全國各警察機關測速執法地點等資訊。	顯示全國各警察機關測速執法地點、速限等資訊。	{}	{ChatGPT}	2025-01-01 04:20:00+00	2025-01-07 17:13:45.339759+00	two_d	SELECT 設置市區鄉鎮 AS x_axis, COUNT(*) AS data\nFROM public.speed_camera\nWHERE 設置市區鄉鎮 IS NOT NULL\nGROUP BY 設置市區鄉鎮\nORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], 設置市區鄉鎮\n);	\N
 43	pump_status	抽水站狀態	\N	{50}	\N	\N	{"mode":"byParam","byParam":{"yParam":"all_pumb_lights"}}	current	\N	10	minute	工務局水利處	顯示當前全市開啟的抽水站數量	顯示當前全市開啟的抽水站數量，資料來源為工務局水利處內部資料，每十分鐘更新。	考慮當日天氣及「水位監測」組件的資料，來探討抽水站的運作狀況與水位異常之間的關聯性。	{}	{tuic}	2023-12-20 05:56:00+00	2024-01-25 09:36:14.565347+00	percent	SELECT '啟動抽水站' AS x_axis,\n  CASE\n    WHEN all_pumb_lights = '+' THEN '啟動中'\n    WHEN all_pumb_lights = '-' THEN '未啟動'\n    ELSE '未啟用'\n  END AS y_axis,\n  COUNT(*) AS data\nFROM patrol_rain_floodgate\nGROUP BY\n  CASE\n    WHEN all_pumb_lights = '+' THEN '啟動中'\n    WHEN all_pumb_lights = '-' THEN '未啟動'\n    ELSE '未啟用'\n  END;	\N
 71	trafficviolation	台北市違規案件	null	{91,94}	\N	\N	{"mode":"byParam","byParam":{"xParam":"location"}}	quarter_ago	now	10	minute	ChatGPT	顯示違規事件	顯示違規事件	顯示違規事件	{}	{ChatGPT}	2025-01-02 04:20:00+00	2025-01-10 05:51:24.594766+00	two_d	SELECT district AS x_axis, COUNT(*) AS data\nFROM public.traffic_violation\nWHERE district IS NOT NULL\nGROUP BY district ORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], district\n);	\N
-44	vehicle_model	違規車型	null	\N	\N	\N	null	static	\N	\N	\N	全國違規案件處理檔	顯示違規車型種類	顯示違規車型種類	顯示違規車型種類	{}	{全國違規案件處理檔}	2025-01-10 09:00:00+00	2025-01-10 08:18:22.017745+00	two_d	SELECT \n    vehicle_type AS x_axis,\n    COUNT(*) AS "data"\nFROM \n    traffic_violation\nGROUP BY \n    vehicle_type\nORDER BY \n    data DESC;	\N
 45	order_rate	開單率	null	\N	\N	\N	null	static	\N	\N	\N	全國違規案件處理檔	顯示智慧燈桿回傳後目前開單率	顯示智慧燈桿回傳後目前開單率	顯示智慧燈桿回傳後目前開單率	{}	{全國違規案件處理檔}	2025-01-10 09:00:00+00	2025-01-10 09:00:38.664635+00	percent	SELECT '開單率' AS x_axis, y_axis, DATA FROM\n(\nSELECT '已開單' AS y_axis, COUNT(*) AS DATA FROM public.traffic_violation \nWHERE status_code = 30\nUNION ALL\nSELECT '未開單' AS y_axis, COUNT(*) AS DATA FROM public.traffic_violation \nWHERE status_code != '30'\n)	\N
 72	abandoned	無法辨識案件	null	{95}	\N	\N	null	static	\N	\N	\N	交通AI辨識系統	提供AI辨識系統無法辨識案件	提供AI辨識系統無法辨識案件	提供AI辨識系統無法辨識案件	{}	{AI辨識子系統}	2025-01-07 23:20:00+00	2025-01-08 04:36:53.57383+00	two_d	SELECT district AS x_axis, COUNT(*) AS data\nFROM public.traffic_violation\nWHERE district IS NOT NULL\n  AND status_code > 20\n  AND status_code < 24\nGROUP BY district\nORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], district\n);	\N
+44	vehicle_model	違規車型	null	\N	\N	\N	null	static	\N	\N	\N	全國違規案件處理檔	顯示違規車型種類	顯示違規車型種類	顯示違規車型種類	{}	{全國違規案件處理檔}	2025-01-10 09:00:00+00	2025-01-10 08:18:22.017745+00	two_d	SELECT \n    vehicle_type AS x_axis,\n    ROUND((COUNT(*) * 100.0 / (SELECT COUNT(*) FROM traffic_violation)), 0) AS "data"\nFROM \n    traffic_violation\nGROUP BY \n    vehicle_type\nORDER BY \n    "data" DESC;	\N
 70	trafficviolation_poly	違規案件分佈	null	{93}	\N	\N	{"mode":"byParam","byParam":{"xParam":"location"}}	static	\N	\N	\N	ChatGPT	顯示交通違規分佈	顯示交通違規分佈	顯示交通違規分佈	{}	{ChatGPT}	2025-01-02 23:20:00+00	2025-01-10 07:59:14.881058+00	two_d	SELECT district AS x_axis, COUNT(*) AS data\nFROM public.traffic_violation\nWHERE district IS NOT NULL\nGROUP BY district ORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], district\n);	\N
 73	illegal_plate	非法車牌案件	null	{96}	\N	\N	{"mode":"byParam","byParam":{"xParam":"district"}}	static	\N	\N	\N	全國違規案件處理檔	顯示非法車牌案件之分佈	顯示非法車牌案件之分佈	顯示非法車牌案件之分佈	{}	{全國違規案件處理檔}	2025-01-07 23:20:00+00	2025-01-10 09:28:15.546144+00	two_d	SELECT district AS x_axis, COUNT(*) AS data\nFROM public.traffic_violation\nWHERE district IS NOT NULL\n  AND status_code > 23\n  AND status_code < 30\nGROUP BY district\nORDER BY ARRAY_POSITION(\n    ARRAY['中正區', '大同區', '士林區', '北投區', '內湖區', '南港區', '松山區', '信義區', '中山區', '大安區', '萬華區', '文山區']::varchar[], district\n);	\N
 \.
@@ -784,6 +784,9 @@ COPY public.roles (id, name, access_control, modify, read) FROM stdin;
 10	admin	t	t	t
 11	editor	f	t	t
 12	viewer	f	f	t
+13	admin	t	t	t
+14	editor	f	t	t
+15	viewer	f	f	t
 \.
 
 
@@ -855,7 +858,7 @@ COPY topology.layer (topology_id, layer_id, schema_name, table_name, feature_col
 -- Name: auth_users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.auth_users_id_seq', 4, true);
+SELECT pg_catalog.setval('public.auth_users_id_seq', 5, true);
 
 
 --
@@ -911,7 +914,7 @@ SELECT pg_catalog.setval('public.issues_id_seq', 1, false);
 -- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('public.roles_id_seq', 12, true);
+SELECT pg_catalog.setval('public.roles_id_seq', 15, true);
 
 
 --
