@@ -95,6 +95,7 @@ services:
     working_dir: /opt/AI-BE
     volumes:
       - ../AI-BE:/opt/AI-BE
+      - ../Dashboard-FE:/opt/Dashboard-FE
 
 networks:
   default:
