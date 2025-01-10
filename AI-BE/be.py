@@ -239,3 +239,37 @@ def get_today_violations():
             print (violations)
             return violations
         
+@router.get("/geojson/get_all_violations")
+def get_all_violations():
+    with psycopg.connect(conninfo,autocommit=True) as conn:
+        with conn.cursor() as cursor:
+            sql = '''SELECT violation_id, violation_date, violation_time, device_id, speed_limit, vehicle_speed, 
+                       license_plate, licenseplate_reply_date, licenseplate_reply_time, vehicle_type,
+                       status_code, district, address, longitude, latitude
+                       FROM traffic_violation'''
+            
+            cursor.execute(sql)
+            violations = cursor.fetchall()
+            print (violations)
+            return violations
+
+@router.get("/geojson/get_violations_by_district")
+def get_district_violation_count():
+    with psycopg.connect(conninfo,autocommit=True) as conn:
+        with conn.cursor() as cursor:
+            sql =   '''
+                    SELECT json_agg(result)
+                    FROM (
+                        SELECT 
+                            district AS district,
+                            COUNT(violation_id) AS number,
+                            ARRAY_AGG(ARRAY[longitude, latitude]) AS coordinates
+                        FROM traffic_violation
+                        GROUP BY district
+                    ) AS result;
+                    '''
+            
+            cursor.execute(sql)
+            violations = cursor.fetchall()
+            print (violations)
+            return violations

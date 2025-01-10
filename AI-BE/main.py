@@ -9,8 +9,7 @@ from fastapi.staticfiles import StaticFiles
 # import os
 from be import router as be_router  # Import the router from be.py
 from violation import insert_new_violation, print_letter, PrinterData
-from generategeojson import get_today_violations_geojson
-
+from generategeojson import update_trafficviolation_geojson, update_trafficviolation_today_geojson, update_trafficviolation_polygon_geojson
 app = FastAPI()
 
 origins = [
@@ -53,9 +52,20 @@ async def process_violations(file_path: str):
     return {"status": "Processing completed"}
 
 @app.get("/today-violations-geojson")
-async def get_today_violations():
-    await get_today_violations_geojson()
-    return ("Created succcessfully")
+async def update_today_violations():
+    await update_trafficviolation_today_geojson()
+    return ("Updated succcessfully")
+
+@app.get("/all-violations-geojson")
+async def update_all_violations():
+    await update_trafficviolation_geojson()
+    return ("Updated succcessfully")
+
+@app.get("/violations-polygon-geojson")
+async def update_violations_polygon():
+    await update_trafficviolation_polygon_geojson()
+    return ("Updated succcessfully")
+
 
 @app.post("/print-letter")
 async def letter_print(data: PrinterData):
