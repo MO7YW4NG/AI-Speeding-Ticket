@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from recognizer import PlateRecognizer, ExtractedPlate
 from geocoding import get_geocode
@@ -8,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 # import os
 from be import router as be_router  # Import the router from be.py
 from violation import insert_new_violation, print_letter, PrinterData
-from geojson import get_today_violations_geojson
+from generategeojson import get_today_violations_geojson
 
 app = FastAPI()
 
@@ -53,7 +54,8 @@ async def process_violations(file_path: str):
 
 @app.get("/today-violations-geojson")
 async def get_today_violations():
-    return await get_today_violations_geojson()
+    await get_today_violations_geojson()
+    return ("Created succcessfully")
 
 @app.post("/print-letter")
 async def letter_print(data: PrinterData):
