@@ -1,17 +1,26 @@
 import { ref } from "vue";
 
 const eventBus = {
-  currentImageIndex: ref(0), // 全局共享的圖片索引
-  nextImage(imagesLength) {
+  imageIndices: {}, // 儲存每個圖片集的索引
+
+  getIndex(key) {
+    if (!this.imageIndices[key]) {
+      this.imageIndices[key] = ref(0); // 初始化索引
+    }
+    return this.imageIndices[key];
+  },
+
+  nextImage(key, imagesLength) {
     if (imagesLength > 0) {
-      this.currentImageIndex.value =
-        (this.currentImageIndex.value + 1) % imagesLength;
+      const index = this.getIndex(key);
+      index.value = (index.value + 1) % imagesLength;
     }
   },
-  prevImage(imagesLength) {
+
+  prevImage(key, imagesLength) {
     if (imagesLength > 0) {
-      this.currentImageIndex.value =
-        (this.currentImageIndex.value - 1 + imagesLength) % imagesLength;
+      const index = this.getIndex(key);
+      index.value = (index.value - 1 + imagesLength) % imagesLength;
     }
   },
 };

@@ -1,15 +1,77 @@
 <template>
-    <div class="flex-1 bg-gray-800 rounded-lg border border-gray-700 p-4 m-4">
-      <h2 class="text-xl text-gray-100 font-semibold mb-4">違規開單系統</h2>
+    <div class="flex h-screen w-screen relative">
+      <!-- 預覽罰單模態視窗 -->
+      <div
+        v-if="showPreview"
+        class="absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-80 flex justify-center items-center z-50"
+      >
+        <div class="bg-white p-4 rounded-lg shadow-lg w-3/4 h-3/4 flex flex-col">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="text-lg font-semibold">罰單預覽</h3>
+            <button @click="closePreview" class="text-red-500 hover:text-red-700 font-bold">關閉</button>
+          </div>
+          <div class="flex-1 overflow-auto">
+            <img src="/assets/Jufa_tongzhidan.jpg" alt="罰單預覽" class="w-full h-full object-contain" />
+          </div>
+        </div>
+      </div>
   
-      <div class="p-4">
+      <!-- 左半邊圖片區域 -->
+      <div class="flex-1 bg-gray-800 rounded-lg border border-gray-700 p-4 m-4">
+        <div v-if="images.length > 0" class="image-container rounded-lg border border-gray-600">
+          <img
+            :src="`data:image/jpeg;base64,${images[currentImageIndex]}`"
+            :alt="'車牌照片' + (currentImageIndex + 1)"
+            class="w-full h-full object-contain"
+          />
+        </div>
+        <div v-else>
+          <p class="text-white">無法載入圖片</p>
+        </div>
+      </div>
+  
+      <!-- 右半邊表單區域 -->
+      <div class="flex-1 bg-gray-800 rounded-lg border border-gray-700 p-4 m-4">
+        <h2 class="text-xl text-gray-100 font-semibold mb-4">違規開單系統</h2>
         <div class="flex flex-col space-y-4">
+          <!-- 日期 -->
+          <div class="flex flex-col">
+            <label class="text-md text-gray-400 mb-1">日期</label>
+            <input
+              type="date"
+              v-model="formData.replyDate"
+              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
+            />
+          </div>
+  
           <!-- 時間 -->
           <div class="flex flex-col">
             <label class="text-md text-gray-400 mb-1">時間</label>
             <input
+              type="time"
+              v-model="formData.replyTime"
+              step="1"
+              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
+            />
+          </div>
+  
+          <!-- 員工 ID -->
+          <div class="flex flex-col">
+            <label class="text-md text-gray-400 mb-1">員工 ID</label>
+            <input
               type="text"
-              :value="currentTime"
+              v-model="formData.employeeId"
+              readonly
+              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
+            />
+          </div>
+  
+          <!-- 處理單位位置 -->
+          <div class="flex flex-col">
+            <label class="text-md text-gray-400 mb-1">處理單位位置 (IP)</label>
+            <input
+              type="text"
+              v-model="formData.processorIp"
               readonly
               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
             />
@@ -18,7 +80,6 @@
           <!-- 舉發 ID -->
           <div class="flex flex-col">
             <label class="text-md text-gray-400 mb-1">舉發 ID</label>
-            <!-- 綁定 formData.serialNumber -->
             <input
               type="text"
               v-model="formData.serialNumber"
@@ -33,110 +94,57 @@
             <input
               type="text"
               v-model="formData.licensePlate"
-              placeholder="請輸入車牌號碼"
+              readonly
               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
             />
           </div>
   
-          <!-- 違規事實 -->
+          <!-- 違規原因 -->
           <div class="flex flex-col">
-            <label class="text-md text-gray-400 mb-1">違規事實</label>
+            <label class="text-md text-gray-400 mb-1">違規原因</label>
             <textarea
-              v-model="formData.violationFact"
-              rows="2"
-              placeholder="請輸入違規事實"
+              v-model="formData.violationReason"
               class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100 text-md"
+              rows="3"
             ></textarea>
           </div>
   
-          <!-- 下拉式選單: 選擇可以開單的資料 -->
-          <div class="flex flex-col mt-4">
-            <label class="text-md text-gray-400 mb-1">選擇可以開單的資料</label>
-            <select
-              v-model="selectedViolation"
-              @change="populateForm"
-              class="w-full px-3 py-2 bg-gray-700 border border-gray-600 rounded-md text-gray-100"
-            >
-              <!-- issuableViolations為後端返回的可開單違規資料陣列 -->
-              <option
-                v-for="(violation, idx) in issuableViolations"
-                :key="idx"
-                :value="violation"
-              >
-                <!-- 這裡假設 violation[0] 是ID, violation[6]是車牌 -->
-                違規 ID: {{ violation[0] }} - 車牌號碼: {{ violation[6] }}
-              </option>
-            </select>
-          </div>
-  
-          <!-- 圖片與按鈕並排區域 -->
-          <div class="flex mt-6 space-x-4 items-start">
-            <!-- 左側圖片 -->
-            <div class="w-1/2 flex justify-center items-center">
-              <img
-                src="/assets/Jufa_tongzhidan.jpg"
-                alt="罰單圖片"
-                class="w-auto max-h-[300px] rounded-md border border-gray-600"
-              />
-            </div>
-  
-            <!-- 右側按鈕 -->
-            <div class="w-1/2 flex flex-col justify-center space-y-4">
-              <button
-                @click="previewTicket"
-                class="w-full px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
-              >
-                預覽罰單
-              </button>
-              <button
-                @click="resetForm"
-                class="w-full px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
-              >
-                重置
-              </button>
-              <button
-                @click="submitTicket"
-                class="w-full px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-              >
-                提交罰單
-              </button>
-            </div>
-          </div>
-        </div>
-  
-        <!-- 切換圖片按鈕 -->
-        <div class="flex justify-center mt-8">
-          <button
-            @click="prevImage"
-            class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
-          >
-            <i class="fas fa-chevron-left text-2xl"></i>
-          </button>
-          <button
-            @click="nextImage"
-            class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
-          >
-            <i class="fas fa-chevron-right text-2xl"></i>
-          </button>
-        </div>
-  
-        <!-- 預覽罰單的彈窗 -->
-        <div
-          v-if="showModal"
-          class="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center"
-        >
-          <div class="relative bg-gray-800 p-4 rounded-lg">
+          <!-- 按鈕 -->
+          <div class="flex space-x-4">
             <button
-              @click="closePreview"
-              class="absolute top-2 right-2 px-2 py-1 bg-red-600 hover:bg-red-700 text-white rounded"
+              @click="previewTicket"
+              class="flex-1 px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
             >
-              關閉
+              預覽罰單
             </button>
-            <img
-              src="/assets/Jufa_tongzhidan.jpg"
-              alt="罰單預覽"
-              class="max-w-full max-h-[80vh] rounded-md"
-            />
+            <button
+              @click="resetForm"
+              class="flex-1 px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
+            >
+              重置
+            </button>
+            <button
+              @click="submitTicket"
+              class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+            >
+              提交罰單
+            </button>
+          </div>
+  
+          <!-- 切換圖片按鈕 -->
+          <div class="flex justify-center mt-4">
+            <button
+              @click="prevImage"
+              class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
+            >
+              <i class="fas fa-chevron-left text-2xl"></i>
+            </button>
+            <button
+              @click="nextImage"
+              class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
+            >
+              <i class="fas fa-chevron-right text-2xl"></i>
+            </button>
           </div>
         </div>
       </div>
@@ -144,153 +152,134 @@
   </template>
   
   <script>
-import { reactive, ref, onMounted } from "vue";
-import { getUnrecognizedPlates, createNewTicket } from "@/services/violationService";
-import eventBus from "@/components/eventBus";
+  import { reactive, ref, onMounted } from "vue";
+  import { getAllIssuableViolations } from "@/services/violationService";
+  
+  export default {
+    setup() {
+      const formData = reactive({
+        serialNumber: "",
+        licensePlate: "",
+        replyDate: "",
+        replyTime: "",
+        violationReason: "預設違規原因",
+        employeeId: "EMP001", // 預設員工 ID
+        processorIp: "192.168.0.1", // 預設處理單位位置 (IP)
+      });
+  
+      const images = ref([]);
+      const currentTime = ref("");
+      const currentImageIndex = ref(0);
+      const issuableViolations = ref([]);
+      const showPreview = ref(false);
+  
+      const fetchIssuableViolations = async () => {
+        try {
+          const response = await getAllIssuableViolations(formData.employeeId, formData.processorIp);
+          issuableViolations.value = response.data.map((entry) => ({
+            id: entry[0],
+            licensePlate: entry[6],
+            image: entry[10],
+            reason: entry[11],
+          }));
+  
+          images.value = issuableViolations.value.map((violation) => violation.image);
+  
+          if (issuableViolations.value.length > 0) {
+            currentImageIndex.value = 0;
+            populateForm();
+          }
+        } catch (error) {
+          console.error("獲取可開單資料失敗：", error);
+        }
+      };
+  
+      const populateForm = () => {
+        if (issuableViolations.value[currentImageIndex.value]) {
+          const violation = issuableViolations.value[currentImageIndex.value];
+          formData.serialNumber = violation.id;
+          formData.licensePlate = violation.licensePlate;
+          formData.violationReason = violation.reason || "預設違規原因";
+        
+        }
+      };
 
-export default {
-  setup() {
-    // 表單資料
-    const formData = reactive({
-      serialNumber: "",   // 舉發ID
-      licensePlate: "",   // 車牌號碼
-      violationFact: "",  // 違規事實
-    });
-
-    // 其他狀態
-    const currentTime = ref("");
-    const showModal = ref(false);  // 控制「預覽罰單」彈窗
-    const issuableViolations = ref([]); // 後端回傳的可開單資料
-    const selectedViolation = ref(null); // 下拉選單中選中的那筆違規資料
-
-    // 圖片相關
-    const images = ref([]);
-    const currentImageIndex = eventBus.currentImageIndex;
-
-    // 每秒更新時間
-    const updateTime = () => {
+      const updateTime = () => {
+      // 1) 顯示在畫面的 currentTime，如 2025/01/10 11:55:32
       currentTime.value = new Date().toLocaleString();
+
+      // 2) 分別更新 replyDate、replyTime
+      const now = new Date();
+      formData.replyDate = now.toISOString().split("T")[0]; // "YYYY-MM-DD"
+      formData.replyTime = now.toTimeString().split(" ")[0]; // "HH:MM:SS"
     };
-
-    // 載入可開單資料 (這裡示範用 getUnrecognizedPlates, 可改成 getIssuableViolations)
-    const fetchUnrecognizedPlates = async () => {
-      try {
-        const response = await getUnrecognizedPlates();
-        // 後端回傳陣列，假設每筆形如 [violation_id, ..., license_plate, ..., image, status_code]
-        issuableViolations.value = response.data;
-        console.log("可開單資料：", issuableViolations.value);
-
-        // 取出圖片
-        images.value = issuableViolations.value.map((plate) => plate.image);
-
-        // 如有資料就預設選擇第一筆
-        if (issuableViolations.value.length > 0) {
-          // 預設下拉式選單選擇第一筆
-          selectedViolation.value = issuableViolations.value[0];
-          populateForm();
+  
+      const nextImage = () => {
+        if (currentImageIndex.value < images.value.length - 1) {
+          currentImageIndex.value++;
         } else {
-          resetForm();
+          currentImageIndex.value = 0;
         }
-      } catch (error) {
-        console.error("獲取可開單資料失敗:", error);
-      }
-    };
-
-    // 下拉選單改變，填入表單
-    const populateForm = () => {
-      if (!selectedViolation.value) {
-        resetForm();
-        return;
-      }
-      const plate = selectedViolation.value;
-
-      // 假設 plate[0] = violation_id, plate[6] = license_plate, plate[11] = status_code
-      formData.serialNumber = plate[0] || "";
-      formData.licensePlate = plate[6] || "";
-      formData.violationFact = "預設違規事實";
-
-      // 若需要根據 plate[11] (status_code) 決定 AI 錯誤原因等，可以在這裡處理
-    };
-
-    // 重置表單
-    const resetForm = () => {
-      formData.serialNumber = "";
-      formData.licensePlate = "";
-      formData.violationFact = "";
-      selectedViolation.value = null;
-    };
-
-    // 預覽罰單 (打開彈窗)
-    const previewTicket = () => {
-      showModal.value = true;
-    };
-
-    // 關閉預覽罰單
-    const closePreview = () => {
-      showModal.value = false;
-    };
-
-    // 提交罰單
-    const submitTicket = async () => {
-      try {
-        if (!formData.serialNumber || !formData.licensePlate || !formData.violationFact) {
-          alert("請完整填寫表單！");
-          return;
+        populateForm();
+      };
+  
+      const prevImage = () => {
+        if (currentImageIndex.value > 0) {
+          currentImageIndex.value--;
+        } else {
+          currentImageIndex.value = images.value.length - 1;
         }
-        const payload = {
-          violation_id: formData.serialNumber,
-          license_plate: formData.licensePlate,
-          violation_fact: formData.violationFact,
-        };
-
-        await createNewTicket(payload);
-        alert("罰單提交成功！");
-        // 重新載入資料 (若需要)
-        fetchUnrecognizedPlates();
-        resetForm();
-      } catch (error) {
-        console.error("提交罰單失敗:", error);
-        alert("提交罰單失敗，請稍後再試！");
-      }
-    };
-
-    // 切換圖片 (上一張/下一張)
-    const nextImage = () => {
-      eventBus.nextImage(images.value.length);
-      // 如果想隨圖片切換更新表單，也可在這裡呼叫 updateFormData(index) (需定義)
-    };
-
-    const prevImage = () => {
-      eventBus.prevImage(images.value.length);
-      // 同上
-    };
-
-    // 組件掛載時
-    onMounted(() => {
+        populateForm();
+      };
+  
+      const resetForm = () => {
+        formData.serialNumber = "";
+        formData.licensePlate = "";
+        formData.replyDate = "";
+        formData.replyTime = "";
+        formData.violationReason = "預設違規原因";
+      };
+  
+      const previewTicket = () => {
+        showPreview.value = true;
+      };
+  
+      const closePreview = () => {
+        showPreview.value = false;
+      };
+  
+      const submitTicket = async () => {
+        alert("提交成功");
+      };
+  
+      onMounted(() => {
+        fetchIssuableViolations();
+        // 一開始就更新一次
       updateTime();
+      // 每秒更新一次
       setInterval(updateTime, 1000);
-      fetchUnrecognizedPlates();
-    });
-
-    return {
-      // 資料
-      formData,
-      currentTime,
-      showModal,
-      issuableViolations,
-      selectedViolation,
-      images,
-      currentImageIndex,
-
-      // 方法
-      resetForm,
-      submitTicket,
-      populateForm,
-      previewTicket,
-      closePreview,
-      nextImage,
-      prevImage,
-    };
-  },
-};
-</script>
+        
+      });
+  
+      return {
+        formData,
+        images,
+        currentImageIndex,
+        nextImage,
+        prevImage,
+        resetForm,
+        previewTicket,
+        closePreview,
+        showPreview,
+        submitTicket,
+      };
+    },
+  };
+  </script>
+  
+  <style scoped>
+  .image-container {
+    height: 80vh;
+  }
+  </style>
+  
