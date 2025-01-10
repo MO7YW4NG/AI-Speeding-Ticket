@@ -22,7 +22,7 @@
         </div>
   
         <!-- 快門按鈕 -->
-        <button class="shutter" @click="triggerFlash">快門</button>
+        <button class="shutter" @click="triggerFlash">喀擦~</button>
       </div>
   
       <!-- 啟動文字 -->
