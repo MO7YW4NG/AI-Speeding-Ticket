@@ -192,7 +192,7 @@ export default {
       violationReason: "預設違規原因",
       employeeId: "EMP001", // 預設員工 ID
       processorIp: "192.168.0.1", // 預設處理單位位置 (IP)
-      name: "王小明", // 預設姓名
+      name: "", // 預設姓名
       address: "台北市中正區XX路XX號", // 預設車主地址
       speedLimit: "", // 新增：速限
       vehicleSpeed: "", // 新增：實際車速
@@ -292,16 +292,16 @@ export default {
       formData.replyDate = "";
       formData.replyTime = "";
       formData.speedLimit = "";
-        formData.vehicleSpeed = "";
+      formData.vehicleSpeed = "";
       formData.violationReason = "預設違規原因";
     };
 
     const previewTicket = async () => {
       try {
         console.log("準備生成罰單，傳送的數據為：", {
-          name: formData.name,
+          owner_name: formData.name,
           plate_number: formData.licensePlate,
-          address: formData.address,
+          owner_address: formData.address,
           vio_year: formData.replyDate.split("-")[0],
           vio_month: formData.replyDate.split("-")[1],
           vio_day: formData.replyDate.split("-")[2],
@@ -314,9 +314,9 @@ export default {
         });
 
         const response = await axios.post("http://localhost:8000/print-letter", {
-          name: formData.name,
+          owner_name: formData.name,
           plate_number: formData.licensePlate,
-          address: formData.address,
+          owner_address: formData.address,
           vio_year: formData.replyDate.split("-")[0],
           vio_month: formData.replyDate.split("-")[1],
           vio_day: formData.replyDate.split("-")[2],
