@@ -274,6 +274,38 @@ def update_traffic_violation(violation_id, employee_id, processor_ip):
     
     return ("Traffic violation issued successfully.")
 
+@router.post("/violation/return_violation")
+def update_traffic_violation_in_issue(violation_id, employee_id, processor_ip):
+    with psycopg.connect(conninfo,autocommit=True) as conn:
+        with conn.cursor() as cursor:
+
+            sql =   '''
+                    SELECT license_plate FROM traffic_violation WHERE violation_id = %s;
+                    '''
+            
+            cursor.execute(sql, (violation_id,))
+            old_license_plate = cursor.fetchone()
+            
+            if old_license_plate:
+                old_license_plate = old_license_plate[0]  # Extract the string value from the tuple
+                
+                sql =   '''
+                        INSERT INTO artificial_recognition_log (employee_id, processor_ip, event_detail,
+                        license_plate)
+                        VALUES (%s, %s, %s, %s);
+                        '''
+                
+                event_detail = f"Made changes to ID: {violation_id}, return it to recognition."
+                cursor.execute(sql, (employee_id, processor_ip, event_detail, old_license_plate))
+
+            # Use parameterized query to safely insert the name
+            sql = '''UPDATE traffic_violation SET status_code = 12 WHERE violation_id = %s'''
+            
+            # Execute the query with the 'name' argument passed as a parameter
+            cursor.execute(sql, (violation_id,))
+    
+    return ("Traffic violation issued successfully.")
+
 
 # API BELOW IS FOR GETGEOJSON
 
