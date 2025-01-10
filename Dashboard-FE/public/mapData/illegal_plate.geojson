@@ -1,0 +1,106 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+        "type": "Feature",
+        "geometry": {
+           "type": "Point",
+           "coordinates":  [ 121.4935455,25.02655029 ]
+        },
+        "properties": {
+        "violation_id":39,
+        "violation_date":"2024-12-21",
+        "violation_time":"12:00:00",
+        "device_id":"D039",
+        "speed_limit":50,
+        "vehicle_speed":75,
+        "license_plate":"MBP2763",
+        "licenseplatereplydate":"2024-12-22",
+        "licenseplatereplytime":"12:15:00",
+        "vehicletype":"小型車",
+        "vehiclestatuscode":1,
+        "recognize":"1",
+        "license_plate2":"MBP2763",
+        "location":"萬華區",
+        "address":"臺北市萬華區西園路二段243之13號1~4樓",
+        "report_reason":"車牌合格、車主死亡"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+           "type": "Point",
+           "coordinates":  [ 121.5135956,25.07314873 ]
+        },
+        "properties": {
+        "violation_id":53,
+        "violation_date":"2024-12-22",
+        "violation_time":"02:00:00",
+        "device_id":"D053",
+        "speed_limit":50,
+        "vehicle_speed":70,
+        "license_plate":"515LUU",
+        "licenseplatereplydate":"2024-12-23",
+        "licenseplatereplytime":"02:15:00",
+        "vehicletype":"小型車",
+        "vehiclestatuscode":1,
+        "recognize":"0",
+        "license_plate2":"515LUU",
+        "location":"大同區",
+        "address":"臺北市大同區重慶北路三段284號2~4樓、286號1~4樓",
+        "report_reason":"車牌不合格"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+           "type": "Point",
+           "coordinates":  [ 121.5174637,25.07487679 ]
+        },
+        "properties": {
+        "violation_id":58,
+        "violation_date":"2024-12-22",
+        "violation_time":"07:00:00",
+        "device_id":"D058",
+        "speed_limit":40,
+        "vehicle_speed":60,
+        "license_plate":"678GTV",
+        "licenseplatereplydate":"2024-12-23",
+        "licenseplatereplytime":"07:15:00",
+        "vehicletype":"小型車",
+        "vehiclestatuscode":1,
+        "recognize":"0",
+        "license_plate2":"678GTV",
+        "location":"大同區",
+        "address":"臺北市大同區敦煌路80巷3號及3-1號1樓",
+        "report_reason":"車牌不合格-車主死亡"
+        }
+      },
+      {
+        "type": "Feature",
+        "geometry": {
+           "type": "Point",
+           "coordinates":  [ 121.5284271,25.12771606 ]
+        },
+        "properties": {
+        "violation_id":85,
+        "violation_date":"2024-12-23",
+        "violation_time":"10:00:00",
+        "device_id":"D085",
+        "speed_limit":60,
+        "vehicle_speed":90,
+        "license_plate":"3496UK",
+        "licenseplatereplydate":"2024-12-23",
+        "licenseplatereplytime":"10:15:00",
+        "vehicletype":"機車",
+        "vehiclestatuscode":2,
+        "photo_id":"binary data",
+        "recognize":"0",
+        "license_plate2":"3496UK",
+        "location":"北投區",
+        "address":"臺北市北投區行義路105號1~2樓",
+        "report_reason":"車牌合格、車主死亡"
+        }
+      }
+  ]
+}
