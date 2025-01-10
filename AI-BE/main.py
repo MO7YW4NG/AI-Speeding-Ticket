@@ -79,8 +79,11 @@ async def update_abandoned_trafficviolation():
 
 @app.post("/print-letter")
 async def letter_print(data: PrinterData):
-    await print_letter(data)
-    return {"status": "Printing completed"}
-
+    try:
+        base64str = await print_letter(data)
+        return {"status": "success", "image": base64str}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+    
 app.include_router(be_router)
 

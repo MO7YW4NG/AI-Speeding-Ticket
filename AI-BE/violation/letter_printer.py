@@ -24,9 +24,9 @@ class PrinterData(BaseModel):
     photo: str
     
 
-def draw_texts(draw, font, texts_positions):
+def draw_texts(draw: ImageDraw.ImageDraw, font, texts_positions: list[tuple[str, tuple[int, int]]]):
     for text, position in texts_positions:
-        draw.text(position, text, font=font, fill=COLOR)
+        draw.text(position, text.strip(), font=font, fill=COLOR)
 
 def resize_image(image, target_width):
     ratio = target_width / image.width
@@ -91,9 +91,9 @@ async def print_letter(data: PrinterData):
         (now.strftime('%m'), (340, 750)),
         (now.strftime('%d'), (430, 750)),
         (range_text, (824, 430)),
-        (data.speed_limit, (705, 398)),
-        (data.speed, (940, 398)),
-        (speed_diff, (705, 430)),
+        (str(data.speed_limit), (705, 398)),
+        (str(data.speed), (940, 398)),
+        (str(speed_diff), (705, 430)),
     ]
     
     image = Image.open(BASE_IMG)
@@ -103,6 +103,9 @@ async def print_letter(data: PrinterData):
     draw_texts(draw, font, texts_positions)
     
     # Load attach image from base64 string
+    missing_padding = len(data.photo) % 4
+    if missing_padding:
+        data.photo += '=' * (4 - missing_padding)
     attached_image_data = base64.b64decode(data.photo)
     attached_image = Image.open(io.BytesIO(attached_image_data))
     image = extend_image(image, attached_image)
