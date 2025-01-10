@@ -6,7 +6,7 @@ import Camera from "@/components/Camera.vue";
 // 定義路由
 const routes = [
   {
-    path: "Recognition",
+    path: "/Recognition",
     name: "RecognitionSystem",
     component: Form, // 如果 `/test1` 是用來展示表單
   },
