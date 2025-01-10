@@ -9,7 +9,7 @@ from fastapi.staticfiles import StaticFiles
 # import os
 from be import router as be_router  # Import the router from be.py
 from violation import insert_new_violation, print_letter, PrinterData
-from generategeojson import update_trafficviolation_geojson, update_trafficviolation_today_geojson, update_trafficviolation_polygon_geojson
+from generategeojson import update_trafficviolation_geojson, update_trafficviolation_today_geojson, update_trafficviolation_polygon_geojson, update_sus_licenseplate_geojson, update_abandoned_trafficviolation_geojson
 app = FastAPI()
 
 origins = [
@@ -64,6 +64,16 @@ async def update_all_violations():
 @app.get("/violations-polygon-geojson")
 async def update_violations_polygon():
     await update_trafficviolation_polygon_geojson()
+    return ("Updated succcessfully")
+
+@app.get("/sus-licenseplate-geojson")
+async def update_sus_licenseplate():
+    await update_sus_licenseplate_geojson()
+    return ("Updated succcessfully")
+
+@app.get("/abandoned-trafficviolation-geojson")
+async def update_abandoned_trafficviolation():
+    await update_abandoned_trafficviolation_geojson()
     return ("Updated succcessfully")
 
 

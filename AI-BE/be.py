@@ -273,3 +273,31 @@ def get_district_violation_count():
             violations = cursor.fetchall()
             print (violations)
             return violations
+        
+@router.get("/geojson/get_abandoned_violations")
+def get_abandoned_violations():
+    with psycopg.connect(conninfo,autocommit=True) as conn:
+        with conn.cursor() as cursor:
+            sql = '''SELECT violation_id, violation_date, violation_time, device_id, speed_limit, vehicle_speed, 
+                       license_plate, licenseplate_reply_date, licenseplate_reply_time, vehicle_type,
+                       status_code, district, address, longitude, latitude
+                       FROM traffic_violation WHERE status_code >= 20 AND status_code <= 23'''
+            
+            cursor.execute(sql)
+            violations = cursor.fetchall()
+            print (violations)
+            return violations
+        
+@router.get("/geojson/get_sus_licenseplates")
+def get_sus_licenseplates():
+    with psycopg.connect(conninfo,autocommit=True) as conn:
+        with conn.cursor() as cursor:
+            sql = '''SELECT violation_id, violation_date, violation_time, device_id, speed_limit, vehicle_speed, 
+                       license_plate, licenseplate_reply_date, licenseplate_reply_time, vehicle_type,
+                       status_code, district, address, longitude, latitude
+                       FROM traffic_violation WHERE status_code >= 24 AND status_code <= 26'''
+            
+            cursor.execute(sql)
+            violations = cursor.fetchall()
+            print (violations)
+            return violations
