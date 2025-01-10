@@ -5,7 +5,7 @@ import be
 async def update_trafficviolation_today_geojson():
     violations = be.get_today_violations()
     
-    geojson_data = []
+    features = []
     for violation in violations:
         # Create a Point geometry using the coordinates (assumed to be at index 13 and 14)
         point = Point((violation[13], violation[14]))
@@ -30,7 +30,9 @@ async def update_trafficviolation_today_geojson():
             }
         )
         
-        geojson_data.append(feature)
+        features.append(feature)
+
+    geojson_data = FeatureCollection(features)
 
     with open('/opt/Dashboard-FE/public/mapData/trafficviolation_today.geojson', 'w', encoding='utf-8') as f:
         json.dump(geojson_data, f, ensure_ascii=False, indent=2)    
@@ -41,7 +43,7 @@ async def update_trafficviolation_today_geojson():
 async def update_trafficviolation_geojson():
     violations = be.get_all_violations()
     
-    geojson_data = []
+    features = []
     for violation in violations:
         # Create a Point geometry using the coordinates (assumed to be at index 13 and 14)
         point = Point((violation[13], violation[14]))
@@ -66,46 +68,42 @@ async def update_trafficviolation_geojson():
             }
         )
         
-        geojson_data.append(feature)
+        features.append(feature)
 
-    with open('/opt/Dashboard-FE/public/mapData/trafficviolation_today.geojson', 'w', encoding='utf-8') as f:
+        geojson_data = FeatureCollection(features)
+
+    with open('/opt/Dashboard-FE/public/mapData/trafficviolation.geojson', 'w', encoding='utf-8') as f:
         json.dump(geojson_data, f, ensure_ascii=False, indent=2)    
     
     # print("Generated successfully", geojson_data)
     return geojson_data
 
 async def update_trafficviolation_polygon_geojson():
-    violations = be.get_district_violation_count()
-
-    features = []
-    for violation in violations[0][0]:  # Assuming the result is a list of dictionaries
-        # Create a MultiPolygon geometry using the coordinates
-        multipolygon = MultiPolygon([violation['coordinates']])
-        
-        # Create a Feature using the multipolygon and properties
-        feature = Feature(
-            geometry=multipolygon,
-            properties={
-                "number": violation['number'],
-                "location": violation['district']
-            }
-        )
-        
-        features.append(feature)
-
-    feature_collection = FeatureCollection(features)
-
-    # Use the correct path within the Dashboard-FE directory
-    with open('/opt/Dashboard-FE/public/mapData/trafficviolation_polygon.geojson', 'w', encoding='utf-8') as f:
-        json.dump(feature_collection, f, ensure_ascii=False, indent=2)    
+    # Read the existing GeoJSON file
+    with open('/opt/Dashboard-FE/public/mapData/trafficviolation_polygon.geojson', 'r', encoding='utf-8') as f:
+        geojson_data = json.load(f)
     
-    # print("Generated successfully", feature_collection)
-    return feature_collection
+    # Fetch the updated district violation count
+    violations = be.get_district_violation_count()
+    violation_dict = {v['district']: v['number'] for v in violations[0][0]}  # Assuming the result is a list of dictionaries
+    print ("Violation dict:", violation_dict)
+    # Update the number property in the properties of each feature
+    for feature in geojson_data['features']:
+        district = feature['properties']['location']
+        if district in violation_dict:
+            feature['properties']['number'] = violation_dict[district]
+
+    # Write the updated GeoJSON back to the file
+    with open('/opt/Dashboard-FE/public/mapData/trafficviolation_polygon.geojson', 'w', encoding='utf-8') as f:
+        json.dump(geojson_data, f, ensure_ascii=False, indent=2)
+    
+    print("Updated successfully", geojson_data)
+    return geojson_data
 
 async def update_abandoned_trafficviolation_geojson():
     violations = be.get_abandoned_violations()
     
-    geojson_data = []
+    features = []
     for violation in violations:
         # Create a Point geometry using the coordinates (assumed to be at index 13 and 14)
         point = Point((violation[13], violation[14]))
@@ -130,7 +128,9 @@ async def update_abandoned_trafficviolation_geojson():
             }
         )
         
-        geojson_data.append(feature)
+        features.append(feature)
+
+    geojson_data = FeatureCollection(features)
 
     with open('/opt/Dashboard-FE/public/mapData/trafficviolation_abandoned.geojson', 'w', encoding='utf-8') as f:
         json.dump(geojson_data, f, ensure_ascii=False, indent=2)    
@@ -141,7 +141,7 @@ async def update_abandoned_trafficviolation_geojson():
 async def update_sus_licenseplate_geojson():
     violations = be.get_sus_licenseplates()
     
-    geojson_data = []
+    features = []
     for violation in violations:
         # Create a Point geometry using the coordinates (assumed to be at index 13 and 14)
         point = Point((violation[13], violation[14]))
@@ -166,7 +166,9 @@ async def update_sus_licenseplate_geojson():
             }
         )
         
-        geojson_data.append(feature)
+        features.append(feature)
+
+    geojson_data = FeatureCollection(features)
 
     with open('/opt/Dashboard-FE/public/mapData/trafficviolation_sus_licenseplates.geojson', 'w', encoding='utf-8') as f:
         json.dump(geojson_data, f, ensure_ascii=False, indent=2)    
