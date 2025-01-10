@@ -1,7 +1,9 @@
 import apiClient from "./api";
 
 
-
+export const getVehicleDetails = (owner_name,owner_address ) => {
+    return apiClient.get(`/violation/get?owner_name=${owner_name}&owner_address=${owner_address}`);
+};
 
 // 獲取所有需要人工辨識的違規數據 (status_code == 11 或 12)
 export const getAllUnrecognizedViolations = (employeeId, processorIp) => {
