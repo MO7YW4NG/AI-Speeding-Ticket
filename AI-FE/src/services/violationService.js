@@ -12,7 +12,7 @@ export const getAllUnrecognizedViolations = (employeeId, processorIp) => {
   export const getAllIssuableViolations = (employeeId, processorIp) => {
     return apiClient.get(`/violation/get_all_issuable?employee_id=${employeeId}&processor_ip=${processorIp}`);
   };
-// 提交新罰單
-export const createNewTicket = (payload) => {
-    return apiClient.post("/violation/issue", payload);
+
+  export const issueNewViolation = (violationId,employeeId ,processorIp) => {
+    return apiClient.post(`/violation/issue?employee_id=${employeeId}&processor_ip=${processorIp}&violation_id=${violationId}`);
   };

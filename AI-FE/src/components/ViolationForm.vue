@@ -1,26 +1,34 @@
 <template>
     <div class="flex h-screen w-screen relative">
-    <!-- 預覽罰單模態視窗 -->
-    <div
-      v-if="showPreview"
-      class="absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-80 flex justify-center items-center z-50"
+   <!-- 預覽罰單模態視窗 -->
+<div
+  v-if="showPreview"
+  class="absolute top-0 left-0 w-full h-full bg-gray-900 bg-opacity-90 flex justify-center items-center z-50"
+>
+  <div class="bg-white bg-opacity-90 p-6 rounded-lg shadow-xl w-3/5 h-4/5 flex flex-col relative">
+    <!-- 關閉按鈕 -->
+    <button
+      @click="closePreview"
+      class="absolute top-4 right-4 text-gray-600 hover:text-gray-900 text-2xl font-bold"
     >
-      <div class="bg-white p-4 rounded-lg shadow-lg w-3/4 h-3/4 flex flex-col">
-        <div class="flex justify-between items-center mb-4">
-          <h3 class="text-lg font-semibold">罰單預覽</h3>
-          <button @click="closePreview" class="text-red-500 hover:text-red-700 font-bold">關閉</button>
-        </div>
-        <div class="flex-1 overflow-auto">
-          <img
-            v-if="ticketImage"
-            :src="`data:image/png;base64,${ticketImage}`"
-            alt="罰單預覽"
-            class="w-full h-full object-contain"
-          />
-          <p v-else class="text-center text-gray-500">正在生成罰單...</p>
-        </div>
-      </div>
+      &times;
+    </button>
+
+    <!-- 標題 -->
+    <h3 class="text-xl font-semibold text-gray-800 text-center mb-4">罰單預覽</h3>
+
+    <!-- 圖片區域 -->
+    <div class="flex-1 overflow-auto flex justify-center items-center">
+      <img
+        v-if="ticketImage"
+        :src="`data:image/png;base64,${ticketImage}`"
+        alt="罰單預覽"
+        class="max-w-full max-h-full object-contain rounded-lg shadow-lg"
+      />
+      <p v-else class="text-center text-gray-500">正在生成罰單...</p>
     </div>
+  </div>
+</div>
   
       <!-- 左半邊圖片區域 -->
       <div class="flex-1 bg-gray-800 rounded-lg border border-gray-700 p-4 m-4">
@@ -142,7 +150,7 @@
               重置
             </button>
             <button
-              @click="submitTicket"
+              @click="submitViolation"
               class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
             >
               提交罰單
@@ -171,7 +179,7 @@
   
   <script>
 import { reactive, ref, onMounted } from "vue";
-import { getAllIssuableViolations } from "@/services/violationService";
+import { getAllIssuableViolations, issueNewViolation } from "@/services/violationService";
 import axios from "axios";
 
 export default {
@@ -248,6 +256,9 @@ export default {
         formData.vio_hour = now.getHours().toString().padStart(2, "0");
         formData.vio_minute = now.getMinutes().toString().padStart(2, "0");
       }
+      else {
+    resetForm(); // 如果沒有資料，清空表單
+  }
     };
 
     // 更新時間，每秒更新一次
@@ -317,7 +328,7 @@ export default {
           photo: images.value[currentImageIndex.value],
         });
 
-        ticketImage.value = response.data; // API 返回罰單 Base64 字串
+        ticketImage.value = response.data.image; // API 返回罰單 Base64 字串
         showPreview.value = true;
       } catch (error) {
         console.error("生成罰單失敗，錯誤信息：", error.response?.data || error.message);
@@ -330,29 +341,28 @@ export default {
       ticketImage.value = "";
     };
 
-
-    const submitTicket = async () => {
-      alert("提交成功");
-    };
-
     async function submitViolation() {
-  const payload = {
-    violation_id: formData.serialNumber, // 從表單中獲取違規ID
-    employee_id: formData.employeeId, // 員工ID
-    processor_ip: formData.processorIp, // 處理單位IP位置
-    speed_limit: formData.speedLimit, // 速限
-    vehicle_speed: formData.vehicleSpeed, // 實際車速s
-  };
-
-  
-
   try {
-    const response = await axios.post("http://localhost:8000/violation/issue", payload);
-    console.log(response.data.message); // 成功時返回的訊息
-    return response.data.message; // 返回訊息
+    const response = await issueNewViolation(formData.serialNumber, formData.employeeId, formData.processorIp);
+    console.log("Violation issued successfully:", response.data);
+
+    // 移除當前的資料和圖片
+    issuableViolations.value.splice(currentImageIndex.value, 1);
+    images.value.splice(currentImageIndex.value, 1);
+
+    // 如果還有剩下的資料，移動到下一筆；否則重置索引
+    if (issuableViolations.value.length > 0) {
+      if (currentImageIndex.value >= issuableViolations.value.length) {
+        currentImageIndex.value = 0; // 如果是最後一筆，重置索引到第一筆
+      }
+      populateForm(); // 填充下一筆資料
+    } else {
+      resetForm(); // 如果沒有資料了，清空表單
+      alert("所有罰單已處理完畢！");
+    }
   } catch (error) {
-    console.error("Error issuing violation:", error.response?.data || error.message);
-    throw new Error("提交失敗，請稍後再試！");
+    console.error("Failed to issue violation:", error.response?.data || error.message);
+    alert("提交失敗，請稍後再試！");
   }
 }
 
@@ -377,16 +387,30 @@ export default {
       closePreview,
       showPreview,
       ticketImage,
-      submitTicket,
     };
   },
 };
 </script>
 
   
-  <style scoped>
-  .image-container {
-    height: 80vh;
-  }
-  </style>
-  
+<style scoped>
+/* 讓模態視窗的背景半透明 */
+.bg-gray-900 {
+  backdrop-filter: blur(6   px); /* 添加背景模糊效果 */
+}
+
+/* 關閉按鈕的樣式 */
+button.close-btn {
+  transition: transform 0.2s ease-in-out;
+}
+
+button.close-btn:hover {
+  transform: scale(1.2); /* 滑鼠懸停時放大 */
+}
+
+/* 罰單圖片區域的樣式 */
+img {
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+</style>
