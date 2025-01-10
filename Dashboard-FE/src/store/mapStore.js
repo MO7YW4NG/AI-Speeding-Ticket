@@ -102,6 +102,7 @@ export const useMapStore = defineStore("map", {
 					});
 					this.map.addControl(this.overlay);
 					this.initializeBasicLayers();
+                    this.updateGeojson();
 				})
 				.on("click", (event) => {
 					if (this.popup) {
@@ -124,6 +125,59 @@ export const useMapStore = defineStore("map", {
 
 			return geoLocate;
 		},
+
+        updateGeojson(){
+            axios.get('http://localhost:8000/today-violations-geojson')
+            .then(response => {
+                // Handle response
+                console.log('Successful updated today violations');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error fetching GeoJSON:', error);
+            });
+
+            axios.get('http://localhost:8000/all-violations-geojson')
+            .then(response => {
+                // Handle response
+                console.log('Successful updated all violations');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error fetching GeoJSON:', error);
+            });
+
+            axios.get('http://localhost:8000/violations-polygon-geojson')
+            .then(response => {
+                // Handle response
+                console.log('Successful updated polygon data');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error fetching GeoJSON:', error);
+            });
+
+            axios.get('http://localhost:8000/sus-licenseplate-geojson')
+            .then(response => {
+                // Handle response
+                console.log('Successful updated sus license plate');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error fetching GeoJSON:', error);
+            });
+
+            axios.get('http://localhost:8000/abandoned-trafficviolation-geojson')
+            .then(response => {
+                // Handle response
+                console.log('Successful updated abandoned');
+            })
+            .catch(error => {
+                // Handle error
+                console.error('Error fetching GeoJSON:', error);
+            });
+        },
+
 		// 2. Adds three basic layers to the map (Taipei District, Taipei Village labels, and Taipei 3D Buildings)
 		// Due to performance concerns, Taipei 3D Buildings won't be added in the mobile version
 		initializeBasicLayers() {

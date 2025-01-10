@@ -1,7 +1,7 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import Form from "../components/Form.vue";
 import ViolationForm from "../components/ViolationForm.vue";
-import Final from "@/components/Final.vue";
+import Camera from "@/components/Camera.vue";
 
 // 定義路由
 const routes = [
@@ -18,7 +18,7 @@ const routes = [
   {
     path: "/test3",
     name: "Final",
-    component: Final, // `/test2` 使用 ViolationForm 作為主要頁面
+    component: Camera, // `/test2` 使用 ViolationForm 作為主要頁面
   },
 ];
 
