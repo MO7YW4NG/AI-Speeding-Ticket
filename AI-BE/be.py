@@ -328,7 +328,7 @@ def get_all_violations():
             sql = '''SELECT violation_id, violation_date, violation_time, device_id, speed_limit, vehicle_speed, 
                        license_plate, licenseplate_reply_date, licenseplate_reply_time, vehicle_type,
                        status_code, district, address, longitude, latitude
-                       FROM traffic_violation'''
+                       FROM traffic_violation WHERE violation_date != CURRENT_DATE'''
             
             cursor.execute(sql)
             violations = cursor.fetchall()
