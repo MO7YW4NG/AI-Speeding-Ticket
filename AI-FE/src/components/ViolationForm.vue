@@ -39,9 +39,9 @@
             class="w-full h-full object-contain"
           />
         </div>
-        <div v-else>
-          <p class="text-white">無法載入圖片</p>
-        </div>
+        <div v-else class="flex items-center justify-center h-full">
+  <p class="text-white text-2xl font-semibold">現已沒有需要開單的照片</p>
+</div>
       </div>
   
       <!-- 右半邊表單區域 -->
@@ -135,27 +135,43 @@
   />
 </div>
   
-          <!-- 按鈕 -->
-          <div class="flex space-x-4">
-            <button
-              @click="previewTicket"
-              class="flex-1 mt-5 px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
-            >
-              預覽罰單
-            </button>
-            <button
-              @click="resetForm"
-              class="flex-1 mt-5  px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
-            >
-              重置
-            </button>
-            <button
-              @click="submitViolation"
-              class="flex-1 mt-5  px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
-            >
-              提交罰單
-            </button>
-          </div>
+<div class="flex flex-col space-y-4">
+  <!-- 第一排按鈕 -->
+  <div class="flex justify-between space-x-4">
+    <!-- 預覽罰單按鈕 -->
+    <button
+      @click="previewTicket"
+      class="flex-1 px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
+    >
+      預覽罰單
+    </button>
+    <!-- 取消開單按鈕 -->
+    <button
+      @click="returnViolation"
+      class="flex-1 px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
+    >
+      取消開單
+    </button>
+  </div>
+
+  <!-- 第二排按鈕 -->
+  <div class="flex justify-between space-x-4">
+    <!-- 重置按鈕 -->
+    <button
+      @click="resetForm"
+      class="flex-1 px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
+    >
+      重置
+    </button>
+    <!-- 提交罰單按鈕 -->
+    <button
+      @click="submitViolation"
+      class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+    >
+      提交罰單
+    </button>
+  </div>
+</div>
   
           <!-- 切換圖片按鈕 -->
           <!--<div class="flex justify-center mt-4">
@@ -179,7 +195,7 @@
   
   <script>
 import { reactive, ref, onMounted } from "vue";
-import { getAllIssuableViolations, issueNewViolation } from "@/services/violationService";
+import { getAllIssuableViolations, issueNewViolation, getVehicleDetails  , returnViolation} from "@/services/violationService";
 import axios from "axios";
 
 export default {
@@ -193,7 +209,7 @@ export default {
       employeeId: "EMP001", // 預設員工 ID
       processorIp: "192.168.0.1", // 預設處理單位位置 (IP)
       name: "", // 預設姓名
-      address: "台北市中正區XX路XX號", // 預設車主地址
+      address: "", // 預設車主地址
       speedLimit: "", // 新增：速限
       vehicleSpeed: "", // 新增：實際車速
       vio_year: "",
@@ -225,7 +241,6 @@ export default {
           image: entry[10],
           reason: entry[11],
         }));
-
         images.value = issuableViolations.value.map((violation) => violation.image);
 
         if (issuableViolations.value.length > 0) {
@@ -237,6 +252,27 @@ export default {
       }
     };
 
+    const fetchVehicleDetails = async () => {
+  try {
+    const response = await getVehicleDetails(formData.licensePlate);
+    const data = response.data;
+    console.log("車主資料已獲取：", data);
+
+   
+      formData.name = data[0][4];
+      formData.address = data[0][3]; 
+    
+
+    console.log("車主資料已獲取：", formData.name, formData.address);
+  } catch (error) {
+    console.error("獲取車主資料失敗：", error.response?.data || error.message);
+    formData.name = "未知";
+    formData.address = "未知";
+  }
+};
+
+
+
     // 填充表單數據
     const populateForm = () => {
       if (issuableViolations.value[currentImageIndex.value]) {
@@ -247,7 +283,7 @@ export default {
         formData.vehicleSpeed = violation.vehicleSpeed;
         formData.violationReason = violation.reason || "預設違規原因";
         formData.photo = violation.image; // 將圖片設置到表單中
-
+        console.log("填充表單數據：", formData);
         // 更新違規時間
         const now = new Date();
         formData.vio_year = now.getFullYear().toString();
@@ -255,6 +291,7 @@ export default {
         formData.vio_day = now.getDate().toString().padStart(2, "0");
         formData.vio_hour = now.getHours().toString().padStart(2, "0");
         formData.vio_minute = now.getMinutes().toString().padStart(2, "0");
+        fetchVehicleDetails();
       }
       else {
     resetForm(); // 如果沒有資料，清空表單
@@ -299,9 +336,9 @@ export default {
     const previewTicket = async () => {
       try {
         console.log("準備生成罰單，傳送的數據為：", {
-          owner_name: formData.name,
+          name: formData.name,
           plate_number: formData.licensePlate,
-          owner_address: formData.address,
+          address: formData.address,
           vio_year: formData.replyDate.split("-")[0],
           vio_month: formData.replyDate.split("-")[1],
           vio_day: formData.replyDate.split("-")[2],
@@ -314,9 +351,9 @@ export default {
         });
 
         const response = await axios.post("http://localhost:8000/print-letter", {
-          owner_name: formData.name,
+          name: formData.name,
           plate_number: formData.licensePlate,
-          owner_address: formData.address,
+          address: formData.address,
           vio_year: formData.replyDate.split("-")[0],
           vio_month: formData.replyDate.split("-")[1],
           vio_day: formData.replyDate.split("-")[2],
@@ -340,6 +377,45 @@ export default {
       showPreview.value = false;
       ticketImage.value = "";
     };
+
+    const returnViolation = async () => {
+  try {
+    console.log("準備取消開單，傳送的數據為：", {
+      violation_id: formData.serialNumber,
+      employee_id: formData.employeeId,
+      processor_ip: formData.processorIp,
+    });
+
+    // 使用 GET 請求
+    const response = await axios.post(
+      `http://localhost:8000/violation/return_violation?violation_id=${formData.serialNumber}&employee_id=${formData.employeeId}&processor_ip=${formData.processorIp}`
+    );
+
+    console.log("Violation returned successfully:", response.data);
+
+    // 從當前佇列中移除已取消的記錄
+    issuableViolations.value.splice(currentImageIndex.value, 1);
+    images.value.splice(currentImageIndex.value, 1);
+
+    // 如果還有資料，移動到下一筆；否則清空表單
+    if (issuableViolations.value.length > 0) {
+      if (currentImageIndex.value >= issuableViolations.value.length) {
+        currentImageIndex.value = 0; // 如果是最後一筆，重置到第一筆
+      }
+      populateForm(); // 加載下一筆數據
+    } else {
+      resetForm(); // 如果無更多資料，清空表單
+      alert("所有罰單已處理完畢！");
+    }
+  } catch (error) {
+    console.error("Failed to return violation:", error.response?.data || error.message);
+    alert("取消失敗，請稍後再試！");
+  }
+};
+
+
+
+
 
     async function submitViolation() {
   try {
@@ -369,7 +445,10 @@ export default {
 
     onMounted(() => {
       fetchIssuableViolations();
-      // 一開始就更新一次
+      
+    
+    
+  
       updateTime();
       // 每秒更新一次
       setInterval(updateTime, 1000);
@@ -384,9 +463,12 @@ export default {
       prevImage,
       resetForm,
       previewTicket,
+      returnViolation,
       closePreview,
       showPreview,
       ticketImage,
+      fetchIssuableViolations,
+      fetchVehicleDetails
     };
   },
 };
