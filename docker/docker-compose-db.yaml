@@ -14,6 +14,8 @@ services:
       POSTGRES_DB: ${DB_DASHBOARD_DBNAME}
       POSTGRES_USER: ${DB_DASHBOARD_USER}
       POSTGRES_PASSWORD: ${DB_DASHBOARD_PASSWORD}
+      TZ: 'Asia/Taipei'
+      PGTZ: 'Asia/Taipei'
     volumes:
       - ./db-data/postgres-data:/var/lib/postgresql/data
     ports:
@@ -27,6 +29,8 @@ services:
       POSTGRES_DB: ${DB_MANAGER_DBNAME}
       POSTGRES_USER: ${DB_MANAGER_USER}
       POSTGRES_PASSWORD: ${DB_MANAGER_PASSWORD}
+      TZ: 'Asia/Taipei'
+      PGTZ: 'Asia/Taipei'
     volumes:
       - ./db-data/postgres-manager-data:/var/lib/postgresql/data
 
