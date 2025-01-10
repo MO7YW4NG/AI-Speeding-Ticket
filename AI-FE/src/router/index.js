@@ -6,18 +6,18 @@ import Camera from "@/components/Camera.vue";
 // 定義路由
 const routes = [
   {
-    path: "/test1",
+    path: "/Recognition",
     name: "RecognitionSystem",
     component: Form, // 如果 `/test1` 是用來展示表單
   },
   {
-    path: "/test2",
+    path: "/Violation",
     name: "ViolationTicketSystem",
     component: ViolationForm, // `/test2` 使用 ViolationForm 作為主要頁面
   },
   {
-    path: "/test3",
-    name: "Final",
+    path: "/First",
+    name: "First",
     component: Camera, // `/test2` 使用 ViolationForm 作為主要頁面
   },
 ];
