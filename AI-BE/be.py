@@ -304,7 +304,20 @@ def update_traffic_violation_in_issue(violation_id, employee_id, processor_ip):
             # Execute the query with the 'name' argument passed as a parameter
             cursor.execute(sql, (violation_id,))
     
-    return ("Traffic violation issued successfully.")
+    return ("Traffic violation updated successfully.")
+
+@router.post("/violation/update_expired_violation")
+def update_expired_violation():
+    with psycopg.connect(conninfo,autocommit=True) as conn:
+        with conn.cursor() as cursor:
+
+            sql =   '''
+                    UPDATE traffic_violation SET status_code = 26 WHERE violation_date <= CURRENT_DATE - INTERVAL '180 days' AND status_code = 0;
+                    '''
+            
+            cursor.execute(sql)
+
+    return ("Expired violations updated successfully.")
 
 
 # API BELOW IS FOR GETGEOJSON
