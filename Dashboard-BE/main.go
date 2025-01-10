@@ -11,6 +11,9 @@ Developed By Taipei Urban Intelligence Center 2023-2024
 package main
 
 import "TaipeiCityDashboardBE/cmd"
+
+// comment code below to build the server
+
 import (
     "github.com/rs/cors"
     "net/http"
@@ -43,3 +46,10 @@ func main() {
 	log.Fatal(http.ListenAndServe(":8000", handler))
 	cmd.Execute()
 }
+
+// comment code above to build the server
+
+// uncomment code below to build the server
+// func main() {
+// 	cmd.Execute()
+// }
