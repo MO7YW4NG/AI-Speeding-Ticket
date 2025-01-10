@@ -139,26 +139,26 @@
           <div class="flex space-x-4">
             <button
               @click="previewTicket"
-              class="flex-1 px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
+              class="flex-1 mt-5 px-3 py-2 bg-yellow-600 hover:bg-yellow-700 text-white rounded-lg"
             >
               預覽罰單
             </button>
             <button
               @click="resetForm"
-              class="flex-1 px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
+              class="flex-1 mt-5  px-3 py-2 bg-gray-600 hover:bg-gray-700 text-white rounded-lg"
             >
               重置
             </button>
             <button
               @click="submitViolation"
-              class="flex-1 px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
+              class="flex-1 mt-5  px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg"
             >
               提交罰單
             </button>
           </div>
   
           <!-- 切換圖片按鈕 -->
-          <div class="flex justify-center mt-4">
+          <!--<div class="flex justify-center mt-4">
             <button
               @click="prevImage"
               class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
@@ -171,7 +171,7 @@
             >
               <i class="fas fa-chevron-right text-2xl"></i>
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

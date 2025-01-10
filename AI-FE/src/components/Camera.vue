@@ -40,7 +40,7 @@
         showLoadingText: false,
         randomPhotos: [], // 隨機照片的資料
         formData: {
-          filePath: "path/to/your/file.jpg" // 替換為實際的文件路徑
+          filePath: "static/json/violation.json" // 替換為實際的文件路徑
         }
       };
     },
@@ -48,25 +48,23 @@
       triggerFlash() {
         this.showFlash = true;
         this.showLoadingText = true;
-  
+
         setTimeout(() => {
-          const payload = {
-            file_path: this.formData.filePath
-          };
-  
-          axios.post('http://localhost:8000/process-violations', payload)
-            .then(response => {
-              console.log("API 回應：", response.data);
-            })
-            .catch(error => {
-              console.error("啟動程式失敗：", error.response?.data || error.message);
-              alert("系統啟動失敗，請稍後再試！");
-              this.showLoadingText = false; // 隱藏啟動文字
-            });
+        const filePath = this.formData.filePath;
+
+        axios.post(`http://localhost:8000/process-violations?file_path=${encodeURIComponent(filePath)}`)
+          .then(response => {
+            console.log("API 回應：", response.data);
+          })
+          .catch(error => {
+            console.error("啟動程式失敗：", error.response?.data || error.message);
+            alert("系統啟動失敗，請稍後再試！");
+            this.showLoadingText = false; // 隱藏啟動文字
+          });
   
           // 模擬完成程序後跳轉
           setTimeout(() => {
-            this.$router.push("/main"); // 替換為主要程式的路由
+            this.$router.push("/test1"); // 替換為主要程式的路由
           }, 2000);
         }, 300); // 閃光動畫持續時間
       },

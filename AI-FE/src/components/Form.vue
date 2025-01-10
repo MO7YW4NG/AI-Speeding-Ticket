@@ -113,7 +113,7 @@
            <!-- 底部區域：回報原因 (左) + 按鈕 (右) -->
         <div class="flex justify-between mt-6">
           <!-- 回報原因區塊 -->
-          <div class="flex-1 pr-4">
+          <div class="flex-1 mt-5  pr-4">
             <label class="text-md text-gray-400 mb-2 block">
               回報原因 (影響 respond_code)
             </label>
@@ -149,7 +149,7 @@
     </div>
   
       <!-- 切換圖片按鈕 -->
-      <div class="flex justify-center mt-8">
+      <!--<div class="flex justify-center mt-8">
         <button
           @click="prevImage"
           class="w-16 h-16 bg-gray-600 hover:bg-gray-700 text-white rounded-full flex items-center justify-center mx-4"
@@ -162,7 +162,7 @@
         >
           <i class="fas fa-chevron-right text-2xl"></i>
         </button>
-      </div>
+      </div> -->
     </div>
   </template>
     
