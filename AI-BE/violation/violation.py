@@ -51,10 +51,10 @@ async def get_vehicle_details(plate_number):
             return result
     else:
         result = { "vehicletype": "Not registered",
-                   "vehiclestatuscode": 27}
+                   "vehiclestatuscode": 25}
         return result
     
-
+# Function to insert new violation data
 async def insert_new_violation(file_path):
     data = read_json_file(file_path) 
     
@@ -69,19 +69,16 @@ async def insert_new_violation(file_path):
         print(f"Plate Number: {plate_number}")
 
         if plate_number is not None:
+            entry['plate_number'] = plate_number.number
             if plate_number.recog_result == 1:  # 1 means multiple plate numbers
-                entry['plate_number'] = "Unrecognized"
                 entry['status'] = 11
 
             elif plate_number.recog_result == 2:  # 2 means recognition failed
-                entry['plate_number'] = "Unrecognized"
                 entry['status'] = 12
             elif plate_number.recog_result == 0:
-                if plate_number.confidence >= 0.85:
-                    entry['plate_number'] = plate_number.number
+                if plate_number.confidence >= 0.9:
                     entry['status'] = 0
-                elif plate_number.confidence < 0.85:
-                    entry['plate_number'] = plate_number.number
+                elif plate_number.confidence < 0.9:
                     entry['status'] = 12
             else:
                 print("Plate number doesn't meet any condition above.")
@@ -94,7 +91,6 @@ async def insert_new_violation(file_path):
             entry['status'] = details['vehiclestatuscode']
         else:
             entry['vehicletype'] = None
-            entry['status'] = None
     
         # Extract date and time from datetime
         dt = datetime.fromisoformat(entry['datetime'])
@@ -117,4 +113,5 @@ async def insert_new_violation(file_path):
     be.insert_new_violation(data)
 
     return ("Data inserted successfully.")
+
 

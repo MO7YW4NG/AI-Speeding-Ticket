@@ -11,7 +11,7 @@ HEADERS = {
     "Referer": "https://map.tgos.tw/",
 }
 
-COOLDOWN_PERIOD = 3  # seconds
+COOLDOWN_PERIOD = 5  # seconds
 last_call_time = time.time()
 
 async def get_geocode(address: str) -> tuple[float, float]:

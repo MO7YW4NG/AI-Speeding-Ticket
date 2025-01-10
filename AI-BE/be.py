@@ -89,14 +89,16 @@ class UpdateLicensePlateRequest(BaseModel):
 @router.post("/violation/update_status/{violation_id}")
 def artificial_recognize_license_plate(violation_id: int, request: UpdateLicensePlateRequest):
     with psycopg.connect(conninfo, autocommit=True) as conn:
+        print(request)
+
         response = request.respond_code
         
         # If license plate is recognizable
         if response == 0: 
             with conn.cursor() as cursor:
-                sql = '''
-                    SELECT license_plate FROM traffic_violation WHERE violation_id = %s;
-                '''
+                sql =   '''
+                        SELECT license_plate FROM traffic_violation WHERE violation_id = %s;
+                        '''
                 
                 cursor.execute(sql, (violation_id,))
                 old_license_plate = cursor.fetchone()
@@ -113,13 +115,51 @@ def artificial_recognize_license_plate(violation_id: int, request: UpdateLicense
                     event_detail = f"Made changes to ID: {violation_id}, updated license plate from {old_license_plate} to {request.new_license_plate}."
                     cursor.execute(sql, (request.employee_id, request.processor_ip, event_detail, request.new_license_plate))
                     
-                    sql = '''
-                        UPDATE traffic_violation 
-                        SET license_plate = %s, status_code = 0 
-                        WHERE violation_id = %s;
-                    '''
+
+                    # Check vehicle_details if match
+                    sql = '''SELECT * FROM vehicle_registration WHERE license_plate = %s'''
+            
+                    # Execute the query with the 'name' argument passed as a parameter
+                    cursor.execute(sql, (request.new_license_plate,))
                     
-                    cursor.execute(sql, (request.new_license_plate, violation_id))
+                    # Fetch the results
+                    result = cursor.fetchall()
+
+                    conn.commit()
+
+                    # if vechicle details exist, proceed to update license plate
+                    if result:
+
+                        #if owner is alive, update the license plate
+                        if result[0][5] == 0:
+                            sql =   '''
+                                    UPDATE traffic_violation 
+                                    SET license_plate = %s, status_code = 0 
+                                    WHERE violation_id = %s;
+                                    '''
+
+                            cursor.execute(sql, (request.new_license_plate, violation_id))
+
+                        #if owner is dead, set status code to 24 
+                        elif result[0][5] == 1:
+                            sql =   '''
+                                    UPDATE traffic_violation 
+                                    SET license_plate = %s, status_code = 24 
+                                    WHERE violation_id = %s;
+                                    '''
+
+                            cursor.execute(sql, (request.new_license_plate, violation_id))
+
+                    # if vehicle details do not exist, set status code to 25
+                    else:
+                        
+                        sql =   '''
+                                UPDATE traffic_violation 
+                                SET status_code = 25 
+                                WHERE violation_id = %s;
+                                '''
+                    
+                        cursor.execute(sql, (violation_id,))
                     
             return "License plate updated successfully."
         
@@ -134,19 +174,31 @@ def artificial_recognize_license_plate(violation_id: int, request: UpdateLicense
                 old_license_plate = cursor.fetchone()
 
                 sql =   '''
-                    INSERT INTO artificial_recognition_log (employee_id, processor_ip, event_detail,
-                    license_plate)
-                    VALUES (%s, %s, %s, %s);
-                    '''
+                        INSERT INTO artificial_recognition_log (employee_id, processor_ip, event_detail,
+                        license_plate)
+                        VALUES (%s, %s, %s, %s);
+                        '''
 
+                status_code = 31
                 if response == 1:
                     reason = "License plate is blurry."
+                    status_code = 21
                 elif response == 2:
                     reason = "License plate is obscured."
+                    status_code = 22
                 elif response == 3:
-                    reason = "The image has more than one license plate visible."    
+                    reason = "The image has more than one license plate visible."
+                    status_code = 23    
                 cursor.execute(sql, (request.employee_id, request.processor_ip, f"Cannot recognize license plate. Reason: {reason}",
                                         old_license_plate[0]))
+                
+                sql =   '''
+                        UPDATE traffic_violation 
+                        SET license_plate = %s, status_code = %s 
+                        WHERE violation_id = %s;
+                        '''
+                
+                cursor.execute(sql, (old_license_plate[0], status_code, violation_id))
             
             return "License plate unrecognizable. Log created."
         
